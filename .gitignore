@@ -8,6 +8,7 @@ target/
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
+/.idea/workspace.xml
 *.iws
 *.iml
 *.ipr
@@ -37,5 +38,5 @@ build/
 ### Mac OS ###
 .DS_Store
 /.idea/encodings.xml
-/.idea/workspace.xml
+
 /.idea/shelf/Uncommitted_changes_before_Update_at_03-01-2023_10_48_[Changes]/shelved.patch

@@ -10,9 +10,6 @@ public class GameController {
 
     private final int MAX_PLAYERS = 6;
     private final int MIN_PLAYERS = 3;
-
-    private final int startingBalance = 30000;
-
     private final int passStartReward = 4000;
 
     private final int numberOfFields = 40;
@@ -38,9 +35,8 @@ public class GameController {
             Player newPlayer = new Player();
             newPlayer.setName(newPlayerName);
             newPlayer.setID(players.size());
-            newPlayer.AddBalance(startingBalance);
             players.add(newPlayer);
-            mgui.addPlayer(newPlayerName, startingBalance);
+            mgui.addPlayer(newPlayerName, newPlayer.getPlayerBalance());
             mgui.drawPlayerPosition(newPlayer);
         }
         mgui.showMessage("Tryk OK for at starte!");
@@ -75,7 +71,7 @@ public class GameController {
         playTurn();
     }
 
-    private void movePlayer(Player player, int moves){
+    public void movePlayer(Player player, int moves){
         int currentPosition = player.getPlayerPosition();
         int newPosition = currentPosition + moves;
         if( newPosition >= numberOfFields){
@@ -86,7 +82,7 @@ public class GameController {
 
     }
 
-    private void giveStartMoney(Player player){
+    public void giveStartMoney(Player player){
         player.AddBalance(passStartReward);
 
     }

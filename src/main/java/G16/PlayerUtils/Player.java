@@ -10,6 +10,10 @@ public class Player {
     private int outOfJailCards = 0;
     private int ID = -1;
 
+    public Player(){
+        balance.setStartingBalance();
+    }
+
 
     public void setName(String name){
         this.name= name;

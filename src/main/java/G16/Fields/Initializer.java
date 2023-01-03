@@ -50,7 +50,7 @@ public class Initializer {
         fields[9] = Allegade;
 
         //field 11
-        Jail Jailcell = new Chance("Jailcell");
+        Jail Jailcell = new Jail("Jailcell");
         fields[10] = Jailcell;
 
         //field 12

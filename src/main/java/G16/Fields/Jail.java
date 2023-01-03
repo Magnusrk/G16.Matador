@@ -1,4 +1,7 @@
 package G16.Fields;
 
-public class Jail {
+public class Jail extends Field {
+    public Jail(String name) {
+        super(name);
+    }
 }

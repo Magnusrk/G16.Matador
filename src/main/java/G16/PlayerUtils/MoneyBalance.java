@@ -10,4 +10,7 @@ public class MoneyBalance {
     public void updateMoney(int money){
         balance+=money;
     }
+    public int getBalance(){
+        return balance;
+    }
 }

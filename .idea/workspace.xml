@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f16e1365-b81e-4a2a-bfcd-ab41a5f0edce" name="Changes" comment="Created Package Diagram">
-      <change beforePath="$PROJECT_DIR$/src/UML/CLass.puml" beforeDir="false" />
+    <list default="true" id="f16e1365-b81e-4a2a-bfcd-ab41a5f0edce" name="Changes" comment="Updated MoneyBalance">
+      <change afterPath="$PROJECT_DIR$/src/test/java/G16/PlayerUtils/MoneyBalanceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/G16/PlayerUtils/MoneyBalance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/G16/PlayerUtils/MoneyBalance.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -17,6 +18,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="UML Class" />
+        <option value="JUnit3 Test Class" />
       </list>
     </option>
   </component>
@@ -37,18 +39,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultPlantUmlFileTemplate&quot;: &quot;UML Class&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultPlantUmlFileTemplate": "UML Class",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit3",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="junit.framework.TestCase" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="G16.PlayerUtils" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -59,6 +71,28 @@
       <updated>1672734601100</updated>
       <workItem from="1672736127833" duration="2401000" />
     </task>
+    <task id="LOCAL-00001" summary="Created PlayerUtils branch">
+      <created>1672742907999</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1672742907999</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added MoneyBalance">
+      <created>1672742998688</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1672742998688</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Updated MoneyBalance">
+      <created>1672743155110</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1672743155110</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -77,6 +111,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Created Package Diagram" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created Package Diagram" />
+    <MESSAGE value="Created PlayerUtils branch" />
+    <MESSAGE value="Added MoneyBalance" />
+    <MESSAGE value="Updated MoneyBalance" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated MoneyBalance" />
   </component>
 </project>

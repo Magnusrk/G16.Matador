@@ -7,4 +7,7 @@ public class MoneyBalance {
     public void setBalance(int balance) {
         this.balance = balance;
     }
+    public void updateMoney(int money){
+        balance+=money;
+    }
 }

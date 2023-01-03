@@ -1,5 +1,6 @@
 package G16.Graphics;
 import G16.PlayerUtils.Die;
+import G16.PlayerUtils.Player;
 import gui_fields.*;
 import gui_main.GUI;
 
@@ -25,9 +26,9 @@ public class MatadorGUI {
         guiPlayers.add(guiPlayer);
     }
 
-    public void drawPlayerPosition(int playerID, int position){
-        GUI_Player selectedPlayer = guiPlayers.get(playerID);
-        selectedPlayer.getCar().setPosition(gui.getFields()[position]);
+    public void drawPlayerPosition(Player player){
+        GUI_Player selectedPlayer = guiPlayers.get(player.getID());
+        selectedPlayer.getCar().setPosition(gui.getFields()[player.getPlayerPosition()]);
     }
     public void drawDice(int faceValue1, int faceValue2){
         gui.setDice(faceValue1, faceValue2);
@@ -45,6 +46,10 @@ public class MatadorGUI {
     public int requestInteger(String message, int minValue, int maxValue) {
 
         return gui.getUserInteger(message, minValue, maxValue);
+    }
+
+    public void updatePlayerBalance(Player player){
+        guiPlayers.get(player.getID()).setBalance(player.getPlayerBalance());
     }
 
 

@@ -51,7 +51,7 @@ public class Player {
         }
     }
     public void setBalance(int ba) {
-        balance.setBalance(ba);
+        //balance.setBalance(ba);
     }
 
     public void setPlayerPosition(int position){

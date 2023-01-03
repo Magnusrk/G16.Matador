@@ -1,4 +1,5 @@
 package G16.Graphics;
+import G16.PlayerUtils.Die;
 import gui_fields.*;
 import gui_main.GUI;
 
@@ -25,7 +26,8 @@ public class MatadorGUI {
         addPlayer("6",30000);
         drawPlayerPosition(0,1);
         showMessage("Spiller 1 kast med terningen");
-        drawDice(1,2);
+        int[] trow = Die.throwDice();
+        drawDice(trow[0],trow[1]);
     }
     public void addPlayer(String name, int balance){
 

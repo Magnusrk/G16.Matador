@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="51d43f59-d627-444e-9c64-31c990b24e1e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/UML/CLass.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="f16e1365-b81e-4a2a-bfcd-ab41a5f0edce" name="Changes" comment="Created Package Diagram">
+      <change beforePath="$PROJECT_DIR$/src/UML/CLass.puml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/G16/PlayerUtils/MoneyBalance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/G16/PlayerUtils/MoneyBalance.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +21,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev_branch" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">

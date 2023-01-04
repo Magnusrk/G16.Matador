@@ -43,6 +43,10 @@ public class MatadorGUI {
 
     }
 
+    public String requestUserButton(String msg,String...options){
+        return gui.getUserButtonPressed(msg,options);
+    }
+
     public int requestInteger(String message, int minValue, int maxValue) {
 
         return gui.getUserInteger(message, minValue, maxValue);

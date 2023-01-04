@@ -10,6 +10,8 @@ public class Player {
     private int outOfJailCards = 0;
     private int ID = -1;
 
+    private int turnsinjail=0;
+
     public Player(){
         balance.setStartingBalance();
     }
@@ -64,6 +66,16 @@ public class Player {
     }
     public void setJailed(boolean jail){
         jailed = jail;
+        if (!jailed){
+            turnsinjail=0;
+        }
+    }
+    public int getTurnsinjail(){
+        return turnsinjail;
+    }
+
+    public void increaseTurnsinjail(){
+        turnsinjail++;
     }
 
 }

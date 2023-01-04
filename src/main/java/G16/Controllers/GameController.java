@@ -1,5 +1,6 @@
 package G16.Controllers;
 
+import G16.Fields.Field;
 import G16.Graphics.MatadorGUI;
 import G16.Language;
 import G16.PlayerUtils.Die;
@@ -83,9 +84,52 @@ public class GameController {
 
     }
 
+    public void landOnField(Player player){
+
+    }
+
     public void giveStartMoney(Player player){
         player.addBalance(passStartReward);
 
+    }
+
+    public void goToJail(Player player){
+        player.setPlayerPosition(10);
+        player.setJailed(true);
+    }
+
+    public void inJail(Player player) {
+        String response;
+        if(player.getOutOfJailCards() > 0){
+            response =mgui.requestUserButton((Language.getString("injail")),Language.getString("injailcard"),Language.getString("injailikkecard"));
+            if(response.equals(Language.getString("injailikkecard"))){
+                mgui.requestUserButton((Language.getString("injail")), Language.getString("injailpay"),Language.getString("injaildie"));
+            }else {
+                player.setJailed(false);
+                player.addOutOfJailCard(-1);
+
+                return;
+            }
+        } else {
+            response =mgui.requestUserButton((Language.getString("injail")), Language.getString("injailpay"),Language.getString("injaildie"));
+        }
+
+        if (response.equals(Language.getString("injailpay"))){
+            player.addBalance(-1000);
+            player.setJailed(false);
+        }
+        else {
+
+            int[] die=Die.throwDice();
+            mgui.drawDice(die[0],die[1]);
+
+            if (die[0]==die[1]){
+                player.setJailed(false);
+            }
+            else {
+                player.increaseTurnsinjail();
+            }
+        }
     }
 
 }

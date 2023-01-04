@@ -3,8 +3,8 @@ package G16.Controllers;
 import G16.Fields.GoToJail;
 import G16.Fields.Initializer;
 import G16.Fields.Field;
-import G16.Graphics.GameGUI;
 import G16.Graphics.MatadorGUI;
+import G16.Graphics.TestingGUI;
 import G16.Language;
 import G16.PlayerUtils.Die;
 import G16.PlayerUtils.Player;
@@ -21,23 +21,33 @@ public class GameController {
 
     private ArrayList<Player> players = new ArrayList<>();
 
-    private GameGUI mgui;
+    private MatadorGUI mgui;
 
     private int currentPlayerID = 0;
 
     private Field[] fields;
 
+    private boolean TEST_MODE;
+
+    public GameController(boolean TEST_MODE){
+        this.TEST_MODE = TEST_MODE;
+        fields=Initializer.InitFields();
+
+        if(TEST_MODE){
+            mgui = new TestingGUI(fields);
+        }else {
+            mgui = new MatadorGUI(fields);
+        }
+    }
 
     public void playGame(){
-        fields=Initializer.InitFields();
-        mgui = new MatadorGUI(fields) {
-        };
+
         setupPlayers();
         playTurn();
 
     }
 
-    private void setupPlayers(){
+    public void setupPlayers(){
         int playerCount = mgui.requestInteger(Language.getString("howManyPlayers"), MIN_PLAYERS, MAX_PLAYERS);
         while (players.size() < playerCount){
             String newPlayerName = mgui.requestString(Language.getString("playerName"));
@@ -51,7 +61,7 @@ public class GameController {
         mgui.showMessage("Tryk OK for at starte!");
     }
 
-    private void playTurn(){
+    public void playTurn(){
 
         Player currentPlayer = players.get(currentPlayerID);
 
@@ -72,7 +82,11 @@ public class GameController {
 
         }
 
-        playTurn();
+
+        if(!TEST_MODE){
+            playTurn();
+        }
+
     }
 
     private void throwAndMove(Player currentPlayer) {
@@ -169,6 +183,10 @@ public class GameController {
                 }
             }
         }
+    }
+
+    public ArrayList<Player> getPlayers(){
+        return players;
     }
 
 }

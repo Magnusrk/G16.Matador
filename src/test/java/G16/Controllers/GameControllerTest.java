@@ -3,12 +3,14 @@ package G16.Controllers;
 import G16.PlayerUtils.Player;
 import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestTemplate;
+
+import java.util.ArrayList;
 
 public class GameControllerTest extends TestCase {
-    GameController controller = new GameController();
 
-    @Test
     public void testMovePlayer(){
+        GameController controller = new GameController(true);
         Player player = new Player();
         controller.movePlayer(player,1);
         assertEquals(1,player.getPlayerPosition());
@@ -17,12 +19,33 @@ public class GameControllerTest extends TestCase {
         controller.movePlayer(player,35);
         assertEquals(6,player.getPlayerPosition());
     }
-    @Test
     public void testGiveStartMoney(){
+        GameController controller = new GameController(true);
         Player player = new Player();
         controller.movePlayer(player,20);
         controller.movePlayer(player,20);
         assertEquals(34000,player.getPlayerBalance());
+    }
+
+    public void testPlayTurn(){
+        GameController controller = new GameController(true);
+        controller.setupPlayers();
+        for(int i = 0; i < 1000; i++){
+            controller.playTurn();
+        }
+    }
+
+    public void testJailedAfterThreeTurns(){
+        GameController controller = new GameController(true);
+        controller.setupPlayers();
+        ArrayList<Player> players = controller.getPlayers();;
+        Player jailedPlayer = controller.getPlayers().get(0);
+        jailedPlayer.setJailed(true);
+        for(int i = 0; i < players.size() * 3; i++){
+            controller.playTurn();
+        }
+        assertEquals(false, jailedPlayer.getJailed());
+
     }
 
 

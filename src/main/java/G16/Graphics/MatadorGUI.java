@@ -10,10 +10,10 @@ import gui_main.GUI;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class MatadorGUI extends GameGUI{
+public class MatadorGUI {
 
-    private final GUI gui;
-    private final ArrayList<GUI_Player> guiPlayers = new ArrayList<>();
+    protected final GUI gui;
+    protected final ArrayList<GUI_Player> guiPlayers = new ArrayList<>();
 
     public MatadorGUI(Field[] fields){
         GUI_Field[] defaultFields = getFields();

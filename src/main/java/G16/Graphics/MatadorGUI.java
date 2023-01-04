@@ -1,5 +1,8 @@
 package G16.Graphics;
-import G16.PlayerUtils.Die;
+import G16.Fields.Brewery;
+import G16.Fields.Field;
+import G16.Fields.Property;
+import G16.Fields.ShippingCompany;
 import G16.PlayerUtils.Player;
 import gui_fields.*;
 import gui_main.GUI;
@@ -7,16 +10,27 @@ import gui_main.GUI;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static gui_fields.GUI_Car.Pattern.HORIZONTAL_GRADIANT;
-import static gui_fields.GUI_Car.Type.CAR;
-
 public class MatadorGUI {
 
     private final GUI gui;
     private final ArrayList<GUI_Player> guiPlayers = new ArrayList<>();
 
-    public MatadorGUI(){
-        this.gui = new GUI(getFields());
+    public MatadorGUI(Field[] fields){
+        GUI_Field[] defaultFields = getFields();
+        for (int i = 0; i<defaultFields.length; i++){
+            if (fields[i] instanceof Property prop) {
+                defaultFields[i].setSubText(prop.getPrice()+",-");
+                defaultFields[i].setBackGroundColor(prop.getColor());
+                defaultFields[i].setTitle(prop.getName());
+            }
+            if (fields[i] instanceof ShippingCompany ship){
+                defaultFields[i].setSubText(ship.getPrice()+",-");
+            }
+            if (fields[i] instanceof Brewery brew){
+                defaultFields[i].setSubText(brew.getPrice()+",-");
+            }
+        }
+        this.gui = new GUI(defaultFields);
     }
 
     public void addPlayer(String name, int balance){
@@ -57,9 +71,9 @@ public class MatadorGUI {
         GUI_Field[] fields = new GUI_Field[40];
         int i = 0;
         fields[i++] = new GUI_Start("Start", "Modtag: 4k", "Modtag kr. 200,-\nnår de passerer start", Color.RED, Color.BLACK);
-        fields[i++] = new GUI_Street("Rødovrevej", "1200,-", "Rødovrevej", "Leje:  20", new Color(75, 155, 225), Color.BLACK);
+        fields[i++] = new GUI_Street("Rødovrevej", "1200,-", "Rødovrevej", "Leje:  20", new Color(75, 155, 225), Color.WHITE);
         fields[i++] = new GUI_Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
-        fields[i++] = new GUI_Street("Hvidovrevej", "Pris:  60", "Hvidovrevej", "Leje:  20", new Color(75, 155, 225), Color.BLACK);
+        fields[i++] = new GUI_Street("Hvidovrevej", "Pris:  60", "Hvidovrevej", "Leje:  20", new Color(75, 155, 225), Color.WHITE);
         fields[i++] = new GUI_Tax("Betal\nindkomst-\nskat", "10% el. 200", "Betal indkomstskat\n10% eller kr. 200,-", Color.GRAY, Color.BLACK);
         fields[i++] = new GUI_Shipping("default", "Øresund", "Pris:  200", "Øresundsredderiet", "Leje:  75", Color.WHITE, Color.BLACK);
         fields[i++] = new GUI_Street("Roskildevej", "Pris:  100", "Roskildevej", "Leje:  40", new Color(255, 135, 120), Color.BLACK);

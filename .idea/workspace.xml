@@ -5,9 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f16e1365-b81e-4a2a-bfcd-ab41a5f0edce" name="Changes" comment="Updated MoneyBalance">
-      <change afterPath="$PROJECT_DIR$/src/test/java/G16/PlayerUtils/MoneyBalanceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/G16/PlayerUtils/MoneyBalance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/G16/PlayerUtils/MoneyBalance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/G16/Controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/G16/Controllers/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/G16/Fields/Brewery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/G16/Fields/Brewery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/G16/Fields/Initializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/G16/Fields/Initializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/G16/Fields/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/G16/Fields/Property.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/G16/Fields/ShippingCompany.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/G16/Fields/ShippingCompany.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/G16/Graphics/MatadorGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/G16/Graphics/MatadorGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,20 +43,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultPlantUmlFileTemplate": "UML Class",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit3",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultPlantUmlFileTemplate&quot;: &quot;UML Class&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit3&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3&quot;: &quot;junit.framework.TestCase&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="junit.framework.TestCase" />
@@ -60,6 +64,12 @@
     <key name="CreateTestDialog.RecentsKey">
       <recent name="G16.PlayerUtils" />
     </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="JUnit.Run all test" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

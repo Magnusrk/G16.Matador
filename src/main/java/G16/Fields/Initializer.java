@@ -1,20 +1,21 @@
 package G16.Fields;
+import java.awt.Color;
 
 public class Initializer {
-    Field[] fields = new Field[40];
+    static Field[] fields = new Field[40];
 
     /**
      * Sets values for every field in the game
      * And adds them into an array
      * @return array with fields
      */
-    public Field[] InitFields(){
+    public static Field[] InitFields(){
         //field 1
         VisitorField start = new VisitorField("start");
         fields[0] = start;
 
         //field 2
-        Property Rødovrevej = new Property("Rødovrevej", Color.Blue, 1200, 1000, 50);
+        Property Rødovrevej = new Property("Rødovrevej", Color.BLUE, 1200, 1000, 50);
         fields[1] = Rødovrevej;
 
         //field 3
@@ -22,7 +23,7 @@ public class Initializer {
         fields[2] = chance1;
 
         //field 4
-        Property Hvidovrevej = new Property("Hvidovrevej",Color.Blue, 1200, 1000, 50);
+        Property Hvidovrevej = new Property("Hvidovrevej",Color.BLUE, 1200, 1000, 50);
         fields[3] = Hvidovrevej;
 
         //field 5
@@ -34,7 +35,7 @@ public class Initializer {
         fields[5] = Scandlines1;
 
         //field 7
-        Property Roskildevej = new Property("Roskildevej",Color.Orange, 2000, 1000, 100);
+        Property Roskildevej = new Property("Roskildevej",Color.ORANGE, 2000, 1000, 100);
         fields[6] = Roskildevej;
 
         //field 8
@@ -42,11 +43,11 @@ public class Initializer {
         fields[7] = chance2;
 
         //field 9
-        Property Valby = new Property("Valby Langgade",Color.Orange, 2000, 1000, 100);
+        Property Valby = new Property("Valby Langgade",Color.ORANGE, 2000, 1000, 100);
         fields[8] = Valby;
 
         //field 10
-        Property Allegade = new Property("Allégade",Color.Orange, 2400, 1000, 150);
+        Property Allegade = new Property("Allégade",Color.ORANGE, 2400, 1000, 150);
         fields[9] = Allegade;
 
         //field 11
@@ -54,7 +55,7 @@ public class Initializer {
         fields[10] = Jailcell;
 
         //field 12
-        Property Frederiksberg = new Property("Frederiksberg Allé",Color.Green, 2800, 2000, 200);
+        Property Frederiksberg = new Property("Frederiksberg Allé",Color.GREEN, 2800, 2000, 200);
         fields[11] = Frederiksberg;
 
         //field 13
@@ -62,11 +63,11 @@ public class Initializer {
         fields[12] = Squash;
 
         //field 14
-        Property Bulowsvej = new Property("Bülowsvej",Color.Green, 2800, 2000, 200);
+        Property Bulowsvej = new Property("Bülowsvej",Color.GREEN, 2800, 2000, 200);
         fields[13] = Bulowsvej;
 
         //field 15
-        Property GlKongevej = new Property("Gl. Kongevej",Color.Green, 3200, 2000, 250);
+        Property GlKongevej = new Property("Gl. Kongevej",Color.GREEN, 3200, 2000, 250);
         fields[14] = GlKongevej;
 
         //field 16
@@ -74,7 +75,7 @@ public class Initializer {
         fields[15] = Mols;
 
         //field 17
-        Property Bernstorffsvej = new Property("Bernstorffsvejj",Color.Gray, 3600, 2000, 300);
+        Property Bernstorffsvej = new Property("Bernstorffsvejj",Color.GRAY, 3600, 2000, 300);
         fields[16] = Bernstorffsvej;
 
         //field 18
@@ -82,11 +83,11 @@ public class Initializer {
         fields[17] = chance3;
 
         //field 19
-        Property Hellerupvej = new Property("Hellerupvej",Color.Gray, 3600, 2000, 300);
+        Property Hellerupvej = new Property("Hellerupvej",Color.GRAY, 3600, 2000, 300);
         fields[18] = Hellerupvej;
 
         //field 20
-        Property Strandvejen = new Property("Strandvejen",Color.Gray, 4000, 2000, 350);
+        Property Strandvejen = new Property("Strandvejen",Color.GRAY, 4000, 2000, 350);
         fields[19] = Strandvejen;
 
         //field 21
@@ -94,7 +95,7 @@ public class Initializer {
         fields[20] = Parkering;
 
         //field 22
-        Property Trianglen = new Property("Trianglen",Color.Red, 4400, 3000, 350);
+        Property Trianglen = new Property("Trianglen",Color.RED, 4400, 3000, 350);
         fields[21] = Trianglen;
 
         //field 23
@@ -102,11 +103,11 @@ public class Initializer {
         fields[22] = chance4;
 
         //field 24
-        Property Østerbrogade = new Property("Østerbrogade",Color.Red, 4400, 3000, 350);
+        Property Østerbrogade = new Property("Østerbrogade",Color.RED, 4400, 3000, 350);
         fields[23] = Østerbrogade;
 
         //field 25
-        Property Grønningen = new Property("Grønningen",Color.Red, 4800, 3000, 400);
+        Property Grønningen = new Property("Grønningen",Color.RED, 4800, 3000, 400);
         fields[24] = Grønningen;
 
         //field 26
@@ -114,11 +115,11 @@ public class Initializer {
         fields[25] = Scandlines2;
 
         //field 27
-        Property Bredgade = new Property("Bredgade",Color.White, 5200, 3000, 450);
+        Property Bredgade = new Property("Bredgade",Color.WHITE, 5200, 3000, 450);
         fields[26] = Bredgade;
 
         //field 28
-        Property KgsNytorv = new Property("Kgs. Nytorv",Color.White, 5200, 3000, 450);
+        Property KgsNytorv = new Property("Kgs. Nytorv",Color.WHITE, 5200, 3000, 450);
         fields[27] = KgsNytorv;
 
         //field 29
@@ -126,7 +127,7 @@ public class Initializer {
         fields[28] = Cola;
 
         //field 30
-        Property Østergade = new Property("Østergade",Color.White, 5600, 3000, 500);
+        Property Østergade = new Property("Østergade",Color.WHITE, 5600, 3000, 500);
         fields[29] = Østergade;
 
         //field 31
@@ -134,11 +135,11 @@ public class Initializer {
         fields[30] = GoToJail;
 
         //field 32
-        Property Amagertorv = new Property("Amagertorv",Color.Yellow, 6000, 4000, 550);
+        Property Amagertorv = new Property("Amagertorv",Color.YELLOW, 6000, 4000, 550);
         fields[31] = Amagertorv;
 
         //field 33
-        Property Vimmelskaftet = new Property("Vimmelskaftet",Color.Yellow, 6000, 4000, 550);
+        Property Vimmelskaftet = new Property("Vimmelskaftet",Color.YELLOW, 6000, 4000, 550);
         fields[32] = Vimmelskaftet;
 
         //field 34
@@ -146,7 +147,7 @@ public class Initializer {
         fields[33] = chance5;
 
         //field 35
-        Property Nygade = new Property("Nygade",Color.Yellow, 6400, 4000, 600);
+        Property Nygade = new Property("Nygade",Color.YELLOW, 6400, 4000, 600);
         fields[34] = Nygade;
 
         //field 36
@@ -158,7 +159,7 @@ public class Initializer {
         fields[36] = chance6;
 
         //field 38
-        Property Frederiksberggade = new Property("Frederiksberggade",Color.Purple, 7000, 4000, 700);
+        Property Frederiksberggade = new Property("Frederiksberggade",new Color(150, 60, 150), 7000, 4000, 700);
         fields[37] = Frederiksberggade;
 
         //field 39
@@ -166,7 +167,7 @@ public class Initializer {
         fields[38] = tax2;
 
         //field 40
-        Property Rådhuspladsen = new Property("Rådhuspladsen",Color.Purple, 8000, 4000, 1000);
+        Property Rådhuspladsen = new Property("Rådhuspladsen",new Color(150, 60, 150), 8000, 4000, 1000);
         fields[39] = Rådhuspladsen;
         return fields;
     }

@@ -26,7 +26,7 @@ public class Initializer {
         fields[3] = Hvidovrevej;
 
         //field 5
-        Tax tax1 = new Tax("Indkomstskat");
+        Tax tax1 = new Tax("Indkomstskat", 4000);
         fields[4] = tax1;
 
         //field 6
@@ -162,7 +162,7 @@ public class Initializer {
         fields[37] = Frederiksberggade;
 
         //field 39
-        Tax tax2 = new Tax("Statsskat");
+        Tax tax2 = new Tax("Statsskat", 2000);
         fields[38] = tax2;
 
         //field 40

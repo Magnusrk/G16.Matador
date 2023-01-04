@@ -3,6 +3,7 @@ package G16.Controllers;
 import G16.Fields.GoToJail;
 import G16.Fields.Initializer;
 import G16.Fields.Field;
+import G16.Graphics.GameGUI;
 import G16.Graphics.MatadorGUI;
 import G16.Language;
 import G16.PlayerUtils.Die;
@@ -20,7 +21,7 @@ public class GameController {
 
     private ArrayList<Player> players = new ArrayList<>();
 
-    private MatadorGUI mgui;
+    private GameGUI mgui;
 
     private int currentPlayerID = 0;
 
@@ -29,7 +30,8 @@ public class GameController {
 
     public void playGame(){
         fields=Initializer.InitFields();
-        mgui = new MatadorGUI(fields);
+        mgui = new MatadorGUI(fields) {
+        };
         setupPlayers();
         playTurn();
 

@@ -10,12 +10,12 @@ import gui_main.GUI;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class MatadorGUI extends GameGUI{
+public class TestingGUI extends GameGUI{
 
     private final GUI gui;
     private final ArrayList<GUI_Player> guiPlayers = new ArrayList<>();
 
-    public MatadorGUI(Field[] fields){
+    public TestingGUI(Field[] fields){
         GUI_Field[] defaultFields = getFields();
         for (int i = 0; i<defaultFields.length; i++){
             if (fields[i] instanceof Property prop) {
@@ -51,11 +51,12 @@ public class MatadorGUI extends GameGUI{
     }
 
     public void showMessage(String message){
-        gui.showMessage(message);
+        System.out.println(message);
+
     }
 
     public String requestString(String message){
-        return gui.getUserString(message);
+        return "dummy string";
 
     }
 

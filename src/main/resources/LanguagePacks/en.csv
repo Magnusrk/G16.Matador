@@ -2,7 +2,7 @@
 #key;value
 #e.g.
 #throwDiceText;You rolled the die!
-
+test; english
 start;Go
 startsub; ← Collect 2$
 chance;Chance

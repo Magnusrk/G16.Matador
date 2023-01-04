@@ -1,0 +1,38 @@
+#USAGE:
+#key;value
+#e.g.
+#throwDiceText;You rolled the die!
+
+start;Go
+startsub; ← Collect 2$
+chance;Chance
+
+noowner;No owner
+tryluck;Try your luck
+price;Price:
+
+prison;Prison
+parking;Parking
+gotojail;Go to jail
+
+tokenChance;Move to an unowned field and get it for free.
+tokenChanceowned; There are no unowned fields, move to an owned field and buy it from another player.
+
+throwDice;throw the dice!
+chooseLanguage;Choose game language
+howManyPlayers;How many players are you?
+tooManyOrFew;Too many or too few players..
+enterAge;Enter age
+enterPlayerName;Enter player name.
+playerNameTaken;The player name is already taken. Please choose a unique name.
+addedPlayer;Added player
+UsedJailCard;You used your "get out of jail" card
+gotojailprompt;is sent to jail.
+BoughtField;bought the property
+YouPay;You pay
+PaysRent;pays rent to
+RentDoubled;Because all colors are owned, the rent was doubled!
+WonTheGame;won the game!
+yesTxt;Yes
+noTxt;No
+restartQuestion;Do you want to restart the game?

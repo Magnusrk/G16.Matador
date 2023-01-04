@@ -3,6 +3,12 @@
 #e.g.
 #throwDiceText;Du kastede med terningerne!
 
+
+
+playerName;Skriv spillerens navn:
+
+
+
 start;Start
 startsub;←Modtag 2$
 chance;Chance

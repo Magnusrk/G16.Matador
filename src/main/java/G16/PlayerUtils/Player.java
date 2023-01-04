@@ -48,7 +48,7 @@ public class Player {
     public int getOutOfJailCards(){
         return outOfJailCards;
     }
-    public void AddBalance(int add){
+    public void addBalance(int add){
         balance.updateMoney(add);
         if (balance.getBalance() < 0){
             bankrupt = true;

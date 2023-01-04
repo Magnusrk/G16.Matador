@@ -30,9 +30,9 @@ public class GameController {
     }
 
     private void setupPlayers(){
-        int playerCount = mgui.requestInteger(Language.GetString("howManyPlayers"), MIN_PLAYERS, MAX_PLAYERS);
+        int playerCount = mgui.requestInteger(Language.getString("howManyPlayers"), MIN_PLAYERS, MAX_PLAYERS);
         while (players.size() < playerCount){
-            String newPlayerName = mgui.requestString("Skriv spiller navn: ");
+            String newPlayerName = mgui.requestString(Language.getString("playerName"));
             Player newPlayer = new Player();
             newPlayer.setName(newPlayerName);
             newPlayer.setID(players.size());
@@ -84,7 +84,7 @@ public class GameController {
     }
 
     public void giveStartMoney(Player player){
-        player.AddBalance(passStartReward);
+        player.addBalance(passStartReward);
 
     }
 

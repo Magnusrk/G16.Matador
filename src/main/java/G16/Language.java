@@ -23,14 +23,14 @@ public class Language {
      * @param pack with the name of the language pack to be used.
      * The name of a language pack is its filename without the extension.
      */
-    public static void SetLanguage(String pack){
+    public static void setLanguage(String pack){
         try {
             //Reads file from resources folder
             InputStream languagePack = Objects.requireNonNull(Main.class.getClassLoader()
                     .getResourceAsStream(languagePackPath + "/" + pack + ".csv"));
 
             currentLanguagePack = pack;
-            InitializeLanguagePack(languagePack);
+            initializeLanguagePack(languagePack);
         } catch (NullPointerException e){
             System.out.println("Couldn't find language pack '" + pack+languagePackExtension + "'");
 
@@ -43,9 +43,9 @@ public class Language {
      * The method will return a string corresponding to the given key in the set language pack.
      * @return String object.
      */
-    public static String GetString(String key){
+    public static String getString(String key){
         if(dictionary.isEmpty())
-            SetLanguage(currentLanguagePack);
+            setLanguage(currentLanguagePack);
         return dictionary.getOrDefault(key, "STRING-NOT-FOUND");
 
     }
@@ -54,7 +54,7 @@ public class Language {
      * Initialize current language pack
      * Reads the language pack file and maps the keys and values to the dictionary variable.
      */
-    private static void InitializeLanguagePack(InputStream languagePack){
+    private static void initializeLanguagePack(InputStream languagePack){
         dictionary.clear();
 
             Scanner fileReader = new Scanner(languagePack);

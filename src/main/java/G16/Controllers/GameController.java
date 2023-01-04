@@ -1,6 +1,7 @@
 package G16.Controllers;
 
 import G16.Graphics.MatadorGUI;
+import G16.Language;
 import G16.PlayerUtils.Die;
 import G16.PlayerUtils.Player;
 
@@ -29,7 +30,7 @@ public class GameController {
     }
 
     private void setupPlayers(){
-        int playerCount = mgui.requestInteger("Hvor mange spillere vil i spille? (3-6) ", MIN_PLAYERS, MAX_PLAYERS);
+        int playerCount = mgui.requestInteger(Language.GetString("howManyPlayers"), MIN_PLAYERS, MAX_PLAYERS);
         while (players.size() < playerCount){
             String newPlayerName = mgui.requestString("Skriv spiller navn: ");
             Player newPlayer = new Player();

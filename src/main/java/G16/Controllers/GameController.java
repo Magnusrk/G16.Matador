@@ -1,5 +1,6 @@
 package G16.Controllers;
 
+import G16.Fields.Initializer;
 import G16.Fields.Field;
 import G16.Graphics.MatadorGUI;
 import G16.Language;
@@ -24,7 +25,7 @@ public class GameController {
 
 
     public void playGame(){
-        mgui = new MatadorGUI();
+        mgui = new MatadorGUI(Initializer.InitFields());
         setupPlayers();
         playTurn();
 

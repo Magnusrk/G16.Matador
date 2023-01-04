@@ -120,10 +120,9 @@ public class GameController {
     }
 
     public void landOnField(Player player){
-        Field currentfield=fields[player.getPlayerPosition()];
+        Field currentfield = fields[player.getPlayerPosition()];
         if(currentfield instanceof GoToJail){
             goToJail(player);
-            System.out.println("123");
         }
     }
 

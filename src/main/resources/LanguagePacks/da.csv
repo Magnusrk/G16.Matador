@@ -39,10 +39,15 @@ WonTheGame;Vandt spillet!
 yesTxt;Ja
 noTxt;Nej
 restartQuestion; Vil du gerne genstarte spillet?
-injail; Du er i fængsel betal 1000 kr, slå to ens med terninger for at blive løsladt eller brug et løseladedelseskort.
-injailpay; Betal 1000 kr.
+injail;Du er i fængsel betal 1000 kr, slå to ens med terninger for at blive løsladt eller brug et løsladelseskort.
+injailpay;Betal 1000 kr.
 injaildie; Slå med terningerne
 injailtre; Det er din tredje tur i fængslet hvis du ikke slår to ens skal du betale bøden.
-injailcard; Brug løsladeseskort
-injailikkecard; Jeg vil ikke bruge mit løsladeskort
-injailifcard; Du har et løsladeseskort. Vil du bruge det?
+injailcard; Brug løsladelseskortene
+injailikkecard; Jeg vil ikke bruge mit løsladelseskort
+injailifcard; Du har et løsladelseskort. Vil du bruge det?
+ikke2ens; Du slog ikke to ens.
+2ens; Du slog to ens, du rykker det som terningerne viser.
+3ture;Du har været i fængsel i tre ture og skal betale 1000 kr. i bøde. Du rykker det terningerne viser.
+betalt; Du har betalt 1000 kr i bøde og får lov til at slå med terningerne.
+brugtkort; Du har brugt et løsladelseskort og får lov til at slå med terningerne

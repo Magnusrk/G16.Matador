@@ -53,16 +53,11 @@ public class GameController {
 
         Player currentPlayer = players.get(currentPlayerID);
 
-        //Throw Dice
-        mgui.showMessage(currentPlayer.getName() + " kast med terningen!");
-        int[] diceThrow = Die.throwDice();
-        int diceSum = diceThrow[0] + diceThrow[1];
-
-        mgui.drawDice(diceThrow[0], diceThrow[1]);
-
-
-        //Move player
-        movePlayer(currentPlayer, diceSum);
+        if (currentPlayer.getJailed()){
+            inJail(currentPlayer);
+        }else  {
+            throwAndMove(currentPlayer);
+        }
 
 
         //Update balance and position on GUI
@@ -76,6 +71,20 @@ public class GameController {
         }
 
         playTurn();
+    }
+
+    private void throwAndMove(Player currentPlayer) {
+        //Throw Dice
+        mgui.showMessage(currentPlayer.getName() + " kast med terningen!");
+        int[] diceThrow = Die.throwDice();
+        int diceSum = diceThrow[0] + diceThrow[1];
+
+        mgui.drawDice(diceThrow[0], diceThrow[1]);
+
+
+        //Move player
+        movePlayer(currentPlayer, diceSum);
+        landOnField(currentPlayer);
     }
 
     public void movePlayer(Player player, int moves){
@@ -93,6 +102,7 @@ public class GameController {
         Field currentfield=fields[player.getPlayerPosition()];
         if(currentfield instanceof GoToJail){
             goToJail(player);
+            System.out.println("123");
         }
     }
 
@@ -102,7 +112,7 @@ public class GameController {
     }
 
     public void goToJail(Player player){
-        player.setPlayerPosition(30);
+        player.setPlayerPosition(10);
         player.setJailed(true);
     }
 
@@ -115,7 +125,8 @@ public class GameController {
             }else {
                 player.setJailed(false);
                 player.addOutOfJailCard(-1);
-
+                mgui.showMessage(Language.getString("brugtkort"));
+                throwAndMove(player);
                 return;
             }
         } else {
@@ -125,6 +136,8 @@ public class GameController {
         if (response.equals(Language.getString("injailpay"))){
             player.addBalance(-1000);
             player.setJailed(false);
+            mgui.showMessage(Language.getString("betalt"));
+            throwAndMove(player);
         }
         else {
 
@@ -133,9 +146,20 @@ public class GameController {
 
             if (die[0]==die[1]){
                 player.setJailed(false);
+                movePlayer(player,die[0]+die[1]);
+                landOnField(player);
+                mgui.showMessage(Language.getString("2ens"));
             }
             else {
                 player.increaseTurnsinjail();
+                mgui.showMessage(Language.getString("ikke2ens"));
+                if (player.getTurnsinjail()>2){
+                    player.addBalance(-1000);
+                    player.setJailed(false);
+                    movePlayer(player,die[0]+die[1]);
+                    landOnField(player);
+                    mgui.showMessage(Language.getString("3ture"));
+                }
             }
         }
     }

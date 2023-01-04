@@ -131,7 +131,7 @@ public class Initializer {
         fields[29] = Østergade;
 
         //field 31
-        Jail GoToJail = new Jail("De fængsles");
+        GoToJail GoToJail = new GoToJail("De fængsles");
         fields[30] = GoToJail;
 
         //field 32

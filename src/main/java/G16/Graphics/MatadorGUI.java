@@ -22,7 +22,7 @@ public class MatadorGUI {
                 defaultFields[i].setSubText(prop.getPrice()+",-");
                 defaultFields[i].setBackGroundColor(prop.getColor());
                 defaultFields[i].setTitle(prop.getName());
-                defaultFields[i].setDescription("price: "+prop.getPrice()+ ",- ------------------------"+  " Rent: " + prop.getRent(0)+ ",- --------------------------"+ " House price: " + prop.getHousePrice()+",- --------------");
+                defaultFields[i].setDescription("price: "+prop.getPrice()+ ",-"+" House price: " + prop.getHousePrice()+",-" + " Leje: "+ prop.getRent(0)+ ",-" + " 1 hus: "+ prop.getRent(1)+ ",-"+ " 2 huse: "+ prop.getRent(2)+ ",-"+ " 3 huse: "+ prop.getRent(3)+ ",-"+ " 4 huse: "+ prop.getRent(4)+ ",-"+ " Hotel leje: "+ prop.getRent(5)+ ",-");
             }
             if (fields[i] instanceof ShippingCompany ship){
                 defaultFields[i].setSubText(ship.getPrice()+",-");

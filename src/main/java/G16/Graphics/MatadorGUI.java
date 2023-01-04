@@ -26,6 +26,7 @@ public class MatadorGUI {
             }
             if (fields[i] instanceof ShippingCompany ship){
                 defaultFields[i].setSubText(ship.getPrice()+",-");
+                defaultFields[i].setDescription("Price: "+ship.getPrice()+",- "+"1 Company owned " + ship.getRent(0)+",- "+"2 Company owned " + ship.getRent(1)+",- "+"3 Company owned " + ship.getRent(2)+",- "+"4 Company owned " + ship.getRent(3));
             }
             if (fields[i] instanceof Brewery brew){
                 defaultFields[i].setSubText(brew.getPrice()+",-");

@@ -1,5 +1,6 @@
 package G16.Controllers;
 
+import G16.Fields.GoToJail;
 import G16.Fields.Initializer;
 import G16.Fields.Field;
 import G16.Graphics.MatadorGUI;
@@ -23,9 +24,12 @@ public class GameController {
 
     private int currentPlayerID = 0;
 
+    private Field[] fields;
+
 
     public void playGame(){
-        mgui = new MatadorGUI(Initializer.InitFields());
+        fields=Initializer.InitFields();
+        mgui = new MatadorGUI(fields);
         setupPlayers();
         playTurn();
 
@@ -86,7 +90,10 @@ public class GameController {
     }
 
     public void landOnField(Player player){
-
+        Field currentfield=fields[player.getPlayerPosition()];
+        if(currentfield instanceof GoToJail){
+            goToJail(player);
+        }
     }
 
     public void giveStartMoney(Player player){
@@ -95,7 +102,7 @@ public class GameController {
     }
 
     public void goToJail(Player player){
-        player.setPlayerPosition(10);
+        player.setPlayerPosition(30);
         player.setJailed(true);
     }
 

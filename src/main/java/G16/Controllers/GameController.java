@@ -87,6 +87,11 @@ public class GameController {
         landOnField(currentPlayer);
     }
 
+    public void balance(Player player,int add){
+        player.addBalance(add);
+        mgui.updatePlayerBalance(player);
+    }
+
     public void movePlayer(Player player, int moves){
         int currentPosition = player.getPlayerPosition();
         int newPosition = currentPosition + moves;

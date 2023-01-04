@@ -1,0 +1,17 @@
+@startgantt
+'https://plantuml.com/gantt-diagram
+
+Project starts 2023-01-02
+[Krav] lasts 3 days and is colored in Lavender/LightBlue
+[Kundemøde] happens 2023-01-04 and is colored in red
+[Analyse og design] lasts 5 days and is colored in Coral/maroon
+[Implementering] lasts 14 days and starts at 2023-01-05 and is colored in lightgreen/darkgreen
+[MVP] happens at 2023-01-11 and is colored in red
+[Test] lasts 13 days and starts at 2023-01-06 and is colored in pink/darkred
+[Aflevering af kode] happens at 2023-01-18 and is colored in red
+[Rapport] lasts 19 days and starts 2023-01-02 and is colored in Fuchsia/firebrick
+[Aflevering af rapport] happens at 2023-01-20 and is colored in red
+
+
+
+@endgantt

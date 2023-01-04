@@ -1,0 +1,41 @@
+#USAGE:
+#key;value
+#e.g.
+#throwDiceText;Du kastede med terningerne!
+
+
+
+playerName;Skriv spillerens navn:
+
+
+
+start;Start
+startsub;←Modtag 2$
+chance;Chance
+
+noowner;Ingen ejer
+tryluck;Prøv lykken
+price;Pris:
+
+prison;Fængsel
+parking;Parkering
+gotojail;Gå i fængsel
+
+throwDice;slå med terningen!
+chooseLanguage;Vælg sproget.
+howManyPlayers;Hvor mange spillere vil i spille? (3-6)
+tooManyOrFew;For mange eller for få spillere..
+enterAge;Indtast alder
+enterPlayerName;Indtast navn
+playerNameTaken;Navnet er allerede taget. Vælg et unikt navn.
+addedPlayer;Tilføjede spiller
+UsedJailCard;Du brugte dit "kom ud af fængsel" kort
+gotojailprompt;bliver sat i fængsel.
+BoughtField;Købte ejendommen
+YouPay; Du betalte
+PaysRent; Betal leje til
+RentDoubled;Fordi alle farver har en ejer er lejen fordoblet!
+WonTheGame;Vandt spillet!
+yesTxt;Ja
+noTxt;Nej
+restartQuestion; Vil du gerne genstarte spillet?

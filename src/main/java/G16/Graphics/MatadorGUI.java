@@ -1,4 +1,6 @@
 package G16.Graphics;
+import G16.PlayerUtils.Die;
+import G16.PlayerUtils.Player;
 import gui_fields.*;
 import gui_main.GUI;
 
@@ -10,32 +12,23 @@ import static gui_fields.GUI_Car.Type.CAR;
 
 public class MatadorGUI {
 
-    private GUI gui;
-    private ArrayList<GUI_Player> guiPlayers = new ArrayList<>();
-    private String[] guiNames;
-    private int playerCount = 0;
+    private final GUI gui;
+    private final ArrayList<GUI_Player> guiPlayers = new ArrayList<>();
 
     public MatadorGUI(){
         this.gui = new GUI(getFields());
-        addPlayer("1",30000);
-        addPlayer("2",30000);
-        addPlayer("3",30000);
-        addPlayer("4",30000);
-        addPlayer("5",30000);
-        addPlayer("6",30000);
-        drawPlayerPosition(0,1);
-        showMessage("Spiller 1 kast med terningen");
-        drawDice(1,2);
     }
+
     public void addPlayer(String name, int balance){
 
         GUI_Player guiPlayer = new GUI_Player(name,balance);
         gui.addPlayer(guiPlayer);
         guiPlayers.add(guiPlayer);
     }
-    public void drawPlayerPosition(int playerID, int position){
-        GUI_Player selectedPlayer = guiPlayers.get(playerID);
-        selectedPlayer.getCar().setPosition(gui.getFields()[position]);
+
+    public void drawPlayerPosition(Player player){
+        GUI_Player selectedPlayer = guiPlayers.get(player.getID());
+        selectedPlayer.getCar().setPosition(gui.getFields()[player.getPlayerPosition()]);
     }
     public void drawDice(int faceValue1, int faceValue2){
         gui.setDice(faceValue1, faceValue2);
@@ -44,6 +37,21 @@ public class MatadorGUI {
     public void showMessage(String message){
         gui.showMessage(message);
     }
+
+    public String requestString(String message){
+        return gui.getUserString(message);
+
+    }
+
+    public int requestInteger(String message, int minValue, int maxValue) {
+
+        return gui.getUserInteger(message, minValue, maxValue);
+    }
+
+    public void updatePlayerBalance(Player player){
+        guiPlayers.get(player.getID()).setBalance(player.getPlayerBalance());
+    }
+
 
     private GUI_Field[] getFields() {
         GUI_Field[] fields = new GUI_Field[40];

@@ -1,9 +1,9 @@
 package G16;
-import G16.Graphics.MatadorGUI;
-import gui_main.GUI;
-
+import G16.Controllers.GameController;
 public class Main {
     public static void main(String[] args) {
-        MatadorGUI mGUI = new MatadorGUI();
+        GameController game = new GameController();
+        game.playGame();
+
     }
 }

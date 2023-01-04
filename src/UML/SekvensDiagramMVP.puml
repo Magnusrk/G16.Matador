@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor Player #lightgreen
+loop No. of players
+Player <-UI : Request name
+Player -> UI: Enter name
+end
+
+loop While No. of players > 1
+Player -> UI: Throw die
+UI -> Die: Get die results
+UI <- Die: Die results
+Player -> UI: Move player
+UI-> field: land on field
+UI <- field:
+UI -> Moneybalance: Request new balance
+UI <- Moneybalance: new balance
+alt balance < 0
+Player <- UI: You lose
+end
+end
+Player <- UI: Winner found
+
+
+@enduml

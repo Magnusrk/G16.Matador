@@ -31,7 +31,7 @@ public class Initializer {
         fields[4] = tax1;
 
         //field 6
-        ShippingCompany Scandlines1 = new ShippingCompany("Helsingør - Helsingborg", 4000, new int[]{50, 250, 750, 2250});
+        ShippingCompany Scandlines1 = new ShippingCompany("Helsingør - Helsingborg", 4000, new int[]{500, 1000, 2000, 4000});
         fields[5] = Scandlines1;
 
         //field 7
@@ -71,7 +71,7 @@ public class Initializer {
         fields[14] = GlKongevej;
 
         //field 16
-        ShippingCompany Mols = new ShippingCompany("Mols-linien", 4000, 500);
+        ShippingCompany Mols = new ShippingCompany("Mols-linien", 4000, new int[]{500, 1000, 2000, 4000});
         fields[15] = Mols;
 
         //field 17
@@ -111,7 +111,7 @@ public class Initializer {
         fields[24] = Grønningen;
 
         //field 26
-        ShippingCompany Scandlines2 = new ShippingCompany("Gedser - Rostock", 4000, 500);
+        ShippingCompany Scandlines2 = new ShippingCompany("Gedser - Rostock", 4000, new int[]{500, 1000, 2000, 4000});
         fields[25] = Scandlines2;
 
         //field 27
@@ -151,7 +151,7 @@ public class Initializer {
         fields[34] = Nygade;
 
         //field 36
-        ShippingCompany Scandlines3 = new ShippingCompany("Rødby - Puttgarden", 4000, 500);
+        ShippingCompany Scandlines3 = new ShippingCompany("Rødby - Puttgarden", 4000, new int[]{500, 1000, 2000, 4000});
         fields[35] = Scandlines3;
 
         //field 37

@@ -2,6 +2,7 @@
 'https://plantuml.com/gantt-diagram
 
 Project starts 2023-01-02
+[Projekt planlægning] lasts 1 day and is colored in #491e5e/pink
 [Krav] lasts 3 days and is colored in Lavender/LightBlue
 [Kundemøde] happens 2023-01-04 and is colored in red
 [Analyse og design] lasts 5 days and is colored in Coral/maroon

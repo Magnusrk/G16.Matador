@@ -22,6 +22,7 @@ public class MatadorGUI {
                 defaultFields[i].setSubText(prop.getPrice()+",-");
                 defaultFields[i].setBackGroundColor(prop.getColor());
                 defaultFields[i].setTitle(prop.getName());
+                defaultFields[i].setDescription("price: "+prop.getPrice()+ ",- ------------------------"+  " Rent: " );
             }
             if (fields[i] instanceof ShippingCompany ship){
                 defaultFields[i].setSubText(ship.getPrice()+",-");

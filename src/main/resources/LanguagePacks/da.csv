@@ -10,7 +10,8 @@ playerName;Skriv spillerens navn:
 
 
 start;Start
-startsub;←Modtag 2$
+startsub;Modtag 4k
+startdesc;Modtag kr. 4000,- når de passerer start
 chance;Chance
 
 noowner;Ingen ejer

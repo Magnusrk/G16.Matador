@@ -83,33 +83,34 @@ public class GameController {
             if (!currentPlayer.getBankrupt()) {
 
 
-        if (currentPlayer.getJailed()){
-            inJail(currentPlayer);
-        }else  {
-            throwAndMove(currentPlayer);
-        }
+                if (currentPlayer.getJailed()) {
+                    inJail(currentPlayer);
+                } else {
+                    throwAndMove(currentPlayer);
+                }
 
 
-        //Update balance and position on GUI
+                //Update balance and position on GUI
 
-        mgui.updatePlayerBalance(currentPlayer);
+                mgui.updatePlayerBalance(currentPlayer);
 
-            currentPlayerID += 1;
-        if(currentPlayerID >= players.size()){
-            currentPlayerID = 0;
+                currentPlayerID += 1;
+                if (currentPlayerID >= players.size()) {
+                    currentPlayerID = 0;
+
+                }
+
+                if (currentPlayer.getBankrupt()) {
+                    removeowner(currentPlayer);
+                    mgui.removecar(currentPlayer);
+                }
+
+
+                if (!TEST_MODE) {
+                    playTurn();
+                }
 
             }
-
-        if(currentPlayer.getBankrupt()){
-            removeowner(currentPlayer);
-            mgui.removecar(currentPlayer);
-        }
-
-
-            if(!TEST_MODE){
-            playTurn();
-        }
-
         }
 
     public void rigDice(int value){
@@ -312,6 +313,7 @@ if (currentfield instanceof Property property){
         if (currentfield.getRent(currentfield.getOwner().getShipsOwned()-1)<currentplayer.getPlayerBalance()) {
             currentplayer.addBalance(-currentfield.getRent(currentfield.getOwner().getShipsOwned()-1));
             currentfield.getOwner().addBalance(currentfield.getRent(currentfield.getOwner().getShipsOwned()-1));
+            mgui.updatePlayerBalance(currentfield.getOwner());
         }
             else {
             currentplayer.addBalance(-currentplayer.getPlayerBalance());
@@ -339,8 +341,6 @@ if (currentfield instanceof Property property){
             }
 
         }
-
-}
         public boolean allinColorOwned (Property currentpropery){
             Player properyowner = currentpropery.getOwner();
             for (Field field : fields) {

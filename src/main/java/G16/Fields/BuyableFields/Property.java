@@ -31,7 +31,7 @@ public class Property extends BuyableField {
                  Language.getString("2house")+ " "+ this.getRent(2)+ ",-<br>"+
                  Language.getString("3house")+ " "+ this.getRent(3)+ ",-<br>"+
                  Language.getString("4house")+ " "+ this.getRent(4)+ ",-<br>"+
-                Language.getString("hotel")+" "+ this.getRent(5)+ ",-<br>";
+                Language.getString("hotel")+" "+ this.getRent(5)+ ",-<br/><br/>";
 
     }
 

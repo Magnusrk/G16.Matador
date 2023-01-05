@@ -76,10 +76,9 @@ public class GameController {
         }
     }
 
-        public void playTurn () {
-
-            Player currentPlayer = players.get(currentPlayerID);
-            if (!currentPlayer.getBankrupt()) {
+    public void playTurn () {
+        Player currentPlayer = players.get(currentPlayerID);
+        if (!currentPlayer.getBankrupt()) {
 
 
         if (currentPlayer.getJailed()){
@@ -298,7 +297,7 @@ public class GameController {
 
     public void payRent(Player currentplayer, BuyableField currentfield){
         mgui.showMessage(Language.getString("payrent" )+" "+ currentfield.getOwner());
-if (currentfield instanceof Property property){
+        if (currentfield instanceof Property property){
                 if (allinColorOwned(property)){
                     if (currentfield.getRent(0) < currentplayer.getPlayerBalance()) {
                         currentplayer.addBalance(2*-currentfield.getRent(0));
@@ -328,7 +327,6 @@ if (currentfield instanceof Property property){
             currentfield.getOwner().addBalance(currentplayer.getPlayerBalance());
         }
     }
-
         public void removeowner (Player bankruptplayer){
             Field field[]= fields;
             for (int i=0; i<field.length;i++){
@@ -351,21 +349,21 @@ if (currentfield instanceof Property property){
         }
 
 }
-        public boolean allinColorOwned (Property currentpropery){
-            Player properyowner = currentpropery.getOwner();
-            for (Field field : fields) {
-                if (field instanceof Property property) {
-                    if (currentpropery.getColor() == property.getColor()) {
-                        if (property.getOwner() == null) {
-                            return false;
-                        }
-                        if (property.getOwner().getID() != properyowner.getID()) {
-                            return false;
-                        }
+    public boolean allinColorOwned (Property currentpropery){
+        Player properyowner = currentpropery.getOwner();
+        for (Field field : fields) {
+            if (field instanceof Property property) {
+                if (currentpropery.getColor() == property.getColor()) {
+                    if (property.getOwner() == null) {
+                        return false;
+                    }
+                    if (property.getOwner().getID() != properyowner.getID()) {
+                        return false;
                     }
                 }
-                return true;
             }
-            return false;
+            return true;
         }
+        return false;
     }
+}

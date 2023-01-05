@@ -6,6 +6,7 @@ import G16.Fields.BuyableFields.Property;
 import G16.Fields.UnbuyableFields.GoToJail;
 import G16.Fields.Initializer;
 import G16.Fields.Field;
+import G16.Fields.UnbuyableFields.Tax;
 import G16.Graphics.MatadorGUI;
 import G16.Graphics.TestingGUI;
 import G16.Language;
@@ -141,6 +142,9 @@ public class GameController {
             } else {
                 payRent(player,prop);
             }
+        } else if (currentfield instanceof Tax tax){
+            mgui.showMessage("Du betaler skat");
+            player.addBalance(-tax.getTax());
         }
 
     }

@@ -10,6 +10,8 @@ public class Player {
     private int outOfJailCards = 0;
     private int ID = -1;
 
+    private int shipsOwned = 0;
+
     private int turnsinjail=0;
 
     public Player(){
@@ -58,6 +60,14 @@ public class Player {
     }
     public void setBalance(int ba) {
         //balance.setBalance(ba);
+    }
+
+    public int getShipsOwned() {
+        return shipsOwned;
+    }
+
+    public void setShipsOwned(int shipsOwned) {
+        this.shipsOwned = shipsOwned;
     }
 
     public void setPlayerPosition(int position){

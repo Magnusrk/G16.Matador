@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f16e1365-b81e-4a2a-bfcd-ab41a5f0edce" name="Changes" comment="Updated MoneyBalance">
+    <list default="true" id="f16e1365-b81e-4a2a-bfcd-ab41a5f0edce" name="Changes" comment="Updated Tax to have a price">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/G16/Controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/G16/Controllers/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/G16/Fields/Brewery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/G16/Fields/Brewery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/G16/Fields/Initializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/G16/Fields/Initializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/G16/Fields/Property.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/G16/Fields/Property.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/G16/Fields/ShippingCompany.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/G16/Fields/ShippingCompany.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/G16/Graphics/MatadorGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/G16/Graphics/MatadorGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev_branch" />
+        <entry key="$PROJECT_DIR$" value="Fields" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -74,12 +69,13 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="51d43f59-d627-444e-9c64-31c990b24e1e" name="Changes" comment="" />
+      <changelist id="f16e1365-b81e-4a2a-bfcd-ab41a5f0edce" name="Changes" comment="Updated Tax to have a price" />
       <created>1672734601100</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1672734601100</updated>
       <workItem from="1672736127833" duration="2401000" />
+      <workItem from="1672918719660" duration="1143000" />
     </task>
     <task id="LOCAL-00001" summary="Created PlayerUtils branch">
       <created>1672742907999</created>

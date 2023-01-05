@@ -159,6 +159,7 @@ public class GameController {
     public void goToJail(Player player){
         player.setPlayerPosition(10);
         player.setJailed(true);
+        mgui.drawPlayerPosition(player);
     }
 
     public void inJail(Player player) {

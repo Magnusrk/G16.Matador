@@ -32,7 +32,7 @@ public class Initializer {
                 new Property("Bülowsvej",Color.GREEN, 2800, 2000, new int[]{200, 1000, 3000, 9000, 12500, 15000}),
                 new Property("Gl. Kongevej",Color.GREEN, 3200, 2000, new int[]{250, 1250, 3750, 10000, 14000, 18000}),
                 new ShippingCompany("Aarhus-Odden", 4000, new int[]{500, 1000, 2000, 4000}),
-                new Property("Bernstorffsvejj",Color.GRAY, 3600, 2000, new int[]{300, 1400, 4000, 11000, 15000, 19000}),
+                new Property("Bernstorffsvej",Color.GRAY, 3600, 2000, new int[]{300, 1400, 4000, 11000, 15000, 19000}),
                 new Chance("chance"),
                 new Property("Hellerupvej",Color.GRAY, 3600, 2000, new int[]{300, 1400, 4000, 11000, 15000, 19000}),
                 new Property("Strandvejen",Color.GRAY, 4000, 2000, new int[]{350, 1600, 4400, 12000, 16000, 20000}),

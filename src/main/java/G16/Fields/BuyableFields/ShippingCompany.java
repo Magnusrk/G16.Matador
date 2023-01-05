@@ -11,7 +11,7 @@ public class ShippingCompany extends BuyableField {
 
     //Show rental price for Ship companies.
     public String toString() {
-
+        //Ship companies deed details.
         return super.toString() + Language.getString("price")+this.getPrice()+ ",-<br>"+
                 Language.getString("1ship")+" "+  this.getRent(0)+ ",-<br>" +
                 Language.getString("2ship")+" "+ this.getRent(1)+ ",-<br>" +

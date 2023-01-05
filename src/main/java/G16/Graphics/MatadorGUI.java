@@ -1,4 +1,5 @@
 package G16.Graphics;
+import G16.Controllers.GameController;
 import G16.Fields.BuyableFields.Brewery;
 import G16.Fields.BuyableFields.BuyableField;
 import G16.Fields.Field;
@@ -19,7 +20,11 @@ public class MatadorGUI {
     protected final GUI gui;
     protected final ArrayList<GUI_Player> guiPlayers = new ArrayList<>();
 
-    public MatadorGUI(Field[] fields){
+    protected GameController gc;
+
+    public MatadorGUI(GameController gc, Field[] fields){
+        this.gc = gc;
+
         GUI_Field[] defaultFields = getFields();
         for (int i = 0; i<defaultFields.length; i++){
             defaultFields[0].setSubText(Language.getString("startsub"));
@@ -59,10 +64,16 @@ public class MatadorGUI {
                 playersonfield.add(gplayer);
             }
         }
-        bankruptplayer.getCar().getPosition().removeAllCars();
+
+        if(bankruptplayer.getCar().getPosition() != null){
+            bankruptplayer.getCar().getPosition().removeAllCars();
+        }
+
+
         for (GUI_Player notbplayers: playersonfield){
             notbplayers.getCar().setPosition(gui.getFields()[player.getPlayerPosition()]);
         }
+
     }
 
     public void drawPlayerPosition(Player player){
@@ -74,21 +85,21 @@ public class MatadorGUI {
     }
 
     public void showMessage(String message){
-        gui.showMessage(message);
+        gui.showMessage(getTurnInfo() + message);
     }
 
     public String requestString(String message){
-        return gui.getUserString(message);
+        return gui.getUserString(getTurnInfo() + message);
 
     }
 
     public String requestUserButton(String msg,String...options){
-        return gui.getUserButtonPressed(msg,options);
+        return gui.getUserButtonPressed(getTurnInfo() + msg,options);
     }
 
     public int requestInteger(String message, int minValue, int maxValue) {
 
-        return gui.getUserInteger(message, minValue, maxValue);
+        return gui.getUserInteger(getTurnInfo() + message, minValue, maxValue);
     }
 
     public void updatePlayerBalance(Player player){
@@ -100,6 +111,10 @@ public class MatadorGUI {
         if (field instanceof BuyableField prop){
             defualtfields[post].setSubText(prop.getOwner().getName());
         }
+    }
+
+    private String getTurnInfo(){
+        return gc.getTurnMessage();
     }
 
     private GUI_Field[] getFields() {

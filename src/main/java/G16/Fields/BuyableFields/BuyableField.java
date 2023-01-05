@@ -4,6 +4,8 @@ import G16.Fields.Field;
 import G16.Graphics.MatadorGUI;
 import G16.PlayerUtils.Player;
 
+import java.util.ArrayList;
+
 public abstract class BuyableField extends Field {
 
     private Player owner;
@@ -33,6 +35,6 @@ public abstract class BuyableField extends Field {
 
     @Override
     public String toString() {
-        return "<div style=\"text-align:center; margin: 0px; width:130px;\"><span style=\"font-size: 15px;\">"+name+"</span></div>";
+        return "<div style=\"text-align:center; margin: 0px; width:130px;;\"><span style=\"font-size: 13px;\">"+name+"</span></div>";
     }
 }

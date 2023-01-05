@@ -1,4 +1,6 @@
-package G16.Fields;
+package G16.Fields.UnbuyableFields;
+
+import G16.Fields.Field;
 
 public class Tax extends Field {
     protected int price;

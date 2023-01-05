@@ -1,4 +1,6 @@
-package G16.Fields;
+package G16.Fields.UnbuyableFields;
+
+import G16.Fields.Field;
 
 import java.util.stream.IntStream;
 

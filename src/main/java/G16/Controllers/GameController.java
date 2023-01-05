@@ -85,6 +85,11 @@ public class GameController {
 
         }
 
+        if(currentPlayer.getBankrupt()){
+            removeowner(currentPlayer);
+            mgui.removecar(currentPlayer);
+        }
+
 
         if(!TEST_MODE){
             playTurn();
@@ -222,6 +227,17 @@ public class GameController {
         else {
             currentplayer.addBalance(-currentplayer.getPlayerBalance());
             currentfield.getOwner().addBalance(currentplayer.getPlayerBalance());
+        }
+    }
+
+    public void removeowner(Player bankruptplayer){
+        Field field[]= fields;
+        for (int i=0; i<field.length;i++){
+            if (field[i] instanceof BuyableField prop){
+                if (prop.getOwner()==bankruptplayer){
+                    prop.setOwner(null);
+                }
+            }
         }
     }
 

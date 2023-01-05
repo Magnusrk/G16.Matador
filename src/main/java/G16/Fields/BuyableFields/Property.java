@@ -19,4 +19,19 @@ public class Property extends BuyableField {
     public java.awt.Color getColor(){
         return color;
     }
+
+    @Override
+    public String toString() {
+
+         return "Pris: "+this.getPrice()+ ",-<br>"+
+                " Huspris: " + this.getHousePrice()+ ",-<br>" +
+                " Leje: "+ this.getRent(0)+ ",-<br>" +
+                " 1 hus: "+ this.getRent(1)+ ",-<br>"+
+                " 2 huse: "+ this.getRent(2)+ ",-<br>"+
+                " 3 huse: "+ this.getRent(3)+ ",-<br>"+
+                " 4 huse: "+ this.getRent(4)+ ",-<br>"+
+                " Hotel leje: "+ this.getRent(5)+ ",-<br>";
+
+    }
+
 }

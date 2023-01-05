@@ -145,6 +145,8 @@ public class MatadorGUI {
         return gc.getTurnMessage();
     }
 
+   
+
     private GUI_Field[] getFields() {
         GUI_Field[] fields = new GUI_Field[40];
         int i = 0;

@@ -1,5 +1,6 @@
 package G16.Controllers;
 
+import G16.Dev.DevConsole;
 import G16.Fields.*;
 import G16.Fields.BuyableFields.BuyableField;
 import G16.Fields.BuyableFields.Property;
@@ -34,6 +35,9 @@ public class GameController {
 
     private boolean TEST_MODE;
 
+    private boolean diceRigged = false;
+    private int nextDiceValue = 0;
+
     private boolean gameStarted = false;
 
     private boolean winnerfound;
@@ -49,8 +53,8 @@ public class GameController {
         }
     }
 
-    public void playGame() {
-
+    public void playGame(){
+        DevConsole dc = new DevConsole(this);
         setupPlayers();
         gameStarted = true;
         playTurn();
@@ -135,13 +139,25 @@ public class GameController {
             return players.get(currentPlayerID);
         }
 
-        private void throwAndMove (Player currentPlayer){
-            //Throw Dice
-            mgui.showMessage(currentPlayer.getName() + " kast med terningen!");
-            int[] diceThrow = Die.throwDice();
-            int diceSum = diceThrow[0] + diceThrow[1];
+    public void rigDice(int value){
+        diceRigged = true;
+        nextDiceValue = value;
+    }
 
-            mgui.drawDice(diceThrow[0], diceThrow[1]);
+    private void throwAndMove(Player currentPlayer) {
+        //Throw Dice
+        mgui.showMessage(currentPlayer.getName() + " kast med terningen!");
+        int[] diceThrow;
+        diceThrow = Die.throwDice();
+        int diceSum = diceThrow[0] + diceThrow[1];
+
+
+        if(diceRigged){
+            diceSum = nextDiceValue;
+            diceRigged = false;
+        }
+
+        mgui.drawDice(diceThrow[0], diceThrow[1]);
 
 
             //Move player
@@ -194,22 +210,30 @@ public class GameController {
             mgui.drawPlayerPosition(player);
         }
 
-        public void inJail (Player player){
-            String response;
-            if (player.getOutOfJailCards() > 0) {
-                response = mgui.requestUserButton((Language.getString("injail")), Language.getString("injailcard"), Language.getString("injailikkecard"));
-                if (response.equals(Language.getString("injailikkecard"))) {
-                    mgui.requestUserButton((Language.getString("injail")), Language.getString("injailpay"), Language.getString("injaildie"));
-                } else {
-                    player.setJailed(false);
-                    player.addOutOfJailCard(-1);
-                    mgui.showMessage(Language.getString("brugtkort"));
-                    throwAndMove(player);
-                    return;
-                }
-            } else {
-                response = mgui.requestUserButton((Language.getString("injail")), Language.getString("injailpay"), Language.getString("injaildie"));
+    public void goToJailByID(int id){
+        Player player = players.get(id);
+        player.setPlayerPosition(10);
+        player.setJailed(true);
+        mgui.drawPlayerPosition(player);
+    }
+
+
+    public void inJail(Player player) {
+        String response;
+        if(player.getOutOfJailCards() > 0){
+            response =mgui.requestUserButton((Language.getString("injail")),Language.getString("injailcard"),Language.getString("injailikkecard"));
+            if(response.equals(Language.getString("injailikkecard"))){
+                mgui.requestUserButton((Language.getString("injail")), Language.getString("injailpay"),Language.getString("injaildie"));
+            }else {
+                player.setJailed(false);
+                player.addOutOfJailCard(-1);
+                mgui.showMessage(Language.getString("brugtkort"));
+                throwAndMove(player);
+                return;
             }
+        } else {
+            response =mgui.requestUserButton((Language.getString("injail")), Language.getString("injailpay"),Language.getString("injaildie"));
+        }
 
             if (response.equals(Language.getString("injailpay"))) {
                 player.addBalance(-1000);
@@ -244,18 +268,28 @@ public class GameController {
             return players;
         }
 
-        public void buyPropfield (Player currentplayer, BuyableField currentfield){
-            if (currentfield.getPrice() < currentplayer.getPlayerBalance()) {
-                String resuslt = mgui.requestUserButton(Language.getString("prop"), Language.getString("yesTxt"), Language.getString("noTxt"));
-                if (resuslt == Language.getString("yesTxt")) {
-                    currentplayer.addBalance(-currentfield.getPrice());
-                    currentfield.setOwner(currentplayer);
-                    mgui.setOwner(currentfield, currentplayer.getPlayerPosition());
-                }
-            } else {
-                mgui.showMessage("propikkeråd");
+    public void buyPropfield(Player currentplayer, BuyableField currentfield){
+        if (currentfield.getPrice()< currentplayer.getPlayerBalance()) {
+            String resuslt = mgui.requestUserButton(Language.getString("prop"), Language.getString("yesTxt"), Language.getString("noTxt"));
+            if (resuslt == Language.getString("yesTxt")) {
+                currentplayer.addBalance(-currentfield.getPrice());
+                currentfield.setOwner(currentplayer);
+                mgui.setOwner(currentfield, currentplayer.getPlayerPosition());
             }
         }
+        else {
+            mgui.showMessage(Language.getString("propikkeråd"));
+        }
+    }
+
+    public void addPlayerMoney(int id, int amount){
+        players.get(id).addBalance(amount);
+        mgui.updatePlayerBalance(players.get(id));
+    }
+
+    public void setPlayerTurn(int id){
+        currentPlayerID = id;
+    }
 
         public void payRent (Player currentplayer, BuyableField currentfield){
             mgui.showMessage(Language.getString("payrent") + " " + currentfield.getOwner());

@@ -1,4 +1,6 @@
-package G16.Fields;
+package G16.Fields.BuyableFields;
+
+import G16.Fields.Field;
 
 public class Brewery extends Field {
     protected int price;

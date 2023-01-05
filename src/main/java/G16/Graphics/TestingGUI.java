@@ -1,15 +1,5 @@
 package G16.Graphics;
-import G16.Fields.Brewery;
 import G16.Fields.Field;
-import G16.Fields.Property;
-import G16.Fields.ShippingCompany;
-import G16.PlayerUtils.Player;
-import gui_fields.*;
-import gui_main.GUI;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Random;
 
 public class TestingGUI extends MatadorGUI{
 

@@ -1,4 +1,9 @@
 package G16.Fields;
+import G16.Fields.BuyableFields.Brewery;
+import G16.Fields.BuyableFields.Property;
+import G16.Fields.BuyableFields.ShippingCompany;
+import G16.Fields.UnbuyableFields.*;
+
 import java.awt.Color;
 
 public class Initializer {

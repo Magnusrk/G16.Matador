@@ -78,4 +78,8 @@ public class Player {
         turnsinjail++;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }

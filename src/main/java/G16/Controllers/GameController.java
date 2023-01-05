@@ -32,20 +32,23 @@ public class GameController {
 
     private boolean TEST_MODE;
 
+    private boolean gameStarted = false;
+
     public GameController(boolean TEST_MODE){
         this.TEST_MODE = TEST_MODE;
         fields=Initializer.InitFields();
 
         if(TEST_MODE){
-            mgui = new TestingGUI(fields);
+            mgui = new TestingGUI(this, fields);
         }else {
-            mgui = new MatadorGUI(fields);
+            mgui = new MatadorGUI(this, fields);
         }
     }
 
     public void playGame(){
 
         setupPlayers();
+        gameStarted = true;
         playTurn();
 
     }
@@ -239,6 +242,16 @@ public class GameController {
                 }
             }
         }
+    }
+
+    public String getTurnMessage(){
+        if(players.size() > 0 && gameStarted){
+            return "["+players.get(currentPlayerID).getName() +"'s tur] ";
+        }
+        else {
+            return "";
+        }
+
     }
 
 }

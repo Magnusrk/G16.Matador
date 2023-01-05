@@ -4,7 +4,7 @@ import G16.Fields.Field;
 
 public class Tax extends Field {
     protected int price;
-    public Tax(String name, int price0) {
+    public Tax(String name, int price) {
         super(name);
     }
 }

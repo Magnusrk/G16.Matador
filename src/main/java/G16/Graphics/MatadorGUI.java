@@ -1,5 +1,6 @@
 package G16.Graphics;
 import G16.Fields.BuyableFields.Brewery;
+import G16.Fields.BuyableFields.BuyableField;
 import G16.Fields.Field;
 import G16.Fields.BuyableFields.Property;
 import G16.Fields.BuyableFields.ShippingCompany;
@@ -73,6 +74,12 @@ public class MatadorGUI {
         guiPlayers.get(player.getID()).setBalance(player.getPlayerBalance());
     }
 
+    public void setOwner(Field field,int post){
+        GUI_Field[] defualtfields = gui.getFields();
+        if (field instanceof BuyableField prop){
+            defualtfields[post].setSubText(prop.getOwner().getName());
+        }
+    }
 
     private GUI_Field[] getFields() {
         GUI_Field[] fields = new GUI_Field[40];

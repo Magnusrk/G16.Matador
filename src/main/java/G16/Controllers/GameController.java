@@ -1,5 +1,8 @@
 package G16.Controllers;
 
+import G16.Fields.*;
+import G16.Fields.BuyableFields.BuyableField;
+import G16.Fields.BuyableFields.Property;
 import G16.Fields.UnbuyableFields.GoToJail;
 import G16.Fields.Initializer;
 import G16.Fields.Field;
@@ -73,7 +76,7 @@ public class GameController {
 
 
         //Update balance and position on GUI
-        mgui.drawPlayerPosition(currentPlayer);
+
         mgui.updatePlayerBalance(currentPlayer);
 
         currentPlayerID += 1;
@@ -100,6 +103,7 @@ public class GameController {
 
         //Move player
         movePlayer(currentPlayer, diceSum);
+        mgui.drawPlayerPosition(currentPlayer);
         landOnField(currentPlayer);
     }
 
@@ -123,7 +127,14 @@ public class GameController {
         Field currentfield = fields[player.getPlayerPosition()];
         if(currentfield instanceof GoToJail){
             goToJail(player);
+        } else if (currentfield instanceof BuyableField prop) {
+            if (prop.getOwner()==null) {
+                buyPropfield(player,prop);
+            } else {
+                payRent(player,prop);
+            }
         }
+
     }
 
     public void giveStartMoney(Player player){
@@ -186,6 +197,32 @@ public class GameController {
 
     public ArrayList<Player> getPlayers(){
         return players;
+    }
+
+    public void buyPropfield(Player currentplayer, BuyableField currentfield){
+        if (currentfield.getPrice()< currentplayer.getPlayerBalance()) {
+            String resuslt = mgui.requestUserButton(Language.getString("prop"), Language.getString("yesTxt"), Language.getString("noTxt"));
+            if (resuslt == Language.getString("yesTxt")) {
+                currentplayer.addBalance(-currentfield.getPrice());
+                currentfield.setOwner(currentplayer);
+                mgui.setOwner(currentfield, currentplayer.getPlayerPosition());
+            }
+        }
+        else {
+            mgui.showMessage("propikkeråd");
+        }
+    }
+
+    public void payRent(Player currentplayer, BuyableField currentfield){
+        mgui.showMessage(Language.getString("rent" )+" "+ currentfield.getOwner());
+        if (currentfield.getRent(0)<currentplayer.getPlayerBalance()) {
+            currentplayer.addBalance(-currentfield.getRent(0));
+            currentfield.getOwner().addBalance(currentfield.getRent(0));
+        }
+        else {
+            currentplayer.addBalance(-currentplayer.getPlayerBalance());
+            currentfield.getOwner().addBalance(currentplayer.getPlayerBalance());
+        }
     }
 
 }

@@ -26,6 +26,7 @@ public class Property extends BuyableField {
 
          return super.toString()+Language.getString("price")+" "+this.getPrice()+ ",-<br>"+
                  Language.getString("housePrice")+ " " + this.getHousePrice()+ ",-<br>" +
+                 Language.getString("allOwned")+ "<br>" +
                  Language.getString("rent")+ " "+ this.getRent(0)+ ",-<br>" +
                  Language.getString("1house")+ " "+ this.getRent(1)+ ",-<br>"+
                  Language.getString("2house")+ " "+ this.getRent(2)+ ",-<br>"+

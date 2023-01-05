@@ -35,6 +35,6 @@ public abstract class BuyableField extends Field {
 
     @Override
     public String toString() {
-        return "<div style=\"text-align:center; margin: 0px; width:130px;;\"><span style=\"font-size: 13px;\">"+name+"</span></div>";
+        return "<div style=\"text-align:center; margin: 0px; width:130px;;\"><span style=\"font-size: 11px;\">"+name+"</span></div>";
     }
 }

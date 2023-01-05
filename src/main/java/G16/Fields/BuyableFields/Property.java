@@ -23,7 +23,7 @@ public class Property extends BuyableField {
     @Override
     public String toString() {
 
-         return "Pris: "+this.getPrice()+ ",-<br>"+
+         return super.toString()+"Pris: "+this.getPrice()+ ",-<br>"+
                 " Huspris: " + this.getHousePrice()+ ",-<br>" +
                 " Leje: "+ this.getRent(0)+ ",-<br>" +
                 " 1 hus: "+ this.getRent(1)+ ",-<br>"+

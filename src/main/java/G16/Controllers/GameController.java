@@ -1,5 +1,6 @@
 package G16.Controllers;
 
+import G16.Dev.DevConsole;
 import G16.Fields.*;
 import G16.Fields.BuyableFields.BuyableField;
 import G16.Fields.BuyableFields.Property;
@@ -34,6 +35,7 @@ public class GameController {
 
     private boolean TEST_MODE;
 
+    private boolean winnerfound = false;
     private boolean diceRigged = false;
     private int nextDiceValue = 0;
 
@@ -76,39 +78,58 @@ public class GameController {
         }
     }
 
-    public void playTurn () {
-        Player currentPlayer = players.get(currentPlayerID);
-        if (!currentPlayer.getBankrupt()) {
+        public void playTurn () {
+
+            Player currentPlayer = players.get(currentPlayerID);
+            if (!currentPlayer.getBankrupt()) {
 
 
-        if (currentPlayer.getJailed()){
-            inJail(currentPlayer);
-        }else  {
-            throwAndMove(currentPlayer);
-        }
+                if (currentPlayer.getJailed()) {
+                    inJail(currentPlayer);
+                } else {
+                    throwAndMove(currentPlayer);
+                }
 
 
-        //Update balance and position on GUI
-
-        mgui.updatePlayerBalance(currentPlayer);
-
+            }
+            setWinnerfound();
             currentPlayerID += 1;
-        if(currentPlayerID >= players.size()){
-            currentPlayerID = 0;
+            if (currentPlayerID >= players.size()) {
+                currentPlayerID = 0;
 
             }
 
-        if(currentPlayer.getBankrupt()){
-            removeowner(currentPlayer);
-            mgui.removecar(currentPlayer);
-        }
-
-
-            if(!TEST_MODE){
-            playTurn();
-        }
+            if (!TEST_MODE) {
+                if (!winnerfound) {
+                    playTurn();
+                }
+            }
 
         }
+
+    private void setWinnerfound () {
+        int deadplayers = 0;
+        Player potwinner = null;
+        for (Player player : players) {
+            if (player.getBankrupt()) {
+                deadplayers++;
+            } else {
+                potwinner = player;
+            }
+        }
+        if (deadplayers == players.size() - 1) {
+            winnerfound = true;
+            mgui.showMessage(potwinner + " " + Language.getString("winner"));
+        }
+    }
+
+    public boolean getWinnerfound () {
+        return winnerfound;
+    }
+
+    public Player getCurrentplayer () {
+        return players.get(currentPlayerID);
+    }
 
     public void rigDice(int value){
         diceRigged = true;
@@ -139,6 +160,14 @@ public class GameController {
                 extra = false;
             }
             int diceSum = diceThrow[0] + diceThrow[1];
+
+
+        if(diceRigged){
+            diceSum = nextDiceValue;
+            diceRigged = false;
+        }
+
+        mgui.drawDice(diceThrow[0], diceThrow[1]);
 
 
             //Move player
@@ -297,7 +326,7 @@ public class GameController {
 
     public void payRent(Player currentplayer, BuyableField currentfield){
         mgui.showMessage(Language.getString("payrent" )+" "+ currentfield.getOwner());
-        if (currentfield instanceof Property property){
+if (currentfield instanceof Property property){
                 if (allinColorOwned(property)){
                     if (currentfield.getRent(0) < currentplayer.getPlayerBalance()) {
                         currentplayer.addBalance(2*-currentfield.getRent(0));
@@ -321,12 +350,14 @@ public class GameController {
         if (currentfield.getRent(currentfield.getOwner().getShipsOwned()-1)<currentplayer.getPlayerBalance()) {
             currentplayer.addBalance(-currentfield.getRent(currentfield.getOwner().getShipsOwned()-1));
             currentfield.getOwner().addBalance(currentfield.getRent(currentfield.getOwner().getShipsOwned()-1));
+            mgui.updatePlayerBalance(currentfield.getOwner());
         }
             else {
             currentplayer.addBalance(-currentplayer.getPlayerBalance());
             currentfield.getOwner().addBalance(currentplayer.getPlayerBalance());
         }
     }
+
         public void removeowner (Player bankruptplayer){
             Field field[]= fields;
             for (int i=0; i<field.length;i++){
@@ -347,23 +378,21 @@ public class GameController {
             }
 
         }
-
-}
-    public boolean allinColorOwned (Property currentpropery){
-        Player properyowner = currentpropery.getOwner();
-        for (Field field : fields) {
-            if (field instanceof Property property) {
-                if (currentpropery.getColor() == property.getColor()) {
-                    if (property.getOwner() == null) {
-                        return false;
-                    }
-                    if (property.getOwner().getID() != properyowner.getID()) {
-                        return false;
+        public boolean allinColorOwned (Property currentpropery){
+            Player properyowner = currentpropery.getOwner();
+            for (Field field : fields) {
+                if (field instanceof Property property) {
+                    if (currentpropery.getColor() == property.getColor()) {
+                        if (property.getOwner() == null) {
+                            return false;
+                        }
+                        if (property.getOwner().getID() != properyowner.getID()) {
+                            return false;
+                        }
                     }
                 }
+                return true;
             }
-            return true;
+            return false;
         }
-        return false;
     }
-}

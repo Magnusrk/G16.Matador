@@ -52,16 +52,21 @@ public class GameControllerTest extends TestCase {
         controller.setupPlayers();
         ArrayList<Player> players = controller.getPlayers();
         for(Player p : players){
-            p.addBalance(-29900);
+            p.addBalance(-29001);
             System.out.println(p.getPlayerBalance());
         }
         for(int i = 0; i < 1000; i++){
+            controller.getCurrentplayer().addBalance(-500);
             for(Player p : players){
-                p.addBalance(-100);
+
                 System.out.println(p.getPlayerBalance());
             }
-
-            controller.playTurn();
+            if(!controller.getWinnerfound()) {
+                controller.playTurn();
+            }
+            else {
+                break;
+            }
         }
         for(Player p : players){
             System.out.println(p.getPlayerBalance());

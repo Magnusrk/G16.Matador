@@ -162,12 +162,12 @@ public class GameController {
             int diceSum = diceThrow[0] + diceThrow[1];
 
 
-        if(diceRigged){
-            diceSum = nextDiceValue;
-            diceRigged = false;
-        }
+            if(diceRigged){
+                diceSum = nextDiceValue;
+                diceRigged = false;
+            }
 
-        mgui.drawDice(diceThrow[0], diceThrow[1]);
+            mgui.drawDice(diceThrow[0], diceThrow[1]);
 
 
             //Move player

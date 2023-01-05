@@ -22,8 +22,8 @@ public class MatadorGUI {
     public MatadorGUI(Field[] fields){
         GUI_Field[] defaultFields = getFields();
         for (int i = 0; i<defaultFields.length; i++){
-            defaultFields[1].setSubText(Language.getString("startsub"));
-            defaultFields[1].setDescription(Language.getString("startdesc"));
+            defaultFields[0].setSubText(Language.getString("startsub"));
+            defaultFields[0].setDescription(Language.getString("startdesc"));
             if (fields[i] instanceof Property prop) {
                 defaultFields[i].setSubText(prop.getPrice()+",-");
                 defaultFields[i].setBackGroundColor(prop.getColor());

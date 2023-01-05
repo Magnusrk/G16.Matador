@@ -219,7 +219,7 @@ public class GameController {
     }
 
     public void payRent(Player currentplayer, BuyableField currentfield){
-        mgui.showMessage(Language.getString("rent" )+" "+ currentfield.getOwner());
+        mgui.showMessage(Language.getString("payrent" )+" "+ currentfield.getOwner());
         if (currentfield.getRent(0)<currentplayer.getPlayerBalance()) {
             currentplayer.addBalance(-currentfield.getRent(0));
             currentfield.getOwner().addBalance(currentfield.getRent(0));

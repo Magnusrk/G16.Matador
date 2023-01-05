@@ -9,6 +9,7 @@ import G16.Language;
 import G16.PlayerUtils.Player;
 import gui_fields.*;
 import gui_main.GUI;
+import java.awt.Window;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -47,6 +48,21 @@ public class MatadorGUI {
         GUI_Player guiPlayer = new GUI_Player(name,balance);
         gui.addPlayer(guiPlayer);
         guiPlayers.add(guiPlayer);
+    }
+
+    public void removecar(Player player){
+        ArrayList<GUI_Player> playersonfield= new ArrayList<>();
+
+        GUI_Player bankruptplayer = guiPlayers.get(player.getID());
+        for (GUI_Player gplayer: guiPlayers){
+            if (gplayer.getCar().getPosition()==bankruptplayer.getCar().getPosition() && gplayer!=bankruptplayer){
+                playersonfield.add(gplayer);
+            }
+        }
+        bankruptplayer.getCar().getPosition().removeAllCars();
+        for (GUI_Player notbplayers: playersonfield){
+            notbplayers.getCar().setPosition(gui.getFields()[player.getPlayerPosition()]);
+        }
     }
 
     public void drawPlayerPosition(Player player){

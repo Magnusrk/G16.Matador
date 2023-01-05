@@ -15,6 +15,9 @@ import java.awt.Window;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static gui_fields.GUI_Car.Pattern.*;
+import static gui_fields.GUI_Car.Type.*;
+
 public class MatadorGUI {
 
     protected final GUI gui;
@@ -48,11 +51,36 @@ public class MatadorGUI {
         this.gui = new GUI(defaultFields);
     }
 
-    public void addPlayer(String name, int balance){
-
-        GUI_Player guiPlayer = new GUI_Player(name,balance);
-        gui.addPlayer(guiPlayer);
-        guiPlayers.add(guiPlayer);
+    public void addPlayer(String name, int balance,int playerNum){
+        switch (playerNum) {
+            case 0 -> {
+                GUI_Player guiPlayer = new GUI_Player(name,balance,new GUI_Car(Color.RED, Color.LIGHT_GRAY, CAR, HORIZONTAL_GRADIANT));
+                gui.addPlayer(guiPlayer);
+                guiPlayers.add(guiPlayer);
+            }
+            case 1-> {
+                GUI_Player guiPlayer = new GUI_Player(name,balance,new GUI_Car(Color.YELLOW, Color.BLUE, TRACTOR, DIAGONAL_DUAL_COLOR));
+                gui.addPlayer(guiPlayer);
+                guiPlayers.add(guiPlayer);
+            }case 2-> {
+                GUI_Player guiPlayer = new GUI_Player(name,balance,new GUI_Car(Color.RED, Color.YELLOW, RACECAR, HORIZONTAL_LINE));
+                gui.addPlayer(guiPlayer);
+                guiPlayers.add(guiPlayer);
+            }case 3-> {
+                GUI_Player guiPlayer = new GUI_Player(name,balance,new GUI_Car(Color.LIGHT_GRAY, Color.LIGHT_GRAY, UFO, HORIZONTAL_DUAL_COLOR));
+                gui.addPlayer(guiPlayer);
+                guiPlayers.add(guiPlayer);
+            }
+            case 4-> {
+                GUI_Player guiPlayer = new GUI_Player(name,balance,new GUI_Car(Color.BLACK, Color.WHITE, CAR, CHECKERED));
+                gui.addPlayer(guiPlayer);
+                guiPlayers.add(guiPlayer);
+            }case 5-> {
+                GUI_Player guiPlayer = new GUI_Player(name,balance,new GUI_Car(Color.PINK, Color.MAGENTA, TRACTOR, HORIZONTAL_GRADIANT));
+                gui.addPlayer(guiPlayer);
+                guiPlayers.add(guiPlayer);
+            }
+        }
     }
 
     public void removecar(Player player){

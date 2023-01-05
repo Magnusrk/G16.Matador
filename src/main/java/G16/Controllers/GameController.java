@@ -56,14 +56,16 @@ public class GameController {
 
     public void setupPlayers(){
         int playerCount = mgui.requestInteger(Language.getString("howManyPlayers"), MIN_PLAYERS, MAX_PLAYERS);
+        int playerNum = 0;
         while (players.size() < playerCount){
             String newPlayerName = mgui.requestString(Language.getString("playerName"));
             Player newPlayer = new Player();
             newPlayer.setName(newPlayerName);
             newPlayer.setID(players.size());
             players.add(newPlayer);
-            mgui.addPlayer(newPlayerName, newPlayer.getPlayerBalance());
+            mgui.addPlayer(newPlayerName, newPlayer.getPlayerBalance(),playerNum);
             mgui.drawPlayerPosition(newPlayer);
+            playerNum++;
         }
         mgui.showMessage("Tryk OK for at starte!");
     }

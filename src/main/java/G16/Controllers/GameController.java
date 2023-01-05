@@ -35,6 +35,7 @@ public class GameController {
 
     private boolean TEST_MODE;
 
+    private boolean winnerfound = false;
     private boolean diceRigged = false;
     private int nextDiceValue = 0;
 
@@ -90,28 +91,45 @@ public class GameController {
                 }
 
 
-                //Update balance and position on GUI
-
-                mgui.updatePlayerBalance(currentPlayer);
-
-                currentPlayerID += 1;
-                if (currentPlayerID >= players.size()) {
-                    currentPlayerID = 0;
-
-                }
-
-                if (currentPlayer.getBankrupt()) {
-                    removeowner(currentPlayer);
-                    mgui.removecar(currentPlayer);
-                }
-
-
-                if (!TEST_MODE) {
-                    playTurn();
-                }
+            }
+            setWinnerfound();
+            currentPlayerID += 1;
+            if (currentPlayerID >= players.size()) {
+                currentPlayerID = 0;
 
             }
+
+            if (!TEST_MODE) {
+                if (!winnerfound) {
+                    playTurn();
+                }
+            }
+
         }
+
+    private void setWinnerfound () {
+        int deadplayers = 0;
+        Player potwinner = null;
+        for (Player player : players) {
+            if (player.getBankrupt()) {
+                deadplayers++;
+            } else {
+                potwinner = player;
+            }
+        }
+        if (deadplayers == players.size() - 1) {
+            winnerfound = true;
+            mgui.showMessage(potwinner + " " + Language.getString("winner"));
+        }
+    }
+
+    public boolean getWinnerfound () {
+        return winnerfound;
+    }
+
+    public Player getCurrentplayer () {
+        return players.get(currentPlayerID);
+    }
 
     public void rigDice(int value){
         diceRigged = true;

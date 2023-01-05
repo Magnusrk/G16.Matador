@@ -1,6 +1,7 @@
 package G16.Fields.BuyableFields;
 
 import G16.Fields.Field;
+import G16.Language;
 
 public class Brewery extends BuyableField {
 
@@ -10,9 +11,9 @@ public class Brewery extends BuyableField {
 
     public String toString() {
 
-        return super.toString() + "Pris: "+this.getPrice()+ ",-<br>"+
-                " 1 bryggeri ejet: " + this.getRent(0)+ ",-<br>" +
-                " 2 bryggerier ejet: "+ this.getRent(1)+ ",-<br>";
+        return super.toString() + Language.getString("price")+" "+ +this.getPrice()+ ",-<br>"+
+                Language.getString("1brew")+ " " + this.getRent(0)+ ",-<br>" +
+                Language.getString("2brew")+" "+ this.getRent(1)+ ",-<br>";
 
 
     }

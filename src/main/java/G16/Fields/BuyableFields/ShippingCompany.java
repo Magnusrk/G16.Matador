@@ -1,6 +1,7 @@
 package G16.Fields.BuyableFields;
 
 import G16.Fields.Field;
+import G16.Language;
 
 public class ShippingCompany extends BuyableField {
 
@@ -11,11 +12,11 @@ public class ShippingCompany extends BuyableField {
     //Show rental price for Ship companies.
     public String toString() {
 
-        return super.toString() + "Pris: "+this.getPrice()+ ",-<br>"+
-                " 1 rederi ejet: " + this.getRent(0)+ ",-<br>" +
-                " 2 rederi ejet: "+ this.getRent(1)+ ",-<br>" +
-                " 3 rederi ejet: "+ this.getRent(2)+ ",-<br>"+
-                " 4 rederi ejet: "+ this.getRent(3)+ ",-<br>";
+        return super.toString() + Language.getString("price")+this.getPrice()+ ",-<br>"+
+                Language.getString("1ship")+" "+  this.getRent(0)+ ",-<br>" +
+                Language.getString("2ship")+" "+ this.getRent(1)+ ",-<br>" +
+                Language.getString("3ship")+" "+ this.getRent(2)+ ",-<br>"+
+                Language.getString("4ship")+" "+ this.getRent(3)+ ",-<br>";
 
 
     }

@@ -1,10 +1,11 @@
 package G16.Graphics;
+import G16.Controllers.GameController;
 import G16.Fields.Field;
 
 public class TestingGUI extends MatadorGUI{
 
-    public TestingGUI(Field[] fields){
-        super(fields);
+    public TestingGUI(GameController gc,Field[] fields){
+        super(gc, fields);
     }
 
     @Override

@@ -44,7 +44,30 @@ public class GameControllerTest extends TestCase {
         for(int i = 0; i < players.size() * 3; i++){
             controller.playTurn();
         }
-        assertEquals(false, jailedPlayer.getJailed());
+        assertFalse(jailedPlayer.getJailed());
+
+    }
+    public void testBankruptcy(){
+        GameController controller = new GameController(true);
+        controller.setupPlayers();
+        ArrayList<Player> players = controller.getPlayers();
+        for(Player p : players){
+            p.addBalance(-29900);
+            System.out.println(p.getPlayerBalance());
+        }
+        for(int i = 0; i < 1000; i++){
+            for(Player p : players){
+                p.addBalance(-100);
+                System.out.println(p.getPlayerBalance());
+            }
+
+            controller.playTurn();
+        }
+        for(Player p : players){
+            System.out.println(p.getPlayerBalance());
+            System.out.println(p.getBankrupt());
+        }
+
 
     }
 

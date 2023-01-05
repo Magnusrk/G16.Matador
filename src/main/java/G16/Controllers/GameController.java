@@ -104,16 +104,34 @@ public class GameController {
     private void throwAndMove(Player currentPlayer) {
         //Throw Dice
         mgui.showMessage(currentPlayer.getName() + " kast med terningen!");
-        int[] diceThrow = Die.throwDice();
-        int diceSum = diceThrow[0] + diceThrow[1];
+        boolean extra = true;
+        int extraCounter = 0;
+        while (extra) {
+            int[] diceThrow = Die.throwDice();
 
-        mgui.drawDice(diceThrow[0], diceThrow[1]);
+            mgui.drawDice(diceThrow[0], diceThrow[1]);
+
+            if (diceThrow[0] == diceThrow[1]) {
+                extraCounter ++;
+                if (extraCounter == 3) {
+                    currentPlayer.setPlayerPosition(10);
+                    currentPlayer.setJailed(true);
+                    mgui.drawPlayerPosition(currentPlayer);
+                    mgui.showMessage(Language.getString("snyd???"));
+                    break;
+                }
+                mgui.showMessage(Language.getString("ekstra"));
+            } else {
+                extra = false;
+            }
+            int diceSum = diceThrow[0] + diceThrow[1];
 
 
-        //Move player
-        movePlayer(currentPlayer, diceSum);
-        mgui.drawPlayerPosition(currentPlayer);
-        landOnField(currentPlayer);
+            //Move player
+            movePlayer(currentPlayer, diceSum);
+            mgui.drawPlayerPosition(currentPlayer);
+            landOnField(currentPlayer);
+        }
     }
 
     public void balance(Player player,int add){
@@ -192,6 +210,7 @@ public class GameController {
                 player.setJailed(false);
                 movePlayer(player,die[0]+die[1]);
                 landOnField(player);
+                mgui.drawPlayerPosition(player);
                 mgui.showMessage(Language.getString("2ens"));
             }
             else {

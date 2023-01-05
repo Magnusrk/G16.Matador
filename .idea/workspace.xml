@@ -7,6 +7,7 @@
     <list default="true" id="f16e1365-b81e-4a2a-bfcd-ab41a5f0edce" name="Changes" comment="Updated Tax to have a price">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/G16/Controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/G16/Controllers/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/LanguagePacks/da.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/LanguagePacks/da.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Fields" />
+        <entry key="$PROJECT_DIR$" value="dev_branch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -120,6 +121,7 @@
     <MESSAGE value="Created PlayerUtils branch" />
     <MESSAGE value="Added MoneyBalance" />
     <MESSAGE value="Updated MoneyBalance" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated MoneyBalance" />
+    <MESSAGE value="Updated goToJail to show player position in jail" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated goToJail to show player position in jail" />
   </component>
 </project>

@@ -415,6 +415,7 @@ public class GameController {
                 if (field[i] instanceof BuyableField prop){
                     if (prop.getOwner()==bankruptplayer){
                         prop.setOwner(null);
+                        mgui.resetOwner(prop,i);
                     }
                 }
             }

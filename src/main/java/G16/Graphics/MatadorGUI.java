@@ -126,6 +126,12 @@ public class MatadorGUI {
             defualtfields[post].setSubText(prop.getOwner().getName());
         }
     }
+    public void resetOwner(Field field , int post){
+        GUI_Field[] defualtfields = gui.getFields();
+        if (field instanceof BuyableField prop){
+            defualtfields[post].setSubText(prop.getPrice()+",-");
+        }
+    }
 
     private String getTurnInfo(){
         return gc.getTurnMessage();

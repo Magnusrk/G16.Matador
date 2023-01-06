@@ -40,11 +40,11 @@ public class GameControllerTest extends TestCase {
         controller.setupPlayers();
         ArrayList<Player> players = controller.getPlayers();
         Player jailedPlayer = controller.getPlayers().get(0);
-
+        controller.fakeDie(true,2,2);
         for(int i = 0; i < players.size() * 3; i++){
             controller.playTurn();
         }
-        assertFalse(jailedPlayer.getJailed());
+        assertTrue(jailedPlayer.getJailed());
     }
 
     public void testJailedAfterThreeTurns(){

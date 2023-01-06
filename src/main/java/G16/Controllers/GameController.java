@@ -324,6 +324,9 @@ public class GameController {
                     landOnField(player, dievalue[0] + dievalue[1]);
                     mgui.showMessage(Language.getString("3ture"));
                     mgui.drawPlayerPosition(player);
+                    mgui.showMessage(Language.getString("ekstra"));
+                    throwAndMove(player);
+
                 }
             }
         }

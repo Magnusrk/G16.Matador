@@ -92,6 +92,7 @@ public class GameController {
 
 
             }
+            mgui.updatePlayerBalance(currentPlayer);
             setWinnerfound();
             currentPlayerID += 1;
             if (currentPlayerID >= players.size()) {

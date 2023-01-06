@@ -11,6 +11,7 @@ public class Player {
     private int ID = -1;
 
     private int shipsOwned = 0;
+    private int brewsOwned = 0;
 
     private int turnsinjail=0;
 
@@ -70,9 +71,15 @@ public class Player {
     public int getShipsOwned() {
         return shipsOwned;
     }
+    public int getBrewsOwned(){
+        return brewsOwned;
+    }
 
     public void setShipsOwned(int shipsOwned) {
         this.shipsOwned = shipsOwned;
+    }
+    public void setBrewsOwned(int brewsOwned){
+        this.brewsOwned = brewsOwned;
     }
 
     public void setPlayerPosition(int position){

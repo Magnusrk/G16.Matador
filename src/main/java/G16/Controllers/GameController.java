@@ -2,6 +2,7 @@ package G16.Controllers;
 
 import G16.Dev.DevConsole;
 import G16.Fields.*;
+import G16.Fields.BuyableFields.Brewery;
 import G16.Fields.BuyableFields.BuyableField;
 import G16.Fields.BuyableFields.Property;
 import G16.Fields.BuyableFields.ShippingCompany;
@@ -82,8 +83,6 @@ public class GameController {
 
             Player currentPlayer = players.get(currentPlayerID);
             if (!currentPlayer.getBankrupt()) {
-
-
                 if (currentPlayer.getJailed()) {
                     inJail(currentPlayer);
                 } else {
@@ -102,14 +101,12 @@ public class GameController {
                 currentPlayerID = 0;
 
             }
-
             if (!TEST_MODE) {
                 if (!winnerfound) {
                     playTurn();
                 }
             }
-
-        }
+    }
 
     private void checkPlayerBankrupt(Player currentPlayer) {
         if(currentPlayer.getBankrupt()){
@@ -167,7 +164,7 @@ public class GameController {
             //Move player
             movePlayer(currentPlayer, diceSum);
             mgui.drawPlayerPosition(currentPlayer);
-            landOnField(currentPlayer);
+            landOnField(currentPlayer, diceSum);
         }
 
         public void balance (Player player,int add){
@@ -186,7 +183,7 @@ public class GameController {
 
         }
 
-        public void landOnField (Player player){
+        public void landOnField (Player player, int diceSum){
             Field currentfield = fields[player.getPlayerPosition()];
             if(currentfield instanceof GoToJail){
                 goToJail(player);
@@ -208,6 +205,12 @@ public class GameController {
             } else if (currentfield instanceof Tax tax){
                 mgui.showMessage("Du betaler skat");
                 player.addBalance(-tax.getTax());
+            } else if (currentfield instanceof Brewery brew){
+                if (brew.getOwner()==null){
+                    buyBrewField(player,brew);
+                } else {
+                    payBrewRent(player,brew, diceSum);
+                }
             }
 
         }
@@ -262,7 +265,7 @@ public class GameController {
                 if (die[0]==die[1]){
                     player.setJailed(false);
                     movePlayer(player,die[0]+die[1]);
-                    landOnField(player);
+                    landOnField(player,die[0]+die[1]);
                     mgui.showMessage(Language.getString("2ens"));
                 }
             else {
@@ -272,7 +275,7 @@ public class GameController {
                         player.addBalance(-1000);
                         player.setJailed(false);
                         movePlayer(player,die[0]+die[1]);
-                        landOnField(player);
+                        landOnField(player,die[0]+die[1]);
                         mgui.showMessage(Language.getString("3ture"));
                     }
                 }
@@ -310,6 +313,20 @@ public class GameController {
             mgui.showMessage(Language.getString("propikkeråd"));
         }
     }
+    public void buyBrewField(Player currentplayer, BuyableField currentfield){
+        if (currentfield.getPrice()< currentplayer.getPlayerBalance()) {
+            String resuslt = mgui.requestUserButton(Language.getString("brew"), Language.getString("yesTxt"), Language.getString("noTxt"));
+            if (resuslt == Language.getString("yesTxt")) {
+                currentplayer.addBalance(-currentfield.getPrice());
+                currentfield.setOwner(currentplayer);
+                currentplayer.setBrewsOwned(currentplayer.getBrewsOwned()+1);
+                mgui.setOwner(currentfield, currentplayer.getPlayerPosition());
+            }
+        }
+        else {
+            mgui.showMessage(Language.getString("propikkeråd"));
+        }
+    }
 
     public void addPlayerMoney(int id, int amount){
         players.get(id).addBalance(amount);
@@ -322,14 +339,14 @@ public class GameController {
 
     public void payRent(Player currentplayer, BuyableField currentfield){
         mgui.showMessage(Language.getString("payrent" )+" "+ currentfield.getOwner());
-if (currentfield instanceof Property property){
+        if (currentfield instanceof Property property){
                 if (allinColorOwned(property)){
                     if (currentfield.getRent(0) < currentplayer.getPlayerBalance()) {
                         currentplayer.addBalance(2*-currentfield.getRent(0));
                         currentfield.getOwner().addBalance(2*currentfield.getRent(0));
                     } else {
-                        currentplayer.addBalance(-currentplayer.getPlayerBalance());
-                        currentfield.getOwner().addBalance(currentplayer.getPlayerBalance());
+                        currentplayer.addBalance(-currentplayer.getPlayerBalance()-1);
+                        currentfield.getOwner().addBalance(currentplayer.getPlayerBalance()+1);
                     }
                 }
             }        if (currentfield.getRent(0)<currentplayer.getPlayerBalance()) {
@@ -349,8 +366,21 @@ if (currentfield instanceof Property property){
             mgui.updatePlayerBalance(currentfield.getOwner());
         }
             else {
-            currentplayer.addBalance(-currentplayer.getPlayerBalance());
-            currentfield.getOwner().addBalance(currentplayer.getPlayerBalance());
+            currentplayer.addBalance(-currentplayer.getPlayerBalance()-1);
+            currentfield.getOwner().addBalance(currentplayer.getPlayerBalance()+1);
+        }
+    }
+    public void payBrewRent(Player currentplayer, BuyableField currentfield, int diceSum){
+        mgui.showMessage(Language.getString("payrent" )+" "+ currentfield.getOwner());
+        int toPay = currentfield.getRent(currentfield.getOwner().getBrewsOwned()-1)*diceSum;
+        if (toPay<currentplayer.getPlayerBalance()) {
+            currentplayer.addBalance(-toPay);
+            currentfield.getOwner().addBalance(toPay);
+            mgui.updatePlayerBalance(currentfield.getOwner());
+        }
+        else {
+            currentplayer.addBalance(-currentplayer.getPlayerBalance()-1);
+            currentfield.getOwner().addBalance(currentplayer.getPlayerBalance()+1);
         }
     }
 

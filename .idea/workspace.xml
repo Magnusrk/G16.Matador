@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f16e1365-b81e-4a2a-bfcd-ab41a5f0edce" name="Changes" comment="Updated Tax to have a price">
+    <list default="true" id="f16e1365-b81e-4a2a-bfcd-ab41a5f0edce" name="Changes" comment="Added extra turn conditions and rules">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/G16/Controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/G16/Controllers/GameController.java" afterDir="false" />
     </list>
@@ -24,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Fields" />
+        <entry key="$PROJECT_DIR$" value="dev_branch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -41,6 +41,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;DefaultPlantUmlFileTemplate&quot;: &quot;UML Class&quot;,
+    &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
@@ -98,7 +99,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672743155110</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added extra turn conditions and rules">
+      <created>1672926134860</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1672926134860</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -120,6 +128,8 @@
     <MESSAGE value="Created PlayerUtils branch" />
     <MESSAGE value="Added MoneyBalance" />
     <MESSAGE value="Updated MoneyBalance" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated MoneyBalance" />
+    <MESSAGE value="Updated goToJail to show player position in jail" />
+    <MESSAGE value="Added extra turn conditions and rules" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added extra turn conditions and rules" />
   </component>
 </project>

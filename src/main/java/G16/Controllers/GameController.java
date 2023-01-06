@@ -371,49 +371,59 @@ public class GameController {
     }
 
     public void payRent(Player currentplayer, BuyableField currentfield){
-        mgui.showMessage(Language.getString("payrent" )+" "+ currentfield.getOwner());
-        if (currentfield instanceof Property property){
-                if (allinColorOwned(property)){
+        if (currentfield.getOwner() != currentplayer) {
+            mgui.showMessage(Language.getString("payrent") + " " + currentfield.getOwner());
+            if (currentfield instanceof Property property) {
+                if (allinColorOwned(property)) {
                     if (currentfield.getRent(0) < currentplayer.getPlayerBalance()) {
-                        currentplayer.addBalance(2*-currentfield.getRent(0));
-                        currentfield.getOwner().addBalance(2*currentfield.getRent(0));
+                        currentplayer.addBalance(2 * -currentfield.getRent(0));
+                        currentfield.getOwner().addBalance(2 * currentfield.getRent(0));
                     } else {
-                        currentfield.getOwner().addBalance(currentplayer.getPlayerBalance());
-                        currentplayer.addBalance(-currentplayer.getPlayerBalance()-1);
+                        currentfield.getOwner().addBalance(currentplayer.getPlayerBalance() + 1);
+                        currentplayer.addBalance(-currentplayer.getPlayerBalance() - 1);
                     }
                 }
-            }        if (currentfield.getRent(0)<currentplayer.getPlayerBalance()) {
-            currentplayer.addBalance(-currentfield.getRent(0));
-            currentfield.getOwner().addBalance(currentfield.getRent(0));
-        }
-        else {
-            currentfield.getOwner().addBalance(currentplayer.getPlayerBalance());
-            currentplayer.addBalance(-currentplayer.getPlayerBalance()-1);
+            }
+            if (currentfield.getRent(0) < currentplayer.getPlayerBalance()) {
+                currentplayer.addBalance(-currentfield.getRent(0));
+                currentfield.getOwner().addBalance(currentfield.getRent(0));
+            } else {
+                currentfield.getOwner().addBalance(currentplayer.getPlayerBalance() + 1);
+                currentplayer.addBalance(-currentplayer.getPlayerBalance() - 1);
+            }
+        } else{
+            mgui.showMessage(Language.getString("selfown"));
         }
     }
     public void payShipRent(Player currentplayer, BuyableField currentfield){
-        mgui.showMessage(Language.getString("payrent" )+" "+ currentfield.getOwner());
-        if (currentfield.getRent(currentfield.getOwner().getShipsOwned()-1)<currentplayer.getPlayerBalance()) {
-            currentplayer.addBalance(-currentfield.getRent(currentfield.getOwner().getShipsOwned()-1));
-            currentfield.getOwner().addBalance(currentfield.getRent(currentfield.getOwner().getShipsOwned()-1));
-            mgui.updatePlayerBalance(currentfield.getOwner());
-        }
-            else {
-            currentfield.getOwner().addBalance(currentplayer.getPlayerBalance());
-            currentplayer.addBalance(-currentplayer.getPlayerBalance()-1);
+        if (currentfield.getOwner() != currentplayer) {
+            mgui.showMessage(Language.getString("payrent") + " " + currentfield.getOwner());
+            if (currentfield.getRent(currentfield.getOwner().getShipsOwned() - 1) < currentplayer.getPlayerBalance()) {
+                currentplayer.addBalance(-currentfield.getRent(currentfield.getOwner().getShipsOwned() - 1));
+                currentfield.getOwner().addBalance(currentfield.getRent(currentfield.getOwner().getShipsOwned() - 1));
+                mgui.updatePlayerBalance(currentfield.getOwner());
+            } else {
+                currentfield.getOwner().addBalance(currentplayer.getPlayerBalance() + 1);
+                currentplayer.addBalance(-currentplayer.getPlayerBalance() - 1);
+            }
+        } else {
+            mgui.showMessage(Language.getString("selfown"));
         }
     }
     public void payBrewRent(Player currentplayer, BuyableField currentfield, int diceSum){
-        mgui.showMessage(Language.getString("payrent" )+" "+ currentfield.getOwner());
-        int toPay = currentfield.getRent(currentfield.getOwner().getBrewsOwned()-1)*diceSum;
-        if (toPay<currentplayer.getPlayerBalance()) {
-            currentplayer.addBalance(-toPay);
-            currentfield.getOwner().addBalance(toPay);
-            mgui.updatePlayerBalance(currentfield.getOwner());
-        }
-        else {
-            currentfield.getOwner().addBalance(currentplayer.getPlayerBalance());
-            currentplayer.addBalance(-currentplayer.getPlayerBalance()-1);
+        if (currentfield.getOwner() != currentplayer) {
+            mgui.showMessage(Language.getString("payrent") + " " + currentfield.getOwner());
+            int toPay = currentfield.getRent(currentfield.getOwner().getBrewsOwned() - 1) * diceSum;
+            if (toPay < currentplayer.getPlayerBalance()) {
+                currentplayer.addBalance(-toPay);
+                currentfield.getOwner().addBalance(toPay);
+                mgui.updatePlayerBalance(currentfield.getOwner());
+            } else {
+                currentfield.getOwner().addBalance(currentplayer.getPlayerBalance() + 1);
+                currentplayer.addBalance(-currentplayer.getPlayerBalance() - 1);
+            }
+        } else{
+            mgui.showMessage(Language.getString("selfown"));
         }
     }
 
@@ -423,6 +433,7 @@ public class GameController {
                 if (field[i] instanceof BuyableField prop){
                     if (prop.getOwner()==bankruptplayer){
                         prop.setOwner(null);
+                        mgui.resetOwner(prop,i);
                     }
                 }
             }

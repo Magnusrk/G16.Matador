@@ -264,6 +264,7 @@ public class GameController {
                     movePlayer(player,die[0]+die[1]);
                     landOnField(player);
                     mgui.showMessage(Language.getString("2ens"));
+                    mgui.drawPlayerPosition(player);
                 }
             else {
                     player.increaseTurnsinjail();
@@ -274,6 +275,7 @@ public class GameController {
                         movePlayer(player,die[0]+die[1]);
                         landOnField(player);
                         mgui.showMessage(Language.getString("3ture"));
+                        mgui.drawPlayerPosition(player);
                     }
                 }
             }

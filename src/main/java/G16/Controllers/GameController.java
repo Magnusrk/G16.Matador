@@ -18,6 +18,7 @@ import G16.PlayerUtils.FakeDie;
 import G16.PlayerUtils.Player;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class GameController {
 
@@ -226,7 +227,7 @@ public class GameController {
             } else if (currentfield instanceof Property prop) {
                 //if property has no owner, then player can purchase it.
                 if (prop.getOwner()==null) {
-                    buyPropfield(player,prop);
+                    buyField(player,prop);
                 } else {
                     //if property has an owner, then player have to pay the rent.
                     payRent(player,prop);
@@ -234,7 +235,7 @@ public class GameController {
         //The player land on the Shipping Company's field.
         } else if (currentfield instanceof ShippingCompany ship) {
             if (ship.getOwner()==null){
-                buyShipField(player,ship);
+                buyField(player,ship);
             } else {
                 payShipRent(player, ship);
                 }
@@ -243,7 +244,7 @@ public class GameController {
                 player.addBalance(-tax.getTax());
             } else if (currentfield instanceof Brewery brew){
                 if (brew.getOwner()==null){
-                    buyBrewField(player,brew);
+                    buyField(player,brew);
                 } else {
                     payBrewRent(player,brew, diceSum);
                 }
@@ -324,47 +325,34 @@ public class GameController {
             return players;
         }
 
-    public void buyPropfield(Player currentplayer, BuyableField currentfield){
-        if (currentfield.getPrice()< currentplayer.getPlayerBalance()) {
-            String resuslt = mgui.requestUserButton(Language.getString("prop"), Language.getString("yesTxt"), Language.getString("noTxt"));
-            if (resuslt == Language.getString("yesTxt")) {
-                currentplayer.addBalance(-currentfield.getPrice());
-                currentfield.setOwner(currentplayer);
-                mgui.setOwner(currentfield, currentplayer.getPlayerPosition());
+        public void buyField(Player currentplayer, BuyableField currentfield) {
+            if (currentfield.getPrice()< currentplayer.getPlayerBalance()) {
+                String resuslt = null;
+                if (currentfield instanceof Property){
+                    resuslt = mgui.requestUserButton(Language.getString("prop"), Language.getString("yesTxt"), Language.getString("noTxt"));
+                }
+                if (currentfield instanceof ShippingCompany){
+                    resuslt = mgui.requestUserButton(Language.getString("ship"), Language.getString("yesTxt"), Language.getString("noTxt"));
+                    if (resuslt.equals(Language.getString("yesTxt"))) {
+                        currentplayer.setShipsOwned(currentplayer.getShipsOwned()+1);
+                    }
+                }
+                if (currentfield instanceof Brewery){
+                    resuslt = mgui.requestUserButton(Language.getString("brew"), Language.getString("yesTxt"), Language.getString("noTxt"));
+                    if (resuslt.equals(Language.getString("yesTxt"))) {
+                        currentplayer.setBrewsOwned(currentplayer.getBrewsOwned()+1);
+                    }
+                }
+                if (Objects.equals(resuslt, Language.getString("yesTxt"))) {
+                    currentplayer.addBalance(-currentfield.getPrice());
+                    currentfield.setOwner(currentplayer);
+                    mgui.setOwner(currentfield, currentplayer.getPlayerPosition());
+                }
+
+                }else {
+                mgui.showMessage("propikkeråd");
             }
         }
-        else {
-            mgui.showMessage("propikkeråd");
-        }
-    }
-    public void buyShipField(Player currentplayer, BuyableField currentfield){
-        if (currentfield.getPrice()< currentplayer.getPlayerBalance()) {
-            String resuslt = mgui.requestUserButton(Language.getString("ship"), Language.getString("yesTxt"), Language.getString("noTxt"));
-            if (resuslt == Language.getString("yesTxt")) {
-                currentplayer.addBalance(-currentfield.getPrice());
-                currentfield.setOwner(currentplayer);
-                currentplayer.setShipsOwned(currentplayer.getShipsOwned()+1);
-                mgui.setOwner(currentfield, currentplayer.getPlayerPosition());
-            }
-        }
-        else {
-            mgui.showMessage(Language.getString("propikkeråd"));
-        }
-    }
-    public void buyBrewField(Player currentplayer, BuyableField currentfield){
-        if (currentfield.getPrice()< currentplayer.getPlayerBalance()) {
-            String resuslt = mgui.requestUserButton(Language.getString("brew"), Language.getString("yesTxt"), Language.getString("noTxt"));
-            if (resuslt == Language.getString("yesTxt")) {
-                currentplayer.addBalance(-currentfield.getPrice());
-                currentfield.setOwner(currentplayer);
-                currentplayer.setBrewsOwned(currentplayer.getBrewsOwned()+1);
-                mgui.setOwner(currentfield, currentplayer.getPlayerPosition());
-            }
-        }
-        else {
-            mgui.showMessage(Language.getString("propikkeråd"));
-        }
-    }
 
     public void addPlayerMoney(int id, int amount){
         players.get(id).addBalance(amount);

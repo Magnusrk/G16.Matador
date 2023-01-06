@@ -1,7 +1,6 @@
 package G16.Controllers;
 
 import G16.Dev.DevConsole;
-import G16.Fields.*;
 import G16.Fields.BuyableFields.Brewery;
 import G16.Fields.BuyableFields.BuyableField;
 import G16.Fields.BuyableFields.Property;
@@ -24,9 +23,9 @@ public class GameController {
 
     private final int MAX_PLAYERS = 6;
     private final int MIN_PLAYERS = 3;
-    private final int passStartReward = 4000;
+    private final int PASS_START_REWARD = 4000;
     private Die die = new Die();
-    private final int numberOfFields = 40;
+    private final int NUMBER_OFF_FIELDS = 40;
 
     private ArrayList<Player> players = new ArrayList<>();
 
@@ -210,8 +209,8 @@ public class GameController {
         public void movePlayer (Player player,int moves){
             int currentPosition = player.getPlayerPosition();
             int newPosition = currentPosition + moves;
-            if( newPosition >= numberOfFields){
-                newPosition -= numberOfFields;
+            if( newPosition >= NUMBER_OFF_FIELDS){
+                newPosition -= NUMBER_OFF_FIELDS;
                 giveStartMoney(player);
             }
             player.setPlayerPosition(newPosition);
@@ -251,7 +250,7 @@ public class GameController {
         }
         //Added 4000 kr to the player's money balance
         public void giveStartMoney (Player player){
-            player.addBalance(passStartReward);
+            player.addBalance(PASS_START_REWARD);
 
         }
 

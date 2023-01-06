@@ -179,6 +179,7 @@ public class GameController {
                     break;
                 }
                 mgui.showMessage(Language.getString("ekstra"));
+                mgui.showMessage(currentPlayer.getName() + " kast med terningen!");
             } else {
                 extra = false;
             }

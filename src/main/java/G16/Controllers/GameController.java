@@ -59,7 +59,7 @@ public class GameController {
         playTurn();
 
     }
-
+    //Create players, limit amount of player to 3-6 players then add player's names.
     public void setupPlayers(){
         int playerCount = mgui.requestInteger(Language.getString("howManyPlayers"), MIN_PLAYERS, MAX_PLAYERS);
         while (players.size() < playerCount) {
@@ -90,8 +90,12 @@ public class GameController {
                     throwAndMove(currentPlayer);
                 }
 
-
+                checkPlayerBankrupt(currentPlayer);
             }
+
+
+
+            mgui.updatePlayerBalance(currentPlayer);
             setWinnerfound();
             currentPlayerID += 1;
             if (currentPlayerID >= players.size()) {
@@ -106,6 +110,14 @@ public class GameController {
             }
 
         }
+
+    private void checkPlayerBankrupt(Player currentPlayer) {
+        if(currentPlayer.getBankrupt()){
+            mgui.showMessage(currentPlayer.getName() + " er gået bankerot. Du er nu ude af spillet. ");
+            removeowner(currentPlayer);
+            mgui.removecar(currentPlayer);
+        }
+    }
 
     private void setWinnerfound () {
         int deadplayers = 0;
@@ -198,11 +210,14 @@ public class GameController {
             if(currentfield instanceof GoToJail){
                 goToJail(player);
             } else if (currentfield instanceof Property prop) {
+                //if property has no owner, then player can purchase it.
                 if (prop.getOwner()==null) {
                     buyPropfield(player,prop);
                 } else {
+                    //if property has an owner, then player have to pay the rent.
                     payRent(player,prop);
             }
+        //The player land on the Shipping Company's field.
         } else if (currentfield instanceof ShippingCompany ship) {
             if (ship.getOwner()==null){
                 buyShipField(player,ship);
@@ -215,7 +230,7 @@ public class GameController {
             }
 
         }
-
+        //Added 4000 kr to the player's money balance
         public void giveStartMoney (Player player){
             player.addBalance(passStartReward);
 

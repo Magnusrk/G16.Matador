@@ -3,20 +3,39 @@
 #e.g.
 #throwDiceText;You rolled the die!
 test; english
-start;Go
-startsub; ← Collect 2$
+
+
+playerName;Please write the player's name:
+
+
+
+start;Let's start
+startsub;Received 4k
+startdesc;Received 4000$ when they passed "Start"
 chance;Chance
 
-noowner;No owner
-tryluck;Try your luck
+noowner;For sale
+tryluck;Take Chance card
 price;Price:
+housePrice;House price:
+rent;Rent:
+1house;1 House:
+2house;2 Houses:
+3house;3 Houses:
+4house;4 Houses:
+hotel;Hotel:
+
+1brew;1 Owned brewery:
+2brew;2 Owned breweries:
+
+1ship;1 Owned Shipping company:
+2ship;2 Owned Shipping company's:
+3ship;3 Owned Shipping company's:
+4ship;4 Owned Shipping company's:
 
 prison;Prison
 parking;Parking
 gotojail;Go to jail
-
-tokenChance;Move to an unowned field and get it for free.
-tokenChanceowned; There are no unowned fields, move to an owned field and buy it from another player.
 
 throwDice;throw the dice!
 chooseLanguage;Choose game language
@@ -36,3 +55,59 @@ WonTheGame;won the game!
 yesTxt;Yes
 noTxt;No
 restartQuestion;Do you want to restart the game?
+injail;You are under arrested! You must pay 1000 $, get two of a kind to get released from jail or use a release card.
+injailpay;Pay 1000$
+injaildie; Thrown the dice!
+injailtre; You have been imprisoned the third time. If you not get two of a kind dice roll then you must pay a fine.
+injailcard; Use Release cards
+injailikkecard; I don't want to use my release card.
+injailifcard; You have one release card. Would you like to use it?
+ikke2ens; You didn't get two of kind dice roll.
+2ens; You get two of a kind. You move forward as the dice shows.
+3ture;You have been imprisoned for three turns and must pay a fine 1000 $. Move according to your next dice roll.
+betalt; You have paid a fine 1000$. Now you can throw the dices.
+brugtkort; You have used a release card. Now you can throw the dices.
+
+prop; You are on a property without an owner. Would you like to buy this property?
+payrent; You landed on a field with owner and you have to pay the rent.
+propikkeråd; You landed on a property without an owner, but you cannot afford it.
+
+
+case1;Oil prices are increased and you have to pay 500$ per a house and 2000$ per a hotel.
+case2;Property taxes are increased. er steget. Extra expenses are: 800$ per house, $2300 per hotel.
+case3;You ran a red light. Pay $1000 for a traffic fine .
+case4;Pay for car wash and waxing $300.
+case5;Pay $200 for delivery of 2 crates of beer
+case6;Pay $3000 for reparation af your car.
+case7;You have bought 4 tires for your car.You pay $1000.
+case8;You have received a parking ticket. You paid a $200 fine.
+case9;Pay your car insurance, $1000
+case10;You have been abroad and bought too many cigarettes. Pay $200 to import tax.
+case11;Dentist bill, Pay $2000.
+case12;You have won a lottery. You receive $500.
+case13;You receive your stock dividend. You receive $1000 from the bank.
+case14;The municipality has refunded a quarter of taxes. Withdraw $3000 from the bank.
+case16;You won money from betting on sport, receive $1000.
+case17;Due to inflation. You receive $1000.
+case18;Your premium bond has called out.You receive $1000 from the bank.
+case19;You have sold some old furniture on auction. Receive $1000 from the bank.
+case20;The value of your own produce from the kitchen garden is $200 as you receive from the bank.
+case21;You receive “The Matador-grant” of $40.000, but only if your assets does not exceed $15,000.
+case22;This is your birthday! Receive $200 each from fellow players .
+case23;You have fronted money for a potluck. Oddly enough everyone pays right away. Receive from $500 each fellow players.
+case24;You are holding a family party and receive a share from fellow players og $500.
+case25;Move forward to START
+case26;Move three fields forward.
+case27;Move three fields backward.
+case28;Move towards to Frederiksberg Allé. If you pass START then you receive $4000.
+case29;Move towards to the closet Shipping company and pay twice the normal rental fee to the owner. If the company doesn't have an owner, then you can purchase it.
+case30;Sail with the Mols-Line, Move the token forward and if you pass START you receive $4000.
+case31;Move forwards to Grønningen, if you pass START you receive $4000.
+case32;Move forwards to Vimmelskaftet, if you pass START you receive $4000.
+case33;Sail with the closet ferry, if you pass START you receive $4000.
+case34;Move forwards to Strandvejen. if you pass START you receive $4000.
+case35;Go to the town hall square.
+case36;In occasion of the king's birthday you are hereby pardoned from prison. This card can be kept until you need it or you can sell it.(amount of card: 2)
+case37;Go to Prison, You will not receive $4000 when you pass start.
+
+winner; won!!!

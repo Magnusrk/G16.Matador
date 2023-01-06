@@ -14,9 +14,14 @@ public class Player {
 
     private int turnsinjail=0;
 
+
+
+
     public Player(){
         balance.setStartingBalance();
     }
+
+
 
 
     public void setName(String name){

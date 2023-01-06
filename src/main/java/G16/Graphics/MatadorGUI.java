@@ -84,24 +84,10 @@ public class MatadorGUI {
     }
 
     public void removecar(Player player){
-        ArrayList<GUI_Player> playersonfield= new ArrayList<>();
-
         GUI_Player bankruptplayer = guiPlayers.get(player.getID());
-        for (GUI_Player gplayer: guiPlayers){
-            if (gplayer.getCar().getPosition()==bankruptplayer.getCar().getPosition() && gplayer!=bankruptplayer){
-                playersonfield.add(gplayer);
-            }
-        }
-
         if(bankruptplayer.getCar().getPosition() != null){
-            bankruptplayer.getCar().getPosition().removeAllCars();
+            bankruptplayer.getCar().getPosition().drawCar(bankruptplayer, false);
         }
-
-
-        for (GUI_Player notbplayers: playersonfield){
-            notbplayers.getCar().setPosition(gui.getFields()[player.getPlayerPosition()]);
-        }
-
     }
 
     public void drawPlayerPosition(Player player){

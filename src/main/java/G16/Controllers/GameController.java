@@ -153,6 +153,10 @@ public class GameController {
         mgui.showMessage(currentPlayer.getName() + " kast med terningen!");
         boolean extra = true;
         int extraCounter = 0;
+        /*This code is used to stay on the same players turn in case they land a dice roll of 2 of a kind.
+         *It will stay in the while as long as 2 of a kind is rolled and stop if 2 of a kind is not rolled.
+         *In the event of getting 2 of a kind 3 times in a row, the while is broken,
+         *and the player is sent directly to jail.*/
         while (extra) {
             int[] diceThrow = Die.throwDice();
 

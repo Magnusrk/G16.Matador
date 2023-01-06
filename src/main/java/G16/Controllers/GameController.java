@@ -41,7 +41,7 @@ public class GameController {
     private boolean winnerfound = false;
     private boolean diceRigged = false;
     private int nextDiceValue = 0;
-
+    private int extraCounter = 0;
     private boolean gameStarted = false;
 
     public GameController(boolean TEST_MODE) {
@@ -83,7 +83,7 @@ public class GameController {
     }
 
     public void playTurn() {
-
+        extraCounter = 0;
         Player currentPlayer = players.get(currentPlayerID);
         if (!currentPlayer.getBankrupt()) {
             if (currentPlayer.getJailed()) {
@@ -161,7 +161,6 @@ public class GameController {
         //Throw Dice
         mgui.showMessage(currentPlayer.getName() + " kast med terningen!");
         boolean extra = true;
-        int extraCounter = 0;
         /*This code is used to stay on the same players turn in case they land a dice roll of 2 of a kind.
          *It will stay in the while as long as 2 of a kind is rolled and stop if 2 of a kind is not rolled.
          *In the event of getting 2 of a kind 3 times in a row, the while is broken,
@@ -180,8 +179,6 @@ public class GameController {
                     mgui.showMessage(Language.getString("snyd???"));
                     break;
                 }
-                mgui.showMessage(Language.getString("ekstra"));
-                mgui.showMessage(currentPlayer.getName() + " kast med terningen!");
             } else {
                 extra = false;
             }
@@ -307,6 +304,8 @@ public class GameController {
                 landOnField(player, dievalue[0] + dievalue[1]);
                 mgui.showMessage(Language.getString("2ens"));
                 mgui.drawPlayerPosition(player);
+                extraCounter++;
+                throwAndMove(player);
             } else {
                 player.increaseTurnsinjail();
                 mgui.showMessage(Language.getString("ikke2ens"));

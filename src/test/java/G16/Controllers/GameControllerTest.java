@@ -35,10 +35,22 @@ public class GameControllerTest extends TestCase {
         }
     }
 
+    public void testExtraTurn(){
+        GameController controller = new GameController(true);
+        controller.setupPlayers();
+        ArrayList<Player> players = controller.getPlayers();
+        Player jailedPlayer = controller.getPlayers().get(0);
+
+        for(int i = 0; i < players.size() * 3; i++){
+            controller.playTurn();
+        }
+        assertFalse(jailedPlayer.getJailed());
+    }
+
     public void testJailedAfterThreeTurns(){
         GameController controller = new GameController(true);
         controller.setupPlayers();
-        ArrayList<Player> players = controller.getPlayers();;
+        ArrayList<Player> players = controller.getPlayers();
         Player jailedPlayer = controller.getPlayers().get(0);
         jailedPlayer.setJailed(true);
         for(int i = 0; i < players.size() * 3; i++){

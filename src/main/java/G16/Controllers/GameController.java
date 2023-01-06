@@ -178,8 +178,6 @@ public class GameController {
                     mgui.showMessage(Language.getString("snyd???"));
                     break;
                 }
-                mgui.showMessage(Language.getString("ekstra"));
-                mgui.showMessage(currentPlayer.getName() + " kast med terningen!");
             } else {
                 extra = false;
             }
@@ -198,6 +196,10 @@ public class GameController {
             movePlayer(currentPlayer, diceSum);
             mgui.drawPlayerPosition(currentPlayer);
             landOnField(currentPlayer, diceSum);
+            if (diceThrow[0] == diceThrow[1]) {
+                mgui.showMessage(Language.getString("ekstra"));
+                mgui.showMessage(currentPlayer.getName() + " kast med terningen!");
+            }
         }
     }
 

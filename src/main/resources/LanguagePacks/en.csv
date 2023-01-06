@@ -74,10 +74,10 @@ propikkeråd; You landed on a property without an owner, but you cannot afford i
 
 
 case1;Oil prices are increased and you have to pay 500$ per a house and 2000$ per a hotel.
-case2;Property taxes are increased. er steget. Extra expenses are: 800$ per house, $2300 per hotel.
+case2;Property taxes are increased. Extra expenses are: 800$ per house, $2300 per hotel.
 case3;You ran a red light. Pay $1000 for a traffic fine .
 case4;Pay for car wash and waxing $300.
-case5;Pay $200 for delivery of 2 crates of beer
+case5;Pay $200 for delivery of 2 crates of beer.
 case6;Pay $3000 for reparation af your car.
 case7;You have bought 4 tires for your car.You pay $1000.
 case8;You have received a parking ticket. You paid a $200 fine.

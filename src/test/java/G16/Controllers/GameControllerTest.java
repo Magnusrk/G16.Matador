@@ -73,7 +73,6 @@ public class GameControllerTest extends TestCase {
             System.out.println(p.getBankrupt());
         }
 
-
     }
 
 

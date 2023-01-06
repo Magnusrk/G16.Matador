@@ -148,17 +148,39 @@ public class GameController {
     private void throwAndMove(Player currentPlayer) {
         //Throw Dice
         mgui.showMessage(currentPlayer.getName() + " kast med terningen!");
-        int[] diceThrow;
-        diceThrow = Die.throwDice();
-        int diceSum = diceThrow[0] + diceThrow[1];
+        boolean extra = true;
+        int extraCounter = 0;
+        /*This code is used to stay on the same players turn in case they land a dice roll of 2 of a kind.
+         *It will stay in the while as long as 2 of a kind is rolled and stop if 2 of a kind is not rolled.
+         *In the event of getting 2 of a kind 3 times in a row, the while is broken,
+         *and the player is sent directly to jail.*/
+        while (extra) {
+            int[] diceThrow = Die.throwDice();
+
+            mgui.drawDice(diceThrow[0], diceThrow[1]);
+
+            if (diceThrow[0] == diceThrow[1]) {
+                extraCounter ++;
+                if (extraCounter == 3) {
+                    currentPlayer.setPlayerPosition(10);
+                    currentPlayer.setJailed(true);
+                    mgui.drawPlayerPosition(currentPlayer);
+                    mgui.showMessage(Language.getString("snyd???"));
+                    break;
+                }
+                mgui.showMessage(Language.getString("ekstra"));
+            } else {
+                extra = false;
+            }
+            int diceSum = diceThrow[0] + diceThrow[1];
 
 
-        if(diceRigged){
-            diceSum = nextDiceValue;
-            diceRigged = false;
-        }
+            if(diceRigged){
+                diceSum = nextDiceValue;
+                diceRigged = false;
+            }
 
-        mgui.drawDice(diceThrow[0], diceThrow[1]);
+            mgui.drawDice(diceThrow[0], diceThrow[1]);
 
 
             //Move player
@@ -166,6 +188,7 @@ public class GameController {
             mgui.drawPlayerPosition(currentPlayer);
             landOnField(currentPlayer, diceSum);
         }
+    }
 
         public void balance (Player player,int add){
             player.addBalance(add);
@@ -267,6 +290,7 @@ public class GameController {
                     movePlayer(player,die[0]+die[1]);
                     landOnField(player,die[0]+die[1]);
                     mgui.showMessage(Language.getString("2ens"));
+                    mgui.drawPlayerPosition(player);
                 }
             else {
                     player.increaseTurnsinjail();
@@ -277,6 +301,7 @@ public class GameController {
                         movePlayer(player,die[0]+die[1]);
                         landOnField(player,die[0]+die[1]);
                         mgui.showMessage(Language.getString("3ture"));
+                        mgui.drawPlayerPosition(player);
                     }
                 }
             }

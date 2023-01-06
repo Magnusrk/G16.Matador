@@ -370,7 +370,7 @@ public class GameController {
                         currentplayer.addBalance(2*-currentfield.getRent(0));
                         currentfield.getOwner().addBalance(2*currentfield.getRent(0));
                     } else {
-                        currentfield.getOwner().addBalance(currentplayer.getPlayerBalance());
+                        currentfield.getOwner().addBalance(currentplayer.getPlayerBalance()+1);
                         currentplayer.addBalance(-currentplayer.getPlayerBalance()-1);
                     }
                 }
@@ -379,7 +379,7 @@ public class GameController {
             currentfield.getOwner().addBalance(currentfield.getRent(0));
         }
         else {
-            currentfield.getOwner().addBalance(currentplayer.getPlayerBalance());
+            currentfield.getOwner().addBalance(currentplayer.getPlayerBalance()+1);
             currentplayer.addBalance(-currentplayer.getPlayerBalance()-1);
         }
     }
@@ -391,7 +391,7 @@ public class GameController {
             mgui.updatePlayerBalance(currentfield.getOwner());
         }
             else {
-            currentfield.getOwner().addBalance(currentplayer.getPlayerBalance());
+            currentfield.getOwner().addBalance(currentplayer.getPlayerBalance()+1);
             currentplayer.addBalance(-currentplayer.getPlayerBalance()-1);
         }
     }
@@ -404,7 +404,7 @@ public class GameController {
             mgui.updatePlayerBalance(currentfield.getOwner());
         }
         else {
-            currentfield.getOwner().addBalance(currentplayer.getPlayerBalance());
+            currentfield.getOwner().addBalance(currentplayer.getPlayerBalance()+1);
             currentplayer.addBalance(-currentplayer.getPlayerBalance()-1);
         }
     }

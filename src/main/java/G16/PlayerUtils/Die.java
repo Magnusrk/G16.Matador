@@ -6,7 +6,7 @@ public class Die {
     public Die(){
 
     }
-    public static int[] throwDice(){
+    public int[] throwDice(){
         int firstNum = (int) ((Math.random() * (DIESIDE)) + 1);
         int secondNum = (int) ((Math.random() * (DIESIDE)) + 1);
         return new int[]{firstNum,secondNum};

@@ -145,9 +145,11 @@ public class GameController {
         diceRigged = true;
         nextDiceValue = value;
     }
-    public void fakeDie(boolean Loaded) {
+    public void fakeDie(boolean Loaded, int value1, int value2) {
         if (Loaded) {
             die = new FakeDie();
+            FakeDie fakeDie = (FakeDie)die;
+            fakeDie.setFaces(value1, value2);
         }
         else {
             die = new Die();

@@ -103,6 +103,7 @@ public class GameController {
             currentPlayerID = 0;
 
         }
+        updatePlayerinfo();
         if (!TEST_MODE) {
             if (!winnerfound) {
                 playTurn();
@@ -254,7 +255,13 @@ public class GameController {
         //Added 4000 kr to the player's money balance
         public void giveStartMoney (Player player){
             player.addBalance(PASS_START_REWARD);
+    }
 
+        public void updatePlayerinfo(){
+        for (Player player: players){
+            mgui.drawPlayerPosition(player);
+            mgui.updatePlayerBalance(player);
+        }
     }
 
     public void goToJail(Player player) {

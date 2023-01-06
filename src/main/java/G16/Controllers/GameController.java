@@ -363,24 +363,28 @@ public class GameController {
     }
 
     public void payRent(Player currentplayer, BuyableField currentfield){
-        mgui.showMessage(Language.getString("payrent" )+" "+ currentfield.getOwner());
-        if (currentfield instanceof Property property){
-                if (allinColorOwned(property)){
+        if (currentfield.getOwner() != currentplayer) {
+            mgui.showMessage(Language.getString("payrent") + " " + currentfield.getOwner());
+            if (currentfield instanceof Property property) {
+                if (allinColorOwned(property)) {
                     if (currentfield.getRent(0) < currentplayer.getPlayerBalance()) {
-                        currentplayer.addBalance(2*-currentfield.getRent(0));
-                        currentfield.getOwner().addBalance(2*currentfield.getRent(0));
+                        currentplayer.addBalance(2 * -currentfield.getRent(0));
+                        currentfield.getOwner().addBalance(2 * currentfield.getRent(0));
                     } else {
-                        currentfield.getOwner().addBalance(currentplayer.getPlayerBalance()+1);
-                        currentplayer.addBalance(-currentplayer.getPlayerBalance()-1);
+                        currentfield.getOwner().addBalance(currentplayer.getPlayerBalance() + 1);
+                        currentplayer.addBalance(-currentplayer.getPlayerBalance() - 1);
                     }
                 }
-            }        if (currentfield.getRent(0)<currentplayer.getPlayerBalance()) {
-            currentplayer.addBalance(-currentfield.getRent(0));
-            currentfield.getOwner().addBalance(currentfield.getRent(0));
-        }
-        else {
-            currentfield.getOwner().addBalance(currentplayer.getPlayerBalance()+1);
-            currentplayer.addBalance(-currentplayer.getPlayerBalance()-1);
+            }
+            if (currentfield.getRent(0) < currentplayer.getPlayerBalance()) {
+                currentplayer.addBalance(-currentfield.getRent(0));
+                currentfield.getOwner().addBalance(currentfield.getRent(0));
+            } else {
+                currentfield.getOwner().addBalance(currentplayer.getPlayerBalance() + 1);
+                currentplayer.addBalance(-currentplayer.getPlayerBalance() - 1);
+            }
+        } else{
+            mgui.showMessage(Language.getString("selfown"));
         }
     }
     public void payShipRent(Player currentplayer, BuyableField currentfield){

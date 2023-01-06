@@ -90,8 +90,11 @@ public class GameController {
                     throwAndMove(currentPlayer);
                 }
 
-
+                checkPlayerBankrupt(currentPlayer);
             }
+
+
+
             mgui.updatePlayerBalance(currentPlayer);
             setWinnerfound();
             currentPlayerID += 1;
@@ -107,6 +110,14 @@ public class GameController {
             }
 
         }
+
+    private void checkPlayerBankrupt(Player currentPlayer) {
+        if(currentPlayer.getBankrupt()){
+            mgui.showMessage(currentPlayer.getName() + " er gået bankerot. Du er nu ude af spillet. ");
+            removeowner(currentPlayer);
+            mgui.removecar(currentPlayer);
+        }
+    }
 
     private void setWinnerfound () {
         int deadplayers = 0;

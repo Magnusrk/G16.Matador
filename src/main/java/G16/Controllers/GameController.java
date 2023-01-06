@@ -14,6 +14,7 @@ import G16.Graphics.MatadorGUI;
 import G16.Graphics.TestingGUI;
 import G16.Language;
 import G16.PlayerUtils.Die;
+import G16.PlayerUtils.FakeDie;
 import G16.PlayerUtils.Player;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class GameController {
     private final int MAX_PLAYERS = 6;
     private final int MIN_PLAYERS = 3;
     private final int passStartReward = 4000;
-
+    private Die die = new Die();
     private final int numberOfFields = 40;
 
     private ArrayList<Player> players = new ArrayList<>();
@@ -144,7 +145,14 @@ public class GameController {
         diceRigged = true;
         nextDiceValue = value;
     }
-
+    public void fakeDie(boolean Loaded) {
+        if (Loaded) {
+            die = new FakeDie();
+        }
+        else {
+            die = new Die();
+        }
+    }
     private void throwAndMove(Player currentPlayer) {
         //Throw Dice
         mgui.showMessage(currentPlayer.getName() + " kast med terningen!");
@@ -155,7 +163,7 @@ public class GameController {
          *In the event of getting 2 of a kind 3 times in a row, the while is broken,
          *and the player is sent directly to jail.*/
         while (extra) {
-            int[] diceThrow = Die.throwDice();
+            int[] diceThrow = die.throwDice();
 
             mgui.drawDice(diceThrow[0], diceThrow[1]);
 
@@ -282,13 +290,13 @@ public class GameController {
             }
         else {
 
-                int[] die=Die.throwDice();
-                mgui.drawDice(die[0],die[1]);
+                int[] dievalue=die.throwDice();
+                mgui.drawDice(dievalue[0],dievalue[1]);
 
-                if (die[0]==die[1]){
+                if (dievalue[0]==dievalue[1]){
                     player.setJailed(false);
-                    movePlayer(player,die[0]+die[1]);
-                    landOnField(player,die[0]+die[1]);
+                    movePlayer(player,dievalue[0]+dievalue[1]);
+                    landOnField(player,dievalue[0]+dievalue[1]);
                     mgui.showMessage(Language.getString("2ens"));
                     mgui.drawPlayerPosition(player);
                 }
@@ -298,8 +306,8 @@ public class GameController {
                     if (player.getTurnsinjail()>2){
                         player.addBalance(-1000);
                         player.setJailed(false);
-                        movePlayer(player,die[0]+die[1]);
-                        landOnField(player,die[0]+die[1]);
+                        movePlayer(player,dievalue[0]+dievalue[1]);
+                        landOnField(player,dievalue[0]+dievalue[1]);
                         mgui.showMessage(Language.getString("3ture"));
                         mgui.drawPlayerPosition(player);
                     }

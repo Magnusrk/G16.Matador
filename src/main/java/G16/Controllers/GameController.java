@@ -5,6 +5,8 @@ import G16.Fields.*;
 import G16.Fields.BuyableFields.BuyableField;
 import G16.Fields.BuyableFields.Property;
 import G16.Fields.BuyableFields.ShippingCompany;
+import G16.Fields.UnbuyableFields.Chance;
+import G16.Fields.UnbuyableFields.ChanceCard;
 import G16.Fields.UnbuyableFields.GoToJail;
 import G16.Fields.Initializer;
 import G16.Fields.Field;
@@ -16,6 +18,10 @@ import G16.PlayerUtils.Die;
 import G16.PlayerUtils.Player;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
+
+
 
 public class GameController {
 
@@ -40,6 +46,10 @@ public class GameController {
     private int nextDiceValue = 0;
 
     private boolean gameStarted = false;
+
+    ChanceCard chancecard = new ChanceCard(IntStream.range(1,21).toArray());
+    int[] chanceArray=chancecard.Shufflechancecard();
+    Chance chanceField= new Chance("chancefield");
 
     public GameController(boolean TEST_MODE){
         this.TEST_MODE = TEST_MODE;
@@ -197,6 +207,8 @@ public class GameController {
             } else if (currentfield instanceof Tax tax){
                 mgui.showMessage("Du betaler skat");
                 player.addBalance(-tax.getTax());
+            } else if (currentfield instanceof Chance) {
+                DoChanceCard(player);
             }
 
         }
@@ -380,4 +392,74 @@ if (currentfield instanceof Property property){
             }
             return false;
         }
+    //------------------------------ Chance Cards ---------------------------------------------//
+    public void DoChanceCard(Player currentPlayer ){
+
+        chancecard.setNumchance(chanceArray);
+
+        switch (chancecard.getNumchance()[0]) {
+            case 1 -> {
+                mgui.showMessage(Language.getString("case 1"));
+            }
+            case 2 -> {
+                mgui.showMessage(Language.getString("case 2"));
+            }
+            case 3 -> {
+                mgui.showMessage(Language.getString("case 3"));
+            }
+        }
+            chanceArray = chanceField.drawChancecard();
+
+    }
+
+    /*public void TokenChanceCard(Player currentPlayer){
+        List<String> avbprops= new ArrayList<>();
+        List<String> allprops= new ArrayList<>();
+        for (Field field : prop) {
+            if (field instanceof PropertyField propertyField) {
+                if (propertyField.getOwner() == null) {
+                    avbprops.add(Language.GetString(propertyField.getName()));
+                }
+                allprops.add(Language.GetString(propertyField.getName()));
+            }
+        }
+        if (avbprops.isEmpty()){
+            String[] alloptions= new String[allprops.size()];
+            allprops.toArray(alloptions);
+
+            String selectedprop=monoGUI.Userselectionarray("dsfa", alloptions);
+            for (int i=0;i<prop.length;i++){
+
+                if (Language.GetString(prop[i].getName()).equals(selectedprop)){
+                    currentPlayer.setPlayerPosition(i);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(),i);
+                    checkPassStart(currentPlayer);
+                    PropertyField propertyField = (PropertyField) prop[i];
+                    propertyField.getOwner().AddBalance(propertyField.getPrice());
+                    monoGUI.SetPlayerBalance(propertyField.getOwner().getID(),propertyField.getOwner().getPlayerBalance());
+                    propertyField.setOwner(currentPlayer);
+                    monoGUI.updateOwner(currentPlayer.getID(),i);
+                    currentPlayer.AddBalance(propertyField.getPrice()*(-1));
+                    monoGUI.SetPlayerBalance(currentPlayer.getID(), currentPlayer.getPlayerBalance());
+                }
+            }
+        }else {
+            String[] options= new String[avbprops.size()];
+            avbprops.toArray(options);
+            String selectedprop=monoGUI.Userselectionarray(Language.GetString("tokenChance"), options);
+            for (int i=0;i<prop.length;i++){
+
+                if (Language.GetString(prop[i].getName()).equals(selectedprop)){
+                    currentPlayer.setPlayerPosition(i);
+                    monoGUI.DrawPlayerPosition(currentPlayer.getID(),i);
+                    checkPassStart(currentPlayer);
+                    PropertyField propertyField= (PropertyField) prop[i];
+                    propertyField.setOwner(currentPlayer);
+                    monoGUI.updateOwner(currentPlayer.getID(),i);
+                }
+            }
+            currentPlayer.setTokenChancecard(false);
+        }
+    }*/
+
     }

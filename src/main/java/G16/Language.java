@@ -50,6 +50,33 @@ public class Language {
 
     }
 
+
+
+    /**
+     * Set language pack
+     * @param pack with the name of the language pack to be used.
+     * The name of a language pack is its filename without the extension.
+     */
+    public static void SetLanguage(String pack){
+        try {
+            //Reads file from resources folder
+            InputStream languagePack = Objects.requireNonNull(Main.class.getClassLoader()
+                    .getResourceAsStream(languagePackPath + "/" + pack + ".csv"));
+
+            currentLanguagePack = pack;
+            initializeLanguagePack(languagePack);
+        } catch (NullPointerException e){
+            System.out.println("Couldn't find language pack '" + pack+languagePackExtension + "'");
+
+        }
+    }
+
+    public static String GetString(String key) {
+        if(dictionary.isEmpty())
+            SetLanguage(currentLanguagePack);
+        return dictionary.getOrDefault(key, "STRING-NOT-FOUND");
+    }
+
     /**
      * Initialize current language pack
      * Reads the language pack file and maps the keys and values to the dictionary variable.
@@ -57,22 +84,22 @@ public class Language {
     private static void initializeLanguagePack(InputStream languagePack){
         dictionary.clear();
 
-            Scanner fileReader = new Scanner(languagePack);
-            int lineNumber = 1;
-            //Reads each line of the language pack
-            while (fileReader.hasNextLine()){
-                String line = fileReader.nextLine();
-                String[] entry = line.split(languagePackDelimiter);
-                //If the line is not empty and the leading character is not '#' (marking a comment) add it to the dictionary.
-                //If the leading character is not '#' and does not contain the delimiter, write and error that the corresponding line is invalid.
-                if(line.length() > 0){
-                    if (entry.length == 2 && line.charAt(0) != '#'){
-                        dictionary.put(entry[0], entry[1]);
-                    } else if (line.charAt(0) != '#'){
-                        System.out.println(currentLanguagePack + languagePackExtension + ": Line " + lineNumber +": Invalid line");
-                    }
+        Scanner fileReader = new Scanner(languagePack);
+        int lineNumber = 1;
+        //Reads each line of the language pack
+        while (fileReader.hasNextLine()){
+            String line = fileReader.nextLine();
+            String[] entry = line.split(languagePackDelimiter);
+            //If the line is not empty and the leading character is not '#' (marking a comment) add it to the dictionary.
+            //If the leading character is not '#' and does not contain the delimiter, write and error that the corresponding line is invalid.
+            if(line.length() > 0){
+                if (entry.length == 2 && line.charAt(0) != '#'){
+                    dictionary.put(entry[0], entry[1]);
+                } else if (line.charAt(0) != '#'){
+                    System.out.println(currentLanguagePack + languagePackExtension + ": Line " + lineNumber +": Invalid line");
                 }
-                lineNumber++;
             }
+            lineNumber++;
+        }
     }
 }

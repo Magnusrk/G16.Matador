@@ -12,7 +12,4 @@ public class Die {
         return new int[]{firstNum,secondNum};
     }
 
-    public static int getDIESIDE() {
-        return DIESIDE;
-    }
 }

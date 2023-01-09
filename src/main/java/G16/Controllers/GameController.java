@@ -358,9 +358,9 @@ public class GameController {
                 extraCounter++;
                 throwAndMove(player);
             } else {
-                player.increaseTurnsinjail();
+                player.increaseTurnsInJail();
                 mgui.showMessage(Language.getString("ikke2ens"));
-                if (player.getTurnsinjail() > 2) {
+                if (player.getTurnsInJail() > 2) {
                     player.addBalance(-1000);
                     player.setJailed(false);
                     movePlayer(player, dievalue[0] + dievalue[1]);

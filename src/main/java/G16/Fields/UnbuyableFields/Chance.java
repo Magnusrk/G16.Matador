@@ -2,8 +2,6 @@ package G16.Fields.UnbuyableFields;
 
 import G16.Fields.Field;
 
-import java.util.stream.IntStream;
-
 public class Chance extends Field {
     //static ChanceCard chancecard = new ChanceCard(IntStream.range(1,21).toArray());
 

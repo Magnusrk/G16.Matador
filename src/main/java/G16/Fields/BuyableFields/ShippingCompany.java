@@ -1,6 +1,4 @@
 package G16.Fields.BuyableFields;
-
-import G16.Fields.Field;
 import G16.Language;
 
 public class ShippingCompany extends BuyableField {

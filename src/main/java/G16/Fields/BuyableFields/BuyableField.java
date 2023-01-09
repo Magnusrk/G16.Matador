@@ -1,10 +1,7 @@
 package G16.Fields.BuyableFields;
 
 import G16.Fields.Field;
-import G16.Graphics.MatadorGUI;
 import G16.PlayerUtils.Player;
-
-import java.util.ArrayList;
 
 public abstract class BuyableField extends Field {
 

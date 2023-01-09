@@ -1,15 +1,11 @@
 package G16.Fields.BuyableFields;
-import G16.Fields.Field;
 import G16.Language;
-import G16.PlayerUtils.Player;
 
 import java.awt.Color;
 public class Property extends BuyableField {
     protected int housePrice;
     protected Color color;
 
-    protected boolean allColorsowned= false;
-    //protected Player owner;
     public Property(String name, Color startingColor, int price, int housePrice, int[] rents){
         super(name, price, rents);
         this.color = startingColor;

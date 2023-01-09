@@ -1,5 +1,6 @@
 package G16.Controllers;
 
+import G16.Fields.Field;
 import G16.PlayerUtils.Player;
 import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
@@ -57,6 +58,27 @@ public class GameControllerTest extends TestCase {
         controller.playTurn();
         assertEquals(28850,players.get(0).getPlayerBalance());
         assertEquals(29950,players.get(1).getPlayerBalance());
+    }
+
+    public void testPayDoubleRent(){
+        GameController controller = new GameController(true);
+        controller.setupPlayers();
+        ArrayList<Player> players = controller.getPlayers();
+        controller.fakeDie(true,2,4);
+        controller.playTurn();
+        assertEquals(28000,players.get(0).getPlayerBalance());
+        controller.setPlayerTurn(0);
+        controller.fakeDie(true,2,0);
+        controller.playTurn();
+        assertEquals(26000,players.get(0).getPlayerBalance());
+        controller.setPlayerTurn(0);
+        controller.fakeDie(true,1,0);
+        controller.playTurn();
+        assertEquals(23600,players.get(0).getPlayerBalance());
+        controller.fakeDie(true,2,4);
+        controller.playTurn();
+        assertEquals(29800,players.get(1).getPlayerBalance());
+        assertEquals(23800,players.get(0).getPlayerBalance());
     }
 
     public void testPayShipRent(){

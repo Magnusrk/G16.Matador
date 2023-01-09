@@ -1,10 +1,7 @@
 package G16.Controllers;
 
-import G16.Fields.Field;
 import G16.PlayerUtils.Player;
 import junit.framework.TestCase;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestTemplate;
 
 import java.util.ArrayList;
 
@@ -153,12 +150,12 @@ public class GameControllerTest extends TestCase {
             System.out.println(p.getPlayerBalance());
         }
         for(int i = 0; i < 1000; i++){
-            controller.getCurrentplayer().addBalance(-500);
+            controller.getCurrentPlayer().addBalance(-500);
             for(Player p : players){
 
                 System.out.println(p.getPlayerBalance());
             }
-            if(!controller.getWinnerfound()) {
+            if(!controller.getWinnerFound()) {
                 controller.playTurn();
             }
             else {

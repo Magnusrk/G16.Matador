@@ -24,7 +24,7 @@ public class GameController {
     private final int MAX_PLAYERS = 6;
     private final int MIN_PLAYERS = 3;
     private Die die = new Die();
-    private final int NUMBER_OFF_FIELDS = 40;
+    private final int NUMBER_OF_FIELDS = 40;
 
     private final ArrayList<Player> players = new ArrayList<>();
 
@@ -36,7 +36,7 @@ public class GameController {
 
     private final boolean TEST_MODE;
 
-    private boolean winnerfound = false;
+    private boolean winnerFound = false;
     private boolean diceRigged = false;
     private int nextDiceValue = 0;
     private int extraCounter = 0;
@@ -95,15 +95,15 @@ public class GameController {
 
 
         mgui.updatePlayerBalance(currentPlayer);
-        setWinnerfound();
+        setWinnerFound();
         currentPlayerID += 1;
         if (currentPlayerID >= players.size()) {
             currentPlayerID = 0;
 
         }
-        updatePlayerinfo();
+        updatePlayerInfo();
         if (!TEST_MODE) {
-            if (!winnerfound) {
+            if (!winnerFound) {
                 playTurn();
             }
         }
@@ -122,27 +122,27 @@ public class GameController {
     }
     /** Checks how many players are left in the game, if there is only one they will be the winner
      */
-    private void setWinnerfound() {
-        int deadplayers = 0;
-        Player potwinner = null;
+    private void setWinnerFound() {
+        int deadPlayers = 0;
+        Player potentialWinner = null;
         for (Player player : players) {
             if (player.getBankrupt()) {
-                deadplayers++;
+                deadPlayers++;
             } else {
-                potwinner = player;
+                potentialWinner = player;
             }
         }
-        if (deadplayers == players.size() - 1) {
-            winnerfound = true;
-            mgui.showMessage(potwinner + " " + Language.getString("winner"));
+        if (deadPlayers == players.size() - 1) {
+            winnerFound = true;
+            mgui.showMessage(potentialWinner + " " + Language.getString("winner"));
         }
     }
 
-    public boolean getWinnerfound() {
-        return winnerfound;
+    public boolean getWinnerFound() {
+        return winnerFound;
     }
 
-    public Player getCurrentplayer() {
+    public Player getCurrentPlayer() {
         return players.get(currentPlayerID);
     }
     /** Used in the dev console to rig the dice.
@@ -222,8 +222,8 @@ public class GameController {
         public void movePlayer (Player player,int moves){
             int currentPosition = player.getPlayerPosition();
             int newPosition = currentPosition + moves;
-            if( newPosition >= NUMBER_OFF_FIELDS){
-                newPosition -= NUMBER_OFF_FIELDS;
+            if( newPosition >= NUMBER_OF_FIELDS){
+                newPosition -= NUMBER_OF_FIELDS;
                 giveStartMoney(player);
             }
             player.setPlayerPosition(newPosition);
@@ -234,10 +234,10 @@ public class GameController {
      * @param diceSum is the sum of the dice, used if the field is a brewery
      */
     public void landOnField (Player player, int diceSum){
-        Field currentfield = fields[player.getPlayerPosition()];
-        if(currentfield instanceof GoToJail){
+        Field currentField = fields[player.getPlayerPosition()];
+        if(currentField instanceof GoToJail){
             goToJail(player);
-        } else if (currentfield instanceof Property prop) {
+        } else if (currentField instanceof Property prop) {
             //if property has no owner, then player can purchase it.
             if (prop.getOwner()==null) {
                 buyField(player,prop);
@@ -246,16 +246,16 @@ public class GameController {
                 payRent(player,prop);
             }
             //The player land on the Shipping Company's field.
-        } else if (currentfield instanceof ShippingCompany ship) {
+        } else if (currentField instanceof ShippingCompany ship) {
             if (ship.getOwner()==null){
                 buyField(player,ship);
             } else {
                 payShipRent(player, ship);
                 }
-            } else if (currentfield instanceof Tax tax){
+            } else if (currentField instanceof Tax tax){
                 mgui.showMessage("Du betaler skat");
                 player.addBalance(-tax.getTax());
-            } else if (currentfield instanceof Brewery brew){
+            } else if (currentField instanceof Brewery brew){
                 if (brew.getOwner()==null){
                     buyField(player,brew);
                 } else {
@@ -275,7 +275,7 @@ public class GameController {
 
     /** Used to update all the players balance and their position on the UI.
      */
-    public void updatePlayerinfo(){
+    public void updatePlayerInfo(){
         for (Player player: players){
             mgui.drawPlayerPosition(player);
             mgui.updatePlayerBalance(player);
@@ -329,13 +329,13 @@ public class GameController {
             throwAndMove(player);
         } else {
 
-            int[] dievalue = die.throwDice();
-            mgui.drawDice(dievalue[0], dievalue[1]);
+            int[] dieValue = die.throwDice();
+            mgui.drawDice(dieValue[0], dieValue[1]);
 
-            if (dievalue[0] == dievalue[1]) {
+            if (dieValue[0] == dieValue[1]) {
                 player.setJailed(false);
-                movePlayer(player, dievalue[0] + dievalue[1]);
-                landOnField(player, dievalue[0] + dievalue[1]);
+                movePlayer(player, dieValue[0] + dieValue[1]);
+                landOnField(player, dieValue[0] + dieValue[1]);
                 mgui.showMessage(Language.getString("2ens"));
                 mgui.drawPlayerPosition(player);
                 extraCounter++;
@@ -346,12 +346,12 @@ public class GameController {
                 if (player.getTurnsInJail() > 2) {
                     player.addBalance(-1000);
                     player.setJailed(false);
-                    movePlayer(player, dievalue[0] + dievalue[1]);
-                    landOnField(player, dievalue[0] + dievalue[1]);
+                    movePlayer(player, dieValue[0] + dieValue[1]);
+                    landOnField(player, dieValue[0] + dieValue[1]);
                     mgui.showMessage(Language.getString("3ture"));
                     mgui.drawPlayerPosition(player);
-                    movePlayer(player, dievalue[0] + dievalue[1]);
-                    landOnField(player, dievalue[0] + dievalue[1]);
+                    movePlayer(player, dieValue[0] + dieValue[1]);
+                    landOnField(player, dieValue[0] + dieValue[1]);
 
                 }
             }
@@ -364,43 +364,43 @@ public class GameController {
         return players;
     }
     /** Used when a player lands on an unowned buyable field. Gives the player the option to buy the field or do nothing.
-     * @param currentplayer is the player who landed on the field
-     * @param currentfield is the field the player landed on.
+     * @param currentPlayer is the player who landed on the field
+     * @param currentField is the field the player landed on.
      */
-        public void buyField(Player currentplayer, BuyableField currentfield) {
-            if (currentfield.getPrice()< currentplayer.getPlayerBalance()) {
+        public void buyField(Player currentPlayer, BuyableField currentField) {
+            if (currentField.getPrice()< currentPlayer.getPlayerBalance()) {
                 String results = null;
-                if (currentfield instanceof Property){
+                if (currentField instanceof Property){
                     if (TEST_MODE){
                         results = Language.getString("yesTxt");
                     } else {
                         results = mgui.requestUserButton(Language.getString("prop"), Language.getString("yesTxt"), Language.getString("noTxt"));
                     }
                 }
-                if (currentfield instanceof ShippingCompany){
+                if (currentField instanceof ShippingCompany){
                     if (TEST_MODE){
                         results = Language.getString("yesTxt");
                     } else {
                         results = mgui.requestUserButton(Language.getString("ship"), Language.getString("yesTxt"), Language.getString("noTxt"));
                     }
                     if (results.equals(Language.getString("yesTxt"))) {
-                        currentplayer.setShipsOwned(currentplayer.getShipsOwned()+1);
+                        currentPlayer.setShipsOwned(currentPlayer.getShipsOwned()+1);
                     }
                 }
-                if (currentfield instanceof Brewery){
+                if (currentField instanceof Brewery){
                     if (TEST_MODE){
                         results = Language.getString("yesTxt");
                     } else {
                         results = mgui.requestUserButton(Language.getString("brew"), Language.getString("yesTxt"), Language.getString("noTxt"));
                     }
                     if (results.equals(Language.getString("yesTxt"))) {
-                        currentplayer.setBrewsOwned(currentplayer.getBrewsOwned()+1);
+                        currentPlayer.setBrewsOwned(currentPlayer.getBrewsOwned()+1);
                     }
                 }
                 if (Objects.equals(results, Language.getString("yesTxt"))) {
-                    currentplayer.addBalance(-currentfield.getPrice());
-                    currentfield.setOwner(currentplayer);
-                    mgui.setOwner(currentfield, currentplayer.getPlayerPosition());
+                    currentPlayer.addBalance(-currentField.getPrice());
+                    currentField.setOwner(currentPlayer);
+                    mgui.setOwner(currentField, currentPlayer.getPlayerPosition());
                 }
 
                 }else {
@@ -422,27 +422,27 @@ public class GameController {
         currentPlayerID = id;
     }
     /** Used to pay rent when a player lands on a property field
-     * @param currentplayer is the player who lands on the field
-     * @param currentfield is the field the player lands on.
+     * @param currentPlayer is the player who lands on the field
+     * @param currentField is the field the player lands on.
      */
-    public void payRent(Player currentplayer, BuyableField currentfield) {
-        if (currentfield.getOwner() != currentplayer) {
-            mgui.showMessage(Language.getString("payrent") + " " + currentfield.getOwner());
-            if (currentfield instanceof Property property) {
+    public void payRent(Player currentPlayer, BuyableField currentField) {
+        if (currentField.getOwner() != currentPlayer) {
+            mgui.showMessage(Language.getString("payrent") + " " + currentField.getOwner());
+            if (currentField instanceof Property property) {
                 if (allinColorOwned(property)) {
-                    if (currentfield.getRent(0) < currentplayer.getPlayerBalance()) {
-                        currentplayer.addBalance(2 * -currentfield.getRent(0));
-                        currentfield.getOwner().addBalance(2 * currentfield.getRent(0));
+                    if (currentField.getRent(0) < currentPlayer.getPlayerBalance()) {
+                        currentPlayer.addBalance(2 * -currentField.getRent(0));
+                        currentField.getOwner().addBalance(2 * currentField.getRent(0));
                     } else {
-                        currentfield.getOwner().addBalance(currentplayer.getPlayerBalance() + 1);
-                        currentplayer.addBalance(-currentplayer.getPlayerBalance() - 1);
+                        currentField.getOwner().addBalance(currentPlayer.getPlayerBalance() + 1);
+                        currentPlayer.addBalance(-currentPlayer.getPlayerBalance() - 1);
                     }
-                } else if (currentfield.getRent(0) < currentplayer.getPlayerBalance()) {
-                    currentplayer.addBalance(-currentfield.getRent(0));
-                    currentfield.getOwner().addBalance(currentfield.getRent(0));
+                } else if (currentField.getRent(0) < currentPlayer.getPlayerBalance()) {
+                    currentPlayer.addBalance(-currentField.getRent(0));
+                    currentField.getOwner().addBalance(currentField.getRent(0));
                 } else {
-                    currentfield.getOwner().addBalance(currentplayer.getPlayerBalance() + 1);
-                    currentplayer.addBalance(-currentplayer.getPlayerBalance() - 1);
+                    currentField.getOwner().addBalance(currentPlayer.getPlayerBalance() + 1);
+                    currentPlayer.addBalance(-currentPlayer.getPlayerBalance() - 1);
                 }
             }
         }
@@ -452,53 +452,53 @@ public class GameController {
         }
     }
     /** Used to pay rent when a player lands on a ferry field
-     * @param currentplayer is the player who lands on the field
-     * @param currentfield is the field the player lands on.
+     * @param currentPlayer is the player who lands on the field
+     * @param currentField is the field the player lands on.
      */
-    public void payShipRent(Player currentplayer, BuyableField currentfield){
-        if (currentfield.getOwner() != currentplayer) {
-            mgui.showMessage(Language.getString("payrent") + " " + currentfield.getOwner());
-            if (currentfield.getRent(currentfield.getOwner().getShipsOwned() - 1) < currentplayer.getPlayerBalance()) {
-                currentplayer.addBalance(-currentfield.getRent(currentfield.getOwner().getShipsOwned() - 1));
-                currentfield.getOwner().addBalance(currentfield.getRent(currentfield.getOwner().getShipsOwned() - 1));
-                mgui.updatePlayerBalance(currentfield.getOwner());
+    public void payShipRent(Player currentPlayer, BuyableField currentField){
+        if (currentField.getOwner() != currentPlayer) {
+            mgui.showMessage(Language.getString("payrent") + " " + currentField.getOwner());
+            if (currentField.getRent(currentField.getOwner().getShipsOwned() - 1) < currentPlayer.getPlayerBalance()) {
+                currentPlayer.addBalance(-currentField.getRent(currentField.getOwner().getShipsOwned() - 1));
+                currentField.getOwner().addBalance(currentField.getRent(currentField.getOwner().getShipsOwned() - 1));
+                mgui.updatePlayerBalance(currentField.getOwner());
             } else {
-                currentfield.getOwner().addBalance(currentplayer.getPlayerBalance() + 1);
-                currentplayer.addBalance(-currentplayer.getPlayerBalance() - 1);
+                currentField.getOwner().addBalance(currentPlayer.getPlayerBalance() + 1);
+                currentPlayer.addBalance(-currentPlayer.getPlayerBalance() - 1);
             }
         } else {
             mgui.showMessage(Language.getString("selfown"));
         }
     }
     /** Used to pay rent when a player lands on a brewery field
-     * @param currentplayer is the player who lands on the field
-     * @param currentfield is the field the player lands on.
+     * @param currentPlayer is the player who lands on the field
+     * @param currentField is the field the player lands on.
      * @param diceSum is the sum of the dice.
      */
-    public void payBrewRent(Player currentplayer, BuyableField currentfield, int diceSum){
-        if (currentfield.getOwner() != currentplayer) {
-            mgui.showMessage(Language.getString("payrent") + " " + currentfield.getOwner());
-            int toPay = currentfield.getRent(currentfield.getOwner().getBrewsOwned() - 1) * diceSum;
-            if (toPay < currentplayer.getPlayerBalance()) {
-                currentplayer.addBalance(-toPay);
-                currentfield.getOwner().addBalance(toPay);
-                mgui.updatePlayerBalance(currentfield.getOwner());
+    public void payBrewRent(Player currentPlayer, BuyableField currentField, int diceSum){
+        if (currentField.getOwner() != currentPlayer) {
+            mgui.showMessage(Language.getString("payrent") + " " + currentField.getOwner());
+            int toPay = currentField.getRent(currentField.getOwner().getBrewsOwned() - 1) * diceSum;
+            if (toPay < currentPlayer.getPlayerBalance()) {
+                currentPlayer.addBalance(-toPay);
+                currentField.getOwner().addBalance(toPay);
+                mgui.updatePlayerBalance(currentField.getOwner());
             } else {
-                currentfield.getOwner().addBalance(currentplayer.getPlayerBalance() + 1);
-                currentplayer.addBalance(-currentplayer.getPlayerBalance() - 1);
+                currentField.getOwner().addBalance(currentPlayer.getPlayerBalance() + 1);
+                currentPlayer.addBalance(-currentPlayer.getPlayerBalance() - 1);
             }
         } else{
             mgui.showMessage(Language.getString("selfown"));
         }
     }
     /** Used to remove the owner of buyable fields if they're owned by a bankrupt player.
-     * @param bankruptplayer is a player who is bankrupt
+     * @param bankruptPlayer is a player who is bankrupt
      */
-    public void removeOwner(Player bankruptplayer){
+    public void removeOwner(Player bankruptPlayer){
         Field[] field = fields;
         for (int i=0; i<field.length;i++){
             if (field[i] instanceof BuyableField prop){
-                if (prop.getOwner()==bankruptplayer){
+                if (prop.getOwner()==bankruptPlayer){
                     prop.setOwner(null);
                     mgui.resetOwner(prop,i);
                 }
@@ -518,18 +518,18 @@ public class GameController {
     }
 
     /** Used to check if a player all the properties of the same color.
-     * @param currentproperty is the property that a player has landed on
+     * @param currentProperty is the property that a player has landed on
      *@return a boolean
      */
-    public boolean allinColorOwned (Property currentproperty){
-        Player propertyowner = currentproperty.getOwner();
+    public boolean allinColorOwned (Property currentProperty){
+        Player propertyOwner = currentProperty.getOwner();
         for (Field field : fields) {
             if (field instanceof Property property) {
-                if (currentproperty.getColor() == property.getColor()) {
+                if (currentProperty.getColor() == property.getColor()) {
                     if (property.getOwner() == null) {
                         return false;
                     }
-                    else if (property.getOwner().getID() != propertyowner.getID()) {
+                    else if (property.getOwner().getID() != propertyOwner.getID()) {
                         return false;
                     }
                 }

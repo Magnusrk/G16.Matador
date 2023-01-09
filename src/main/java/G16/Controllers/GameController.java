@@ -221,17 +221,17 @@ public class GameController {
 
     }
 
-        public void landOnField (Player player, int diceSum){
-            Field currentfield = fields[player.getPlayerPosition()];
-            if(currentfield instanceof GoToJail){
-                goToJail(player);
-            } else if (currentfield instanceof Property prop) {
-                //if property has no owner, then player can purchase it.
-                if (prop.getOwner()==null) {
-                    buyField(player,prop);
-                } else {
-                    //if property has an owner, then player have to pay the rent.
-                    payRent(player,prop);
+    public void landOnField (Player player, int diceSum){
+        Field currentfield = fields[player.getPlayerPosition()];
+        if(currentfield instanceof GoToJail){
+            goToJail(player);
+        } else if (currentfield instanceof Property prop) {
+            //if property has no owner, then player can purchase it.
+            if (prop.getOwner()==null) {
+                buyField(player,prop);
+            } else {
+                //if property has an owner, then player have to pay the rent.
+                payRent(player,prop);
             }
             //The player land on the Shipping Company's field.
         } else if (currentfield instanceof ShippingCompany ship) {
@@ -251,13 +251,13 @@ public class GameController {
                 }
             }
 
-        }
-        //Added 4000 kr to the player's money balance
-        public void giveStartMoney (Player player){
-            player.addBalance(PASS_START_REWARD);
+    }
+    //Added 4000 kr to the player's money balance
+    public void giveStartMoney (Player player){
+        player.addBalance(PASS_START_REWARD);
     }
 
-        public void updatePlayerinfo(){
+    public void updatePlayerinfo(){
         for (Player player: players){
             mgui.drawPlayerPosition(player);
             mgui.updatePlayerBalance(player);
@@ -274,9 +274,9 @@ public class GameController {
         Player player = players.get(id);
         player.setPlayerPosition(10);
         player.setJailed(true);
+        mgui.showMessage(Language.getString("gotojailprompt"));
         mgui.drawPlayerPosition(player);
     }
-
 
     public void inJail(Player player) {
         String response;
@@ -311,6 +311,7 @@ public class GameController {
                 landOnField(player, dievalue[0] + dievalue[1]);
                 mgui.showMessage(Language.getString("2ens"));
                 mgui.drawPlayerPosition(player);
+                mgui.showMessage(Language.getString("ekstra"));
                 extraCounter++;
                 throwAndMove(player);
             } else {
@@ -319,12 +320,13 @@ public class GameController {
                 if (player.getTurnsinjail() > 2) {
                     player.addBalance(-1000);
                     player.setJailed(false);
-                    movePlayer(player, dievalue[0] + dievalue[1]);
-                    landOnField(player, dievalue[0] + dievalue[1]);
                     mgui.showMessage(Language.getString("3ture"));
                     mgui.drawPlayerPosition(player);
-                    mgui.showMessage(Language.getString("ekstra"));
-                    throwAndMove(player);
+                    movePlayer(player, dievalue[0] + dievalue[1]);
+                    landOnField(player, dievalue[0] + dievalue[1]);
+
+                    //mgui.showMessage(Language.getString("ekstra"));
+                    //throwAndMove(player);
 
                 }
             }
@@ -394,12 +396,11 @@ public class GameController {
                 }
             }
         }
-    else
-    {
-        mgui.showMessage(Language.getString("selfown"));
+        else
+        {
+            mgui.showMessage(Language.getString("selfown"));
+        }
     }
-
-}
 
     public void payShipRent(Player currentplayer, BuyableField currentfield){
         if (currentfield.getOwner() != currentplayer) {
@@ -433,42 +434,41 @@ public class GameController {
         }
     }
 
-        public void removeowner (Player bankruptplayer){
-            Field field[]= fields;
-            for (int i=0; i<field.length;i++){
-                if (field[i] instanceof BuyableField prop){
-                    if (prop.getOwner()==bankruptplayer){
-                        prop.setOwner(null);
-                        mgui.resetOwner(prop,i);
-                    }
+    public void removeowner (Player bankruptplayer){
+        Field field[]= fields;
+        for (int i=0; i<field.length;i++){
+            if (field[i] instanceof BuyableField prop){
+                if (prop.getOwner()==bankruptplayer){
+                    prop.setOwner(null);
+                    mgui.resetOwner(prop,i);
                 }
             }
-        }
-
-        public String getTurnMessage (){
-            if(players.size() > 0 && gameStarted){
-                return "["+players.get(currentPlayerID).getName() +"'s tur] ";
-            }
-        else {
-                return "";
-            }
-
-        }
-        public boolean allinColorOwned (Property currentpropery){
-            Player properyowner = currentpropery.getOwner();
-            for (Field field : fields) {
-                if (field instanceof Property property) {
-                    if (currentpropery.getColor() == property.getColor()) {
-                        if (property.getOwner() == null) {
-                            return false;
-                        }
-                        if (property.getOwner().getID() != properyowner.getID()) {
-                            return false;
-                        }
-                    }
-                }
-                return true;
-            }
-            return false;
         }
     }
+
+    public String getTurnMessage (){
+        if(players.size() > 0 && gameStarted){
+            return "["+players.get(currentPlayerID).getName() +"'s tur] ";
+        }
+        else {
+            return "";
+        }
+    }
+    public boolean allinColorOwned (Property currentproperty){
+        Player propertyowner = currentproperty.getOwner();
+        for (Field field : fields) {
+            if (field instanceof Property property) {
+                if (currentproperty.getColor() == property.getColor()) {
+                    if (property.getOwner() == null) {
+                        return false;
+                    }
+                    else if (property.getOwner().getID() != propertyowner.getID()) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+}

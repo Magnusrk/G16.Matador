@@ -19,6 +19,7 @@ tryluck;Take Chance card
 price;Price:
 housePrice;House price:
 rent;Rent:
+allOwned;All properties are owned. Rental: 2x
 1house;1 House:
 2house;2 Houses:
 3house;3 Houses:
@@ -65,12 +66,18 @@ injailifcard; You have one release card. Would you like to use it?
 ikke2ens; You didn't get two of kind dice roll.
 2ens; You get two of a kind. You move forward as the dice shows.
 3ture;You have been imprisoned for three turns and must pay a fine 1000 $. Move according to your next dice roll.
+ekstra; You get two of a kind. You receive an extra turn.
+snyd???; You get two of a kind too many times. You are sent to Jail.
 betalt; You have paid a fine 1000$. Now you can throw the dices.
 brugtkort; You have used a release card. Now you can throw the dices.
 
 prop; You are on a property without an owner. Would you like to buy this property?
 payrent; You landed on a field with owner and you have to pay the rent.
 propikkeråd; You landed on a property without an owner, but you cannot afford it.
+
+payrent; You have land on a field which has an owner. You have to pay the rent.
+propikkeråd; You have land on a field which has no owner. men du har ikke råd til at købe den.
+selfown; You have land on a field that you own. Nothing happens.
 
 
 case1;Oil prices are increased and you have to pay 500$ per a house and 2000$ per a hotel.

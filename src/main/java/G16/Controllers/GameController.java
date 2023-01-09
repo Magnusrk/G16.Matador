@@ -23,19 +23,18 @@ public class GameController {
 
     private final int MAX_PLAYERS = 6;
     private final int MIN_PLAYERS = 3;
-    private final int PASS_START_REWARD = 4000;
     private Die die = new Die();
     private final int NUMBER_OFF_FIELDS = 40;
 
-    private ArrayList<Player> players = new ArrayList<>();
+    private final ArrayList<Player> players = new ArrayList<>();
 
-    private MatadorGUI mgui;
+    private final MatadorGUI mgui;
 
     private int currentPlayerID = 0;
 
-    private Field[] fields;
+    private final Field[] fields;
 
-    private boolean TEST_MODE;
+    private final boolean TEST_MODE;
 
     private boolean winnerfound = false;
     private boolean diceRigged = false;
@@ -55,7 +54,7 @@ public class GameController {
     }
 
     public void playGame() {
-        DevConsole dc = new DevConsole(this);
+        new DevConsole(this);
         setupPlayers();
         gameStarted = true;
         playTurn();
@@ -113,17 +112,15 @@ public class GameController {
     /** If the player is bankrupt it removes their car from the board
      * and makes it so they don't own any properties
      * @param currentPlayer is the player whose turn it is
-     *@return void
      */
     private void checkPlayerBankrupt(Player currentPlayer) {
         if (currentPlayer.getBankrupt()) {
             mgui.showMessage(currentPlayer.getName() + " er gået bankerot. Du er nu ude af spillet. ");
-            removeowner(currentPlayer);
+            removeOwner(currentPlayer);
             mgui.removeCar(currentPlayer);
         }
     }
     /** Checks how many players are left in the game, if there is only one they will be the winner
-     *@return void
      */
     private void setWinnerfound() {
         int deadplayers = 0;
@@ -150,7 +147,6 @@ public class GameController {
     }
     /** Used in the dev console to rig the dice.
      * @param value is how many spaces you want to move
-     *@return void
      */
     public void rigDice(int value) {
         diceRigged = true;
@@ -160,7 +156,6 @@ public class GameController {
      * @param loaded determines wheter the dice should be predetermined or random.
      * @param value1 the face value of the first die
      * @param value2 the face value of the second die
-     *@return java.awt.Color
      */
     public void fakeDie(boolean loaded, int value1, int value2) {
         if (loaded) {
@@ -173,7 +168,6 @@ public class GameController {
     }
     /** Used to throw the die and move the player. also calls the landOnField method.
      * @param currentPlayer is the player whose turn it is.
-     *@return void
      */
     private void throwAndMove(Player currentPlayer) {
         //Throw Dice
@@ -222,14 +216,8 @@ public class GameController {
         }
     }
 
-    public void balance(Player player, int add) {
-        player.addBalance(add);
-        mgui.updatePlayerBalance(player);
-    }
-
     /** Used to move a player. Also checks if the player passed start.
      * @param player is a player. Usually the current player
-     *@return void.
      */
         public void movePlayer (Player player,int moves){
             int currentPosition = player.getPlayerPosition();
@@ -244,7 +232,6 @@ public class GameController {
     /** Used when a player lands on a field and determines what should happen depending on the field
      * @param player is the one who lands on the field
      * @param diceSum is the sum of the dice, used if the field is a brewery
-     *@return void
      */
     public void landOnField (Player player, int diceSum){
         Field currentfield = fields[player.getPlayerPosition()];
@@ -279,15 +266,14 @@ public class GameController {
     }
     /** Used to give money to a player who passes start
      * @param player is the player who get the money
-     *@return void
      */
     //Added 4000 kr to the player's money balance
     public void giveStartMoney (Player player){
+        int PASS_START_REWARD = 4000;
         player.addBalance(PASS_START_REWARD);
     }
 
     /** Used to update all the players balance and their position on the UI.
-     *@return void
      */
     public void updatePlayerinfo(){
         for (Player player: players){
@@ -298,7 +284,6 @@ public class GameController {
 
     /** Used to send a player to jail
      * @param player is the player who gets send to jail
-     *@return void
      */
     public void goToJail(Player player) {
         player.setPlayerPosition(10);
@@ -308,7 +293,6 @@ public class GameController {
 
     /** Used to send player to jail by their id. Used in the dev console.
      * @param id is the players id, player 1's id is 0.
-     *@return void
      */
     public void goToJailByID(int id) {
         Player player = players.get(id);
@@ -320,7 +304,6 @@ public class GameController {
 
     /** Used when a player is in jail. Gives the player the option to choose what they want to do the get out of jail.
      * @param player is the player who is in jail
-     *@return void
      */
     public void inJail(Player player) {
         String response;
@@ -370,9 +353,6 @@ public class GameController {
                     movePlayer(player, dievalue[0] + dievalue[1]);
                     landOnField(player, dievalue[0] + dievalue[1]);
 
-                    //mgui.showMessage(Language.getString("ekstra"));
-                    //throwAndMove(player);
-
                 }
             }
         }
@@ -386,7 +366,6 @@ public class GameController {
     /** Used when a player lands on an unowned buyable field. Gives the player the option to buy the field or do nothing.
      * @param currentplayer is the player who landed on the field
      * @param currentfield is the field the player landed on.
-     *@return java.awt.Color
      */
         public void buyField(Player currentplayer, BuyableField currentfield) {
             if (currentfield.getPrice()< currentplayer.getPlayerBalance()) {
@@ -431,7 +410,6 @@ public class GameController {
 
     /** Used to give a player money by their id. Used in the dev console
      * @param id is the players id, player 1's id is 0.
-     *@return void
      */
     public void addPlayerMoney(int id, int amount) {
         players.get(id).addBalance(amount);
@@ -439,7 +417,6 @@ public class GameController {
     }
     /** Used to set whose turn it is
      * @param id is the players id, player 1's id is 0.
-     *@return void
      */
     public void setPlayerTurn(int id) {
         currentPlayerID = id;
@@ -447,7 +424,6 @@ public class GameController {
     /** Used to pay rent when a player lands on a property field
      * @param currentplayer is the player who lands on the field
      * @param currentfield is the field the player lands on.
-     *@return void
      */
     public void payRent(Player currentplayer, BuyableField currentfield) {
         if (currentfield.getOwner() != currentplayer) {
@@ -478,7 +454,6 @@ public class GameController {
     /** Used to pay rent when a player lands on a ferry field
      * @param currentplayer is the player who lands on the field
      * @param currentfield is the field the player lands on.
-     *@return void
      */
     public void payShipRent(Player currentplayer, BuyableField currentfield){
         if (currentfield.getOwner() != currentplayer) {
@@ -499,7 +474,6 @@ public class GameController {
      * @param currentplayer is the player who lands on the field
      * @param currentfield is the field the player lands on.
      * @param diceSum is the sum of the dice.
-     *@return void
      */
     public void payBrewRent(Player currentplayer, BuyableField currentfield, int diceSum){
         if (currentfield.getOwner() != currentplayer) {
@@ -519,10 +493,9 @@ public class GameController {
     }
     /** Used to remove the owner of buyable fields if they're owned by a bankrupt player.
      * @param bankruptplayer is a player who is bankrupt
-     *@return void
      */
-    public void removeowner (Player bankruptplayer){
-        Field field[]= fields;
+    public void removeOwner(Player bankruptplayer){
+        Field[] field = fields;
         for (int i=0; i<field.length;i++){
             if (field[i] instanceof BuyableField prop){
                 if (prop.getOwner()==bankruptplayer){

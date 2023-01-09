@@ -1,0 +1,115 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+
+
+class Player {
+-id : int
+-name : String
+-position : int
+-prevPosition : int
+-jailed : boolean
+-isBankupt : boolean
++setPlayerPosition(position : int) : void
+
+}
+
+class MoneyBalance{
+- balance : int
++getBalance() : int
++updateMoney(money : int) : void
+}
+
+abstract class Field{
+#name : String
+}
+
+class PropertyField{
+#color : Color
+#housePrice : int
+}
+
+class ChanceField{}
+
+class Language{
+{static}dictionary : Map<String, String>
+{static}setLanguage(pack : String) : void
+{static}getString(key : String) : String
+
+
+}
+
+class GoToJailField{}
+
+class Jail{}
+class Tax{
+#tax : int
+}
+
+class SodaField {}
+
+class FerryField {}
+
+class MatadorGUI {
++drawPlayerPosition(player : Player) : void
++updatePlayerBalance(player : Player) : void
++updatePlayerBalance(player : Player) : void
++showMessage(message : String) : void
++requestUserString(message : String) : String
++requestUserButton(message : String, options : String[]) : String
++requestUserInt(message : String) : int
+
+}
+
+
+class Die {
+{static} throwDice() : int[]
+}
+
+class GameController{
+-winnerFound : boolean
+-gameStarted : boolean
+
++playGame() : void
++setupPlayers() : void
++playTurn() : void
+}
+
+abstract class BuyableField {
+#owner : Player
+#price : int
+#rents : int[]
+}
+
+abstract class UnBuyableField {}
+
+class VisitorField {}
+
+
+
+Player "-players[]   " <-- " " GameController
+GameController "  " --> "-fields[]" Field
+Field <|-- BuyableField
+Field <|-- UnBuyableField
+
+UnBuyableField <|-- GoToJailField
+UnBuyableField <|-- Jail
+UnBuyableField <|-- ChanceField
+UnBuyableField <|-- VisitorField
+UnBuyableField <|-- Tax
+
+BuyableField <|-- PropertyField
+BuyableField <|-- FerryField
+BuyableField <|-- SodaField
+
+MoneyBalance "-balance" <-left- " " Player
+
+GameController -left-> Die
+GameController " " -right-> "-mgui" MatadorGUI
+Language " " <-- " " GameController
+
+
+
+
+@enduml

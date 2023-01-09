@@ -15,7 +15,12 @@ UI -> Die: Get die results
 UI <- Die: Die results
 Player -> UI: Move player
 UI-> field: land on field
-UI <- field:
+alt unowned
+UI <- field: Buy field
+end
+alt owned
+UI <- field: Pay rent
+end
 UI -> Moneybalance: Request new balance
 UI <- Moneybalance: new balance
 alt balance < 0

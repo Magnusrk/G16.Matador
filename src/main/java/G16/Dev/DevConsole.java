@@ -72,6 +72,30 @@ public class DevConsole {
                     gc.rigDice(value);
                     break;
 
+                case "rp":
+                    int face1;
+                    int face2;
+                    try {
+                        face1 = Integer.parseInt(command[1]);
+                        face2 = Integer.parseInt(command[2]);
+                        gc.fakeDie(true, face1, face2);
+                    } catch (NumberFormatException | ArrayIndexOutOfBoundsException e){
+                        System.out.println("Invalid syntax.");
+                        break;
+                    }
+                    //gc.(pair);
+                    break;
+                case "rld":
+                    try {
+                        gc.fakeDie(false, 1,1);
+                        //RESET DICE
+                    } catch (NumberFormatException | ArrayIndexOutOfBoundsException e){
+                        System.out.println("Invalid syntax.");
+                        break;
+                    }
+                    //gc.(pair);
+                    break;
+
                 case "help":
                     System.out.println("""
                             --AVAILABLE COMMANDS--
@@ -79,6 +103,8 @@ public class DevConsole {
                             turn <player id>            #Give the turn to player
                             jail <player id>            #Jail player
                             rd <value>                  #Rig next dice throw to roll given value
+                            rp  <value> <value>         #Rig dice throw to always roll given value faces
+                            rld                         #Remove loaded dice.
                             help                        #Display this list
                             
                             """);

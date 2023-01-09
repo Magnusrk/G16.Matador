@@ -7,6 +7,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 
+/** Used to manage string constants and translations
+ * @author G16
+ * @version 2.0
+ */
 public class Language {
     //Get path to the package LanguagePacks. The LanguagePacks contains files (or "language packs") used in translating the program.
     private static final String languagePackPath = "LanguagePacks";

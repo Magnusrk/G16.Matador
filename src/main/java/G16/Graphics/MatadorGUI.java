@@ -5,22 +5,23 @@ import G16.Fields.BuyableFields.BuyableField;
 import G16.Fields.Field;
 import G16.Fields.BuyableFields.Property;
 import G16.Fields.BuyableFields.ShippingCompany;
-import G16.Fields.UnbuyableFields.VisitorField;
 import G16.Language;
 import G16.PlayerUtils.Player;
 import gui_fields.*;
 import gui_main.GUI;
-import java.awt.Window;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 import static gui_fields.GUI_Car.Pattern.*;
 import static gui_fields.GUI_Car.Type.*;
-
+/** Represents the GUI of the game
+ * @author G16
+ * @version 0.1
+ */
 public class MatadorGUI {
 
-    protected final GUI gui;
+    protected final GUI gui; //Instance of the diplomitdtu.matadorGUI
     protected final ArrayList<GUI_Player> guiPlayers = new ArrayList<>();
 
     protected GameController gc;
@@ -51,6 +52,12 @@ public class MatadorGUI {
         this.gui = new GUI(defaultFields);
     }
 
+
+    /** Add a player to the GUI
+     * @param name Display name of the new player
+     * @param balance Displayed balance of the new player
+     * @param playerNum Index of the player. Used to determine the displayed car of the player.
+     */
     public void addPlayer(String name, int balance,int playerNum){
         switch (playerNum) {
             case 0 -> {
@@ -83,53 +90,96 @@ public class MatadorGUI {
         }
     }
 
-    public void removecar(Player player){
+    /** Remove a players car from the GUI
+     * @param player Player object of the player.
+     */
+    public void removeCar(Player player){
         GUI_Player bankruptplayer = guiPlayers.get(player.getID());
         if(bankruptplayer.getCar().getPosition() != null){
             bankruptplayer.getCar().getPosition().drawCar(bankruptplayer, false);
         }
     }
 
+    /** Draw/update a players position.
+     * @param player player object of the player who should be updated.
+     */
     public void drawPlayerPosition(Player player){
         GUI_Player selectedPlayer = guiPlayers.get(player.getID());
         selectedPlayer.getCar().setPosition(gui.getFields()[player.getPlayerPosition()]);
     }
+
+    /** Draw the dice on the board with the given facevalues. If the values are not in the range 1-6, they
+     * will not be updated.
+     * @param faceValue1 face value of the first die
+     * @param faceValue2 face value of the second die
+     */
     public void drawDice(int faceValue1, int faceValue2){
         gui.setDice(faceValue1, faceValue2);
     }
 
+    /** Display a message on the board. The message must be dismissed by clicking the displayed "OK" button.
+     * will not be updated.
+     * @param message The displayed string.
+     */
     public void showMessage(String message){
         gui.showMessage(getTurnInfo() + message);
     }
 
+    /** Request a string input from the user.
+     * @param message The displayed message.
+     * @return String the written input from the user.
+     */
     public String requestString(String message){
         return gui.getUserString(getTurnInfo() + message);
 
     }
 
+    /** Request the user to choose between different buttons.
+     * @param msg The displayed message.
+     * @param options The name of the different options
+     * @return String the name of the picked option.
+     */
     public String requestUserButton(String msg,String...options){
         return gui.getUserButtonPressed(getTurnInfo() + msg,options);
     }
 
+    /** Request the user to write an integer
+     * @param message The displayed message.
+     * @param minValue The minimum value the user can select
+     * @param maxValue The maximum value the user can select
+     * @return int The written integer.
+     */
     public int requestInteger(String message, int minValue, int maxValue) {
 
         return gui.getUserInteger(getTurnInfo() + message, minValue, maxValue);
     }
 
+    /** Update a players displayed balance
+     * @param player The player whos balance should be updated.
+     */
     public void updatePlayerBalance(Player player){
         guiPlayers.get(player.getID()).setBalance(player.getPlayerBalance());
     }
 
-    public void setOwner(Field field,int post){
-        GUI_Field[] defualtfields = gui.getFields();
+    /** Update a field to display that it is owned by a player.
+     * @param field The field that the player should now own
+     * @param pos The position of the field.
+     */
+    public void setOwner(Field field,int pos){
+        GUI_Field[] defaultFields = gui.getFields();
         if (field instanceof BuyableField prop){
-            defualtfields[post].setSubText(prop.getOwner().getName());
+            defaultFields[pos].setSubText(prop.getOwner().getName());
         }
     }
-    public void resetOwner(Field field , int post){
-        GUI_Field[] defualtfields = gui.getFields();
+
+    /** Update a field to display that it is NOT owned
+     * @param field The field that should become available for purchase
+     * @param pos The position of the field.
+     */
+    public void resetOwner(Field field , int pos){
+        GUI_Field[] defaultFields = gui.getFields();
         if (field instanceof BuyableField prop){
-            defualtfields[post].setSubText(prop.getPrice()+",-");
+            defaultFields[pos].setSubText(prop.getPrice()+",-");
         }
     }
 
@@ -137,8 +187,9 @@ public class MatadorGUI {
         return gc.getTurnMessage();
     }
 
-   
-
+    /** Manually instantiated GUI_Field array. Copied from diplomitdtu.matadorgui
+     * @return GUI_Field[] array of default fields.
+     */
     private GUI_Field[] getFields() {
         GUI_Field[] fields = new GUI_Field[40];
         int i = 0;

@@ -1,7 +1,6 @@
 package G16.Controllers;
 
 import G16.Dev.DevConsole;
-import G16.Fields.*;
 import G16.Fields.BuyableFields.Brewery;
 import G16.Fields.BuyableFields.BuyableField;
 import G16.Fields.BuyableFields.Property;
@@ -115,7 +114,7 @@ public class GameController {
         if (currentPlayer.getBankrupt()) {
             mgui.showMessage(currentPlayer.getName() + " er gået bankerot. Du er nu ude af spillet. ");
             removeowner(currentPlayer);
-            mgui.removecar(currentPlayer);
+            mgui.removeCar(currentPlayer);
         }
     }
 

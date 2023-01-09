@@ -1,5 +1,6 @@
 package G16.Controllers;
 
+import G16.Fields.Field;
 import G16.PlayerUtils.Player;
 import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
@@ -59,6 +60,27 @@ public class GameControllerTest extends TestCase {
         assertEquals(29950,players.get(1).getPlayerBalance());
     }
 
+    public void testPayDoubleRent(){
+        GameController controller = new GameController(true);
+        controller.setupPlayers();
+        ArrayList<Player> players = controller.getPlayers();
+        controller.fakeDie(true,2,4);
+        controller.playTurn();
+        assertEquals(28000,players.get(0).getPlayerBalance());
+        controller.setPlayerTurn(0);
+        controller.fakeDie(true,2,0);
+        controller.playTurn();
+        assertEquals(26000,players.get(0).getPlayerBalance());
+        controller.setPlayerTurn(0);
+        controller.fakeDie(true,1,0);
+        controller.playTurn();
+        assertEquals(23600,players.get(0).getPlayerBalance());
+        controller.fakeDie(true,2,4);
+        controller.playTurn();
+        assertEquals(29800,players.get(1).getPlayerBalance());
+        assertEquals(23800,players.get(0).getPlayerBalance());
+    }
+
     public void testPayShipRent(){
         GameController controller = new GameController(true);
         controller.setupPlayers();
@@ -66,9 +88,48 @@ public class GameControllerTest extends TestCase {
         controller.fakeDie(true,2,3);
         controller.playTurn();
         assertEquals(26000,players.get(0).getPlayerBalance());
+        assertEquals(1,players.get(0).getShipsOwned());
         controller.playTurn();
         assertEquals(29500,players.get(1).getPlayerBalance());
         assertEquals(26500,players.get(0).getPlayerBalance());
+    }
+    public void testPayDoubleShipRent(){
+        GameController controller = new GameController(true);
+        controller.setupPlayers();
+        ArrayList<Player> players = controller.getPlayers();
+        controller.fakeDie(true,2,3);
+        controller.playTurn();
+        players.get(0).setShipsOwned(players.get(0).getShipsOwned()+1);
+        assertEquals(26000,players.get(0).getPlayerBalance());
+        controller.playTurn();
+        assertEquals(29000,players.get(1).getPlayerBalance());
+        assertEquals(27000,players.get(0).getPlayerBalance());
+    }
+
+        public void testPayBrewRent(){
+        GameController controller = new GameController(true);
+        controller.setupPlayers();
+        ArrayList<Player> players = controller.getPlayers();
+        controller.fakeDie(true,7,5);
+        controller.playTurn();
+        assertEquals(27000,players.get(0).getPlayerBalance());
+        assertEquals(1,players.get(0).getBrewsOwned());
+        controller.playTurn();
+        assertEquals(28800,players.get(1).getPlayerBalance());
+        assertEquals(28200,players.get(0).getPlayerBalance());
+    }
+    public void testPayDoubleBrewRent(){
+        GameController controller = new GameController(true);
+        controller.setupPlayers();
+        ArrayList<Player> players = controller.getPlayers();
+        controller.fakeDie(true,7,5);
+        controller.playTurn();
+        players.get(0).setBrewsOwned(players.get(0).getBrewsOwned()+1);
+        assertEquals(27000,players.get(0).getPlayerBalance());
+        assertEquals(2,players.get(0).getBrewsOwned());
+        controller.playTurn();
+        assertEquals(27600,players.get(1).getPlayerBalance());
+        assertEquals(29400,players.get(0).getPlayerBalance());
     }
 
     public void testJailedAfterThreeTurns(){

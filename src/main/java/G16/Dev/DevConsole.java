@@ -1,13 +1,20 @@
 package G16.Dev;
 
 import G16.Controllers.GameController;
-
 import java.util.Scanner;
 
+/** Developer Console for easier testing
+        * @author G16
+        * @version 0.1
+        */
 public class DevConsole {
 
     private GameController gc;
 
+
+    /** Creates a Developer Console. The console is in a separate thread.
+     * @param gc GameController for the game.
+     */
     public DevConsole(GameController gc){
         this.gc = gc;
         Thread commandlineThread = new Thread(this::waitForCommand);
@@ -83,7 +90,6 @@ public class DevConsole {
                         System.out.println("Invalid syntax.");
                         break;
                     }
-                    //gc.(pair);
                     break;
                 case "rld":
                     try {
@@ -93,7 +99,7 @@ public class DevConsole {
                         System.out.println("Invalid syntax.");
                         break;
                     }
-                    //gc.(pair);
+
                     break;
 
                 case "help":

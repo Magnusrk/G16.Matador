@@ -467,8 +467,8 @@ public class GameController {
                     }
                 }
             }
-            return true;
+
         }
-        return false;
+        return true;
     }
 }

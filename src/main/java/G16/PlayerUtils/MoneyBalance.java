@@ -1,10 +1,9 @@
 package G16.PlayerUtils;
 
 public class MoneyBalance {
-    private final int STARTINGBALANCE = 30000;
     private int balance;
     public void setStartingBalance() {
-        balance = STARTINGBALANCE;
+        balance = 30000;
     }
     public void updateMoney(int money){
         balance+=money;

@@ -9,7 +9,7 @@ import java.util.Scanner;
         */
 public class DevConsole {
 
-    private GameController gc;
+    private final GameController gc;
 
 
     /** Creates a Developer Console. The console is in a separate thread.

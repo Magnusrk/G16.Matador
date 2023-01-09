@@ -2,9 +2,8 @@ package G16.PlayerUtils;
 
 public class Player {
     private String name;
-    private MoneyBalance balance = new MoneyBalance();
+    private final MoneyBalance balance = new MoneyBalance();
     private int playerPosition = 0;
-    private int prevPlayerPosition = 0;
     private boolean jailed = false;
     private boolean bankrupt = false;
     private int outOfJailCards = 0;
@@ -13,7 +12,7 @@ public class Player {
     private int shipsOwned = 0;
     private int brewsOwned = 0;
 
-    private int turnsinjail=0;
+    private int turnsInJail = 0;
 
 
 
@@ -43,9 +42,6 @@ public class Player {
     public int getPlayerPosition(){
         return playerPosition;
     }
-    public int getPrevPlayerPosition(){
-        return prevPlayerPosition;
-    }
     public boolean getBankrupt(){
         return bankrupt;
     }
@@ -64,9 +60,6 @@ public class Player {
             bankrupt = true;
         }
     }
-    public void setBalance(int ba) {
-        //balance.setBalance(ba);
-    }
 
     public int getShipsOwned() {
         return shipsOwned;
@@ -83,21 +76,20 @@ public class Player {
     }
 
     public void setPlayerPosition(int position){
-        prevPlayerPosition = playerPosition;
         playerPosition = position;
     }
     public void setJailed(boolean jail){
         jailed = jail;
         if (!jailed){
-            turnsinjail=0;
+            turnsInJail =0;
         }
     }
-    public int getTurnsinjail(){
-        return turnsinjail;
+    public int getTurnsInJail(){
+        return turnsInJail;
     }
 
-    public void increaseTurnsinjail(){
-        turnsinjail++;
+    public void increaseTurnsInJail(){
+        turnsInJail++;
     }
 
     @Override

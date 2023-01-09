@@ -47,6 +47,18 @@ public class GameControllerTest extends TestCase {
         assertTrue(jailedPlayer.getJailed());
     }
 
+    public void testPayRent(){
+        GameController controller = new GameController(true);
+        controller.setupPlayers();
+        ArrayList<Player> players = controller.getPlayers();
+        controller.fakeDie(true,1,2);
+        controller.playTurn();
+        assertEquals(28800,players.get(0).getPlayerBalance());
+        controller.playTurn();
+        assertEquals(28850,players.get(0).getPlayerBalance());
+        assertEquals(29950,players.get(1).getPlayerBalance());
+    }
+
     public void testJailedAfterThreeTurns(){
         GameController controller = new GameController(true);
         controller.setupPlayers();

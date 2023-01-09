@@ -337,23 +337,27 @@ public class GameController {
 
         public void buyField(Player currentplayer, BuyableField currentfield) {
             if (currentfield.getPrice()< currentplayer.getPlayerBalance()) {
-                String resuslt = null;
+                String results = null;
                 if (currentfield instanceof Property){
-                    resuslt = mgui.requestUserButton(Language.getString("prop"), Language.getString("yesTxt"), Language.getString("noTxt"));
+                    if (TEST_MODE){
+                        results = Language.getString("yesTxt");
+                    } else {
+                        results = mgui.requestUserButton(Language.getString("prop"), Language.getString("yesTxt"), Language.getString("noTxt"));
+                    }
                 }
                 if (currentfield instanceof ShippingCompany){
-                    resuslt = mgui.requestUserButton(Language.getString("ship"), Language.getString("yesTxt"), Language.getString("noTxt"));
-                    if (resuslt.equals(Language.getString("yesTxt"))) {
+                    results = mgui.requestUserButton(Language.getString("ship"), Language.getString("yesTxt"), Language.getString("noTxt"));
+                    if (results.equals(Language.getString("yesTxt"))) {
                         currentplayer.setShipsOwned(currentplayer.getShipsOwned()+1);
                     }
                 }
                 if (currentfield instanceof Brewery){
-                    resuslt = mgui.requestUserButton(Language.getString("brew"), Language.getString("yesTxt"), Language.getString("noTxt"));
-                    if (resuslt.equals(Language.getString("yesTxt"))) {
+                    results = mgui.requestUserButton(Language.getString("brew"), Language.getString("yesTxt"), Language.getString("noTxt"));
+                    if (results.equals(Language.getString("yesTxt"))) {
                         currentplayer.setBrewsOwned(currentplayer.getBrewsOwned()+1);
                     }
                 }
-                if (Objects.equals(resuslt, Language.getString("yesTxt"))) {
+                if (Objects.equals(results, Language.getString("yesTxt"))) {
                     currentplayer.addBalance(-currentfield.getPrice());
                     currentfield.setOwner(currentplayer);
                     mgui.setOwner(currentfield, currentplayer.getPlayerPosition());

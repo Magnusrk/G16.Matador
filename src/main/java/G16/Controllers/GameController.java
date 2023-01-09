@@ -346,13 +346,21 @@ public class GameController {
                     }
                 }
                 if (currentfield instanceof ShippingCompany){
-                    results = mgui.requestUserButton(Language.getString("ship"), Language.getString("yesTxt"), Language.getString("noTxt"));
+                    if (TEST_MODE){
+                        results = Language.getString("yesTxt");
+                    } else {
+                        results = mgui.requestUserButton(Language.getString("ship"), Language.getString("yesTxt"), Language.getString("noTxt"));
+                    }
                     if (results.equals(Language.getString("yesTxt"))) {
                         currentplayer.setShipsOwned(currentplayer.getShipsOwned()+1);
                     }
                 }
                 if (currentfield instanceof Brewery){
-                    results = mgui.requestUserButton(Language.getString("brew"), Language.getString("yesTxt"), Language.getString("noTxt"));
+                    if (TEST_MODE){
+                        results = Language.getString("yesTxt");
+                    } else {
+                        results = mgui.requestUserButton(Language.getString("brew"), Language.getString("yesTxt"), Language.getString("noTxt"));
+                    }
                     if (results.equals(Language.getString("yesTxt"))) {
                         currentplayer.setBrewsOwned(currentplayer.getBrewsOwned()+1);
                     }

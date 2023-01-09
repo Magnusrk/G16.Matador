@@ -66,9 +66,48 @@ public class GameControllerTest extends TestCase {
         controller.fakeDie(true,2,3);
         controller.playTurn();
         assertEquals(26000,players.get(0).getPlayerBalance());
+        assertEquals(1,players.get(0).getShipsOwned());
         controller.playTurn();
         assertEquals(29500,players.get(1).getPlayerBalance());
         assertEquals(26500,players.get(0).getPlayerBalance());
+    }
+    public void testPayDoubleShipRent(){
+        GameController controller = new GameController(true);
+        controller.setupPlayers();
+        ArrayList<Player> players = controller.getPlayers();
+        controller.fakeDie(true,2,3);
+        controller.playTurn();
+        players.get(0).setShipsOwned(players.get(0).getShipsOwned()+1);
+        assertEquals(26000,players.get(0).getPlayerBalance());
+        controller.playTurn();
+        assertEquals(29000,players.get(1).getPlayerBalance());
+        assertEquals(27000,players.get(0).getPlayerBalance());
+    }
+
+        public void testPayBrewRent(){
+        GameController controller = new GameController(true);
+        controller.setupPlayers();
+        ArrayList<Player> players = controller.getPlayers();
+        controller.fakeDie(true,7,5);
+        controller.playTurn();
+        assertEquals(27000,players.get(0).getPlayerBalance());
+        assertEquals(1,players.get(0).getBrewsOwned());
+        controller.playTurn();
+        assertEquals(28800,players.get(1).getPlayerBalance());
+        assertEquals(28200,players.get(0).getPlayerBalance());
+    }
+    public void testPayDoubleBrewRent(){
+        GameController controller = new GameController(true);
+        controller.setupPlayers();
+        ArrayList<Player> players = controller.getPlayers();
+        controller.fakeDie(true,7,5);
+        controller.playTurn();
+        players.get(0).setBrewsOwned(players.get(0).getBrewsOwned()+1);
+        assertEquals(27000,players.get(0).getPlayerBalance());
+        assertEquals(2,players.get(0).getBrewsOwned());
+        controller.playTurn();
+        assertEquals(27600,players.get(1).getPlayerBalance());
+        assertEquals(29400,players.get(0).getPlayerBalance());
     }
 
     public void testJailedAfterThreeTurns(){

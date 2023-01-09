@@ -373,7 +373,7 @@ public class GameController {
                 }
 
                 }else {
-                mgui.showMessage("propikkeråd");
+                mgui.showMessage(Language.getString("propikkeråd"));
             }
         }
 

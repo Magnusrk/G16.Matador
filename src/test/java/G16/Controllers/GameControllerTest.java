@@ -1,10 +1,7 @@
 package G16.Controllers;
 
-import G16.Fields.Field;
 import G16.PlayerUtils.Player;
 import junit.framework.TestCase;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestTemplate;
 
 import java.util.ArrayList;
 

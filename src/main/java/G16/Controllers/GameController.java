@@ -15,6 +15,8 @@ import G16.Language;
 import G16.PlayerUtils.Die;
 import G16.PlayerUtils.FakeDie;
 import G16.PlayerUtils.Player;
+import gui_fields.GUI_Field;
+import gui_fields.GUI_Street;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -371,7 +373,7 @@ public class GameController {
         public void buyField(Player currentPlayer, BuyableField currentField) {
             if (currentField.getPrice()< currentPlayer.getPlayerBalance()) {
                 String results = null;
-                if (currentField instanceof Property){
+                if (currentField instanceof Property prop){
                     if (TEST_MODE){
                         results = Language.getString("yesTxt");
                     } else {
@@ -433,7 +435,7 @@ public class GameController {
         if (currentField.getOwner() != currentPlayer) {
             mgui.showMessage(Language.getString("payrent") + " " + currentField.getOwner());
             if (currentField instanceof Property property) {
-                if (allinColorOwned(property)) {
+                if (allinColorOwned(property) && property.getHouseCount()==0) {
                     if (currentField.getRent(0) < currentPlayer.getPlayerBalance()) {
                         currentPlayer.addBalance(2 * -currentField.getRent(0));
                         currentField.getOwner().addBalance(2 * currentField.getRent(0));
@@ -441,9 +443,9 @@ public class GameController {
                         currentField.getOwner().addBalance(currentPlayer.getPlayerBalance() + 1);
                         currentPlayer.addBalance(-currentPlayer.getPlayerBalance() - 1);
                     }
-                } else if (currentField.getRent(0) < currentPlayer.getPlayerBalance()) {
-                    currentPlayer.addBalance(-currentField.getRent(0));
-                    currentField.getOwner().addBalance(currentField.getRent(0));
+                } else if (currentField.getRent(property.getHouseCount()) < currentPlayer.getPlayerBalance()) {
+                    currentPlayer.addBalance(-currentField.getRent(property.getHouseCount()));
+                    currentField.getOwner().addBalance(currentField.getRent(property.getHouseCount()));
                 } else {
                     currentField.getOwner().addBalance(currentPlayer.getPlayerBalance() + 1);
                     currentPlayer.addBalance(-currentPlayer.getPlayerBalance() - 1);
@@ -509,6 +511,19 @@ public class GameController {
             }
         }
     }
+
+    public void buildHouse(Player builder, Property field, int houses){
+        if (field.getHouseCount()<4) {
+            mgui.buildHouse(field, houses);
+            builder.addBalance(-field.getHousePrice());
+        }
+        else {
+            mgui.buildHotel(field);
+            builder.addBalance(-field.getHousePrice());
+        }
+    }
+
+
     /** Used to show whose turn it is on the UI
      *@return String
      */

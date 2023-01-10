@@ -59,6 +59,7 @@ public class MatadorGUI {
      * @param playerNum Index of the player. Used to determine the displayed car of the player.
      */
     public void addPlayer(String name, int balance,int playerNum){
+
         switch (playerNum) {
             case 0 -> {
                 GUI_Player guiPlayer = new GUI_Player(name,balance,new GUI_Car(Color.RED, Color.LIGHT_GRAY, CAR, HORIZONTAL_GRADIANT));
@@ -183,6 +184,20 @@ public class MatadorGUI {
         }
     }
 
+    public void buildHouse(Property field, int houses){
+        field.setHouses(houses);
+        GUI_Field plot = gui.getFields()[field.getID()];
+        GUI_Street street = (GUI_Street) plot;
+        street.setHouses(houses);
+    }
+
+    public void buildHotel(Property field){
+        field.setHouses(5);
+        GUI_Field plot = gui.getFields()[field.getID()];
+        GUI_Street street = (GUI_Street) plot;
+        street.setHotel(true);
+    }
+
     private String getTurnInfo(){
         return gc.getTurnMessage();
     }
@@ -190,7 +205,7 @@ public class MatadorGUI {
     /** Manually instantiated GUI_Field array. Copied from diplomitdtu.matadorgui
      * @return GUI_Field[] array of default fields.
      */
-    private GUI_Field[] getFields() {
+    public GUI_Field[] getFields() {
         GUI_Field[] fields = new GUI_Field[40];
         int i = 0;
         fields[i++] = new GUI_Start("Start", "Modtag: 4k", "Modtag kr. 200,-\nnår de passerer start", Color.RED, Color.BLACK);

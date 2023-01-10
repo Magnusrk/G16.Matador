@@ -192,7 +192,7 @@ public class MatadorGUI {
     }
 
     public void buildHotel(Property field){
-        field.setHouses(6);
+        field.setHouses(5);
         GUI_Field plot = gui.getFields()[field.getID()];
         GUI_Street street = (GUI_Street) plot;
         street.setHotel(true);

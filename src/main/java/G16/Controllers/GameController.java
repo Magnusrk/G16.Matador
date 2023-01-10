@@ -72,7 +72,20 @@ public class GameController {
         while (players.size() < playerCount) {
             int playerNum = 0;
             while (players.size() < playerCount) {
-                String newPlayerName = mgui.requestString(Language.getString("playerName"));
+                //Check that the player's name must not be the same
+                String newPlayerName = "";
+                boolean nameIsTaken = false;
+                do {//The warning message shows if Player's name is taken and shows the new name filling field.
+                    newPlayerName =  mgui.requestString(Language.getString("playerName"));
+                    nameIsTaken = false;
+                    for (Player player: players){
+                        if(player.getName().equals(newPlayerName)){
+                            nameIsTaken = true;
+                            mgui.showMessage(Language.getString("playerNameTaken"));
+                        }
+                    }
+                }while (nameIsTaken);
+
                 Player newPlayer = new Player();
                 newPlayer.setName(newPlayerName);
                 newPlayer.setID(players.size());

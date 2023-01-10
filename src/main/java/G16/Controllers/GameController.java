@@ -514,7 +514,7 @@ public class GameController {
             builder.addBalance(-field.getHousePrice());
         }
         else {
-            mgui.buildHotel(field, houses);
+            mgui.buildHotel(field);
             builder.addBalance(-field.getHousePrice());
         }
     }

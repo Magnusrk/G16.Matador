@@ -431,7 +431,7 @@ public class GameController {
         if (currentField.getOwner() != currentPlayer) {
             mgui.showMessage(Language.getString("payrent") + " " + currentField.getOwner());
             if (currentField instanceof Property property) {
-                if (allinColorOwned(property)) {
+                if (allinColorOwned(property) && property.getHouseCount()==0) {
                     if (currentField.getRent(0) < currentPlayer.getPlayerBalance()) {
                         currentPlayer.addBalance(2 * -currentField.getRent(0));
                         currentField.getOwner().addBalance(2 * currentField.getRent(0));

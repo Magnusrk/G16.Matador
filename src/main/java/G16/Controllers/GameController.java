@@ -651,7 +651,12 @@ public class GameController {
         Player highestbidder=null;
         while (bidOnGoing){
         int increment=0;
-        for (Player player: players) {
+        for (int i =currentPlayerID+1; i<currentPlayerID+1+players.size();i++) {
+            int index= i;
+            if (i>=players.size()){
+                index-=players.size();
+            }
+            Player player=players.get(index);
             result = mgui.requestUserButton(player.getName()+Language.getString("aucTur")+" " +Language.getString("bid") + " " + bid, Language.getString("yesTxt"), Language.getString("noTxt"));
             if (result.equals(Language.getString("yesTxt"))) {
                 bid = mgui.requestInteger(Language.getString("yourbid"), bid, player.getPlayerBalance());
@@ -665,10 +670,12 @@ public class GameController {
             bidOnGoing=false;
         }
         }
-        currentField.setOwner(highestbidder);
-        mgui.setOwner(currentField,currentPlayer.getPlayerPosition());
-        highestbidder.addBalance(bid);
-        mgui.showMessage(highestbidder.getName()+Language.getString("auctionWon"));
-        auctionMode=false;
+        if (highestbidder!=null) {
+            currentField.setOwner(highestbidder);
+            mgui.setOwner(currentField, currentPlayer.getPlayerPosition());
+            addBalanceToPlayer(highestbidder,-bid);
+            mgui.showMessage(highestbidder.getName() + Language.getString("auctionWon"));
+            auctionMode = false;
+        }
     }
 }

@@ -190,6 +190,12 @@ public class MatadorGUI {
         street.setHouses(houses);
     }
 
+    public void buildHotel(Property field, int houses){
+        GUI_Field plot = gui.getFields()[field.getID()];
+        GUI_Street street = (GUI_Street) plot;
+        street.setHotel(true);
+    }
+
     private String getTurnInfo(){
         return gc.getTurnMessage();
     }

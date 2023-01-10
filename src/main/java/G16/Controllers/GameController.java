@@ -18,7 +18,9 @@ import G16.PlayerUtils.Player;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Street;
 
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class GameController {
@@ -115,15 +117,29 @@ public class GameController {
 
     private void askPlayerActions(Player currentPlayer) {
         ArrayList<String> options = new ArrayList<>();
-        //Trade
+        //Trade mulighed
         options.add(Language.getString("tradeAction"));
 
-        //Byg hus hoteller
+        //Byg hus/hotel
         ArrayList<Property> ownedProperties = getOwnedProperties(currentPlayer);
         ownedProperties.removeIf(prop -> !allinColorOwned(prop));
         if(ownedProperties.size() > 0 ){
             options.add(Language.getString("buildHouseAction"));
         }
+
+        HashMap<Color, Integer> streetHouseMap = new HashMap<>();
+        for(Property prop : ownedProperties){
+            Color currentColor = prop.getColor();
+            if(streetHouseMap.containsKey(currentColor)){
+                if(prop.getHouseCount() < streetHouseMap.get(currentColor)){
+                    streetHouseMap.replace(currentColor, prop.getHouseCount());
+                }
+            }else {
+                streetHouseMap.put(currentColor, prop.getHouseCount());
+            }
+        }
+        ownedProperties.removeIf(prop -> prop.getHouseCount() > streetHouseMap.get(prop.getColor()));
+
 
         //Slut tur
         options.add(Language.getString("endTurnAction"));

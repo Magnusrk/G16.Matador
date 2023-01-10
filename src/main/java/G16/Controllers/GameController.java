@@ -130,6 +130,8 @@ public class GameController {
         if(ownedProperties.size() > 0 ){
             options.add(Language.getString("buildHouseAction"));
         }
+        options.add(Language.getString("mort"));
+        options.add(Language.getString("payMort"));
 
         HashMap<Color, Integer> streetHouseMap = new HashMap<>();
         for(Property prop : ownedProperties){
@@ -154,6 +156,10 @@ public class GameController {
             startTrade(currentPlayer);
         } else if(action.equals(Language.getString("buildHouseAction"))){
             buyHousePrompt(currentPlayer, ownedProperties);
+        } else if (action.equals(Language.getString("mort"))) {
+            mortgage(currentPlayer);
+        } else if (action.equals(Language.getString("payMort"))) {
+            payMortgage(currentPlayer);
         }
         if(!action.equals(Language.getString("endTurnAction"))){
             askPlayerActions(currentPlayer);
@@ -802,13 +808,33 @@ public class GameController {
             if ((property.getName()+" "+ mortgage).equals(result)){
                 mortgage = property.getPrice() / 2;
                 addBalanceToPlayer(currentplayer,mortgage);
+                property.setMortgaged(true);
             }
         }
 
 
     }
 
-    public void payMortgage(){
+    public void payMortgage(Player currentplayer){
+        int mortgage=0;
+        ArrayList<String> mortgagedFields = new ArrayList<>();
+        for (Property property: getOwnedProperties(currentplayer)){
+            if (property.getMortgaged()) {
+                mortgage = (int) ((property.getPrice()/2)+(Math.round(property.getPrice()*0.1)/100)*100);
+                mortgagedFields.add(property.getName()+" "+mortgage);
+            }
+        }
+        mortgagedFields.add(Language.getString("cancelMortgage"));
+        String result= mgui.requestUserDropDown(Language.getString("mortgage"),mortgagedFields.toArray(new String[0]));
+        for (Property property:getOwnedProperties(currentplayer)){
+            if (result.equals(Language.getString("cancelMortgage"))){
 
+            }
+            if ((property.getName()+" "+ mortgage).equals(result)){
+                mortgage = (int) ((property.getPrice()/2)+(Math.round(property.getPrice()*0.1)/100)*100);
+                addBalanceToPlayer(currentplayer,-mortgage);
+                property.setMortgaged(false);
+            }
+        }
     }
 }

@@ -132,6 +132,8 @@ buyHouseMessage; Vælg hvilken gade, du vil købe et hus eller hotel til.
 
 mortgage; Hvilken ejendom vil du pantsætte?
 cancelMortgage; Annulér pantsætning.
+mort; Pantsæt en bolig
+payMort; Betal en pantsætning
 selectTradeReceiver; Hvem vil du handle med?
 cancelTrade; Annullér handel
 createTradeOffer; Hvad vil du gerne handle med? Du har på nuværende tidspunkt budt følgende:

@@ -129,3 +129,20 @@ endTurnAction;Slut din tur
 getPlayerAction;Vælg en handling.
 cancelBuyHouseText; Anullér køb
 buyHouseMessage; Vælg hvilken gade, du vil købe et hus eller hotel til.
+
+mortgage; Hvilken ejendom vil du pantsætte?
+cancelMortgage; Annulér pantsætning.
+mort; Pantsæt en bolig
+payMort; Betal en pantsætning
+selectTradeReceiver; Hvem vil du handle med?
+cancelTrade; Annullér handel
+createTradeOffer; Hvad vil du gerne handle med? Du har på nuværende tidspunkt budt følgende:
+tradeOfferSetMoney; Tilbyd penge
+tradeOfferSetField; Tilbyd ejendomme
+tradeOfferReject; Stop handlen
+tradeOfferHowMuchMoney; Hvor mange penge vil du byde i handelstilbuddet?
+tradeOfferSendOffer; Send handelstilbud
+tradeOfferFields; ejendomme
+tradeOfferAddFieldGoBack; <- Tilbage
+tradeOfferAddFieldText; Vælg hvilken ejendom du vil tilføje til tilbuddet. Du kan også vælge "Tilbage", hvis du ikke ønsker at tilføje en ejendom.
+tradeOfferAddMoreFieldQ; Vil du tilføje endnu en ejendom? Du har på nuværende tidspunkt følgende ejendomme i tilbuddet.

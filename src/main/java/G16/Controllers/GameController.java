@@ -16,6 +16,7 @@ import G16.Language;
 import G16.PlayerUtils.Die;
 import G16.PlayerUtils.FakeDie;
 import G16.PlayerUtils.Player;
+import G16.PlayerUtils.TradeOffer;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Street;
 
@@ -52,6 +53,7 @@ public class GameController {
     public GameController(boolean TEST_MODE) {
         this.TEST_MODE = TEST_MODE;
         fields = Initializer.InitFields();
+
         if (TEST_MODE) {
             mgui = new TestingGUI(this, fields);
         } else {
@@ -141,6 +143,8 @@ public class GameController {
         if(ownedProperties.size() > 0 ){
             options.add(Language.getString("buildHouseAction"));
         }
+        options.add(Language.getString("mort"));
+        options.add(Language.getString("payMort"));
 
         HashMap<Color, Integer> streetHouseMap = new HashMap<>();
         for(Property prop : ownedProperties){
@@ -162,10 +166,99 @@ public class GameController {
         String action = mgui.requestUserButton(Language.getString("getPlayerAction"), options.toArray((new String[0])));
 
         if(action.equals(Language.getString("tradeAction"))){
-            //TRADE METHOD
+            startTrade(currentPlayer);
         } else if(action.equals(Language.getString("buildHouseAction"))){
             buyHousePrompt(currentPlayer, ownedProperties);
+        } else if (action.equals(Language.getString("mort"))) {
+            mortgage(currentPlayer);
+        } else if (action.equals(Language.getString("payMort"))) {
+            payMortgage(currentPlayer);
         }
+        if(!action.equals(Language.getString("endTurnAction"))){
+            askPlayerActions(currentPlayer);
+        }
+
+    }
+
+    private void startTrade(Player currentPlayer) {
+
+        ArrayList<String> options = new ArrayList<>();
+        for(Player p : players){
+            options.add(p.getName());
+        }
+        options.removeIf(player -> currentPlayer.getName().equals(player));
+        options.add(Language.getString("cancelTrade"));
+        String action = mgui.requestUserDropDown(Language.getString("selectTradeReceiver"), options.toArray(new String[0]));
+        if(!action.equals(Language.getString("cancelTrade"))){
+            Player tradeReceiver = null;
+            for(Player p : players){
+                if(p.getName().equals(action)){
+                    tradeReceiver = p;
+                }
+            }
+            if(tradeReceiver != null){
+                TradeOffer playerOffer = makeTradeOffer(currentPlayer);
+            }
+
+        }
+    }
+
+    public TradeOffer makeTradeOffer(Player trader){
+        TradeOffer newOffer = new TradeOffer();
+        String action;
+        do{
+             action = mgui.requestUserButton(Language.getString("createTradeOffer") +
+                     "\n "+newOffer.getMoney() +",-\n" + Language.getString("tradeOfferFields")+": ",
+                    Language.getString("tradeOfferSetMoney"),
+                    Language.getString("tradeOfferSetField"),
+                     Language.getString("tradeOfferSendOffer"),
+                    Language.getString("tradeOfferReject")
+            );
+             if(action.equals(Language.getString("tradeOfferSetMoney"))){
+                 newOffer.setMoney(mgui.requestInteger(Language.getString("tradeOfferHowMuchMoney"),0, trader.getPlayerBalance()));
+             }
+             if(action.equals(Language.getString("tradeOfferSetField"))){
+                 ArrayList<BuyableField> offeredFields = new ArrayList<>();
+                 ArrayList<BuyableField> ownedFields = getOwnedBuyableFields(trader);
+                 boolean continueAdding;
+                 do{
+                     continueAdding = false;
+                     ArrayList<String> options = new ArrayList<>();
+                     for(BuyableField bf : ownedFields){
+                         options.add(bf.getName());
+                     }
+                     options.add(Language.getString("tradeOfferAddFieldGoBack"));
+                     String addedField = mgui.requestUserDropDown(Language.getString("tradeOfferAddFieldText"),options.toArray(new String[0]));
+                     if(!addedField.equals(Language.getString("tradeOfferAddFieldGoBack"))){
+                         BuyableField selectedField = null;
+                         for(BuyableField buyablef : ownedFields){
+                             if(buyablef.getName().equals(addedField)){
+                                 selectedField = buyablef;
+                             }
+                         }
+                         offeredFields.add(selectedField);
+                         ownedFields.remove(selectedField);
+
+                         StringBuilder listOfOffers = new StringBuilder();
+                         for(BuyableField bfo : offeredFields){
+                             listOfOffers.append(bfo.getName()).append("\n");
+                         }
+
+                         String askContinue = mgui.requestUserButton(Language.getString("tradeOfferAddMoreFieldQ") + "\n" + listOfOffers, Language.getString("yesTxt"),Language.getString("noTxt"));
+                         if(askContinue.equals(Language.getString("yesTxt"))){
+                             continueAdding = true;
+                         }
+                         newOffer.setFields(offeredFields);
+                     }
+
+                 } while (continueAdding);
+
+
+
+             }
+        } while (!action.equals(Language.getString("tradeOfferReject")) && !action.equals(Language.getString("tradeOfferSendOffer")));
+        return newOffer;
+
 
     }
 
@@ -190,8 +283,20 @@ public class GameController {
             }
 
         }
-        askPlayerActions(currentPlayer);
 
+    }
+
+    private ArrayList<BuyableField> getOwnedBuyableFields(Player currentPlayer) {
+        ArrayList<BuyableField> ownedBuyableFields = new ArrayList<>();
+        for(Field field : fields){
+            if(field instanceof BuyableField bf){
+                if(bf.getOwner() == currentPlayer){
+                    ownedBuyableFields.add(bf);
+
+                }
+            }
+        }
+        return ownedBuyableFields;
     }
 
     public ArrayList<Property> getOwnedProperties(Player currentPlayer) {
@@ -535,7 +640,7 @@ public class GameController {
      * @param currentField is the field the player lands on.
      */
     public void payRent(Player currentPlayer, BuyableField currentField) {
-        if (currentField.getOwner() != currentPlayer) {
+        if (currentField.getOwner() != currentPlayer && !((Property) currentField).getMortgaged()) {
             mgui.showMessage(Language.getString("payrent") + " " + currentField.getOwner());
             if (currentField instanceof Property property) {
                 if (allinColorOwned(property) && property.getHouseCount()==0) {
@@ -685,6 +790,7 @@ public class GameController {
         }
         if (increment==players.size()){
             bidOnGoing=false;
+
         }
         }
         if (highestbidder!=null) {
@@ -692,7 +798,56 @@ public class GameController {
             mgui.setOwner(currentField, currentPlayer.getPlayerPosition());
             addBalanceToPlayer(highestbidder,-bid);
             mgui.showMessage(highestbidder.getName() + Language.getString("auctionWon"));
-            auctionMode = false;
+
+        }
+        auctionMode = false;
+    }
+
+    public void mortgage(Player currentplayer){
+        int mortgage=0;
+        ArrayList<String> ownedfields = new ArrayList<>();
+        for (Property property: getOwnedProperties(currentplayer)){
+            if (!property.getMortgaged()) {
+                mortgage = property.getPrice() / 2;
+                ownedfields.add(property.getName()+" "+mortgage);
+            }
+        }
+        ownedfields.add(Language.getString("cancelMortgage"));
+       String result= mgui.requestUserDropDown(Language.getString("mortgage"),ownedfields.toArray(new String[0]));
+        for (Property property:getOwnedProperties(currentplayer)){
+            if (result.equals(Language.getString("cancelMortgage"))){
+
+            }
+            if ((property.getName()+" "+ mortgage).equals(result)){
+                mortgage = property.getPrice() / 2;
+                addBalanceToPlayer(currentplayer,mortgage);
+                property.setMortgaged(true);
+            }
+        }
+
+
+    }
+
+    public void payMortgage(Player currentplayer){
+        int mortgage=0;
+        ArrayList<String> mortgagedFields = new ArrayList<>();
+        for (Property property: getOwnedProperties(currentplayer)){
+            if (property.getMortgaged()) {
+                mortgage = (int) ((property.getPrice()/2)+(Math.round(property.getPrice()*0.1)/100)*100);
+                mortgagedFields.add(property.getName()+" "+mortgage);
+            }
+        }
+        mortgagedFields.add(Language.getString("cancelMortgage"));
+        String result= mgui.requestUserDropDown(Language.getString("mortgage"),mortgagedFields.toArray(new String[0]));
+        for (Property property:getOwnedProperties(currentplayer)){
+            if (result.equals(Language.getString("cancelMortgage"))){
+
+            }
+            if ((property.getName()+" "+ mortgage).equals(result)){
+                mortgage = (int) ((property.getPrice()/2)+(Math.round(property.getPrice()*0.1)/100)*100);
+                addBalanceToPlayer(currentplayer,-mortgage);
+                property.setMortgaged(false);
+            }
         }
     }
 }

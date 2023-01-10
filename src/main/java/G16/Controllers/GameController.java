@@ -15,6 +15,8 @@ import G16.Language;
 import G16.PlayerUtils.Die;
 import G16.PlayerUtils.FakeDie;
 import G16.PlayerUtils.Player;
+import gui_fields.GUI_Field;
+import gui_fields.GUI_Street;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -370,7 +372,7 @@ public class GameController {
         public void buyField(Player currentPlayer, BuyableField currentField) {
             if (currentField.getPrice()< currentPlayer.getPlayerBalance()) {
                 String results = null;
-                if (currentField instanceof Property){
+                if (currentField instanceof Property prop){
                     if (TEST_MODE){
                         results = Language.getString("yesTxt");
                     } else {
@@ -538,4 +540,6 @@ public class GameController {
         }
         return true;
     }
+
+
 }

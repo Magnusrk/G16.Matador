@@ -1,6 +1,8 @@
 package G16.Fields.BuyableFields;
 import G16.Language;
+import gui_resources.Attrs;
 
+import javax.swing.*;
 import java.awt.Color;
 public class Property extends BuyableField {
     protected int housePrice;
@@ -21,6 +23,11 @@ public class Property extends BuyableField {
     }
 
     @Override
+    public int getID() {
+        return super.getID();
+    }
+
+    @Override
     public String toString() {
 
          return super.toString()+Language.getString("price")+" "+this.getPrice()+ ",-<br>"+
@@ -34,6 +41,4 @@ public class Property extends BuyableField {
                 Language.getString("hotel")+" "+ this.getRent(5)+ ",-<br/><br/>";
 
     }
-
-
 }

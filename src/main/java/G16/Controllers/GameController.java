@@ -5,6 +5,7 @@ import G16.Fields.BuyableFields.Brewery;
 import G16.Fields.BuyableFields.BuyableField;
 import G16.Fields.BuyableFields.Property;
 import G16.Fields.BuyableFields.ShippingCompany;
+import G16.Fields.UnbuyableFields.Chance;
 import G16.Fields.UnbuyableFields.GoToJail;
 import G16.Fields.Initializer;
 import G16.Fields.Field;
@@ -46,16 +47,17 @@ public class GameController {
     private int extraCounter = 0;
     private boolean gameStarted = false;
     private boolean auctionMode =false;
+    ChanceCardController ccController;
 
     public GameController(boolean TEST_MODE) {
         this.TEST_MODE = TEST_MODE;
         fields = Initializer.InitFields();
-
         if (TEST_MODE) {
             mgui = new TestingGUI(this, fields);
         } else {
             mgui = new MatadorGUI(this, fields);
         }
+        ccController = new ChanceCardController(mgui);
     }
 
     public void playGame() {
@@ -179,7 +181,7 @@ public class GameController {
 
     }
 
-    private ArrayList<Property> getOwnedProperties(Player currentPlayer) {
+    public ArrayList<Property> getOwnedProperties(Player currentPlayer) {
         ArrayList<Property> ownedProperties = new ArrayList<>();
         for(Field field : fields){
             if(field instanceof Property prop){
@@ -344,7 +346,9 @@ public class GameController {
                 } else {
                     payBrewRent(player,brew, diceSum);
                 }
-            }
+            } else if (currentField instanceof Chance chance){
+            ccController.DoChanceCard(player,this);
+        }
 
     }
     /** Used to give money to a player who passes start
@@ -441,7 +445,7 @@ public class GameController {
         }
     }
 
-    private void addBalanceToPlayer(Player player, int amount){
+    public void addBalanceToPlayer(Player player, int amount){
         player.addBalance(amount);
         mgui.updatePlayerBalance(player);
     }

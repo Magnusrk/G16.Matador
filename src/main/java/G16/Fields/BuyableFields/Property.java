@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.Color;
 public class Property extends BuyableField {
     protected int housePrice;
+    protected int houses;
     protected Color color;
 
     public Property(String name, Color startingColor, int price, int housePrice, int[] rents){
@@ -20,6 +21,12 @@ public class Property extends BuyableField {
     }
     public java.awt.Color getColor(){
         return color;
+    }
+    public void setHouses(int houses){
+        this.houses = houses;
+    }
+    public int getHouseCount(){
+        return houses;
     }
 
     @Override

@@ -185,12 +185,14 @@ public class MatadorGUI {
     }
 
     public void buildHouse(Property field, int houses){
+        field.setHouses(houses);
         GUI_Field plot = gui.getFields()[field.getID()];
         GUI_Street street = (GUI_Street) plot;
         street.setHouses(houses);
     }
 
     public void buildHotel(Property field, int houses){
+        field.setHouses(6);
         GUI_Field plot = gui.getFields()[field.getID()];
         GUI_Street street = (GUI_Street) plot;
         street.setHotel(true);

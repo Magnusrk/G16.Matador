@@ -439,9 +439,9 @@ public class GameController {
                         currentField.getOwner().addBalance(currentPlayer.getPlayerBalance() + 1);
                         currentPlayer.addBalance(-currentPlayer.getPlayerBalance() - 1);
                     }
-                } else if (currentField.getRent(0) < currentPlayer.getPlayerBalance()) {
-                    currentPlayer.addBalance(-currentField.getRent(0));
-                    currentField.getOwner().addBalance(currentField.getRent(0));
+                } else if (currentField.getRent(property.getHouseCount()) < currentPlayer.getPlayerBalance()) {
+                    currentPlayer.addBalance(-currentField.getRent(property.getHouseCount()));
+                    currentField.getOwner().addBalance(currentField.getRent(property.getHouseCount()));
                 } else {
                     currentField.getOwner().addBalance(currentPlayer.getPlayerBalance() + 1);
                     currentPlayer.addBalance(-currentPlayer.getPlayerBalance() - 1);

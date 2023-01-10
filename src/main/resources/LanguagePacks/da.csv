@@ -129,3 +129,6 @@ endTurnAction;Slut din tur
 getPlayerAction;Vælg en handling.
 cancelBuyHouseText; Anullér køb
 buyHouseMessage; Vælg hvilken gade, du vil købe et hus eller hotel til.
+
+mortgage; Hvilken ejendom vil du pantsætte?
+cancelMortgage; Annulér pantsætning.

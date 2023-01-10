@@ -678,4 +678,32 @@ public class GameController {
             auctionMode = false;
         }
     }
+
+    public void mortgage(Player currentplayer){
+        int mortgage=0;
+        ArrayList<String> ownedfields = new ArrayList<>();
+        for (Property property: getOwnedProperties(currentplayer)){
+            if (!property.getMortgaged()) {
+                mortgage = property.getPrice() / 2;
+                ownedfields.add(property.getName()+" "+mortgage);
+            }
+        }
+        ownedfields.add(Language.getString("cancelMortgage"));
+       String result= mgui.requestUserDropDown(Language.getString("mortgage"),ownedfields.toArray(new String[0]));
+        for (Property property:getOwnedProperties(currentplayer)){
+            if (result.equals(Language.getString("cancelMortgage"))){
+
+            }
+            if ((property.getName()+" "+ mortgage).equals(result)){
+                mortgage = property.getPrice() / 2;
+                addBalanceToPlayer(currentplayer,mortgage);
+            }
+        }
+
+
+    }
+
+    public void payMortgage(){
+
+    }
 }

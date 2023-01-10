@@ -5,6 +5,7 @@ import G16.Fields.BuyableFields.Brewery;
 import G16.Fields.BuyableFields.BuyableField;
 import G16.Fields.BuyableFields.Property;
 import G16.Fields.BuyableFields.ShippingCompany;
+import G16.Fields.UnbuyableFields.Chance;
 import G16.Fields.UnbuyableFields.GoToJail;
 import G16.Fields.Initializer;
 import G16.Fields.Field;
@@ -47,6 +48,7 @@ public class GameController {
     private int extraCounter = 0;
     private boolean gameStarted = false;
     private boolean auctionMode =false;
+    ChanceCardController ccController;
 
     public GameController(boolean TEST_MODE) {
         this.TEST_MODE = TEST_MODE;
@@ -57,6 +59,7 @@ public class GameController {
         } else {
             mgui = new MatadorGUI(this, fields);
         }
+        ccController = new ChanceCardController(mgui);
     }
 
     public void playGame() {
@@ -277,7 +280,7 @@ public class GameController {
         return ownedBuyableFields;
     }
 
-    private ArrayList<Property> getOwnedProperties(Player currentPlayer) {
+    public ArrayList<Property> getOwnedProperties(Player currentPlayer) {
         ArrayList<Property> ownedProperties = new ArrayList<>();
         for(Field field : fields){
             if(field instanceof Property prop){
@@ -442,7 +445,9 @@ public class GameController {
                 } else {
                     payBrewRent(player,brew, diceSum);
                 }
-            }
+            } else if (currentField instanceof Chance chance){
+            ccController.DoChanceCard(player,this);
+        }
 
     }
     /** Used to give money to a player who passes start
@@ -539,7 +544,7 @@ public class GameController {
         }
     }
 
-    private void addBalanceToPlayer(Player player, int amount){
+    public void addBalanceToPlayer(Player player, int amount){
         player.addBalance(amount);
         mgui.updatePlayerBalance(player);
     }
@@ -777,5 +782,33 @@ public class GameController {
 
         }
         auctionMode = false;
+    }
+
+    public void mortgage(Player currentplayer){
+        int mortgage=0;
+        ArrayList<String> ownedfields = new ArrayList<>();
+        for (Property property: getOwnedProperties(currentplayer)){
+            if (!property.getMortgaged()) {
+                mortgage = property.getPrice() / 2;
+                ownedfields.add(property.getName()+" "+mortgage);
+            }
+        }
+        ownedfields.add(Language.getString("cancelMortgage"));
+       String result= mgui.requestUserDropDown(Language.getString("mortgage"),ownedfields.toArray(new String[0]));
+        for (Property property:getOwnedProperties(currentplayer)){
+            if (result.equals(Language.getString("cancelMortgage"))){
+
+            }
+            if ((property.getName()+" "+ mortgage).equals(result)){
+                mortgage = property.getPrice() / 2;
+                addBalanceToPlayer(currentplayer,mortgage);
+            }
+        }
+
+
+    }
+
+    public void payMortgage(){
+
     }
 }

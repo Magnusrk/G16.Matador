@@ -9,6 +9,9 @@ public class Property extends BuyableField {
     protected int houses;
     protected Color color;
 
+
+    public boolean mortgaged=false;
+
     public Property(String name, Color startingColor, int price, int housePrice, int[] rents){
         super(name, price, rents);
         this.color = startingColor;
@@ -47,5 +50,12 @@ public class Property extends BuyableField {
                  Language.getString("4house")+ " "+ this.getRent(4)+ ",-<br>"+
                 Language.getString("hotel")+" "+ this.getRent(5)+ ",-<br/><br/>";
 
+    }
+    public boolean getMortgaged() {
+        return mortgaged;
+    }
+
+    public void setMortgaged(boolean mortgaged) {
+        this.mortgaged = mortgaged;
     }
 }

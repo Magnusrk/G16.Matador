@@ -144,6 +144,10 @@ public class MatadorGUI {
         return gui.getUserButtonPressed(getTurnInfo() + msg,options);
     }
 
+    public String requestUserDropDown(String msg,String...options){
+        return gui.getUserSelection(getTurnInfo() + msg,options);
+    }
+
     /** Request the user to write an integer
      * @param message The displayed message.
      * @param minValue The minimum value the user can select
@@ -159,7 +163,10 @@ public class MatadorGUI {
      * @param player The player whos balance should be updated.
      */
     public void updatePlayerBalance(Player player){
-        guiPlayers.get(player.getID()).setBalance(player.getPlayerBalance());
+        if(guiPlayers.size() > player.getID() && player.getID() >= 0){
+            guiPlayers.get(player.getID()).setBalance(player.getPlayerBalance());
+        }
+
     }
 
     /** Update a field to display that it is owned by a player.

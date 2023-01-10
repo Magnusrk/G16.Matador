@@ -31,6 +31,12 @@ public class TestingGUI extends MatadorGUI{
     }
 
     @Override
+    public String requestUserDropDown(String msg,String...options){
+        int choice = (int) ((Math.random() * (options.length)));
+        return options[choice];
+    }
+
+    @Override
     public int requestInteger(String message, int minValue, int maxValue) {
 
         return minValue;

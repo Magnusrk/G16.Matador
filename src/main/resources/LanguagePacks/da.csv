@@ -118,3 +118,9 @@ case39;I anledning af kongens fødselsdag benådes De herved for fængsel. Dette
 case40;Gå i fængsel, De indkasserer ikke 4000 kr for at passere start.
 
 winner; har vundet
+tradeAction;Handel
+buildHouseAction;Byg hus eller hotel
+endTurnAction;Slut din tur
+getPlayerAction;Vælg en handling.
+cancelBuyHouseText; Anullér køb
+buyHouseMessage; Vælg hvilken gade, du vil købe et hus eller hotel til.

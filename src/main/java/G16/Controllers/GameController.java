@@ -90,6 +90,7 @@ public class GameController {
                 inJail(currentPlayer);
             } else {
                 throwAndMove(currentPlayer);
+                askPlayerActions(currentPlayer);
             }
 
             checkPlayerBankrupt(currentPlayer);
@@ -109,6 +110,69 @@ public class GameController {
                 playTurn();
             }
         }
+    }
+
+    private void askPlayerActions(Player currentPlayer) {
+        ArrayList<String> options = new ArrayList<>();
+        //Trade
+        options.add(Language.getString("tradeAction"));
+
+        //Byg hus hoteller
+        ArrayList<Property> ownedProperties = getOwnedProperties(currentPlayer);
+        ownedProperties.removeIf(prop -> !allinColorOwned(prop));
+        if(ownedProperties.size() > 0 ){
+            options.add(Language.getString("buildHouseAction"));
+        }
+
+        //Slut tur
+        options.add(Language.getString("endTurnAction"));
+
+        String action = mgui.requestUserButton(Language.getString("getPlayerAction"), options.toArray((new String[0])));
+
+        if(action.equals(Language.getString("tradeAction"))){
+            //TRADE METHOD
+        } else if(action.equals(Language.getString("buildHouseAction"))){
+            buyHousePrompt(currentPlayer, ownedProperties);
+        }
+
+    }
+
+    private void buyHousePrompt(Player currentPlayer, ArrayList<Property> houseableProps){
+        ArrayList<String> options = new ArrayList<>();
+        for(Property prop : houseableProps){
+            if(prop.getHouseCount() < 5){
+                options.add(prop.getName() + " - " + prop.getHousePrice() + ",-");
+            }
+
+        }
+        options.add(Language.getString("cancelBuyHouseText"));
+        String action = mgui.requestUserDropDown(Language.getString("buyHouseMessage"), options.toArray((new String[0])));
+        if(!action.equals(Language.getString("cancelBuyHouseText"))){
+            Property property;
+            for(Property prop : houseableProps){
+                if((prop.getName() + " - " + prop.getHousePrice() + ",-").equals(action)){
+                    property = prop;
+                    buildHouse(currentPlayer, property, prop.getHouseCount()+1);
+                    break;
+                }
+            }
+
+        }
+        askPlayerActions(currentPlayer);
+
+    }
+
+    private ArrayList<Property> getOwnedProperties(Player currentPlayer) {
+        ArrayList<Property> ownedProperties = new ArrayList<>();
+        for(Field field : fields){
+            if(field instanceof Property prop){
+                if(prop.getOwner() == currentPlayer){
+                    ownedProperties.add(prop);
+
+                }
+            }
+        }
+        return ownedProperties;
     }
 
     /** If the player is bankrupt it removes their car from the board
@@ -256,7 +320,7 @@ public class GameController {
                 }
             } else if (currentField instanceof Tax tax){
                 mgui.showMessage("Du betaler skat");
-                player.addBalance(-tax.getTax());
+                addBalanceToPlayer(player, -tax.getTax());
             } else if (currentField instanceof Brewery brew){
                 if (brew.getOwner()==null){
                     buyField(player,brew);
@@ -272,7 +336,7 @@ public class GameController {
     //Added 4000 kr to the player's money balance
     public void giveStartMoney (Player player){
         int PASS_START_REWARD = 4000;
-        player.addBalance(PASS_START_REWARD);
+        addBalanceToPlayer(player, PASS_START_REWARD);
     }
 
     /** Used to update all the players balance and their position on the UI.
@@ -325,7 +389,7 @@ public class GameController {
         }
 
         if (response.equals(Language.getString("injailpay"))) {
-            player.addBalance(-1000);
+            addBalanceToPlayer(player, -1000);
             player.setJailed(false);
             mgui.showMessage(Language.getString("betalt"));
             throwAndMove(player);
@@ -346,7 +410,7 @@ public class GameController {
                 player.increaseTurnsInJail();
                 mgui.showMessage(Language.getString("ikke2ens"));
                 if (player.getTurnsInJail() > 2) {
-                    player.addBalance(-1000);
+                    addBalanceToPlayer(player, -1000);
                     player.setJailed(false);
                     movePlayer(player, dieValue[0] + dieValue[1]);
                     landOnField(player, dieValue[0] + dieValue[1]);
@@ -359,6 +423,12 @@ public class GameController {
             }
         }
     }
+
+    private void addBalanceToPlayer(Player player, int amount){
+        player.addBalance(amount);
+        mgui.updatePlayerBalance(player);
+    }
+
     /** Used to get an arraylist of all the players
      *@return players
      */
@@ -400,7 +470,7 @@ public class GameController {
                     }
                 }
                 if (Objects.equals(results, Language.getString("yesTxt"))) {
-                    currentPlayer.addBalance(-currentField.getPrice());
+                    addBalanceToPlayer(currentPlayer, -currentField.getPrice());
                     currentField.setOwner(currentPlayer);
                     mgui.setOwner(currentField, currentPlayer.getPlayerPosition());
                 }
@@ -413,7 +483,7 @@ public class GameController {
     /** Used to give a player money by their id. Used in the dev console
      * @param id is the players id, player 1's id is 0.
      */
-    public void addPlayerMoney(int id, int amount) {
+    public void addPlayerBalanceByID(int id, int amount) {
         players.get(id).addBalance(amount);
         mgui.updatePlayerBalance(players.get(id));
     }
@@ -433,18 +503,19 @@ public class GameController {
             if (currentField instanceof Property property) {
                 if (allinColorOwned(property) && property.getHouseCount()==0) {
                     if (currentField.getRent(0) < currentPlayer.getPlayerBalance()) {
-                        currentPlayer.addBalance(2 * -currentField.getRent(0));
-                        currentField.getOwner().addBalance(2 * currentField.getRent(0));
+                        addBalanceToPlayer(currentPlayer,2 * -currentField.getRent(0) );
+                        addBalanceToPlayer(currentField.getOwner(),2 * currentField.getRent(0));
                     } else {
-                        currentField.getOwner().addBalance(currentPlayer.getPlayerBalance() + 1);
-                        currentPlayer.addBalance(-currentPlayer.getPlayerBalance() - 1);
+
+                        addBalanceToPlayer(currentField.getOwner(),currentPlayer.getPlayerBalance() + 1);
+                        addBalanceToPlayer(currentPlayer,-currentPlayer.getPlayerBalance() - 1);
                     }
                 } else if (currentField.getRent(property.getHouseCount()) < currentPlayer.getPlayerBalance()) {
-                    currentPlayer.addBalance(-currentField.getRent(property.getHouseCount()));
-                    currentField.getOwner().addBalance(currentField.getRent(property.getHouseCount()));
+                    addBalanceToPlayer(currentField.getOwner(),currentField.getRent(property.getHouseCount()));
+                    addBalanceToPlayer(currentPlayer,-currentField.getRent(property.getHouseCount()));
                 } else {
-                    currentField.getOwner().addBalance(currentPlayer.getPlayerBalance() + 1);
-                    currentPlayer.addBalance(-currentPlayer.getPlayerBalance() - 1);
+                    addBalanceToPlayer(currentField.getOwner(),currentPlayer.getPlayerBalance() + 1);
+                    addBalanceToPlayer(currentPlayer,-currentPlayer.getPlayerBalance() - 1);
                 }
             }
         }
@@ -461,12 +532,12 @@ public class GameController {
         if (currentField.getOwner() != currentPlayer) {
             mgui.showMessage(Language.getString("payrent") + " " + currentField.getOwner());
             if (currentField.getRent(currentField.getOwner().getShipsOwned() - 1) < currentPlayer.getPlayerBalance()) {
-                currentPlayer.addBalance(-currentField.getRent(currentField.getOwner().getShipsOwned() - 1));
-                currentField.getOwner().addBalance(currentField.getRent(currentField.getOwner().getShipsOwned() - 1));
+                addBalanceToPlayer(currentField.getOwner(),currentField.getRent(currentField.getOwner().getShipsOwned() - 1));
+                addBalanceToPlayer(currentPlayer,-currentField.getRent(currentField.getOwner().getShipsOwned() - 1));
                 mgui.updatePlayerBalance(currentField.getOwner());
             } else {
-                currentField.getOwner().addBalance(currentPlayer.getPlayerBalance() + 1);
-                currentPlayer.addBalance(-currentPlayer.getPlayerBalance() - 1);
+                addBalanceToPlayer(currentField.getOwner(),currentPlayer.getPlayerBalance() + 1);
+                addBalanceToPlayer(currentPlayer,-currentPlayer.getPlayerBalance() - 1);
             }
         } else {
             mgui.showMessage(Language.getString("selfown"));
@@ -482,12 +553,11 @@ public class GameController {
             mgui.showMessage(Language.getString("payrent") + " " + currentField.getOwner());
             int toPay = currentField.getRent(currentField.getOwner().getBrewsOwned() - 1) * diceSum;
             if (toPay < currentPlayer.getPlayerBalance()) {
-                currentPlayer.addBalance(-toPay);
-                currentField.getOwner().addBalance(toPay);
-                mgui.updatePlayerBalance(currentField.getOwner());
+                addBalanceToPlayer(currentField.getOwner(),toPay);
+                addBalanceToPlayer(currentPlayer,-toPay);
             } else {
-                currentField.getOwner().addBalance(currentPlayer.getPlayerBalance() + 1);
-                currentPlayer.addBalance(-currentPlayer.getPlayerBalance() - 1);
+                addBalanceToPlayer(currentField.getOwner(),currentPlayer.getPlayerBalance() + 1);
+                addBalanceToPlayer(currentPlayer,-currentPlayer.getPlayerBalance() - 1);
             }
         } else{
             mgui.showMessage(Language.getString("selfown"));
@@ -511,14 +581,13 @@ public class GameController {
     public void buildHouse(Player builder, Property field, int houses){
         if (field.getHouseCount()<4) {
             mgui.buildHouse(field, houses);
-            builder.addBalance(-field.getHousePrice());
+            addBalanceToPlayer(builder,-field.getHousePrice());
         }
         else {
             mgui.buildHotel(field);
-            builder.addBalance(-field.getHousePrice());
+            addBalanceToPlayer(builder,-field.getHousePrice());
         }
     }
-
 
     /** Used to show whose turn it is on the UI
      *@return String

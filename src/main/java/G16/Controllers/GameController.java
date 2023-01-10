@@ -261,7 +261,9 @@ public class GameController {
 
 
     }
-
+    public int getPlayerAmount(){
+        return players.size();
+    }
     private void buyHousePrompt(Player currentPlayer, ArrayList<Property> houseableProps){
         ArrayList<String> options = new ArrayList<>();
         for(Property prop : houseableProps){
@@ -849,5 +851,8 @@ public class GameController {
                 property.setMortgaged(false);
             }
         }
+    }
+    public Field[] getFields() {
+        return fields;
     }
 }

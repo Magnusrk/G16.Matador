@@ -94,27 +94,27 @@ case11;Dentist bill, Pay $2000.
 case12;You have won a lottery. You receive $500.
 case13;You receive your stock dividend. You receive $1000 from the bank.
 case14;The municipality has refunded a quarter of taxes. Withdraw $3000 from the bank.
-case16;You won money from betting on sport, receive $1000.
-case17;Due to inflation. You receive $1000.
-case18;Your premium bond has called out.You receive $1000 from the bank.
-case19;You have sold some old furniture on auction. Receive $1000 from the bank.
-case20;The value of your own produce from the kitchen garden is $200 as you receive from the bank.
-case21;You receive “The Matador-grant” of $40.000, but only if your assets does not exceed $15,000.
-case22;This is your birthday! Receive $200 each from fellow players .
-case23;You have fronted money for a potluck. Oddly enough everyone pays right away. Receive from $500 each fellow players.
-case24;You are holding a family party and receive a share from fellow players og $500.
-case25;Move forward to START
-case26;Move three fields forward.
-case27;Move three fields backward.
-case28;Move towards to Frederiksberg Allé. If you pass START then you receive $4000.
-case29;Move towards to the closet Shipping company and pay twice the normal rental fee to the owner. If the company doesn't have an owner, then you can purchase it.
-case30;Sail with the Mols-Line, Move the token forward and if you pass START you receive $4000.
-case31;Move forwards to Grønningen, if you pass START you receive $4000.
-case32;Move forwards to Vimmelskaftet, if you pass START you receive $4000.
-case33;Sail with the closet ferry, if you pass START you receive $4000.
-case34;Move forwards to Strandvejen. if you pass START you receive $4000.
-case35;Go to the town hall square.
-case36;In occasion of the king's birthday you are hereby pardoned from prison. This card can be kept until you need it or you can sell it.(amount of card: 2)
-case37;Go to Prison, You will not receive $4000 when you pass start.
+case15;You won money from betting on sport, receive $1000.
+case16;Due to inflation. You receive $1000.
+case17;Your government bond has called out.You receive $1000 from the bank.
+case18;You have sold some old furniture on auction. Receive $1000 from the bank.
+case19;The value of your own produce from the kitchen garden is $200 as you receive from the bank.
+case20;You receive “The Matador-grant” of $40.000, but only if your assets does not exceed $15,000.
+case21;This is your birthday! Receive $200 each from fellow players .
+case22;You have fronted money for a potluck. Oddly enough everyone pays right away. Receive from $500 each fellow players.
+case23;You are holding a family party and receive a share from fellow players og $500.
+case24;Move forward to START
+case25;Move three fields forward.
+case26;Move three fields backward.
+case27;Move towards to Frederiksberg Allé. If you pass START then you receive $4000.
+case28;Move towards to the closet Shipping company and pay twice the normal rental fee to the owner. If the company doesn't have an owner, then you can purchase it.
+case29;Sail with the Mols-Line, Move the token forward and if you pass START you receive $4000.
+case30;Move forwards to Grønningen, if you pass START you receive $4000.
+case31;Move forwards to Vimmelskaftet, if you pass START you receive $4000.
+case32;Sail with the closet ferry, if you pass START you receive $4000.
+case33;Move forwards to Strandvejen. if you pass START you receive $4000.
+case34;Go to the town hall square.
+case35;In occasion of the king's birthday you are hereby pardoned from prison. This card can be kept until you need it or you can sell it.(amount of card: 2)
+case36;Go to Prison, You will not receive $4000 when you pass start.
 
 winner; won!!!

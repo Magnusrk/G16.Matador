@@ -79,6 +79,11 @@ payrent; Du har landet på et felt som er ejet og bliver nødt til at betale lej
 propikkeråd; Du har landet på en ejendom som ikke har nogle ejer, men du har ikke råd til at købe den.
 selfown; Du har landet på et felt som du selv ejer. Der sker ingenting.
 
+bid; Vil du byde på denne grund? Det nuværende bud er
+yourbid; Hvor meget vil du byde?
+auctionWon; vandt auktionen!
+aucTur; 's tur
+
 
 case1;Oliepriserne er steget, og De skal betale kr 500 pr hus og kr 2000 pr hotel.
 case2;Ejendomsskatten er steget. Ekstraudgifterne er: 800 kr pr hus, 2300 kr pr hotel.

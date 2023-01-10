@@ -41,6 +41,7 @@ public class GameController {
     private int nextDiceValue = 0;
     private int extraCounter = 0;
     private boolean gameStarted = false;
+    private boolean auctionMode =false;
 
     public GameController(boolean TEST_MODE) {
         this.TEST_MODE = TEST_MODE;
@@ -401,9 +402,12 @@ public class GameController {
                     currentPlayer.addBalance(-currentField.getPrice());
                     currentField.setOwner(currentPlayer);
                     mgui.setOwner(currentField, currentPlayer.getPlayerPosition());
+                } else if (Objects.equals(results,Language.getString("noTxt"))) {
+                    auction(currentField,currentPlayer);
                 }
 
-                }else {
+
+            }else {
                 mgui.showMessage(Language.getString("propikkeråd"));
             }
         }
@@ -509,7 +513,7 @@ public class GameController {
      *@return String
      */
     public String getTurnMessage (){
-        if(players.size() > 0 && gameStarted){
+        if(players.size() > 0 && gameStarted && !auctionMode){
             return "["+players.get(currentPlayerID).getName() +"'s tur] ";
         }
         else {
@@ -537,5 +541,34 @@ public class GameController {
 
         }
         return true;
+    }
+
+    public void auction(BuyableField currentField, Player currentPlayer){
+        auctionMode=true;
+        int bid=0;
+        boolean bidOnGoing=true;
+        String result;
+        Player highestbidder=null;
+        while (bidOnGoing){
+        int increment=0;
+        for (Player player: players) {
+            result = mgui.requestUserButton(player.getName()+Language.getString("aucTur")+" " +Language.getString("bid") + " " + bid, Language.getString("yesTxt"), Language.getString("noTxt"));
+            if (result.equals(Language.getString("yesTxt"))) {
+                bid = mgui.requestInteger(Language.getString("yourbid"), bid, player.getPlayerBalance());
+                highestbidder=player;
+            }
+            else {
+                increment++;
+            }
+        }
+        if (increment==players.size()){
+            bidOnGoing=false;
+        }
+        }
+        currentField.setOwner(highestbidder);
+        mgui.setOwner(currentField,currentPlayer.getPlayerPosition());
+        highestbidder.addBalance(bid);
+        mgui.showMessage(highestbidder.getName()+Language.getString("auctionWon"));
+        auctionMode=false;
     }
 }

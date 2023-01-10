@@ -49,7 +49,7 @@ public class MatadorGUI {
                 defaultFields[i].setDescription(String.valueOf(brew));
             }
         }
-        this.gui = new GUI(defaultFields);
+        this.gui = new GUI(defaultFields, new Color(54, 236, 189));
     }
 
 

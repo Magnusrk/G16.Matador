@@ -627,7 +627,7 @@ public class GameController {
      * @param currentField is the field the player lands on.
      */
     public void payRent(Player currentPlayer, BuyableField currentField) {
-        if (currentField.getOwner() != currentPlayer) {
+        if (currentField.getOwner() != currentPlayer && !((Property) currentField).getMortgaged()) {
             mgui.showMessage(Language.getString("payrent") + " " + currentField.getOwner());
             if (currentField instanceof Property property) {
                 if (allinColorOwned(property) && property.getHouseCount()==0) {

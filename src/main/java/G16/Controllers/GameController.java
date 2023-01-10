@@ -507,6 +507,12 @@ public class GameController {
             }
         }
     }
+
+    public void buildHouse(Player builder, Property field, int houses){
+        mgui.buildHouse(field, houses);
+        builder.addBalance(-field.getHousePrice());
+    }
+
     /** Used to show whose turn it is on the UI
      *@return String
      */

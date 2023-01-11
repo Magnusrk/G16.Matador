@@ -131,12 +131,12 @@ cancelBuyHouseText; Cancel
 buyHouseMessage; Choose which street you want build a house or hotel on.
 
 mortgage; Which property do you want to mortgage?
-payMortgage; Hvilken pantsætning vil du betale?
-cancelMortgage; Annullér pantsætning.
-mort; Pantsæt en bolig
-payMort; Betal en pantsætning
-selectTradeReceiver; Hvem vil du handle med?
-cancelTrade; Annullér handel
+payMortgage; Which mortgage do you want to pay?
+cancelMortgage; Cancel mortgage.
+mort; Mortgage a house.
+payMort; Pay a mortgage.
+selectTradeReceiver; Who would you like to trade with?
+cancelTrade; Cancel trade
 createTradeOffer; Lav et foreslag til en handelsaftale. På nuværende tidspunkt er aftalen som følger:
 createCounterTradeOffer; Hvad vil du byde for de tilbudte aktiver?
 tradeOfferSetMoney; Penge

@@ -25,6 +25,7 @@ public class ChanceCardController {
 
     public void DoChanceCard(Player currentPlayer, GameController controller ) {
         this.controller = controller;
+        //getNumchance()[0]
         switch (getNumchance()[0]) {
             case 1 -> wealthBasedCost(currentPlayer, "1",500,2000);
             case 2 -> wealthBasedCost(currentPlayer, "2",800,2300);
@@ -108,6 +109,7 @@ public class ChanceCardController {
         String mesg = "case";
         mesg = mesg + caseNum;
         mgui.showMessage(Language.getString(mesg));
+        mgui.displayChanceCards(caseNum);
         int toPay = 0;
         for (int i = 0; i< controller.getOwnedProperties(player).size(); i++)
             if(controller.getOwnedProperties(player).get(i).getHouseCount()<5){
@@ -122,12 +124,15 @@ public class ChanceCardController {
     private void giveOrTakeCash(Player player, String caseNum, int amount){
         String mesg = "case";
         mesg = mesg + caseNum;
+        mgui.displayChanceCards(caseNum);
         mgui.showMessage(Language.getString(mesg));
         controller.addBalanceToPlayer(player,amount);
     }
 
     private void matadorEndowment(Player player){
         mgui.showMessage(Language.getString("case20"));
+        mgui.displayChanceCards("20");
+
         int wealth = 0;
         wealth = wealth + player.getPlayerBalance();
         wealth = wealth +(player.getShipsOwned() *4000);
@@ -150,6 +155,7 @@ public class ChanceCardController {
         String mesg = "case";
         mesg = mesg + caseNum;
         mgui.showMessage(Language.getString(mesg));
+        mgui.displayChanceCards(caseNum);
         int receiver = player.getID();
         for (int i = 0; i< controller.getPlayerAmount(); i++){
             if (i != receiver){
@@ -160,14 +166,17 @@ public class ChanceCardController {
     }
     private void moveToStart(Player player){
         mgui.showMessage(Language.getString("case24"));
+        mgui.displayChanceCards("24");
         player.setPlayerPosition(0);
     }
     private void moveForwardThree(Player player){
         mgui.showMessage(Language.getString("case25"));
+        mgui.displayChanceCards("25");
         player.setPlayerPosition(player.getPlayerPosition()+3);
     }
     private void moveBackThree(Player player){
         mgui.showMessage(Language.getString("case26"));
+        mgui.displayChanceCards("26");
         if (player.getPlayerPosition()<3){
             player.setPlayerPosition(39);
         }else {
@@ -177,6 +186,8 @@ public class ChanceCardController {
     private void moveToShip(Player player, boolean doubleRent){
         Field[] fields = controller.getFields();
         mgui.showMessage(Language.getString("case28"));
+        mgui.displayChanceCards("28");
+
         if (player.getPlayerPosition()== 2 || player.getPlayerPosition() == 7){
             player.setPlayerPosition(5);
             if(fields[5] instanceof ShippingCompany ship && ship.getOwner() != null) {
@@ -231,6 +242,7 @@ public class ChanceCardController {
 
         }
         mgui.showMessage(Language.getString("case29"));
+        mgui.displayChanceCards("29");
         if(fields[15] instanceof ShippingCompany ship && ship.getOwner() != null) {
             controller.payShipRent(player, (BuyableField) fields[15]);
         }else {
@@ -241,6 +253,7 @@ public class ChanceCardController {
         Field[] fields = controller.getFields();
         String mesg = "case";
         mesg = mesg + caseNum;
+        mgui.displayChanceCards(caseNum);
         if (player.getPlayerPosition()> address) {
             controller.movePlayer(player, 40 - player.getPlayerPosition() + address);
         } else {
@@ -256,10 +269,12 @@ public class ChanceCardController {
     }
     private void jailFree(Player player){
         mgui.showMessage(Language.getString("case35"));
+        mgui.displayChanceCards("35");
         player.addOutOfJailCard(1);
     }
     private void goToJail(Player player){
         mgui.showMessage(Language.getString("case36"));
+        mgui.displayChanceCards("36");
         player.setJailed(true);
     }
 }

@@ -146,7 +146,7 @@ tradeOfferSetMoney; Penge
 tradeOfferSetField; Ejendomme
 tradeOfferReject; Afvis tilbuddet
 tradeOfferCancel; Stop handlen
-tradeOfferHowMuchMoney; Hvor mange penge vil du give? Skriv negative værdier, for at få.
+tradeOfferHowMuchMoney; Hvor mange penge vil du give? Skriv negative værdier, for at modtage penge.
 tradeOfferSendOffer; Send handelstilbud
 tradeOfferAddFieldGoBack; <- Tilbage
 tradeOfferAddFieldText; - Vælg hvilken ejendom du vil tilføje til tilbuddet. Du kan også vælge "Tilbage", hvis du ikke ønsker at tilføje en ejendom.

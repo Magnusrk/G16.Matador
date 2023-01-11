@@ -1,6 +1,8 @@
 package G16.Controllers;
 
+import G16.Fields.BuyableFields.Brewery;
 import G16.Fields.BuyableFields.BuyableField;
+import G16.Fields.BuyableFields.ShippingCompany;
 import G16.Graphics.MatadorGUI;
 import G16.Language;
 import G16.PlayerUtils.Player;
@@ -8,6 +10,12 @@ import G16.PlayerUtils.TradeOffer;
 
 import java.util.ArrayList;
 import java.util.Objects;
+
+
+/** Trade controller for managing player to player trading
+ * @author G16
+ * @version 0.5
+ */
 
 public class TradeController {
 
@@ -20,6 +28,9 @@ public class TradeController {
         this.gc = gc;
     }
 
+    /** Start trade
+     * @param currentPlayer player who initializes the trade
+     */
     public void startTrade(Player currentPlayer) {
 
         ArrayList<Player> players = gc.getPlayers();
@@ -51,10 +62,26 @@ public class TradeController {
                         for(BuyableField tradedField : playerOffer.getFields(true)){
                             tradedField.setOwner(tradeReceiver);
                             mgui.setOwner(tradedField, tradedField.getID());
+                            if(tradedField instanceof ShippingCompany){
+                                tradeReceiver.setShipsOwned(tradeReceiver.getShipsOwned()+1);
+                                currentPlayer.setShipsOwned(currentPlayer.getShipsOwned()-1);
+                            }
+                            if(tradedField instanceof Brewery){
+                                tradeReceiver.setBrewsOwned(tradeReceiver.getBrewsOwned()+1);
+                                currentPlayer.setBrewsOwned(currentPlayer.getBrewsOwned()-1);
+                            }
                         }
                         for(BuyableField tradedField : playerOffer.getFields(false)){
                             tradedField.setOwner(currentPlayer);
                             mgui.setOwner(tradedField, tradedField.getID());
+                            if(tradedField instanceof ShippingCompany){
+                                tradeReceiver.setShipsOwned(tradeReceiver.getShipsOwned()-1);
+                                currentPlayer.setShipsOwned(currentPlayer.getShipsOwned()+1);
+                            }
+                            if(tradedField instanceof Brewery){
+                                tradeReceiver.setBrewsOwned(tradeReceiver.getBrewsOwned()-1);
+                                currentPlayer.setBrewsOwned(currentPlayer.getBrewsOwned()+1);
+                            }
                         }
                         mgui.showMessage(Language.getString("tradeOfferWasAccepted"));
                         return;
@@ -69,6 +96,12 @@ public class TradeController {
         mgui.showMessage(Language.getString("tradeOfferWasCancelled"));
     }
 
+
+    /** Make trade offer
+     * @param proposer player who initializes the trade and suggests the trade
+     * @param receiver the player to whom the proposer wishes to trade
+     * @return TradeOffer object with proposed trade offer info
+     */
     public TradeOffer makeTradeOffer(Player proposer, Player receiver){
         TradeOffer newOffer = new TradeOffer(proposer, receiver);
         String action;
@@ -102,6 +135,12 @@ public class TradeController {
         return newOffer;
     }
 
+
+    /** Make player pick offered fields
+     * @param newOffer the trade offer which is being made
+     * @param proposer is the player adding fields on behalf of himself(the proposer) or the receiver of the trade offer?
+     *
+     */
     private void tradePickOfferedFields(TradeOffer newOffer, boolean proposer) {
         Player trader = newOffer.getTradeParty(proposer);
         ArrayList<BuyableField> offeredFields = newOffer.getFields(proposer);
@@ -142,6 +181,12 @@ public class TradeController {
         } while (continueAdding);
     }
 
+
+    /** Generate string to display trade offer
+     * @param newOffer the trade offer which is to be displayed
+     * @return String with formatted text
+     *
+     */
     private String getTradeStatusText(TradeOffer newOffer) {
         StringBuilder proposerBuyableFieldsOffered = new StringBuilder();
         StringBuilder receiverBuyableFieldsOffered = new StringBuilder();

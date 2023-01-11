@@ -457,6 +457,7 @@ public class GameController {
         if (response.equals(Language.getString("injailpay"))) {
             addBalanceToPlayer(player, -1000);
             player.setJailed(false);
+            mgui.updatePlayerBalance(player);
             mgui.showMessage(Language.getString("betalt"));
             throwAndMove(player);
         } else {

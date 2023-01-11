@@ -146,3 +146,5 @@ tradeOfferFields; ejendomme
 tradeOfferAddFieldGoBack; <- Tilbage
 tradeOfferAddFieldText; Vælg hvilken ejendom du vil tilføje til tilbuddet. Du kan også vælge "Tilbage", hvis du ikke ønsker at tilføje en ejendom.
 tradeOfferAddMoreFieldQ; Vil du tilføje endnu en ejendom? Du har på nuværende tidspunkt følgende ejendomme i tilbuddet.
+
+ikkeNok; Du har ikke nok penge til at byde.

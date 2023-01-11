@@ -387,7 +387,9 @@ public class GameController {
 
             mgui.drawDice(diceThrow[0], diceThrow[1]);
 
-            if (diceThrow[0] == diceThrow[1]) {
+            if (currentPlayer.getJailed()) {
+                break;
+            } else if (diceThrow[0] == diceThrow[1]) {
                 extraCounter++;
                 if (extraCounter == 3) {
                     currentPlayer.setPlayerPosition(10);
@@ -414,7 +416,9 @@ public class GameController {
             movePlayer(currentPlayer, diceSum);
             mgui.drawPlayerPosition(currentPlayer);
             landOnField(currentPlayer, diceSum);
-            if (diceThrow[0] == diceThrow[1]) {
+            if (currentPlayer.getJailed()) {
+                mgui.showMessage(Language.getString("gotojailprompt"));
+            } else if (diceThrow[0] == diceThrow[1]) {
                 mgui.showMessage(Language.getString("ekstra"));
                 mgui.showMessage(currentPlayer.getName() + " kast med terningen!");
             }
@@ -495,7 +499,6 @@ public class GameController {
     public void goToJail(Player player) {
         player.setPlayerPosition(10);
         player.setJailed(true);
-        mgui.showMessage(Language.getString("gotojailprompt"));
         mgui.drawPlayerPosition(player);
     }
 

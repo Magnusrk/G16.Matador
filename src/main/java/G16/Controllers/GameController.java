@@ -808,22 +808,23 @@ public class GameController {
     public void mortgage(Player currentplayer){
         int mortgage=0;
         ArrayList<String> ownedfields = new ArrayList<>();
-        for (Property property: getOwnedProperties(currentplayer)){
-            if (!property.getMortgaged()) {
-                mortgage = property.getPrice() / 2;
-                ownedfields.add(property.getName()+" "+mortgage);
+        for (BuyableField buyableField : getOwnedBuyableFields(currentplayer)){
+            if (!buyableField.getMortgaged()) {
+                mortgage = buyableField.getPrice() / 2;
+                ownedfields.add(buyableField.getName()+" "+mortgage);
             }
         }
         ownedfields.add(Language.getString("cancelMortgage"));
        String result= mgui.requestUserDropDown(Language.getString("mortgage"),ownedfields.toArray(new String[0]));
-        for (Property property:getOwnedProperties(currentplayer)){
+        for (BuyableField buyableField:getOwnedBuyableFields(currentplayer)){
+            mortgage = buyableField.getPrice() / 2;
             if (result.equals(Language.getString("cancelMortgage"))){
 
             }
-            if ((property.getName()+" "+ mortgage).equals(result)){
-                mortgage = property.getPrice() / 2;
+            if ((buyableField.getName()+" "+ mortgage).equals(result)){
+                mortgage = buyableField.getPrice() / 2;
                 addBalanceToPlayer(currentplayer,mortgage);
-                property.setMortgaged(true);
+                buyableField.setMortgaged(true);
             }
         }
 
@@ -833,22 +834,23 @@ public class GameController {
     public void payMortgage(Player currentplayer){
         int mortgage=0;
         ArrayList<String> mortgagedFields = new ArrayList<>();
-        for (Property property: getOwnedProperties(currentplayer)){
-            if (property.getMortgaged()) {
-                mortgage = (int) ((property.getPrice()/2)+(Math.round(property.getPrice()*0.1)/100)*100);
-                mortgagedFields.add(property.getName()+" "+mortgage);
+        for (BuyableField buyableField: getOwnedBuyableFields(currentplayer)){
+            if (buyableField.getMortgaged()) {
+                mortgage = (int) ((buyableField.getPrice()/2)+(Math.round((buyableField.getPrice()*0.1)/100))*100);
+                mortgagedFields.add(buyableField.getName()+" "+mortgage);
             }
         }
         mortgagedFields.add(Language.getString("cancelMortgage"));
         String result= mgui.requestUserDropDown(Language.getString("mortgage"),mortgagedFields.toArray(new String[0]));
-        for (Property property:getOwnedProperties(currentplayer)){
+        for (BuyableField buyableField:getOwnedBuyableFields(currentplayer)){
+            mortgage = (int) ((buyableField.getPrice()/2)+(Math.round((buyableField.getPrice()*0.1)/100))*100);
             if (result.equals(Language.getString("cancelMortgage"))){
 
             }
-            if ((property.getName()+" "+ mortgage).equals(result)){
-                mortgage = (int) ((property.getPrice()/2)+(Math.round(property.getPrice()*0.1)/100)*100);
+            if ((buyableField.getName()+" "+ mortgage).equals(result)){
+                mortgage = (int) ((buyableField.getPrice()/2)+(Math.round((buyableField.getPrice()*0.1)/100))*100);
                 addBalanceToPlayer(currentplayer,-mortgage);
-                property.setMortgaged(false);
+                buyableField.setMortgaged(false);
             }
         }
     }

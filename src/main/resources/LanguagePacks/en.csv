@@ -56,15 +56,15 @@ WonTheGame;won the game!
 yesTxt;Yes
 noTxt;No
 restartQuestion;Do you want to restart the game?
-injail;You are under arrested! You must pay 1000 $, get two of a kind to get released from jail or use a release card.
+injail;You are under arrested! You must pay 1000 $, get two of a kind or use a release card to get released from jail .
 injailpay;Pay 1000$
 injaildie; Thrown the dice!
-injailtre; You have been imprisoned the third time. If you not get two of a kind dice roll then you must pay a fine.
+injailtre; You have been imprisoned for three turns. If you can't get two of a kind then you must pay a fine.
 injailcard; Use Release cards
 injailikkecard; I don't want to use my release card.
 injailifcard; You have one release card. Would you like to use it?
-ikke2ens; You didn't get two of kind dice roll.
-2ens; You get two of a kind. You move forward as the dice shows.
+ikke2ens; You didn't get two of kind.
+2ens; You got two of a kind. You move forward as the dice shows.
 3ture;You have been imprisoned for three turns and must pay a fine of 1000 $. Move according to your next dice roll.
 ekstra; You get two of a kind. You receive an extra turn.
 snyd???; You get two of a kind too many times. You are sent to Jail.

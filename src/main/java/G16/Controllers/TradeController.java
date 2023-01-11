@@ -67,8 +67,8 @@ public class TradeController {
                                 currentPlayer.setShipsOwned(currentPlayer.getShipsOwned()-1);
                             }
                             if(tradedField instanceof Brewery){
-                                tradeReceiver.setShipsOwned(tradeReceiver.getBrewsOwned()+1);
-                                currentPlayer.setShipsOwned(currentPlayer.getBrewsOwned()-1);
+                                tradeReceiver.setBrewsOwned(tradeReceiver.getBrewsOwned()+1);
+                                currentPlayer.setBrewsOwned(currentPlayer.getBrewsOwned()-1);
                             }
                         }
                         for(BuyableField tradedField : playerOffer.getFields(false)){
@@ -79,8 +79,8 @@ public class TradeController {
                                 currentPlayer.setShipsOwned(currentPlayer.getShipsOwned()+1);
                             }
                             if(tradedField instanceof Brewery){
-                                tradeReceiver.setShipsOwned(tradeReceiver.getBrewsOwned()-1);
-                                currentPlayer.setShipsOwned(currentPlayer.getBrewsOwned()+1);
+                                tradeReceiver.setBrewsOwned(tradeReceiver.getBrewsOwned()-1);
+                                currentPlayer.setBrewsOwned(currentPlayer.getBrewsOwned()+1);
                             }
                         }
                         mgui.showMessage(Language.getString("tradeOfferWasAccepted"));

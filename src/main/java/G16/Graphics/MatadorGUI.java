@@ -115,7 +115,7 @@ public class MatadorGUI {
         int fieldCount = gui.getFields().length;
         int currentPosition = player.getPreviousPlayerPosition();
 
-            while (currentPosition != player.getPlayerPosition()){
+        while (currentPosition != player.getPlayerPosition()){
                 currentPosition++;
                 if((currentPosition >= fieldCount)){
                     currentPosition -= fieldCount;

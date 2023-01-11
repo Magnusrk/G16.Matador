@@ -53,7 +53,7 @@ public class Initializer {
                 new Property("Nygade",Color.YELLOW, 6400, 4000, new int[]{600, 3000, 9000, 20000, 24000, 28000}),
                 new ShippingCompany("København-Oslo","D.F.D.S", 4000, new int[]{500, 1000, 2000, 4000}),
                 new Chance("chance"),
-                new Property("Frederiksberggade",new Color(150, 60, 150), 7000, 4000, new int[]{700, 3500, 10000, 22000, 26000, 30000}),
+                new Property("Frederiksberggade",purple, 7000, 4000, new int[]{700, 3500, 10000, 22000, 26000, 30000}),
                 new Tax("Statsskat", 2000),
                 new Property("Rådhuspladsen",purple, 8000, 4000, new int[]{1000, 4000, 12000, 28000, 34000, 40000})
         };

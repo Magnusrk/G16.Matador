@@ -27,7 +27,8 @@ public class ChanceCardController {
 
     public void DoChanceCard(Player currentPlayer, GameController controller ) {
         this.controller = controller;
-        switch (getNumchance()[0]) {
+       // getNumchance()[0]
+        switch (1) {
             case 1 -> wealthBasedCost(currentPlayer, "1",500,2000);
             case 2 -> wealthBasedCost(currentPlayer, "2",800,2300);
             case 3 -> giveOrTakeCash(currentPlayer,"3",-1000);
@@ -118,7 +119,7 @@ public class ChanceCardController {
                 toPay = toPay +hotelCost;
             }
         controller.addBalanceToPlayer(player,-toPay);
-        mgui.showMessage("To pay: "+toPay);
+        mgui.showMessage(Language.getString("toPay")+" "+toPay);
     }
 
     public void giveOrTakeCash(Player player, String caseNum, int amount){

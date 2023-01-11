@@ -130,6 +130,8 @@ getPlayerAction;Vælg en handling.
 cancelBuyHouseText; Anullér køb
 buyHouseMessage; Vælg hvilken gade, du vil købe et hus eller hotel til.
 
+toPay;At betale:
+
 mortgage; Hvilken ejendom vil du pantsætte?
 payMortgage; Hvilken pantsætning vil du betale?
 cancelMortgage; Annullér pantsætning.

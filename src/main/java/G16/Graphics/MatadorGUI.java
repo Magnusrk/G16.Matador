@@ -101,6 +101,12 @@ public class MatadorGUI {
         }
     }
 
+    public void displayChanceCards(String caseNum){
+        String mesg = "case";
+        mesg = mesg + caseNum;
+        gui.displayChanceCard(Language.getString(mesg));
+    }
+
     /** Draw/update a players position.
      * @param player player object of the player who should be updated.
      */

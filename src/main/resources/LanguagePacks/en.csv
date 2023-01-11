@@ -139,22 +139,22 @@ selectTradeReceiver; Who would you like to trade with?
 cancelTrade; Cancel trade
 createTradeOffer; Lav et foreslag til en handelsaftale. På nuværende tidspunkt er aftalen som følger:
 createCounterTradeOffer; Hvad vil du byde for de tilbudte aktiver?
-tradeOfferSetMoney; Penge
-tradeOfferSetField; Ejendomme
-tradeOfferReject; Afvis tilbuddet
-tradeOfferCancel; Stop handlen
-tradeOfferHowMuchMoney; Hvor mange penge vil du give? Skriv negative værdier, for at få.
-tradeOfferSendOffer; Send handelstilbud
-tradeOfferAddFieldGoBack; <- Tilbage
-tradeOfferAddFieldText; - Vælg hvilken ejendom du vil tilføje til tilbuddet. Du kan også vælge "Tilbage", hvis du ikke ønsker at tilføje en ejendom.
-tradeOfferAddMoreFieldQ; Vil du tilføje endnu en ejendom? Du har på nuværende tidspunkt følgende ejendomme i tilbuddet.
-tradeOfferPresent; tilbyder følgende aktiver i en handel:
-tradeOfferWantToAccept; Vil du acceptere denne handel?
-tradeOfferWasCancelled; Handlen blev annulleret
-tradeOfferWasAccepted; Handlen er blevet gennemført
-tradeOfferGetMoneyText; Modtager penge
-tradeOfferGiveMoneyText; Giver penge
-tradeOfferFields; Afgiver ejendomme
-tradeOfferChooseFieldGiver; Vælg for hvilken spiller, du vil vælge de ejendomme som skal indgå i handlen.
+tradeOfferSetMoney; Money
+tradeOfferSetField; Properties
+tradeOfferReject; Reject offer
+tradeOfferCancel; Cancel trade
+tradeOfferHowMuchMoney; How much money will you give? Write negative value, to get money.
+tradeOfferSendOffer; Send trade offer
+tradeOfferAddFieldGoBack; <- Back
+tradeOfferAddFieldText; - Choose which property you would like to add to the offer. You can also press "Back", if you dont want to add a property.
+tradeOfferAddMoreFieldQ; Would you like to add another property? Currently you have the following properties on offer.
+tradeOfferPresent; offers the following assets in a trade:
+tradeOfferWantToAccept; Would you like to accept the trade?
+tradeOfferWasCancelled; Trade has been canceled
+tradeOfferWasAccepted; Trade has been accepted
+tradeOfferGetMoneyText; Receives money
+tradeOfferGiveMoneyText; Gives money
+tradeOfferFields; Surrenders properties
+tradeOfferChooseFieldGiver; Choose a player whose properties you would like to trade with.
 
-ikkeNok; Du har ikke nok penge til at byde.
+ikkeNok; You don't have enough money to bid.

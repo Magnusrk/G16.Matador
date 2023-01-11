@@ -1,6 +1,7 @@
 package G16.Controllers;
 
 import G16.Fields.BuyableFields.BuyableField;
+import G16.Fields.BuyableFields.ShippingCompany;
 import G16.Fields.Field;
 import G16.Graphics.MatadorGUI;
 import G16.Language;
@@ -36,55 +37,55 @@ public class ChanceCardController {
                 propertyTaxes(currentPlayer);
             }
             case 3 -> {
-                ranRedLight(currentPlayer);
+                giveOrTakeCash(currentPlayer,"3",-1000);
             }
             case 4 -> {
-                carWash(currentPlayer);
+                giveOrTakeCash(currentPlayer,"4",-300);
             }
             case 5 -> {
-                beer(currentPlayer);
+                giveOrTakeCash(currentPlayer,"5",-200);
             }
             case 6,7 -> {
-                carRepair(currentPlayer);
+                giveOrTakeCash(currentPlayer,"6",-3000);
             }
             case 8 -> {
-                tirePurchase(currentPlayer);
+                giveOrTakeCash(currentPlayer,"7",-1000);
             }
             case 9 -> {
-                parkingTicket(currentPlayer);
+                giveOrTakeCash(currentPlayer,"8",-200);
             }
             case 10 -> {
-                carInsurance(currentPlayer);
+                giveOrTakeCash(currentPlayer,"9",-1000);
             }
             case 11 -> {
-                cigarettesToll(currentPlayer);
+                giveOrTakeCash(currentPlayer,"10",-200);
             }
             case 12 -> {
-                dentalBill(currentPlayer);
+                giveOrTakeCash(currentPlayer,"11",-2000);
             }
             case 13,14 -> {
-                lotteryWin(currentPlayer);
+                giveOrTakeCash(currentPlayer,"12",500);
             }
             case 15,16,17 -> {
-                stockDividend(currentPlayer);
+                giveOrTakeCash(currentPlayer,"13",1000);
             }
             case 18 -> {
-                taxReturn(currentPlayer);
+                giveOrTakeCash(currentPlayer,"14",3000);
             }
             case 19 -> {
-                bettingWin(currentPlayer);
+                giveOrTakeCash(currentPlayer,"15",1000);
             }
             case 20 -> {
-                salaryIncrease(currentPlayer);
+                giveOrTakeCash(currentPlayer,"16",1000);
             }
             case 21,22 -> {
-                bondMaturity(currentPlayer);
+                giveOrTakeCash(currentPlayer,"17",1000);
             }
             case 23 -> {
-                furnitureSale(currentPlayer);
+                giveOrTakeCash(currentPlayer,"18",1000);
             }
             case 24 -> {
-                cropYield(currentPlayer);
+                giveOrTakeCash(currentPlayer,"19",200);
             }
             case 25 -> {
                 matadorEndowment(currentPlayer);
@@ -176,84 +177,13 @@ public class ChanceCardController {
         mgui.showMessage("To pay: "+toPay);
     }
 
-    public void ranRedLight(Player player){
-        mgui.showMessage(Language.getString("case3"));
-        controller.addBalanceToPlayer(player,-1000);
+    public void giveOrTakeCash(Player player, String caseNum, int amount){
+        String mesg = "case";
+        mesg = mesg + caseNum;
+        mgui.showMessage(Language.getString(mesg));
+        controller.addBalanceToPlayer(player,amount);
     }
 
-    public void carWash(Player player){
-        mgui.showMessage(Language.getString("case4"));
-        controller.addBalanceToPlayer(player,-300);
-    }
-
-    public void beer(Player player){
-        mgui.showMessage(Language.getString("case5"));
-        controller.addBalanceToPlayer(player,-200);
-    }
-
-    public void carRepair(Player player){
-        mgui.showMessage(Language.getString("case6"));
-        controller.addBalanceToPlayer(player,-3000);
-    }
-
-    public void tirePurchase(Player player){
-        mgui.showMessage(Language.getString("case7"));
-        controller.addBalanceToPlayer(player,-1000);
-    }
-
-    public void parkingTicket(Player player){
-        mgui.showMessage(Language.getString("case8"));
-        controller.addBalanceToPlayer(player,-200);
-    }
-
-    public void carInsurance(Player player){
-        mgui.showMessage(Language.getString("case9"));
-        controller.addBalanceToPlayer(player,-1000);
-    }
-
-    public void cigarettesToll(Player player){
-        mgui.showMessage(Language.getString("case10"));
-        controller.addBalanceToPlayer(player,-200);
-    }
-
-    public void dentalBill(Player player){
-        mgui.showMessage(Language.getString("case11"));
-        controller.addBalanceToPlayer(player,-2000);
-    }
-
-    public void lotteryWin(Player player){
-        mgui.showMessage(Language.getString("case12"));
-        controller.addBalanceToPlayer(player,500);
-    }
-    public void stockDividend(Player player){
-        mgui.showMessage(Language.getString("case13"));
-        controller.addBalanceToPlayer(player,1000);
-    }
-
-    public void taxReturn(Player player){
-        mgui.showMessage(Language.getString("case14"));
-        controller.addBalanceToPlayer(player,3000);
-    }
-    public void bettingWin(Player player){
-        mgui.showMessage(Language.getString("case15"));
-        controller.addBalanceToPlayer(player,1000);
-    }
-    public void salaryIncrease(Player player){
-        mgui.showMessage(Language.getString("case16"));
-        controller.addBalanceToPlayer(player,1000);
-    }
-    public void bondMaturity(Player player){
-        mgui.showMessage(Language.getString("case17"));
-        controller.addBalanceToPlayer(player,1000);
-    }
-    public void furnitureSale(Player player){
-        mgui.showMessage(Language.getString("case18"));
-        controller.addBalanceToPlayer(player,1000);
-    }
-    public void cropYield(Player player){
-        mgui.showMessage(Language.getString("case19"));
-        controller.addBalanceToPlayer(player,200);
-    }
     public void matadorEndowment(Player player){
         mgui.showMessage(Language.getString("case20"));
         int wealth = 0;
@@ -329,24 +259,33 @@ public class ChanceCardController {
         mgui.showMessage(Language.getString("case28"));
         if (player.getPlayerPosition()== 2 || player.getPlayerPosition() == 7){
             player.setPlayerPosition(5);
-            controller.payShipRent(player, (BuyableField) fields[5]);
-            controller.payShipRent(player, (BuyableField) fields[5]);
+            if(fields[5] instanceof ShippingCompany ship && ship.getOwner() != null) {
+                controller.payShipRent(player, (BuyableField) fields[5]);
+                controller.payShipRent(player, (BuyableField) fields[5]);
+            }
         }
         if (player.getPlayerPosition()== 17 ){
             player.setPlayerPosition(15);
-            controller.payShipRent(player, (BuyableField) fields[15]);
-            controller.payShipRent(player, (BuyableField) fields[15]);
+            if(fields[15] instanceof ShippingCompany ship && ship.getOwner() != null) {
+                controller.payShipRent(player, (BuyableField) fields[15]);
+                controller.payShipRent(player, (BuyableField) fields[15]);
+            }
         }
         if (player.getPlayerPosition()== 22 ){
             player.setPlayerPosition(25);
-            controller.payShipRent(player, (BuyableField) fields[25]);
-            controller.payShipRent(player, (BuyableField) fields[25]);
+            if(fields[25] instanceof ShippingCompany ship && ship.getOwner() != null) {
+                controller.payShipRent(player, (BuyableField) fields[25]);
+                controller.payShipRent(player, (BuyableField) fields[25]);
+            }
         }
         if (player.getPlayerPosition()== 36 || player.getPlayerPosition() == 33){
             player.setPlayerPosition(35);
-            controller.payShipRent(player, (BuyableField) fields[35]);
-            controller.payShipRent(player, (BuyableField) fields[35]);
+            if(fields[35] instanceof ShippingCompany ship && ship.getOwner() != null) {
+                controller.payShipRent(player, (BuyableField) fields[35]);
+                controller.payShipRent(player, (BuyableField) fields[35]);
+            }
         }
     }
+
 }
 

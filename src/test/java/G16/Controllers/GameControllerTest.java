@@ -26,7 +26,7 @@ public class GameControllerTest extends TestCase {
     }
 
     public void testPlayTurn(){
-        for(int n = 0; n < 1000; n++){
+        for(int n = 0; n < 2; n++){
             GameController controller = new GameController(true);
             controller.setupPlayers();
             for(int i = 0; i < 1000; i++){

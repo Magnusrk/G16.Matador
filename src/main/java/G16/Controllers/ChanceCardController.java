@@ -251,7 +251,9 @@ public class ChanceCardController {
             player.setPlayerPosition(5);
             if(fields[5] instanceof ShippingCompany ship && ship.getOwner() != null) {
                 controller.payShipRent(player, (BuyableField) fields[5]);
-                controller.payShipRent(player, (BuyableField) fields[5]);
+                if (doubleRent) {
+                    controller.payShipRent(player, (BuyableField) fields[5]);
+                }
             } else {
                 controller.buyField(player, (BuyableField) fields[5]);
             }
@@ -271,7 +273,9 @@ public class ChanceCardController {
             player.setPlayerPosition(25);
             if(fields[25] instanceof ShippingCompany ship && ship.getOwner() != null) {
                 controller.payShipRent(player, (BuyableField) fields[25]);
-                controller.payShipRent(player, (BuyableField) fields[25]);
+                if (doubleRent) {
+                    controller.payShipRent(player, (BuyableField) fields[25]);
+                }
             }else {
                 controller.buyField(player, (BuyableField) fields[25]);
             }
@@ -280,7 +284,9 @@ public class ChanceCardController {
             player.setPlayerPosition(35);
             if(fields[35] instanceof ShippingCompany ship && ship.getOwner() != null) {
                 controller.payShipRent(player, (BuyableField) fields[35]);
-                controller.payShipRent(player, (BuyableField) fields[35]);
+                if (doubleRent) {
+                    controller.payShipRent(player, (BuyableField) fields[35]);
+                }
             }else {
                 controller.buyField(player, (BuyableField) fields[35]);
             }
@@ -312,7 +318,7 @@ public class ChanceCardController {
 
         }
         mgui.showMessage(Language.getString(mesg));
-        if(fields[address] instanceof Property prop && prop.getOwner() != null) {
+        if(fields[address] instanceof Property prop && prop.getOwner() != null && !prop.getMortgaged()) {
             controller.payShipRent(player, (BuyableField) fields[address]);
         }else {
             controller.buyField(player, (BuyableField) fields[address]);

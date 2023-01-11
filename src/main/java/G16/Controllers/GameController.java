@@ -768,7 +768,7 @@ public class GameController {
             }
         }
         mortgagedFields.add(Language.getString("cancelMortgage"));
-        String result= mgui.requestUserDropDown(Language.getString("mortgage"),mortgagedFields.toArray(new String[0]));
+        String result= mgui.requestUserDropDown(Language.getString("payMortgage"),mortgagedFields.toArray(new String[0]));
         for (BuyableField buyableField:getOwnedBuyableFields(currentplayer)){
             mortgage = (int) ((buyableField.getPrice()/2)+(Math.round((buyableField.getPrice()*0.1)/100))*100);
             if (result.equals(Language.getString("cancelMortgage"))){

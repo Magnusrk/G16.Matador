@@ -6,32 +6,75 @@ import java.util.ArrayList;
 
 public class TradeOffer {
 
-    private boolean accepted = false;
-    private int money = 0;
-    private ArrayList<BuyableField> fields = new ArrayList<>();
+    Player proposer;
 
-    public void setFields(ArrayList<BuyableField> fields){
-        this.fields = fields;
+    Player receiver;
+
+    private int proposerMoney = 0;
+    private int receiverMoney = 0;
+    private ArrayList<BuyableField> proposerFields = new ArrayList<>();
+    private ArrayList<BuyableField> receiverFields = new ArrayList<>();
+
+    private boolean finished = false;
+
+    public TradeOffer(Player proposer, Player receiver){
+        this.proposer = proposer;
+        this.receiver = receiver;
     }
 
-    public ArrayList<BuyableField> getFields(){
-        return fields;
+
+    public void setFields(ArrayList<BuyableField> fields, boolean proposer){
+
+        if(proposer){
+            this.proposerFields = fields;
+        } else {
+            this.receiverFields = fields;
+        }
+
     }
 
-    public void setMoney(int amount){
-        money = amount;
+    public ArrayList<BuyableField> getFields(boolean proposer){
+        if(proposer){
+            return proposerFields;
+        } else {
+            return receiverFields;
+        }
+
     }
 
-    public int getMoney(){
-        return money;
+    public void setMoney(int amount, boolean proposer){
+        if(proposer){
+            this.proposerMoney = amount;
+        } else {
+            this.receiverMoney = amount;
+        }
     }
 
-    public void setAccepted(boolean accepted){
-        this.accepted = accepted;
+    public int getMoney(boolean proposer){
+        if (proposer){
+            return proposerMoney;
+        } else {
+            return receiverMoney;
+        }
+
     }
 
-    public boolean getAccepted(){
-        return accepted;
+    public Player getTradeParty(boolean isProposer){
+        if(isProposer){
+            return this.proposer;
+
+        } else {
+            return receiver;
+        }
     }
+
+    public boolean getFinished(){
+        return finished;
+    }
+
+    public void setFinished(boolean finished){
+        this.finished = finished;
+    }
+
 
 }

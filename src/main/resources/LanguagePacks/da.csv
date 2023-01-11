@@ -136,15 +136,24 @@ mort; Pantsæt en bolig
 payMort; Betal en pantsætning
 selectTradeReceiver; Hvem vil du handle med?
 cancelTrade; Annullér handel
-createTradeOffer; Hvad vil du gerne handle med? Du har på nuværende tidspunkt budt følgende:
-tradeOfferSetMoney; Tilbyd penge
-tradeOfferSetField; Tilbyd ejendomme
-tradeOfferReject; Stop handlen
-tradeOfferHowMuchMoney; Hvor mange penge vil du byde i handelstilbuddet?
+createTradeOffer; Lav et foreslag til en handelsaftale. På nuværende tidspunkt er aftalen som følger:
+createCounterTradeOffer; Hvad vil du byde for de tilbudte aktiver?
+tradeOfferSetMoney; Penge
+tradeOfferSetField; Ejendomme
+tradeOfferReject; Afvis tilbuddet
+tradeOfferCancel; Stop handlen
+tradeOfferHowMuchMoney; Hvor mange penge vil du give? Skriv negative værdier, for at få.
 tradeOfferSendOffer; Send handelstilbud
-tradeOfferFields; ejendomme
 tradeOfferAddFieldGoBack; <- Tilbage
-tradeOfferAddFieldText; Vælg hvilken ejendom du vil tilføje til tilbuddet. Du kan også vælge "Tilbage", hvis du ikke ønsker at tilføje en ejendom.
+tradeOfferAddFieldText; - Vælg hvilken ejendom du vil tilføje til tilbuddet. Du kan også vælge "Tilbage", hvis du ikke ønsker at tilføje en ejendom.
 tradeOfferAddMoreFieldQ; Vil du tilføje endnu en ejendom? Du har på nuværende tidspunkt følgende ejendomme i tilbuddet.
+tradeOfferPresent; tilbyder følgende aktiver i en handel:
+tradeOfferWantToAccept; Vil du acceptere denne handel?
+tradeOfferWasCancelled; Handlen blev annulleret
+tradeOfferWasAccepted; Handlen er blevet gennemført
+tradeOfferGetMoneyText; Modtager penge
+tradeOfferGiveMoneyText; Giver penge
+tradeOfferFields; Afgiver ejendomme
+tradeOfferChooseFieldGiver; Vælg for hvilken spiller, du vil vælge de ejendomme som skal indgå i handlen.
 
 ikkeNok; Du har ikke nok penge til at byde.

@@ -172,7 +172,8 @@ public class ChanceCardController {
     private void moveForwardThree(Player player){
         mgui.showMessage(Language.getString("case25"));
         mgui.displayChanceCards("25");
-        player.setPlayerPosition(player.getPlayerPosition()+3);
+        controller.movePlayer(player,3);
+        //player.setPlayerPosition(player.getPlayerPosition()+3);
     }
     private void moveBackThree(Player player){
         mgui.showMessage(Language.getString("case26"));

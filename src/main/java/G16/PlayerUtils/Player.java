@@ -4,6 +4,7 @@ public class Player {
     private String name;
     private final MoneyBalance balance = new MoneyBalance();
     private int playerPosition = 0;
+    private int previousPlayerPosition = 0;
     private boolean jailed = false;
     private boolean bankrupt = false;
     private int outOfJailCards = 0;
@@ -76,7 +77,12 @@ public class Player {
     }
 
     public void setPlayerPosition(int position){
+        previousPlayerPosition = playerPosition;
         playerPosition = position;
+    }
+
+    public int getPreviousPlayerPosition(){
+        return previousPlayerPosition;
     }
     public void setJailed(boolean jail){
         jailed = jail;

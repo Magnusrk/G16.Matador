@@ -106,6 +106,24 @@ public class MatadorGUI {
      */
     public void drawPlayerPosition(Player player){
         GUI_Player selectedPlayer = guiPlayers.get(player.getID());
+        int fieldCount = gui.getFields().length;
+        int currentPosition = player.getPreviousPlayerPosition();
+
+            while (currentPosition != player.getPlayerPosition()){
+                if(currentPosition >= fieldCount){
+                    currentPosition -= fieldCount;
+                }
+                currentPosition++;
+                selectedPlayer.getCar().setPosition(gui.getFields()[currentPosition]);
+                try {
+                    Thread.sleep(110);
+                } catch (InterruptedException e){
+                    System.out.println("Animation interrupted");
+                }
+
+            }
+
+        player.setPlayerPosition(player.getPlayerPosition());
         selectedPlayer.getCar().setPosition(gui.getFields()[player.getPlayerPosition()]);
     }
 
@@ -163,9 +181,15 @@ public class MatadorGUI {
      * @param player The player whos balance should be updated.
      */
     public void updatePlayerBalance(Player player){
-        if(guiPlayers.size() > player.getID() && player.getID() >= 0){
-            guiPlayers.get(player.getID()).setBalance(player.getPlayerBalance());
+        try{
+            if(guiPlayers.size() > player.getID() && player.getID() >= 0){
+                guiPlayers.get(player.getID()).setBalance(player.getPlayerBalance());
+            }
+        } catch (NullPointerException e){
+            System.out.println("UI ERROR: " + e.getMessage());
         }
+
+
 
     }
 

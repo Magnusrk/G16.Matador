@@ -29,10 +29,10 @@ hotel;Hotel:
 1brew;1 Owned brewery:
 2brew;2 Owned breweries:
 
-1ship;1 Owned Shipping company:
-2ship;2 Owned Shipping company's:
-3ship;3 Owned Shipping company's:
-4ship;4 Owned Shipping company's:
+1ship;1 owned Shipping company:
+2ship;2 owned Shipping companies:
+3ship;3 owned Shipping companies:
+4ship;4 owned Shipping companies:
 
 prison;Prison
 parking;Parking
@@ -56,93 +56,105 @@ WonTheGame;won the game!
 yesTxt;Yes
 noTxt;No
 restartQuestion;Do you want to restart the game?
-injail;You are under arrested! You must pay 1000 $, get two of a kind to get released from jail or use a release card.
+injail;You are under arrested! You must pay 1000 $, get two of a kind or use a release card to get released from jail .
 injailpay;Pay 1000$
 injaildie; Thrown the dice!
-injailtre; You have been imprisoned the third time. If you not get two of a kind dice roll then you must pay a fine.
+injailtre; You have been imprisoned for three turns. If you can't get two of a kind then you must pay a fine.
 injailcard; Use Release cards
 injailikkecard; I don't want to use my release card.
 injailifcard; You have one release card. Would you like to use it?
-ikke2ens; You didn't get two of kind dice roll.
-2ens; You get two of a kind. You move forward as the dice shows.
-3ture;You have been imprisoned for three turns and must pay a fine 1000 $. Move according to your next dice roll.
-ekstra; You get two of a kind. You receive an extra turn.
-snyd???; You get two of a kind too many times. You are sent to Jail.
-betalt; You have paid a fine 1000$. Now you can throw the dices.
-brugtkort; You have used a release card. Now you can throw the dices.
+ikke2ens; You didn't get two of kind.
+2ens; You got two of a kind. You move forward as the dice shows.
+3ture;You have been imprisoned for three turns and must pay a fine of 1000$. Move according to your next dice roll.
+ekstra; You got two of a kind. You receive an extra turn.
+snyd???; You got two of a kind too many times. You are sent to Jail.
+betalt; You have paid a fine of 1000$. Now you can throw the dice.
+brugtkort; You have used a release card. Now you can throw the dice.
 
 prop; You are on a property without an owner. Would you like to buy this property?
-payrent; You landed on a field with owner and you have to pay the rent.
-propikkeråd; You landed on a property without an owner, but you cannot afford it.
+ship; You are on a shipping company without an owner. Would you like to buy this shipping company?
+brew; You are on a brewery without an owner. Would you like to buy this brewery?
 
-payrent; You have land on a field which has an owner. You have to pay the rent.
-propikkeråd; You have land on a field which has no owner. men du har ikke råd til at købe den.
+payrent; You landed on a field with an owner and you have to pay the rent.
+propikkeråd; You landed on a property without an owner, but you cannot afford it.
 selfown; You have land on a field that you own. Nothing happens.
 
-bid; Would you like to make a bidding to this property? The current bid er
-yourbid; How much would you like to bid?
-auctionWon; Won an auction!
+bid; Do you want to bid on the field? The current bid is
+yourbid; How much do you want to bid?
+auctionWon; won the auction!
 aucTur; 's turn
 
 
 case1;Oil prices are increased and you have to pay 500$ per a house and 2000$ per a hotel.
 case2;Property taxes are increased. Extra expenses are: 800$ per house, $2300 per hotel.
-case3;You ran a red light. Pay $1000 for a traffic fine .
+case3;You ran a red light. Pay $1000 for a traffic fine.
 case4;Pay for car wash and waxing $300.
 case5;Pay $200 for delivery of 2 crates of beer.
-case6;Pay $3000 for reparation af your car.
-case7;You have bought 4 tires for your car.You pay $1000.
-case8;You have received a parking ticket. You paid a $200 fine.
+case6;Pay $3000 for car repairs.
+case7;You have bought 4 tires for your car. You pay $1000.
+case8;You have received a parking ticket. You pay a $200 fine.
 case9;Pay your car insurance, $1000
-case10;You have been abroad and bought too many cigarettes. Pay $200 to import tax.
-case11;Dentist bill, Pay $2000.
-case12;You have won a lottery. You receive $500.
-case13;You receive your stock dividend. You receive $1000 from the bank.
-case14;The municipality has refunded a quarter of taxes. Withdraw $3000 from the bank.
-case15;You won money from betting on sport, receive $1000.
-case16;Due to inflation. You receive $1000.
-case17;Your government bond has called out.You receive $1000 from the bank.
+case10;You have been abroad and bought too many cigarettes. Pay $200 in import tax.
+case11;Dentist bill, pay $2000.
+case12;You have won the lottery. You receive $500.
+case13;You receive a stock dividend. You receive $1000 from the bank.
+case14;The municipality has refunded this quarters tax. Withdraw $3000 from the bank.
+case15;You won money from sports betting, receive $1000.
+case16;Due to inflation you get a salary increase. You receive $1000.
+case17;Your government bond has matured.You receive $1000 from the bank.
 case18;You have sold some old furniture on auction. Receive $1000 from the bank.
-case19;The value of your own produce from the kitchen garden is $200 as you receive from the bank.
-case20;You receive “The Matador-grant” of $40.000, but only if your assets does not exceed $15,000.
-case21;This is your birthday! Receive $200 each from fellow players .
+case19;You sell somme produce from your kitchen garden. Receive $200 from the bank.
+case20;You receive “The Matador-grant” of $40,000, but only if your assets don't exceed $15,000.
+case21;It's your birthday! Receive $200 from each of the other players.
 case22;You have fronted money for a potluck. Oddly enough everyone pays right away. Receive from $500 each fellow players.
-case23;You are holding a family party and receive a share from fellow players og $500.
+case23;You are holding a family gathering and receive $500 from each of the other players.
 case24;Move forward to START
 case25;Move three fields forward.
 case26;Move three fields backward.
 case27;Move towards to Frederiksberg Allé. If you pass START then you receive $4000.
 case28;Move towards to the closet Shipping company and pay twice the normal rental fee to the owner. If the company doesn't have an owner, then you can purchase it.
-case29;Sail with the Mols-Line, Move the token forward and if you pass START you receive $4000.
+case29;Sail with the Mols-Line, Move forward and if you pass START you receive $4000.
 case30;Move forwards to Grønningen, if you pass START you receive $4000.
 case31;Move forwards to Vimmelskaftet, if you pass START you receive $4000.
 case32;Sail with the closet ferry, if you pass START you receive $4000.
 case33;Move forwards to Strandvejen. if you pass START you receive $4000.
-case34;Go to the town hall square.
-case35;In occasion of the king's birthday you are hereby pardoned from prison. This card can be kept until you need it or you can sell it.(amount of card: 2)
+case34;Go to Rådhuspladsen.
+case35;On the occasion of the king's birthday you are hereby pardoned from prison. This card can be kept until you need it or you can sell it.
 case36;Go to Prison, You will not receive $4000 when you pass start.
 
 winner; won!!!
-tradeAction;Handel
+tradeAction;Trade
 buildHouseAction;Build a house or hotel
-endTurnAction;Finish your turn
-getPlayerAction;Choose an action
-cancelBuyHouseText; Cancel purchase
-buyHouseMessage; Choose the property where you want to buy a house or hotel
+endTurnAction;End turn
+getPlayerAction;Choose an action.
+cancelBuyHouseText; Cancel
+buyHouseMessage; Choose which street you want build a house or hotel on.
 
-mortgage; Which property would you like to pledge?
-cancelMortgage; Cancel pledge
-mort; Pledge a property
-payMort; Pay a pledge
+mortgage; Which property do you want to mortgage?
+payMortgage; Which mortgage do you want to pay?
+cancelMortgage; Cancel mortgage.
+mort; Mortgage a house.
+payMort; Pay a mortgage.
 selectTradeReceiver; Who would you like to trade with?
 cancelTrade; Cancel trade
-createTradeOffer; What would you like to trade? You have currently offer as following:
-tradeOfferSetMoney; Offer money
-tradeOfferSetField; Offer property
-tradeOfferReject; Stop trading
-tradeOfferHowMuchMoney; How much money would you like to bid to the trade offer?
-tradeOfferSendOffer; Send a trade offer
-tradeOfferFields; property
-tradeOfferAddFieldGoBack; <- back
-tradeOfferAddFieldText; Choose which property would you like to put to offer. You can also choose "Back", if you do not want to add property.
-tradeOfferAddMoreFieldQ; Would you like to add a property to offer? You have now these following property to offer.
+createTradeOffer; Lav et foreslag til en handelsaftale. På nuværende tidspunkt er aftalen som følger:
+createCounterTradeOffer; Hvad vil du byde for de tilbudte aktiver?
+tradeOfferSetMoney; Penge
+tradeOfferSetField; Ejendomme
+tradeOfferReject; Afvis tilbuddet
+tradeOfferCancel; Stop handlen
+tradeOfferHowMuchMoney; Hvor mange penge vil du give? Skriv negative værdier, for at få.
+tradeOfferSendOffer; Send handelstilbud
+tradeOfferAddFieldGoBack; <- Tilbage
+tradeOfferAddFieldText; - Vælg hvilken ejendom du vil tilføje til tilbuddet. Du kan også vælge "Tilbage", hvis du ikke ønsker at tilføje en ejendom.
+tradeOfferAddMoreFieldQ; Vil du tilføje endnu en ejendom? Du har på nuværende tidspunkt følgende ejendomme i tilbuddet.
+tradeOfferPresent; tilbyder følgende aktiver i en handel:
+tradeOfferWantToAccept; Vil du acceptere denne handel?
+tradeOfferWasCancelled; Handlen blev annulleret
+tradeOfferWasAccepted; Handlen er blevet gennemført
+tradeOfferGetMoneyText; Modtager penge
+tradeOfferGiveMoneyText; Giver penge
+tradeOfferFields; Afgiver ejendomme
+tradeOfferChooseFieldGiver; Vælg for hvilken spiller, du vil vælge de ejendomme som skal indgå i handlen.
+
+ikkeNok; Du har ikke nok penge til at byde.

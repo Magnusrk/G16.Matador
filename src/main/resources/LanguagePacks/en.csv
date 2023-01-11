@@ -65,11 +65,11 @@ injailikkecard; I don't want to use my release card.
 injailifcard; You have one release card. Would you like to use it?
 ikke2ens; You didn't get two of kind dice roll.
 2ens; You get two of a kind. You move forward as the dice shows.
-3ture;You have been imprisoned for three turns and must pay a fine 1000 $. Move according to your next dice roll.
+3ture;You have been imprisoned for three turns and must pay a fine of 1000 $. Move according to your next dice roll.
 ekstra; You get two of a kind. You receive an extra turn.
 snyd???; You get two of a kind too many times. You are sent to Jail.
-betalt; You have paid a fine 1000$. Now you can throw the dices.
-brugtkort; You have used a release card. Now you can throw the dices.
+betalt; You have paid a fine of 1000$. Now you can throw the dice.
+brugtkort; You have used a release card. Now you can throw the dice.
 
 prop; You are on a property without an owner. Would you like to buy this property?
 payrent; You landed on a field with owner and you have to pay the rent.
@@ -82,39 +82,39 @@ selfown; You have land on a field that you own. Nothing happens.
 
 case1;Oil prices are increased and you have to pay 500$ per a house and 2000$ per a hotel.
 case2;Property taxes are increased. Extra expenses are: 800$ per house, $2300 per hotel.
-case3;You ran a red light. Pay $1000 for a traffic fine .
+case3;You ran a red light. Pay $1000 for a traffic fine.
 case4;Pay for car wash and waxing $300.
 case5;Pay $200 for delivery of 2 crates of beer.
-case6;Pay $3000 for reparation af your car.
-case7;You have bought 4 tires for your car.You pay $1000.
-case8;You have received a parking ticket. You paid a $200 fine.
+case6;Pay $3000 for car repairs.
+case7;You have bought 4 tires for your car. You pay $1000.
+case8;You have received a parking ticket. You pay a $200 fine.
 case9;Pay your car insurance, $1000
-case10;You have been abroad and bought too many cigarettes. Pay $200 to import tax.
-case11;Dentist bill, Pay $2000.
-case12;You have won a lottery. You receive $500.
-case13;You receive your stock dividend. You receive $1000 from the bank.
-case14;The municipality has refunded a quarter of taxes. Withdraw $3000 from the bank.
-case15;You won money from betting on sport, receive $1000.
-case16;Due to inflation. You receive $1000.
-case17;Your government bond has called out.You receive $1000 from the bank.
+case10;You have been abroad and bought too many cigarettes. Pay $200 in import tax.
+case11;Dentist bill, pay $2000.
+case12;You have won the lottery. You receive $500.
+case13;You receive a stock dividend. You receive $1000 from the bank.
+case14;The municipality has refunded this quarters tax. Withdraw $3000 from the bank.
+case15;You won money from sports betting, receive $1000.
+case16;Due to inflation you get a salary increase. You receive $1000.
+case17;Your government bond has matured.You receive $1000 from the bank.
 case18;You have sold some old furniture on auction. Receive $1000 from the bank.
-case19;The value of your own produce from the kitchen garden is $200 as you receive from the bank.
-case20;You receive “The Matador-grant” of $40.000, but only if your assets does not exceed $15,000.
-case21;This is your birthday! Receive $200 each from fellow players .
+case19;You sell somme produce from your kitchen garden. Receive $200 from the bank.
+case20;You receive “The Matador-grant” of $40,000, but only if your assets don't exceed $15,000.
+case21;It's your birthday! Receive $200 from each of the other players.
 case22;You have fronted money for a potluck. Oddly enough everyone pays right away. Receive from $500 each fellow players.
-case23;You are holding a family party and receive a share from fellow players og $500.
+case23;You are holding a family gathering and receive $500 from each of the other players.
 case24;Move forward to START
 case25;Move three fields forward.
 case26;Move three fields backward.
 case27;Move towards to Frederiksberg Allé. If you pass START then you receive $4000.
 case28;Move towards to the closet Shipping company and pay twice the normal rental fee to the owner. If the company doesn't have an owner, then you can purchase it.
-case29;Sail with the Mols-Line, Move the token forward and if you pass START you receive $4000.
+case29;Sail with the Mols-Line, Move forward and if you pass START you receive $4000.
 case30;Move forwards to Grønningen, if you pass START you receive $4000.
 case31;Move forwards to Vimmelskaftet, if you pass START you receive $4000.
 case32;Sail with the closet ferry, if you pass START you receive $4000.
 case33;Move forwards to Strandvejen. if you pass START you receive $4000.
-case34;Go to the town hall square.
-case35;In occasion of the king's birthday you are hereby pardoned from prison. This card can be kept until you need it or you can sell it.(amount of card: 2)
+case34;Go to Rådhuspladsen.
+case35;On the occasion of the king's birthday you are hereby pardoned from prison. This card can be kept until you need it or you can sell it.
 case36;Go to Prison, You will not receive $4000 when you pass start.
 
 winner; won!!!

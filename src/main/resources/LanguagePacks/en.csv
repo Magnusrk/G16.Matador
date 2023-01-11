@@ -123,3 +123,38 @@ case35;On the occasion of the king's birthday you are hereby pardoned from priso
 case36;Go to Prison, You will not receive $4000 when you pass start.
 
 winner; won!!!
+tradeAction;Trade
+buildHouseAction;Build a house or hotel
+endTurnAction;End turn
+getPlayerAction;Choose an action.
+cancelBuyHouseText; Cancel
+buyHouseMessage; Choose which street you want build a house or hotel on.
+
+mortgage; Which property do you want to mortgage?
+payMortgage; Hvilken pantsætning vil du betale?
+cancelMortgage; Annullér pantsætning.
+mort; Pantsæt en bolig
+payMort; Betal en pantsætning
+selectTradeReceiver; Hvem vil du handle med?
+cancelTrade; Annullér handel
+createTradeOffer; Lav et foreslag til en handelsaftale. På nuværende tidspunkt er aftalen som følger:
+createCounterTradeOffer; Hvad vil du byde for de tilbudte aktiver?
+tradeOfferSetMoney; Penge
+tradeOfferSetField; Ejendomme
+tradeOfferReject; Afvis tilbuddet
+tradeOfferCancel; Stop handlen
+tradeOfferHowMuchMoney; Hvor mange penge vil du give? Skriv negative værdier, for at få.
+tradeOfferSendOffer; Send handelstilbud
+tradeOfferAddFieldGoBack; <- Tilbage
+tradeOfferAddFieldText; - Vælg hvilken ejendom du vil tilføje til tilbuddet. Du kan også vælge "Tilbage", hvis du ikke ønsker at tilføje en ejendom.
+tradeOfferAddMoreFieldQ; Vil du tilføje endnu en ejendom? Du har på nuværende tidspunkt følgende ejendomme i tilbuddet.
+tradeOfferPresent; tilbyder følgende aktiver i en handel:
+tradeOfferWantToAccept; Vil du acceptere denne handel?
+tradeOfferWasCancelled; Handlen blev annulleret
+tradeOfferWasAccepted; Handlen er blevet gennemført
+tradeOfferGetMoneyText; Modtager penge
+tradeOfferGiveMoneyText; Giver penge
+tradeOfferFields; Afgiver ejendomme
+tradeOfferChooseFieldGiver; Vælg for hvilken spiller, du vil vælge de ejendomme som skal indgå i handlen.
+
+ikkeNok; Du har ikke nok penge til at byde.

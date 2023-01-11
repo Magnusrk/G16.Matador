@@ -131,6 +131,7 @@ cancelBuyHouseText; Anullér køb
 buyHouseMessage; Vælg hvilken gade, du vil købe et hus eller hotel til.
 
 mortgage; Hvilken ejendom vil du pantsætte?
+payMortgage; Hvilken pantsætning vil du betale?
 cancelMortgage; Annullér pantsætning.
 mort; Pantsæt en bolig
 payMort; Betal en pantsætning

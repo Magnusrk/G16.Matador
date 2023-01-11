@@ -516,11 +516,11 @@ public class GameController {
                     results = mgui.requestUserButton(Language.getString("prop"), Language.getString("yesTxt"), Language.getString("noTxt"));
                 }
             }
-            if (currentField instanceof ShippingCompany){
+            if (currentField instanceof ShippingCompany ShippingCompanyName){
                 if (TEST_MODE){
                     results = Language.getString("yesTxt");
                 } else {
-                    results = mgui.requestUserButton(Language.getString("ship"), Language.getString("yesTxt"), Language.getString("noTxt"));
+                    results = mgui.requestUserButton(Language.getString("ship") + ShippingCompanyName.getTitle() + Language.getString("ship2"), Language.getString("yesTxt"), Language.getString("noTxt"));
                 }
                 if (results.equals(Language.getString("yesTxt"))) {
                     currentPlayer.setShipsOwned(currentPlayer.getShipsOwned()+1);

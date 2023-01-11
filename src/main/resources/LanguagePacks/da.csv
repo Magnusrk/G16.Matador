@@ -72,7 +72,8 @@ betalt; Du har betalt 1000 kr i bøde og får lov til at slå med terningerne.
 brugtkort; Du har brugt et løsladelseskort og får lov til at slå med terningerne
 
 prop; Du har landet på en ejendom som ikke har nogen ejer. Vil du købe ejendommen?
-ship; Du har landet på en rederi som ikke har nogen ejer. Vil du købe rederiet?
+ship; Du har landet på en
+ship2; rederi som ikke har nogen ejer. Vil du købe rederiet?
 brew; Du har landet på en bryggeri som ikke har nogen ejer. Vil du købe bryggeriet?
 
 payrent; Du har landet på et felt som er ejet og bliver nødt til at betale leje til

@@ -2,9 +2,14 @@ package G16.Fields.BuyableFields;
 import G16.Language;
 
 public class ShippingCompany extends BuyableField {
-
-    public ShippingCompany(String name, int price, int[] rents) {
+private String title;
+    public ShippingCompany(String name,String title, int price, int[] rents) {
         super(name,price,rents);
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     //Show rental price for Ship companies.

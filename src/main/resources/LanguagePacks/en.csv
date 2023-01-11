@@ -79,6 +79,11 @@ payrent; You have land on a field which has an owner. You have to pay the rent.
 propikkeråd; You have land on a field which has no owner. men du har ikke råd til at købe den.
 selfown; You have land on a field that you own. Nothing happens.
 
+bid; Would you like to make a bidding to this property? The current bid er
+yourbid; How much would you like to bid?
+auctionWon; Won an auction!
+aucTur; 's turn
+
 
 case1;Oil prices are increased and you have to pay 500$ per a house and 2000$ per a hotel.
 case2;Property taxes are increased. Extra expenses are: 800$ per house, $2300 per hotel.
@@ -118,3 +123,26 @@ case35;In occasion of the king's birthday you are hereby pardoned from prison. T
 case36;Go to Prison, You will not receive $4000 when you pass start.
 
 winner; won!!!
+tradeAction;Handel
+buildHouseAction;Build a house or hotel
+endTurnAction;Finish your turn
+getPlayerAction;Choose an action
+cancelBuyHouseText; Cancel purchase
+buyHouseMessage; Choose the property where you want to buy a house or hotel
+
+mortgage; Which property would you like to pledge?
+cancelMortgage; Cancel pledge
+mort; Pledge a property
+payMort; Pay a pledge
+selectTradeReceiver; Who would you like to trade with?
+cancelTrade; Cancel trade
+createTradeOffer; What would you like to trade? You have currently offer as following:
+tradeOfferSetMoney; Offer money
+tradeOfferSetField; Offer property
+tradeOfferReject; Stop trading
+tradeOfferHowMuchMoney; How much money would you like to bid to the trade offer?
+tradeOfferSendOffer; Send a trade offer
+tradeOfferFields; property
+tradeOfferAddFieldGoBack; <- back
+tradeOfferAddFieldText; Choose which property would you like to put to offer. You can also choose "Back", if you do not want to add property.
+tradeOfferAddMoreFieldQ; Would you like to add a property to offer? You have now these following property to offer.

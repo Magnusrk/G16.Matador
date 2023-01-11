@@ -116,10 +116,11 @@ public class MatadorGUI {
         int currentPosition = player.getPreviousPlayerPosition();
 
             while (currentPosition != player.getPlayerPosition()){
-                if(currentPosition >= fieldCount){
+                currentPosition++;
+                if((currentPosition >= fieldCount)){
                     currentPosition -= fieldCount;
                 }
-                currentPosition++;
+
                 selectedPlayer.getCar().setPosition(gui.getFields()[currentPosition]);
                 try {
                     Thread.sleep(110);

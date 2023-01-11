@@ -65,19 +65,24 @@ injailikkecard; I don't want to use my release card.
 injailifcard; You have one release card. Would you like to use it?
 ikke2ens; You didn't get two of kind.
 2ens; You got two of a kind. You move forward as the dice shows.
-3ture;You have been imprisoned for three turns and must pay a fine of 1000 $. Move according to your next dice roll.
-ekstra; You get two of a kind. You receive an extra turn.
-snyd???; You get two of a kind too many times. You are sent to Jail.
+3ture;You have been imprisoned for three turns and must pay a fine of 1000$. Move according to your next dice roll.
+ekstra; You got two of a kind. You receive an extra turn.
+snyd???; You got two of a kind too many times. You are sent to Jail.
 betalt; You have paid a fine of 1000$. Now you can throw the dice.
 brugtkort; You have used a release card. Now you can throw the dice.
 
 prop; You are on a property without an owner. Would you like to buy this property?
-payrent; You landed on a field with owner and you have to pay the rent.
-propikkeråd; You landed on a property without an owner, but you cannot afford it.
+ship; You are on a shipping company without an owner. Would you like to buy this shipping company?
+brew; You are on a brewery without an owner. Would you like to buy this brewery?
 
-payrent; You have land on a field which has an owner. You have to pay the rent.
-propikkeråd; You have land on a field which has no owner. men du har ikke råd til at købe den.
+payrent; You landed on a field with an owner and you have to pay the rent.
+propikkeråd; You landed on a property without an owner, but you cannot afford it.
 selfown; You have land on a field that you own. Nothing happens.
+
+bid; Do you want to bid on the field? The current bid is
+yourbid; How much do you want to bid?
+auctionWon; won the auction!
+aucTur; 's turn
 
 
 case1;Oil prices are increased and you have to pay 500$ per a house and 2000$ per a hotel.

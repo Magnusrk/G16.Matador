@@ -646,7 +646,7 @@ public class GameController {
      * @param currentField is the field the player lands on.
      */
     public void payRent(Player currentPlayer, BuyableField currentField) {
-        if (currentField.getOwner() != currentPlayer && !((Property) currentField).getMortgaged()) {
+        if (currentField.getOwner() != currentPlayer && !currentField.getMortgaged() && !currentField.getOwner().getJailed()) {
             mgui.showMessage(Language.getString("payrent") + " " + currentField.getOwner());
             if (currentField instanceof Property property) {
                 if (allinColorOwned(property) && property.getHouseCount()==0) {
@@ -654,7 +654,6 @@ public class GameController {
                         addBalanceToPlayer(currentPlayer,2 * -currentField.getRent(0) );
                         addBalanceToPlayer(currentField.getOwner(),2 * currentField.getRent(0));
                     } else {
-
                         addBalanceToPlayer(currentField.getOwner(),currentPlayer.getPlayerBalance() + 1);
                         addBalanceToPlayer(currentPlayer,-currentPlayer.getPlayerBalance() - 1);
                     }
@@ -677,7 +676,7 @@ public class GameController {
      * @param currentField is the field the player lands on.
      */
     public void payShipRent(Player currentPlayer, BuyableField currentField){
-        if (currentField.getOwner() != currentPlayer) {
+        if (currentField.getOwner() != currentPlayer && !currentField.getMortgaged() && !currentField.getOwner().getJailed()) {
             mgui.showMessage(Language.getString("payrent") + " " + currentField.getOwner());
             if (currentField.getRent(currentField.getOwner().getShipsOwned() - 1) < currentPlayer.getPlayerBalance()) {
                 addBalanceToPlayer(currentField.getOwner(),currentField.getRent(currentField.getOwner().getShipsOwned() - 1));
@@ -697,7 +696,7 @@ public class GameController {
      * @param diceSum is the sum of the dice.
      */
     public void payBrewRent(Player currentPlayer, BuyableField currentField, int diceSum){
-        if (currentField.getOwner() != currentPlayer) {
+        if (currentField.getOwner() != currentPlayer && !currentField.getMortgaged() && !currentField.getOwner().getJailed()) {
             mgui.showMessage(Language.getString("payrent") + " " + currentField.getOwner());
             int toPay = currentField.getRent(currentField.getOwner().getBrewsOwned() - 1) * diceSum;
             if (toPay < currentPlayer.getPlayerBalance()) {
@@ -785,14 +784,19 @@ public class GameController {
                 index-=players.size();
             }
             Player player=players.get(index);
-            result = mgui.requestUserButton(player.getName()+Language.getString("aucTur")+" " +Language.getString("bid") + " " + bid, Language.getString("yesTxt"), Language.getString("noTxt"));
-            if (result.equals(Language.getString("yesTxt"))) {
-                bid = mgui.requestInteger(Language.getString("yourbid"), bid, player.getPlayerBalance());
-                highestbidder=player;
-            }
-            else {
+            if (player.getPlayerBalance()>bid) {
+                result = mgui.requestUserButton(player.getName() + Language.getString("aucTur") + " " + Language.getString("bid") + " " + bid, Language.getString("yesTxt"), Language.getString("noTxt"));
+                if (result.equals(Language.getString("yesTxt"))) {
+                    bid = mgui.requestInteger(Language.getString("yourbid"), bid + 1, player.getPlayerBalance());
+                    highestbidder = player;
+                }else {
+                    increment++;
+                }
+            } else if (player.getPlayerBalance()<=bid){
+                mgui.showMessage(player.getName() + Language.getString("aucTur") + " " +Language.getString("ikkeNok"));
                 increment++;
             }
+
         }
         if (increment==players.size()){
             bidOnGoing=false;

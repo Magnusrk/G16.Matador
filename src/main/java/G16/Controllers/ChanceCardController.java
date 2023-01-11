@@ -17,9 +17,7 @@ public class ChanceCardController {
     MatadorGUI mgui;
     static int[] numchance = IntStream.range(1,45).toArray();
     GameController controller;
-    //ChanceCard chancecard = new ChanceCard(IntStream.range(1,21).toArray());
     int[] chanceArray=Shufflechancecard();
-    //ChanceField chanceField= new ChanceField("chancefield");
 
     public ChanceCardController(MatadorGUI mgui) {
         this.mgui = mgui;
@@ -27,8 +25,7 @@ public class ChanceCardController {
 
     public void DoChanceCard(Player currentPlayer, GameController controller ) {
         this.controller = controller;
-       // getNumchance()[0]
-        switch (1) {
+        switch (getNumchance()[0]) {
             case 1 -> wealthBasedCost(currentPlayer, "1",500,2000);
             case 2 -> wealthBasedCost(currentPlayer, "2",800,2300);
             case 3 -> giveOrTakeCash(currentPlayer,"3",-1000);
@@ -72,7 +69,7 @@ public class ChanceCardController {
 
     /* shuffles the values in the array. Code found on https://www.digitalocean.com/community/tutorials/shuffle-array-java
      */
-    public int[] Shufflechancecard(){
+    private int[] Shufflechancecard(){
         Random rand = new Random();
 
         for (int i = 0; i < numchance.length; i++) {
@@ -85,7 +82,7 @@ public class ChanceCardController {
         return numchance;
     }
 
-    public int[] leftshiftarray(){
+    private int[] leftshiftarray(){
         int[] proxy = new int[numchance.length];
         for (int i = 0; i < numchance.length-1; i++) {
             proxy[i] = numchance[i + 1];
@@ -94,20 +91,20 @@ public class ChanceCardController {
         return proxy;
     }
 
-    public int[] getNumchance(){
+    private int[] getNumchance(){
         System.out.println(Arrays.toString(numchance));
         return numchance;
     }
-    public int[] drawChancecard() {
+    private int[] drawChancecard() {
         getNumchance();
         setNumchance(leftshiftarray());
         return getNumchance();
     }
 
-    public void setNumchance(int[] proxy){
+    private void setNumchance(int[] proxy){
         numchance=proxy;
     }
-    public void wealthBasedCost(Player player, String caseNum, int houseCost, int hotelCost){
+    private void wealthBasedCost(Player player, String caseNum, int houseCost, int hotelCost){
         String mesg = "case";
         mesg = mesg + caseNum;
         mgui.showMessage(Language.getString(mesg));
@@ -122,14 +119,14 @@ public class ChanceCardController {
         mgui.showMessage(Language.getString("toPay")+" "+toPay);
     }
 
-    public void giveOrTakeCash(Player player, String caseNum, int amount){
+    private void giveOrTakeCash(Player player, String caseNum, int amount){
         String mesg = "case";
         mesg = mesg + caseNum;
         mgui.showMessage(Language.getString(mesg));
         controller.addBalanceToPlayer(player,amount);
     }
 
-    public void matadorEndowment(Player player){
+    private void matadorEndowment(Player player){
         mgui.showMessage(Language.getString("case20"));
         int wealth = 0;
         wealth = wealth + player.getPlayerBalance();
@@ -149,7 +146,7 @@ public class ChanceCardController {
     }
 
 
-    public void getMoneyFromPlayers(Player player, int amount, String caseNum){
+    private void getMoneyFromPlayers(Player player, int amount, String caseNum){
         String mesg = "case";
         mesg = mesg + caseNum;
         mgui.showMessage(Language.getString(mesg));
@@ -161,15 +158,15 @@ public class ChanceCardController {
         }
         controller.addBalanceToPlayer(player,(controller.getPlayerAmount()-1)*amount);
     }
-    public void moveToStart(Player player){
+    private void moveToStart(Player player){
         mgui.showMessage(Language.getString("case24"));
         player.setPlayerPosition(0);
     }
-    public void moveForwardThree(Player player){
+    private void moveForwardThree(Player player){
         mgui.showMessage(Language.getString("case25"));
         player.setPlayerPosition(player.getPlayerPosition()+3);
     }
-    public void moveBackThree(Player player){
+    private void moveBackThree(Player player){
         mgui.showMessage(Language.getString("case26"));
         if (player.getPlayerPosition()<3){
             player.setPlayerPosition(39);
@@ -177,7 +174,7 @@ public class ChanceCardController {
             player.setPlayerPosition(player.getPlayerPosition() - 3);
         }
     }
-    public void moveToShip(Player player, boolean doubleRent){
+    private void moveToShip(Player player, boolean doubleRent){
         Field[] fields = controller.getFields();
         mgui.showMessage(Language.getString("case28"));
         if (player.getPlayerPosition()== 2 || player.getPlayerPosition() == 7){
@@ -225,7 +222,7 @@ public class ChanceCardController {
             }
         }
     }
-    public void moveToMols(Player player){
+    private void moveToMols(Player player){
         Field[] fields = controller.getFields();
         if (player.getPlayerPosition()> 15) {
             controller.movePlayer(player, 40 - player.getPlayerPosition() + 15);
@@ -240,7 +237,7 @@ public class ChanceCardController {
             controller.buyField(player, (BuyableField) fields[15]);
         }
     }
-    public void moveToProp(Player player, int address, String caseNum){
+    private void moveToProp(Player player, int address, String caseNum){
         Field[] fields = controller.getFields();
         String mesg = "case";
         mesg = mesg + caseNum;
@@ -257,11 +254,11 @@ public class ChanceCardController {
             controller.buyField(player, (BuyableField) fields[address]);
         }
     }
-    public void jailFree(Player player){
+    private void jailFree(Player player){
         mgui.showMessage(Language.getString("case35"));
         player.addOutOfJailCard(1);
     }
-    public void goToJail(Player player){
+    private void goToJail(Player player){
         mgui.showMessage(Language.getString("case36"));
         player.setJailed(true);
     }

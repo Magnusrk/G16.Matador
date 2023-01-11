@@ -26,11 +26,17 @@ public class GameControllerTest extends TestCase {
     }
 
     public void testPlayTurn(){
-        GameController controller = new GameController(true);
-        controller.setupPlayers();
-        for(int i = 0; i < 1000; i++){
-            controller.playTurn();
+        for(int n = 0; n < 1000; n++){
+            GameController controller = new GameController(true);
+            controller.setupPlayers();
+            for(int i = 0; i < 1000; i++){
+                controller.playTurn();
+                if(controller.getWinnerFound()){
+                    break;
+                }
+            }
         }
+
     }
 
     public void testExtraTurn(){

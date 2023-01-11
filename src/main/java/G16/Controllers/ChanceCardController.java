@@ -1,6 +1,7 @@
 package G16.Controllers;
 
 import G16.Fields.BuyableFields.BuyableField;
+import G16.Fields.BuyableFields.Property;
 import G16.Fields.BuyableFields.ShippingCompany;
 import G16.Fields.Field;
 import G16.Graphics.MatadorGUI;
@@ -28,13 +29,12 @@ public class ChanceCardController {
     public void DoChanceCard(Player currentPlayer, GameController controller ) {
         setNumchance(chanceArray);
         this.controller = controller;
-        //getNumchance()[0]
-        switch (35) {
+        switch (getNumchance()[0]) {
             case 1 -> {
-                oilPrices(currentPlayer);
+                wealthBasedCost(currentPlayer, "1",500,2000);
             }
             case 2 -> {
-                propertyTaxes(currentPlayer);
+                wealthBasedCost(currentPlayer, "2",800,2300);
             }
             case 3 -> {
                 giveOrTakeCash(currentPlayer,"3",-1000);
@@ -91,13 +91,13 @@ public class ChanceCardController {
                 matadorEndowment(currentPlayer);
             }
             case 26 -> {
-                birthday(currentPlayer);
+                getMoneyFromPlayers(currentPlayer,200,"21");
             }
             case 27 -> {
-                partyPot(currentPlayer);
+                getMoneyFromPlayers(currentPlayer,500,"22");
             }
             case 28 -> {
-                familyParty(currentPlayer);
+                getMoneyFromPlayers(currentPlayer,500,"23");
             }
             case 29,30 -> {
                 moveToStart(currentPlayer);
@@ -109,10 +109,34 @@ public class ChanceCardController {
                 moveBackThree(currentPlayer);
             }
             case 34 -> {
-                moveToFrederiksberg(currentPlayer);
+                moveToProp(currentPlayer,11,"27");
             }
             case 35 -> {
-                moveToShip(currentPlayer);
+                moveToShip(currentPlayer, true);
+            }
+            case 36 -> {
+                moveToMols(currentPlayer);
+            }
+            case 37 -> {
+                moveToProp(currentPlayer,24,"30");
+            }
+            case 38 -> {
+                moveToProp(currentPlayer,32,"31");
+            }
+            case 39 -> {
+                moveToShip(currentPlayer, false);
+            }
+            case 40 -> {
+                moveToProp(currentPlayer,19,"33");
+            }
+            case 41 -> {
+                moveToProp(currentPlayer,39,"34");
+            }
+            case 42,43 -> {
+                jailFree(currentPlayer);
+            }
+            case 44,45 -> {
+                goToJail(currentPlayer);
             }
         }
         leftshiftarray();
@@ -150,28 +174,16 @@ public class ChanceCardController {
     public void setNumchance(int[] proxy){
         numchance=proxy;
     }
-
-    public void oilPrices(Player player){
-        mgui.showMessage(Language.getString("case1"));
+    public void wealthBasedCost(Player player, String caseNum, int houseCost, int hotelCost){
+        String mesg = "case";
+        mesg = mesg + caseNum;
+        mgui.showMessage(Language.getString(mesg));
         int toPay = 0;
         for (int i = 0; i< controller.getOwnedProperties(player).size(); i++)
             if(controller.getOwnedProperties(player).get(i).getHouseCount()<5){
-                toPay = toPay +(controller.getOwnedProperties(player).get(i).getHouseCount()*500);
+                toPay = toPay +(controller.getOwnedProperties(player).get(i).getHouseCount()*houseCost);
             } else {
-                toPay = toPay +2000;
-            }
-        controller.addBalanceToPlayer(player,-toPay);
-        mgui.showMessage("To pay: "+toPay);
-    }
-
-    public void propertyTaxes(Player player){
-        mgui.showMessage(Language.getString("case2"));
-        int toPay = 0;
-        for (int i = 0; i< controller.getOwnedProperties(player).size(); i++)
-            if(controller.getOwnedProperties(player).get(i).getHouseCount()<5){
-                toPay = toPay +(controller.getOwnedProperties(player).get(i).getHouseCount()*800);
-            } else {
-                toPay = toPay +2300;
+                toPay = toPay +hotelCost;
             }
         controller.addBalanceToPlayer(player,-toPay);
         mgui.showMessage("To pay: "+toPay);
@@ -203,36 +215,18 @@ public class ChanceCardController {
         }
     }
 
-    public void birthday(Player player){
-        mgui.showMessage(Language.getString("case21"));
-        int birthdayBoy = player.getID();
-        for (int i = 0; i< controller.getPlayerAmount(); i++){
-            if (i != birthdayBoy){
-                controller.addPlayerBalanceByID(i,-200);
-            }
-        }
-        controller.addBalanceToPlayer(player,(controller.getPlayerAmount()-1)*200);
-    }
 
-    public void partyPot(Player player){
-        mgui.showMessage(Language.getString("case22"));
-        int birthdayBoy = player.getID();
+    public void getMoneyFromPlayers(Player player, int amount, String caseNum){
+        String mesg = "case";
+        mesg = mesg + caseNum;
+        mgui.showMessage(Language.getString(mesg));
+        int receiver = player.getID();
         for (int i = 0; i< controller.getPlayerAmount(); i++){
-            if (i != birthdayBoy){
-                controller.addPlayerBalanceByID(i,-500);
+            if (i != receiver){
+                controller.addPlayerBalanceByID(i,-amount);
             }
         }
-        controller.addBalanceToPlayer(player,(controller.getPlayerAmount()-1)*500);
-    }
-    public void familyParty(Player player){
-        mgui.showMessage(Language.getString("case23"));
-        int birthdayBoy = player.getID();
-        for (int i = 0; i< controller.getPlayerAmount(); i++){
-            if (i != birthdayBoy){
-                controller.addPlayerBalanceByID(i,-500);
-            }
-        }
-        controller.addBalanceToPlayer(player,(controller.getPlayerAmount()-1)*500);
+        controller.addBalanceToPlayer(player,(controller.getPlayerAmount()-1)*amount);
     }
     public void moveToStart(Player player){
         mgui.showMessage(Language.getString("case24"));
@@ -250,11 +244,7 @@ public class ChanceCardController {
             player.setPlayerPosition(player.getPlayerPosition() - 3);
         }
     }
-    public void moveToFrederiksberg(Player player){
-        mgui.showMessage(Language.getString("case27"));
-        player.setPlayerPosition(37);
-    }
-    public void moveToShip(Player player){
+    public void moveToShip(Player player, boolean doubleRent){
         Field[] fields = controller.getFields();
         mgui.showMessage(Language.getString("case28"));
         if (player.getPlayerPosition()== 2 || player.getPlayerPosition() == 7){
@@ -262,13 +252,19 @@ public class ChanceCardController {
             if(fields[5] instanceof ShippingCompany ship && ship.getOwner() != null) {
                 controller.payShipRent(player, (BuyableField) fields[5]);
                 controller.payShipRent(player, (BuyableField) fields[5]);
+            } else {
+                controller.buyField(player, (BuyableField) fields[5]);
             }
         }
         if (player.getPlayerPosition()== 17 ){
             player.setPlayerPosition(15);
             if(fields[15] instanceof ShippingCompany ship && ship.getOwner() != null) {
                 controller.payShipRent(player, (BuyableField) fields[15]);
-                controller.payShipRent(player, (BuyableField) fields[15]);
+                if (doubleRent) {
+                    controller.payShipRent(player, (BuyableField) fields[15]);
+                }
+            }else {
+                controller.buyField(player, (BuyableField) fields[15]);
             }
         }
         if (player.getPlayerPosition()== 22 ){
@@ -276,6 +272,8 @@ public class ChanceCardController {
             if(fields[25] instanceof ShippingCompany ship && ship.getOwner() != null) {
                 controller.payShipRent(player, (BuyableField) fields[25]);
                 controller.payShipRent(player, (BuyableField) fields[25]);
+            }else {
+                controller.buyField(player, (BuyableField) fields[25]);
             }
         }
         if (player.getPlayerPosition()== 36 || player.getPlayerPosition() == 33){
@@ -283,9 +281,50 @@ public class ChanceCardController {
             if(fields[35] instanceof ShippingCompany ship && ship.getOwner() != null) {
                 controller.payShipRent(player, (BuyableField) fields[35]);
                 controller.payShipRent(player, (BuyableField) fields[35]);
+            }else {
+                controller.buyField(player, (BuyableField) fields[35]);
             }
         }
     }
+    public void moveToMols(Player player){
+        Field[] fields = controller.getFields();
+        if (player.getPlayerPosition()> 15) {
+            controller.movePlayer(player, 40 - player.getPlayerPosition() + 15);
+        } else {
+            controller.movePlayer(player, 15 - player.getPlayerPosition());
 
+        }
+        mgui.showMessage(Language.getString("case29"));
+        if(fields[15] instanceof ShippingCompany ship && ship.getOwner() != null) {
+            controller.payShipRent(player, (BuyableField) fields[15]);
+        }else {
+            controller.buyField(player, (BuyableField) fields[15]);
+        }
+    }
+    public void moveToProp(Player player, int address, String caseNum){
+        Field[] fields = controller.getFields();
+        String mesg = "case";
+        mesg = mesg + caseNum;
+        if (player.getPlayerPosition()> address) {
+            controller.movePlayer(player, 40 - player.getPlayerPosition() + address);
+        } else {
+            controller.movePlayer(player, address - player.getPlayerPosition());
+
+        }
+        mgui.showMessage(Language.getString(mesg));
+        if(fields[address] instanceof Property prop && prop.getOwner() != null) {
+            controller.payShipRent(player, (BuyableField) fields[address]);
+        }else {
+            controller.buyField(player, (BuyableField) fields[address]);
+        }
+    }
+    public void jailFree(Player player){
+        mgui.showMessage(Language.getString("case35"));
+        player.addOutOfJailCard(1);
+    }
+    public void goToJail(Player player){
+        mgui.showMessage(Language.getString("case36"));
+        player.setJailed(true);
+    }
 }
 

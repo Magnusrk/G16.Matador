@@ -495,6 +495,7 @@ public class GameController {
     public void goToJail(Player player) {
         player.setPlayerPosition(10);
         player.setJailed(true);
+        mgui.showMessage(Language.getString("gotojailprompt"));
         mgui.drawPlayerPosition(player);
     }
 

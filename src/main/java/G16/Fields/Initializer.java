@@ -8,6 +8,7 @@ import java.awt.Color;
 
 public class Initializer {
     static Field[] fields;
+    static Color purple = new Color(150, 60, 150);
 
     /**
      * Sets values for every field in the game
@@ -52,9 +53,9 @@ public class Initializer {
                 new Property("Nygade",Color.YELLOW, 6400, 4000, new int[]{600, 3000, 9000, 20000, 24000, 28000}),
                 new ShippingCompany("København-Oslo", 4000, new int[]{500, 1000, 2000, 4000}),
                 new Chance("chance"),
-                new Property("Frederiks-\nberggade",new Color(150, 60, 150), 7000, 4000, new int[]{700, 3500, 10000, 22000, 26000, 30000}),
+                new Property("Frederiks-\nberggade",purple, 7000, 4000, new int[]{700, 3500, 10000, 22000, 26000, 30000}),
                 new Tax("Statsskat", 2000),
-                new Property("Rådhuspladsen",new Color(150, 60, 150), 8000, 4000, new int[]{1000, 4000, 12000, 28000, 34000, 40000})
+                new Property("Rådhuspladsen",purple, 8000, 4000, new int[]{1000, 4000, 12000, 28000, 34000, 40000})
         };
         for (int i = 0; i< fields.length; i++){
             fields[i].setID(i);

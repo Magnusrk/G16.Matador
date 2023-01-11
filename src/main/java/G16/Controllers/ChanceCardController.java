@@ -7,7 +7,6 @@ import G16.Fields.Field;
 import G16.Graphics.MatadorGUI;
 import G16.Language;
 import G16.PlayerUtils.Player;
-import gui_main.GUI;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -27,119 +26,46 @@ public class ChanceCardController {
     }
 
     public void DoChanceCard(Player currentPlayer, GameController controller ) {
-        setNumchance(chanceArray);
         this.controller = controller;
         switch (getNumchance()[0]) {
-            case 1 -> {
-                wealthBasedCost(currentPlayer, "1",500,2000);
-            }
-            case 2 -> {
-                wealthBasedCost(currentPlayer, "2",800,2300);
-            }
-            case 3 -> {
-                giveOrTakeCash(currentPlayer,"3",-1000);
-            }
-            case 4 -> {
-                giveOrTakeCash(currentPlayer,"4",-300);
-            }
-            case 5 -> {
-                giveOrTakeCash(currentPlayer,"5",-200);
-            }
-            case 6,7 -> {
-                giveOrTakeCash(currentPlayer,"6",-3000);
-            }
-            case 8 -> {
-                giveOrTakeCash(currentPlayer,"7",-1000);
-            }
-            case 9 -> {
-                giveOrTakeCash(currentPlayer,"8",-200);
-            }
-            case 10 -> {
-                giveOrTakeCash(currentPlayer,"9",-1000);
-            }
-            case 11 -> {
-                giveOrTakeCash(currentPlayer,"10",-200);
-            }
-            case 12 -> {
-                giveOrTakeCash(currentPlayer,"11",-2000);
-            }
-            case 13,14 -> {
-                giveOrTakeCash(currentPlayer,"12",500);
-            }
-            case 15,16,17 -> {
-                giveOrTakeCash(currentPlayer,"13",1000);
-            }
-            case 18 -> {
-                giveOrTakeCash(currentPlayer,"14",3000);
-            }
-            case 19 -> {
-                giveOrTakeCash(currentPlayer,"15",1000);
-            }
-            case 20 -> {
-                giveOrTakeCash(currentPlayer,"16",1000);
-            }
-            case 21,22 -> {
-                giveOrTakeCash(currentPlayer,"17",1000);
-            }
-            case 23 -> {
-                giveOrTakeCash(currentPlayer,"18",1000);
-            }
-            case 24 -> {
-                giveOrTakeCash(currentPlayer,"19",200);
-            }
-            case 25 -> {
-                matadorEndowment(currentPlayer);
-            }
-            case 26 -> {
-                getMoneyFromPlayers(currentPlayer,200,"21");
-            }
-            case 27 -> {
-                getMoneyFromPlayers(currentPlayer,500,"22");
-            }
-            case 28 -> {
-                getMoneyFromPlayers(currentPlayer,500,"23");
-            }
-            case 29,30 -> {
-                moveToStart(currentPlayer);
-            }
-            case 31 -> {
-                moveForwardThree(currentPlayer);
-            }
-            case 32,33 -> {
-                moveBackThree(currentPlayer);
-            }
-            case 34 -> {
-                moveToProp(currentPlayer,11,"27");
-            }
-            case 35 -> {
-                moveToShip(currentPlayer, true);
-            }
-            case 36 -> {
-                moveToMols(currentPlayer);
-            }
-            case 37 -> {
-                moveToProp(currentPlayer,24,"30");
-            }
-            case 38 -> {
-                moveToProp(currentPlayer,32,"31");
-            }
-            case 39 -> {
-                moveToShip(currentPlayer, false);
-            }
-            case 40 -> {
-                moveToProp(currentPlayer,19,"33");
-            }
-            case 41 -> {
-                moveToProp(currentPlayer,39,"34");
-            }
-            case 42,43 -> {
-                jailFree(currentPlayer);
-            }
-            case 44,45 -> {
-                goToJail(currentPlayer);
-            }
+            case 1 -> wealthBasedCost(currentPlayer, "1",500,2000);
+            case 2 -> wealthBasedCost(currentPlayer, "2",800,2300);
+            case 3 -> giveOrTakeCash(currentPlayer,"3",-1000);
+            case 4 -> giveOrTakeCash(currentPlayer,"4",-300);
+            case 5 -> giveOrTakeCash(currentPlayer,"5",-200);
+            case 6,7 -> giveOrTakeCash(currentPlayer,"6",-3000);
+            case 8 -> giveOrTakeCash(currentPlayer,"7",-1000);
+            case 9 -> giveOrTakeCash(currentPlayer,"8",-200);
+            case 10 -> giveOrTakeCash(currentPlayer,"9",-1000);
+            case 11 -> giveOrTakeCash(currentPlayer,"10",-200);
+            case 12 -> giveOrTakeCash(currentPlayer,"11",-2000);
+            case 13,14 -> giveOrTakeCash(currentPlayer,"12",500);
+            case 15,16,17 -> giveOrTakeCash(currentPlayer,"13",1000);
+            case 18 -> giveOrTakeCash(currentPlayer,"14",3000);
+            case 19 -> giveOrTakeCash(currentPlayer,"15",1000);
+            case 20 -> giveOrTakeCash(currentPlayer,"16",1000);
+            case 21,22 -> giveOrTakeCash(currentPlayer,"17",1000);
+            case 23 -> giveOrTakeCash(currentPlayer,"18",1000);
+            case 24 -> giveOrTakeCash(currentPlayer,"19",200);
+            case 25 -> matadorEndowment(currentPlayer);
+            case 26 -> getMoneyFromPlayers(currentPlayer,200,"21");
+            case 27 -> getMoneyFromPlayers(currentPlayer,500,"22");
+            case 28 -> getMoneyFromPlayers(currentPlayer,500,"23");
+            case 29,30 -> moveToStart(currentPlayer);
+            case 31 -> moveForwardThree(currentPlayer);
+            case 32,33 -> moveBackThree(currentPlayer);
+            case 34 -> moveToProp(currentPlayer,11,"27");
+            case 35 -> moveToShip(currentPlayer, true);
+            case 36 -> moveToMols(currentPlayer);
+            case 37 -> moveToProp(currentPlayer,24,"30");
+            case 38 -> moveToProp(currentPlayer,32,"31");
+            case 39 -> moveToShip(currentPlayer, false);
+            case 40 -> moveToProp(currentPlayer,19,"33");
+            case 41 -> moveToProp(currentPlayer,39,"34");
+            case 42,43 -> jailFree(currentPlayer);
+            case 44,45 -> goToJail(currentPlayer);
         }
-        leftshiftarray();
+        drawChancecard();
     }
 
 
@@ -168,7 +94,13 @@ public class ChanceCardController {
     }
 
     public int[] getNumchance(){
+        System.out.println(Arrays.toString(numchance));
         return numchance;
+    }
+    public int[] drawChancecard() {
+        getNumchance();
+        setNumchance(leftshiftarray());
+        return getNumchance();
     }
 
     public void setNumchance(int[] proxy){
@@ -319,7 +251,7 @@ public class ChanceCardController {
         }
         mgui.showMessage(Language.getString(mesg));
         if(fields[address] instanceof Property prop && prop.getOwner() != null && !prop.getMortgaged()) {
-            controller.payShipRent(player, (BuyableField) fields[address]);
+            controller.payRent(player, (BuyableField) fields[address]);
         }else {
             controller.buyField(player, (BuyableField) fields[address]);
         }

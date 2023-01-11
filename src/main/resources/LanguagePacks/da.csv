@@ -99,12 +99,12 @@ case11;Tandlægeregning, betal kr 2000.
 case12;De har vundet i klasselotteriet. Modtag 500 kr.
 case13;De modtager Deres aktieudbytte. Modtag kr 1000 af banken
 case14;Kommunen har eftergivet et kvartals skat. Hæv i banken 3000 kr.
-case15;De have en række med elleve rigtige i tipning, modtag kl 1000
+case15;De have en række med elleve rigtige i tipning, modtag kr 1000
 case16;Grundet dyrtiden har De fået gageforhøjelse, modtag kr 1000.
 case17;Deres præmieobligation er udtrykket. De modtager 1000 kr af banken.
 case18;De har solgt nogle gamle møbler på auktion. Modtag 1000 kr af banken.
 case19;Værdien af egen avl fra nyttehaven udgør 200 som de modtager af banken
-case20;De modtager “Matador-legatet” på kr 40.000, men kun hvis værdier ikke overstiger 15.000 kr
+case20;De modtager “Matador-legatet” på kr 40.000, men kun hvis dine værdier ikke overstiger 15.000 kr
 case21;Det er deres fødselsdag. Modtag af hver medspiller 200 kr.
 case22;De har lagt penge ud til et sammenskudsgilde. Mærkværdigvis betaler alle straks. Modtag fra hver medspiller 500 kr.
 case23;De skal holde familiefest og får et tilskud fra hver medspiller på 500 kr.
@@ -129,6 +129,8 @@ endTurnAction;Slut din tur
 getPlayerAction;Vælg en handling.
 cancelBuyHouseText; Anullér køb
 buyHouseMessage; Vælg hvilken gade, du vil købe et hus eller hotel til.
+
+toPay;At betale:
 
 mortgage; Hvilken ejendom vil du pantsætte?
 payMortgage; Hvilken pantsætning vil du betale?

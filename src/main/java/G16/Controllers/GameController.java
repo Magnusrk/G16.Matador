@@ -584,49 +584,47 @@ public class GameController {
      * @param currentPlayer is the player who landed on the field
      * @param currentField is the field the player landed on.
      */
-        public void buyField(Player currentPlayer, BuyableField currentField) {
-            if (currentField.getPrice()< currentPlayer.getPlayerBalance()) {
-                String results = null;
-                if (currentField instanceof Property prop){
-                    if (TEST_MODE){
-                        results = Language.getString("yesTxt");
-                    } else {
-                        results = mgui.requestUserButton(Language.getString("prop"), Language.getString("yesTxt"), Language.getString("noTxt"));
-                    }
+    public void buyField(Player currentPlayer, BuyableField currentField) {
+        if (currentField.getPrice()< currentPlayer.getPlayerBalance()) {
+            String results = null;
+            if (currentField instanceof Property prop){
+                if (TEST_MODE){
+                    results = Language.getString("yesTxt");
+                } else {
+                    results = mgui.requestUserButton(Language.getString("prop"), Language.getString("yesTxt"), Language.getString("noTxt"));
                 }
-                if (currentField instanceof ShippingCompany){
-                    if (TEST_MODE){
-                        results = Language.getString("yesTxt");
-                    } else {
-                        results = mgui.requestUserButton(Language.getString("ship"), Language.getString("yesTxt"), Language.getString("noTxt"));
-                    }
-                    if (results.equals(Language.getString("yesTxt"))) {
-                        currentPlayer.setShipsOwned(currentPlayer.getShipsOwned()+1);
-                    }
-                }
-                if (currentField instanceof Brewery){
-                    if (TEST_MODE){
-                        results = Language.getString("yesTxt");
-                    } else {
-                        results = mgui.requestUserButton(Language.getString("brew"), Language.getString("yesTxt"), Language.getString("noTxt"));
-                    }
-                    if (results.equals(Language.getString("yesTxt"))) {
-                        currentPlayer.setBrewsOwned(currentPlayer.getBrewsOwned()+1);
-                    }
-                }
-                if (Objects.equals(results, Language.getString("yesTxt"))) {
-                    addBalanceToPlayer(currentPlayer, -currentField.getPrice());
-                    currentField.setOwner(currentPlayer);
-                    mgui.setOwner(currentField, currentPlayer.getPlayerPosition());
-                } else if (Objects.equals(results,Language.getString("noTxt"))) {
-                    auction(currentField,currentPlayer);
-                }
-
-
-            }else {
-                mgui.showMessage(Language.getString("propikkeråd"));
             }
+            if (currentField instanceof ShippingCompany){
+                if (TEST_MODE){
+                    results = Language.getString("yesTxt");
+                } else {
+                    results = mgui.requestUserButton(Language.getString("ship"), Language.getString("yesTxt"), Language.getString("noTxt"));
+                }
+                if (results.equals(Language.getString("yesTxt"))) {
+                    currentPlayer.setShipsOwned(currentPlayer.getShipsOwned()+1);
+                }
+            }
+            if (currentField instanceof Brewery){
+                if (TEST_MODE){
+                    results = Language.getString("yesTxt");
+                } else {
+                    results = mgui.requestUserButton(Language.getString("brew"), Language.getString("yesTxt"), Language.getString("noTxt"));
+                }
+                if (results.equals(Language.getString("yesTxt"))) {
+                    currentPlayer.setBrewsOwned(currentPlayer.getBrewsOwned()+1);
+                }
+            }
+            if (Objects.equals(results, Language.getString("yesTxt"))) {
+                addBalanceToPlayer(currentPlayer, -currentField.getPrice());
+                currentField.setOwner(currentPlayer);
+                mgui.setOwner(currentField, currentPlayer.getPlayerPosition());
+            } else if (Objects.equals(results,Language.getString("noTxt"))) {
+                auction(currentField,currentPlayer);
+            }
+        }else {
+            mgui.showMessage(Language.getString("propikkeråd"));
         }
+    }
 
     /** Used to give a player money by their id. Used in the dev console
      * @param id is the players id, player 1's id is 0.

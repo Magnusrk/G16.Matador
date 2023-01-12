@@ -14,7 +14,7 @@ startsub;Receive 4k
 pressStart;Press OK to start!
 startdesc;Received 4000$ when they passed "Start"
 chance;Chance
-throwDice;Throw the dice;
+throwDice;Throw the dice
 
 
 noowner;For sale
@@ -24,6 +24,8 @@ tax1;Pay \nincome- \ntax
 tax2;Extra\nfederal tax
 taxdesc1;Pay income-tax 4000,-
 taxdesc2;Pay extra federal-tax 2000,-
+taxPrice1;Pay 4000,-
+taxPrice2;pay 2000,-
 price;Price:
 housePrice;House price:
 rent;Rent:
@@ -118,8 +120,8 @@ case14;The municipality has refunded this quarters tax. Withdraw $3000 from the 
 case15;You won money from sports betting, receive $1000.
 case16;Due to inflation you get a salary increase. You receive $1000.
 case17;Your government bond has matured.You receive $1000 from the bank.
-case18;You have sold some old furniture on auction. Receive $1000 from the bank.
-case19;You sell somme produce from your kitchen garden. Receive $200 from the bank.
+case18;You sell some old furniture on auction. Receive $1000 from the bank.
+case19;You sell some produce from your kitchen garden. Receive $200 from the bank.
 case20;You receive “The Matador-grant” of $40,000, but only if your assets don't exceed $15,000.
 case21;It's your birthday! Receive $200 from each of the other players.
 case22;You have fronted money for a potluck. Oddly enough everyone pays right away. Receive from $500 each fellow players.

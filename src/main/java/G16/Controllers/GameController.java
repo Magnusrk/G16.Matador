@@ -27,22 +27,15 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class GameController {
-
     private final int MAX_PLAYERS = 6;
     private final int MIN_PLAYERS = 3;
     private Die die = new Die();
     private final int NUMBER_OF_FIELDS = 40;
-
     private final ArrayList<Player> players = new ArrayList<>();
-
     private final MatadorGUI mgui;
-
     private int currentPlayerID = 0;
-
     private final Field[] fields;
-
     private final boolean TEST_MODE;
-
     private boolean winnerFound = false;
     private boolean diceRigged = false;
     private int nextDiceValue = 0;
@@ -73,7 +66,6 @@ public class GameController {
         setupPlayers();
         gameStarted = true;
         playTurn();
-
     }
 
     private void setGameLanguage(){
@@ -130,7 +122,6 @@ public class GameController {
             checkPlayerBankrupt(currentPlayer);
         }
 
-
         mgui.updatePlayerBalance(currentPlayer);
         setWinnerFound();
         currentPlayerID += 1;
@@ -167,7 +158,6 @@ public class GameController {
             }
         }
 
-
         HashMap<Color, Integer> streetHouseMap = new HashMap<>();
         for(Property prop : ownedProperties){
             Color currentColor = prop.getColor();
@@ -180,7 +170,6 @@ public class GameController {
             }
         }
         ownedProperties.removeIf(prop -> prop.getHouseCount() > streetHouseMap.get(prop.getColor()));
-
 
         //Slut tur
         options.add(Language.getString("endTurnAction"));
@@ -201,9 +190,7 @@ public class GameController {
         if(!action.equals(Language.getString("endTurnAction"))){
             askPlayerActions(currentPlayer);
         }
-
     }
-
     public int getPlayerAmount(){
         return players.size();
     }
@@ -226,9 +213,7 @@ public class GameController {
                     break;
                 }
             }
-
         }
-
     }
 
     public ArrayList<BuyableField> getOwnedBuyableFields(Player currentPlayer) {
@@ -346,15 +331,12 @@ public class GameController {
             }
             int diceSum = diceThrow[0] + diceThrow[1];
 
-
             if (diceRigged) {
                 diceSum = nextDiceValue;
                 diceRigged = false;
             }
 
             mgui.drawDice(diceThrow[0], diceThrow[1]);
-
-
             //Move player
             movePlayer(currentPlayer, diceSum);
             mgui.drawPlayerPosition(currentPlayer);
@@ -367,19 +349,17 @@ public class GameController {
             }
         }
     }
-
     /** Used to move a player. Also checks if the player passed start.
      * @param player is a player. Usually the current player
      */
-        public void movePlayer (Player player,int moves){
-            int currentPosition = player.getPlayerPosition();
-            int newPosition = currentPosition + moves;
-            if( newPosition >= NUMBER_OF_FIELDS){
-                newPosition -= NUMBER_OF_FIELDS;
-                giveStartMoney(player);
-            }
-            player.setPlayerPosition(newPosition);
-
+    public void movePlayer (Player player,int moves){
+        int currentPosition = player.getPlayerPosition();
+        int newPosition = currentPosition + moves;
+        if( newPosition >= NUMBER_OF_FIELDS){
+            newPosition -= NUMBER_OF_FIELDS;
+            giveStartMoney(player);
+        }
+        player.setPlayerPosition(newPosition);
     }
     /** Used when a player lands on a field and determines what should happen depending on the field
      * @param player is the one who lands on the field

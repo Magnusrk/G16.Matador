@@ -102,7 +102,7 @@ public class TradeController {
      * @param receiver the player to whom the proposer wishes to trade
      * @return TradeOffer object with proposed trade offer info
      */
-    public TradeOffer makeTradeOffer(Player proposer, Player receiver){
+    private TradeOffer makeTradeOffer(Player proposer, Player receiver){
         TradeOffer newOffer = new TradeOffer(proposer, receiver);
         String action;
         do{

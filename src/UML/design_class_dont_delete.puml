@@ -70,11 +70,23 @@ class Die {
 class GameController{
 -winnerFound : boolean
 -gameStarted : boolean
-
 +playGame() : void
 +setupPlayers() : void
 +playTurn() : void
 }
+
+class ChanceCardController{
++doChanceCard() : void
+}
+
+class TradeController{
++startTrade() : void
+}
+
+class TradeOffer{
+
+}
+
 
 abstract class BuyableField {
 #owner : Player
@@ -105,10 +117,13 @@ BuyableField <|-- SodaField
 
 MoneyBalance "-balance" <-left- " " Player
 
+GameController -- TradeController
+GameController -- ChanceCardController
+
 GameController -left-> Die
 GameController " " -right-> "-mgui" MatadorGUI
 Language " " <-- " " GameController
-
+TradeController -left-> TradeOffer
 
 
 

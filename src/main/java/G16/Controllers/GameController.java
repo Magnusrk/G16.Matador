@@ -518,9 +518,9 @@ public class GameController {
         String result= null;
         player.addBalance(amount);
         mgui.updatePlayerBalance(player);
-        if (player.getPlayerBalance()< 0 && getOwnedBuyableFields(player)==null){
+        if (player.getPlayerBalance()< 0 && getOwnedBuyableFields(player).isEmpty()){
             player.setBankrupt(true);
-        } else if (getOwnedBuyableFields(player)!=null && player.getPlayerBalance()<0) {
+        } else if (!getOwnedBuyableFields(player).isEmpty() && player.getPlayerBalance()<0) {
             while (con) {
                 result = mgui.requestUserButton(Language.getString("bankerot"), Language.getString("mort"), Language.getString("sellHouse"), Language.getString("con"));
                 if (result.equals(Language.getString("mort"))) {
@@ -610,17 +610,17 @@ public class GameController {
             mgui.showMessage(Language.getString("payrent") + " " + currentField.getOwner());
             if (currentField instanceof Property property) {
                 if (allinColorOwned(property) && property.getHouseCount()==0) {
-                    if (currentField.getRent(0) < currentPlayer.getPlayerBalance()) {
+                    if (currentField.getRent(0) < currentPlayer.getPlayerBalance() || !getOwnedBuyableFields(currentPlayer).isEmpty()) {
                         addBalanceToPlayer(currentPlayer,2 * -currentField.getRent(0) );
                         addBalanceToPlayer(currentField.getOwner(),2 * currentField.getRent(0));
                     } else {
                         addBalanceToPlayer(currentField.getOwner(),currentPlayer.getPlayerBalance() + 1);
                         addBalanceToPlayer(currentPlayer,-currentPlayer.getPlayerBalance() - 1);
                     }
-                } else if (currentField.getRent(property.getHouseCount()) < currentPlayer.getPlayerBalance()) {
+                } else if (currentField.getRent(property.getHouseCount()) < currentPlayer.getPlayerBalance() || !getOwnedBuyableFields(currentPlayer).isEmpty()) {
                     addBalanceToPlayer(currentField.getOwner(),currentField.getRent(property.getHouseCount()));
                     addBalanceToPlayer(currentPlayer,-currentField.getRent(property.getHouseCount()));
-                } else {
+                } else  {
                     addBalanceToPlayer(currentField.getOwner(),currentPlayer.getPlayerBalance() + 1);
                     addBalanceToPlayer(currentPlayer,-currentPlayer.getPlayerBalance() - 1);
                 }
@@ -642,7 +642,7 @@ public class GameController {
     public void payShipRent(Player currentPlayer, BuyableField currentField){
         if (currentField.getOwner() != currentPlayer && !currentField.getMortgaged() && !currentField.getOwner().getJailed()) {
             mgui.showMessage(Language.getString("payrent") + " " + currentField.getOwner());
-            if (currentField.getRent(currentField.getOwner().getShipsOwned() - 1) < currentPlayer.getPlayerBalance()) {
+            if (currentField.getRent(currentField.getOwner().getShipsOwned() - 1) < currentPlayer.getPlayerBalance() || !getOwnedBuyableFields(currentPlayer).isEmpty()) {
                 addBalanceToPlayer(currentField.getOwner(),currentField.getRent(currentField.getOwner().getShipsOwned() - 1));
                 addBalanceToPlayer(currentPlayer,-currentField.getRent(currentField.getOwner().getShipsOwned() - 1));
                 mgui.updatePlayerBalance(currentField.getOwner());
@@ -663,7 +663,7 @@ public class GameController {
         if (currentField.getOwner() != currentPlayer && !currentField.getMortgaged() && !currentField.getOwner().getJailed()) {
             mgui.showMessage(Language.getString("payrent") + " " + currentField.getOwner());
             int toPay = currentField.getRent(currentField.getOwner().getBrewsOwned() - 1) * diceSum;
-            if (toPay < currentPlayer.getPlayerBalance()) {
+            if (toPay < currentPlayer.getPlayerBalance() || !getOwnedBuyableFields(currentPlayer).isEmpty()) {
                 addBalanceToPlayer(currentField.getOwner(),toPay);
                 addBalanceToPlayer(currentPlayer,-toPay);
             } else {

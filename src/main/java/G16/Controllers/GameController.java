@@ -508,11 +508,20 @@ public class GameController {
                     mortgage(player);
                 } else if (result.equals(Language.getString("sellHouse"))) {
                     sellHousePrompt(player);
-                } else if (result.equals(Language.getString("con")) && player.getPlayerBalance() < 0) {
+                } else if(result.equals(Language.getString("con"))){
+                    ArrayList<BuyableField> ownedFields = getOwnedBuyableFields(player);
+                    ownedFields.removeIf(BuyableField::getMortgaged);
+                    if(!(ownedFields.size() > 0 )){
+                        con = false;
+                        player.setBankrupt(true);
 
-                } else {
-                    con = false;
+
+                    } else {
+                        mgui.showMessage(Language.getString("stillBankerot"));
+                    }
+
                 }
+
             }
         }
     }
@@ -661,11 +670,17 @@ public class GameController {
     public void removeOwner(Player bankruptPlayer){
         Field[] field = fields;
         for (int i=0; i<field.length;i++){
-            if (field[i] instanceof BuyableField prop){
-                if (prop.getOwner()==bankruptPlayer){
-                    prop.setOwner(null);
-                    mgui.resetOwner(prop,i);
-                    mgui.buildHouse((Property) prop,0);
+            if (field[i] instanceof BuyableField buyable){
+                if (buyable.getOwner()==bankruptPlayer){
+                    buyable.setOwner(null);
+                    buyable.setMortgaged(false);
+                    mgui.resetOwner(buyable,i);
+                    if(field[i]  instanceof Property prop){
+                        prop.setHouses(0);
+                        mgui.buildHouse(prop,0);
+                        mgui.buildHotel(prop, false);
+                    }
+
                 }
             }
         }

@@ -88,6 +88,8 @@ bid; Vil du byde på denne grund? Det nuværende bud er
 yourbid; Hvor meget vil du byde?
 auctionWon; vandt auktionen!
 aucTur; 's tur
+
+
 case1;Oliepriserne er steget, og De skal betale kr 500 pr hus og kr 2000 pr hotel.
 case2;Ejendomsskatten er steget. Ekstraudgifterne er: 800 kr pr hus, 2300 kr pr hotel.
 case3;De har kørt frem for “fuldt stop”, Betal 1000 kroner i bøde
@@ -133,7 +135,7 @@ getPlayerAction;Vælg en handling.
 cancelBuyHouseText; Anullér køb
 buyHouseMessage; Vælg hvilken gade, du vil købe et hus eller hotel til.
 
-toPay;At betale:
+toPay;To pay:
 
 mortgage; Hvilken ejendom vil du pantsætte?
 payMortgage; Hvilken pantsætning vil du betale?
@@ -161,6 +163,7 @@ tradeOfferGetMoneyText; Modtager penge
 tradeOfferGiveMoneyText; Giver penge
 tradeOfferFields; Afgiver ejendomme
 tradeOfferChooseFieldGiver; Vælg for hvilken spiller, du vil vælge de ejendomme som skal indgå i handlen.
+
 ikkeNok; Du har ikke nok penge til at byde.
 sellHouse; Sælg hus eller hotel.
 

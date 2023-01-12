@@ -6,6 +6,7 @@ public class Player {
     private int playerPosition = 0;
     private int previousPlayerPosition = 0;
     private boolean jailed = false;
+
     private boolean bankrupt = false;
     private int outOfJailCards = 0;
     private int ID = -1;
@@ -57,9 +58,11 @@ public class Player {
     }
     public void addBalance(int add){
         balance.updateMoney(add);
+        /*
         if (balance.getBalance() < 0){
             bankrupt = true;
         }
+         */
     }
 
     public int getShipsOwned() {
@@ -101,5 +104,9 @@ public class Player {
     @Override
     public String toString() {
         return name;
+    }
+
+    public void setBankrupt(boolean bankrupt) {
+        this.bankrupt = bankrupt;
     }
 }

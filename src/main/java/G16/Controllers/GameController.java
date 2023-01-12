@@ -514,8 +514,26 @@ public class GameController {
     }
 
     public void addBalanceToPlayer(Player player, int amount){
+        boolean con=true;
+        String result= null;
         player.addBalance(amount);
         mgui.updatePlayerBalance(player);
+        if (player.getPlayerBalance()< 0 && getOwnedBuyableFields(player)==null){
+            player.setBankrupt(true);
+        } else if (getOwnedBuyableFields(player)!=null && player.getPlayerBalance()<0) {
+            while (con) {
+                result = mgui.requestUserButton(Language.getString("bankerot"), Language.getString("mort"), Language.getString("sellHouse"), Language.getString("con"));
+                if (result.equals(Language.getString("mort"))) {
+                    mortgage(player);
+                } else if (result.equals(Language.getString("sellHouse"))) {
+                    sellHousePrompt(player);
+                } else if (result.equals(Language.getString("con")) && player.getPlayerBalance() < 0) {
+
+                } else {
+                    con = false;
+                }
+            }
+        }
     }
 
     /** Used to get an arraylist of all the players
@@ -786,7 +804,7 @@ public class GameController {
             if (result.equals(Language.getString("cancelMortgage"))){
 
             }
-            if ((buyableField.getName()+" "+ mortgage).equals(result)){
+            if ((buyableField.getName()+" "+ mortgage+",-").equals(result)){
                 mortgage = buyableField.getPrice() / 2;
                 addBalanceToPlayer(currentplayer,mortgage);
                 buyableField.setMortgaged(true);
@@ -812,7 +830,7 @@ public class GameController {
             if (result.equals(Language.getString("cancelMortgage"))){
 
             }
-            if ((buyableField.getName()+" "+ mortgage).equals(result)){
+            if ((buyableField.getName()+" "+ mortgage+",-").equals(result)){
                 mortgage = (int) ((buyableField.getPrice()/2)+(Math.round((buyableField.getPrice()*0.1)/100))*100);
                 addBalanceToPlayer(currentplayer,-mortgage);
                 buyableField.setMortgaged(false);
@@ -838,7 +856,7 @@ public class GameController {
             if (result.equals(Language.getString("cancelSellHouse"))){
 
             }
-            if ((property.getName()+" "+ mortgage).equals(result)){
+            if ((property.getName()+" "+ mortgage+",-").equals(result)){
                 if (property.getHouseCount()<5) {
                     mgui.buildHouse(property, property.getHouseCount() - 1);
                     addBalanceToPlayer(currentplayer,property.getHousePrice()/2);

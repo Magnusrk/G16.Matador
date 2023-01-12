@@ -5,6 +5,7 @@ import G16.Fields.BuyableFields.BuyableField;
 import G16.Fields.Field;
 import G16.Fields.BuyableFields.Property;
 import G16.Fields.BuyableFields.ShippingCompany;
+import G16.Fields.UnbuyableFields.*;
 import G16.Language;
 import G16.PlayerUtils.Player;
 import gui_fields.*;
@@ -12,6 +13,7 @@ import gui_main.GUI;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static gui_fields.GUI_Car.Pattern.*;
 import static gui_fields.GUI_Car.Type.*;
@@ -21,14 +23,13 @@ import static gui_fields.GUI_Car.Type.*;
  */
 public class MatadorGUI {
 
-    protected final GUI gui; //Instance of the diplomitdtu.matadorGUI
+    protected GUI gui; //Instance of the diplomitdtu.matadorGUI
     protected final ArrayList<GUI_Player> guiPlayers = new ArrayList<>();
 
     protected GameController gc;
 
     public MatadorGUI(GameController gc, Field[] fields){
         this.gc = gc;
-
         GUI_Field[] defaultFields = getFields();
         for (int i = 0; i<defaultFields.length; i++){
             defaultFields[0].setSubText(Language.getString("startsub"));
@@ -50,6 +51,51 @@ public class MatadorGUI {
             }
         }
         this.gui = new GUI(defaultFields, new Color(54, 236, 189));
+    }
+
+    public void updateGUI(Field[] fields){
+        GUI_Field[] defaultFields = gui.getFields();
+        for (int i = 0; i<defaultFields.length; i++){
+            defaultFields[0].setTitle(Language.getString("start"));
+            defaultFields[0].setSubText(Language.getString("startsub"));
+            defaultFields[0].setDescription(Language.getString("startdesc"));
+            if (fields[i] instanceof Property prop) {
+                defaultFields[i].setTitle(prop.getName());
+                defaultFields[i].setDescription(String.valueOf(prop));
+            }
+            if (fields[i] instanceof ShippingCompany ship){
+                defaultFields[i].setDescription(String.valueOf(ship));
+            }
+            if (fields[i] instanceof Brewery brew){
+                defaultFields[i].setDescription(brew.toString());
+            }
+            if (fields[i] instanceof Chance chance){
+                defaultFields[i].setSubText(Language.getString("tryluck"));
+                defaultFields[i].setDescription(Language.getString("takeChance"));
+            }
+            if (fields[i] instanceof  Tax tax) {
+                if (Objects.equals(tax.getName(), "Indkomstskat")){
+                    defaultFields[i].setTitle(Language.getString("tax1"));
+                    defaultFields[i].setDescription(Language.getString("taxdesc1"));
+                } else {
+                    defaultFields[i].setTitle(Language.getString("tax2"));
+                    defaultFields[i].setDescription(Language.getString("taxdesc2"));
+                }
+            }
+            if (fields[i] instanceof Jail jail){
+                defaultFields[i].setSubText(Language.getString("jail"));
+                defaultFields[i].setDescription(Language.getString("visitJail"));
+            }
+            if (fields[i] instanceof VisitorField visit){
+                defaultFields[i].setTitle(Language.getString("parking"));
+                defaultFields[i].setSubText(Language.getString("parking"));
+                defaultFields[i].setDescription(Language.getString("parkingDesc"));
+            }
+            if (fields[i] instanceof GoToJail goToJail){
+                defaultFields[i].setSubText(Language.getString("gotojail"));
+                defaultFields[i].setDescription(Language.getString("gotojailDesc"));
+            }
+        }
     }
 
 
@@ -271,14 +317,14 @@ public class MatadorGUI {
     public GUI_Field[] getFields() {
         GUI_Field[] fields = new GUI_Field[40];
         int i = 0;
-        fields[i++] = new GUI_Start("Start", "Modtag: 4k", "Modtag kr. 200,-\nnår de passerer start", Color.RED, Color.BLACK);
+        fields[i++] = new GUI_Start("Start", Language.getString("startsub"), "Modtag kr. 200,-\nnår de passerer start", Color.RED, Color.BLACK);
         fields[i++] = new GUI_Street("Rødovrevej", "1200,-", "Rødovrevej", "Leje:  20", new Color(75, 155, 225), Color.WHITE);
-        fields[i++] = new GUI_Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
+        fields[i++] = new GUI_Chance("?", Language.getString("tryluck"), "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
         fields[i++] = new GUI_Street("Hvidovrevej", "Pris:  60", "Hvidovrevej", "Leje:  20", new Color(75, 155, 225), Color.WHITE);
         fields[i++] = new GUI_Tax("Betal\nindkomst-\nskat", "Betal 4000,-", "Betal indkomstskat 4000,-", Color.GRAY, Color.BLACK);
         fields[i++] = new GUI_Shipping("default", "Forsea", "Pris:  200", "Øresundsredderiet", "Leje:  75", Color.WHITE, Color.BLACK);
         fields[i++] = new GUI_Street("Roskildevej", "Pris:  100", "Roskildevej", "Leje:  40", new Color(255, 135, 120), Color.BLACK);
-        fields[i++] = new GUI_Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
+        fields[i++] = new GUI_Chance("?", Language.getString("tryluck"), "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
         fields[i++] = new GUI_Street("Valby Langgade", "Pris:  100", "Valby Langgade", "Leje:  40", new Color(255, 135, 120), Color.BLACK);
         fields[i++] = new GUI_Street("Allégade", "Pris:  120", "Allégade", "Leje:  45", new Color(255, 135, 120), Color.BLACK);
         fields[i++] = new GUI_Jail("default", "Fængsel", "Fængsel", "På besøg i fængslet", new Color(125, 125, 125), Color.BLACK);
@@ -288,12 +334,12 @@ public class MatadorGUI {
         fields[i++] = new GUI_Street("Gammel Kongevej", "Pris:  140", "Gammel Kongevej", "Leje:  50", new Color(102, 204, 0), Color.BLACK);
         fields[i++] = new GUI_Shipping("default", "Molslinjen", "Pris:  200", "D.F.D.S.", "Leje:  75", Color.WHITE, Color.BLACK);
         fields[i++] = new GUI_Street("Bernstorffsvej", "Pris:  180", "Bernstorffsvej", "Leje:  60", new Color(153, 153, 153), Color.BLACK);
-        fields[i++] = new GUI_Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
+        fields[i++] = new GUI_Chance("?", Language.getString("tryluck"), "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
         fields[i++] = new GUI_Street("Hellerupvej", "Pris:  180", "Hellerupvej", "Leje:  60", new Color(153, 153, 153), Color.BLACK);
         fields[i++] = new GUI_Street("Strandvejen", "Pris:  180", "Strandvejen", "Leje:  60", new Color(153, 153, 153), Color.BLACK);
         fields[i++] = new GUI_Refuge("default", "Helle", "Helle", "Ta' en pause", Color.WHITE, Color.BLACK);
         fields[i++] = new GUI_Street("Trianglen", "Pris:  220", "Trianglen", "Leje:  70", Color.RED, Color.BLACK);
-        fields[i++] = new GUI_Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
+        fields[i++] = new GUI_Chance("?", Language.getString("tryluck"), "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
         fields[i++] = new GUI_Street("Østerbrogade", "Pris:  220", "Østerbrogade", "Leje:  70", Color.RED, Color.BLACK);
         fields[i++] = new GUI_Street("Grønningen", "Pris:  240", "Grønningen", "Leje:  80", Color.RED, Color.BLACK);
         fields[i++] = new GUI_Shipping("default", "Scandlines", "Pris:  200", "Ø.S. redderiet", "Leje:  75", Color.WHITE, Color.BLACK);
@@ -304,10 +350,10 @@ public class MatadorGUI {
         fields[i++] = new GUI_Jail("default", "Gå i fængsel", "Gå i fængsel", "De fængsles\nSlå to ens for at komme ud", new Color(125, 125, 125), Color.BLACK);
         fields[i++] = new GUI_Street("Amagertorv", "Pris:  300", "Amagertorv", "Leje:  95", new Color(255, 255, 50), Color.BLACK);
         fields[i++] = new GUI_Street("Vimmelskaftet", "Pris:  300", "Vimmelskaftet", "Leje:  95", new Color(255, 255, 50), Color.BLACK);
-        fields[i++] = new GUI_Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
+        fields[i++] = new GUI_Chance("?", Language.getString("tryluck"), "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
         fields[i++] = new GUI_Street("Nygade", "Pris:  320", "Nygade", "Leje:  100", new Color(255, 255, 50), Color.BLACK);
         fields[i++] = new GUI_Shipping("default", "D.F.D.S", "Pris:  200", "Bornholms redderi", "Leje:  75", Color.WHITE, Color.BLACK);
-        fields[i++] = new GUI_Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
+        fields[i++] = new GUI_Chance("?", Language.getString("tryluck"), "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
         fields[i++] = new GUI_Street("Frederiksberggade", "Pris:  350", "Frederiksberggade", "Leje:  120", new Color(150, 60, 150), Color.WHITE);
         fields[i++] = new GUI_Tax("Ekstra-\nordinær\nstatsskat", "Betal 2000,-", "Betal ekstraordinær\nstatsskat: 2000,-", Color.GRAY, Color.BLACK);
         fields[i] = new GUI_Street("Rådhuspladsen", "Pris:  400", "Rådhuspladsen", "Leje:  150", new Color(150, 60, 150), Color.WHITE);

@@ -10,12 +10,19 @@ playerName;Skriv spillerens navn:
 
 
 start;Start
+pressStart;Tryk OK for at starte!
 startsub;Modtag 4k
 startdesc;Modtag kr. 4000,- når de passerer start
 chance;Chance
+throwDice;kast med terningen!
 
 noowner;Ingen ejer
 tryluck;Prøv lykken
+takeChance;Ta' et chance kort
+tax1;Betal \nindkomst-\nskat
+tax2;Ekstra-\nordinær\nstatsskat
+taxdesc1;Betal indkosmtskat 4000,-
+taxdesc2;Betal ekstaordinær statsskat 2000,-
 price;Pris:
 housePrice;Huspris:
 rent;Leje:
@@ -34,8 +41,10 @@ hotel;Hotel leje:
 3ship;3 rederier ejet:
 4ship;4 rederier ejet:
 
-prison;Fængsel
+jail;Fængsel
+visitJail;På besøg i fængslet
 parking;Parkering
+parkingDesc;Ta' en pause
 gotojail;Gå i fængsel
 
 throwDice;slå med terningen!

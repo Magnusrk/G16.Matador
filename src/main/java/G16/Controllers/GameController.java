@@ -383,7 +383,7 @@ public class GameController {
                 payShipRent(player, ship);
                 }
             } else if (currentField instanceof Tax tax){
-                mgui.showMessage("Du betaler skat");
+                mgui.showMessage(Language.getString("tax"));
                 addBalanceToPlayer(player, -tax.getTax());
             } else if (currentField instanceof Brewery brew){
                 if (brew.getOwner()==null){
@@ -520,7 +520,7 @@ public class GameController {
                 if (TEST_MODE){
                     results = Language.getString("yesTxt");
                 } else {
-                    results = mgui.requestUserButton(Language.getString("ship") + ShippingCompanyName.getTitle() + Language.getString("ship2"), Language.getString("yesTxt"), Language.getString("noTxt"));
+                    results = mgui.requestUserButton(Language.getString("ship")+" "+  ShippingCompanyName.getTitle() + Language.getString("ship2"), Language.getString("yesTxt"), Language.getString("noTxt"));
                 }
                 if (results.equals(Language.getString("yesTxt"))) {
                     currentPlayer.setShipsOwned(currentPlayer.getShipsOwned()+1);
@@ -586,8 +586,12 @@ public class GameController {
                 }
             }
         }
-        else
-        {
+        else {
+            if (currentField.getOwner().getJailed()){
+                mgui.showMessage(Language.getString("ownerJailed"));
+            } else if (currentField.getMortgaged()) {
+                mgui.showMessage(Language.getString("mortgaged"));
+            }
             mgui.showMessage(Language.getString("selfown"));
         }
     }

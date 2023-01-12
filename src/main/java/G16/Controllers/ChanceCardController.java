@@ -193,7 +193,7 @@ public class ChanceCardController {
         mgui.showMessage(Language.getString("case28"));
         mgui.displayChanceCards("28");
 
-        if (player.getPlayerPosition()== 2 || player.getPlayerPosition() == 7){
+        if (player.getPlayerPosition()== 36 || player.getPlayerPosition()== 2){
             player.setPlayerPosition(5);
             mgui.drawPlayerPosition(player);
             if(fields[5] instanceof ShippingCompany ship && ship.getOwner() != null) {
@@ -205,7 +205,7 @@ public class ChanceCardController {
                 controller.buyField(player, (BuyableField) fields[5]);
             }
         }
-        if (player.getPlayerPosition()== 17 ){
+        if (player.getPlayerPosition() == 7){
             player.setPlayerPosition(15);
             mgui.drawPlayerPosition(player);
             if(fields[15] instanceof ShippingCompany ship && ship.getOwner() != null) {
@@ -217,7 +217,7 @@ public class ChanceCardController {
                 controller.buyField(player, (BuyableField) fields[15]);
             }
         }
-        if (player.getPlayerPosition()== 22 ){
+        if (player.getPlayerPosition()== 17 || player.getPlayerPosition()== 22 ){
             player.setPlayerPosition(25);
             mgui.drawPlayerPosition(player);
             if(fields[25] instanceof ShippingCompany ship && ship.getOwner() != null) {
@@ -229,7 +229,7 @@ public class ChanceCardController {
                 controller.buyField(player, (BuyableField) fields[25]);
             }
         }
-        if (player.getPlayerPosition()== 36 || player.getPlayerPosition() == 33){
+        if (player.getPlayerPosition() == 33){
             player.setPlayerPosition(35);
             mgui.drawPlayerPosition(player);
             if(fields[35] instanceof ShippingCompany ship && ship.getOwner() != null) {

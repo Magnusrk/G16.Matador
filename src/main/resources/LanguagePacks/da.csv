@@ -73,13 +73,16 @@ betalt; Du har betalt 1000 kr i bøde og får lov til at slå med terningerne.
 brugtkort; Du har brugt et løsladelseskort og får lov til at slå med terningerne
 
 prop; Du har landet på en ejendom som ikke har nogen ejer. Vil du købe ejendommen?
-ship; Du har landet på en
-ship2; rederi som ikke har nogen ejer. Vil du købe rederiet?
+ship; Du har landet på
+ship2; rederi som ikke har nogen ejer. Vil de købe rederiet?
 brew; Du har landet på en bryggeri som ikke har nogen ejer. Vil du købe bryggeriet?
 
 payrent; Du har landet på et felt som er ejet og bliver nødt til at betale leje til
+ownerJailed;Ejeren af feltet er i fængels så du betaler ikke leje.
+mortaged;Ejeren har pantsat grunden så du skal ikke betale leje.
 propikkeråd; Du har landet på en ejendom som ikke har nogle ejer, men du har ikke råd til at købe den.
 selfown; Du har landet på et felt som du selv ejer. Der sker ingenting.
+tax;Du betaler skat
 
 bid; Vil du byde på denne grund? Det nuværende bud er
 yourbid; Hvor meget vil du byde?

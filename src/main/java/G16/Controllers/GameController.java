@@ -19,6 +19,7 @@ import G16.PlayerUtils.Player;
 import G16.PlayerUtils.TradeOffer;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Street;
+import org.apache.commons.codec.language.bm.Lang;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -66,10 +67,20 @@ public class GameController {
 
     public void playGame() {
         new DevConsole(this);
+
+        setGameLanguage();
+
         setupPlayers();
         gameStarted = true;
         playTurn();
 
+    }
+
+    private void setGameLanguage(){
+        String language = mgui.requestUserDropDown("Select game language", "Dansk", "English");
+        if(language.equals("English")){
+            Language.setLanguage("en");
+        }
     }
 
     //Create players, limit amount of player to 3-6 players then add player's names.
@@ -297,7 +308,7 @@ public class GameController {
      */
     private void throwAndMove(Player currentPlayer) {
         //Throw Dice
-        mgui.showMessage(currentPlayer.getName() + " kast med terningen!");
+        mgui.showMessage(currentPlayer.getName() + " "+ Language.getString("throwDice"));
         boolean extra = true;
         /*This code is used to stay on the same players turn in case they land a dice roll of 2 of a kind.
          *It will stay in the while as long as 2 of a kind is rolled and stop if 2 of a kind is not rolled.

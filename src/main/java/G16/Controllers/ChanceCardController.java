@@ -79,7 +79,7 @@ public class ChanceCardController {
             numchance[randomIndexToSwap] = numchance[i];
             numchance[i] = temp;
         }
-        System.out.println(Arrays.toString(numchance));
+
         return numchance;
     }
 
@@ -93,7 +93,6 @@ public class ChanceCardController {
     }
 
     private int[] getNumchance(){
-        System.out.println(Arrays.toString(numchance));
         return numchance;
     }
     private int[] drawChancecard() {

@@ -516,6 +516,8 @@ public class GameController {
                         player.setBankrupt(true);
 
 
+                    } else if (player.getPlayerBalance()>=0) {
+                        con= false;
                     } else {
                         mgui.showMessage(Language.getString("stillBankerot"));
                     }

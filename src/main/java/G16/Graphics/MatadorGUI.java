@@ -153,13 +153,29 @@ public class MatadorGUI {
         gui.displayChanceCard(Language.getString(mesg));
     }
 
-    /** Draw/update a players position.
+    /** Draw/update a players position with an animation.
      * @param player player object of the player who should be updated.
      */
     public void drawPlayerPosition(Player player){
         GUI_Player selectedPlayer = guiPlayers.get(player.getID());
         int fieldCount = gui.getFields().length;
         int currentPosition = player.getPreviousPlayerPosition();
+
+        int capTime = 1500; //Max animation time
+        int deltaTime = 100; //Default time per move
+        int deltaPosition; //Amount ot of moves
+
+        if(currentPosition > player.getPlayerPosition()){
+            deltaPosition = 40-currentPosition+ player.getPlayerPosition();
+        } else {
+            deltaPosition = player.getPlayerPosition() - currentPosition;
+        }
+
+        if(deltaPosition > 0 && (deltaPosition *deltaTime) > capTime){
+            deltaTime = capTime/deltaPosition;
+        }
+
+
 
         while (currentPosition != player.getPlayerPosition()){
                 currentPosition++;
@@ -169,7 +185,7 @@ public class MatadorGUI {
 
                 selectedPlayer.getCar().setPosition(gui.getFields()[currentPosition]);
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(deltaTime);
                 } catch (InterruptedException e){
                     System.out.println("Animation interrupted");
                 }

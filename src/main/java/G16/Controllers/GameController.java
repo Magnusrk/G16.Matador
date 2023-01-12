@@ -135,6 +135,7 @@ public class GameController {
     }
 
     private void askPlayerActions(Player currentPlayer) {
+        int houses=0;
         ArrayList<String> options = new ArrayList<>();
         //Trade mulighed
         options.add(Language.getString("tradeAction"));
@@ -147,6 +148,13 @@ public class GameController {
         }
         options.add(Language.getString("mort"));
         options.add(Language.getString("payMort"));
+        for (Property property: ownedProperties) {
+           houses=property.getHouseCount();
+            if (houses>0) {
+                options.add(Language.getString("sellHouse"));
+            }
+        }
+
 
         HashMap<Color, Integer> streetHouseMap = new HashMap<>();
         for(Property prop : ownedProperties){
@@ -175,6 +183,8 @@ public class GameController {
             mortgage(currentPlayer);
         } else if (action.equals(Language.getString("payMort"))) {
             payMortgage(currentPlayer);
+        } else if (action.equals(Language.getString("sellHouse"))) {
+            sellHousePrompt(currentPlayer);
         }
         if(!action.equals(Language.getString("endTurnAction"))){
             askPlayerActions(currentPlayer);
@@ -651,8 +661,18 @@ public class GameController {
             addBalanceToPlayer(builder,-field.getHousePrice());
         }
         else {
-            mgui.buildHotel(field);
+            mgui.buildHotel(field,true);
             addBalanceToPlayer(builder,-field.getHousePrice());
+        }
+    }
+
+    public void sellHouse(Player builder, Property field, int houses){
+        if (field.getHouseCount()>1 && field.getHouseCount()<4){
+            mgui.buildHouse(field,houses);
+            addBalanceToPlayer(builder,field.getHousePrice()/2);
+        } else if (field.getHouseCount()==5) {
+            mgui.buildHotel(field,false);
+            addBalanceToPlayer(builder,5*field.getHousePrice()/2);
         }
     }
 
@@ -739,7 +759,7 @@ public class GameController {
         for (BuyableField buyableField : getOwnedBuyableFields(currentplayer)){
             if (!buyableField.getMortgaged()) {
                 mortgage = buyableField.getPrice() / 2;
-                ownedfields.add(buyableField.getName()+" "+mortgage);
+                ownedfields.add(buyableField.getName()+" "+mortgage+",-");
             }
         }
         ownedfields.add(Language.getString("cancelMortgage"));
@@ -765,7 +785,7 @@ public class GameController {
         for (BuyableField buyableField: getOwnedBuyableFields(currentplayer)){
             if (buyableField.getMortgaged()) {
                 mortgage = (int) ((buyableField.getPrice()/2)+(Math.round((buyableField.getPrice()*0.1)/100))*100);
-                mortgagedFields.add(buyableField.getName()+" "+mortgage);
+                mortgagedFields.add(buyableField.getName()+" "+mortgage+",-");
             }
         }
         mortgagedFields.add(Language.getString("cancelMortgage"));
@@ -779,6 +799,36 @@ public class GameController {
                 mortgage = (int) ((buyableField.getPrice()/2)+(Math.round((buyableField.getPrice()*0.1)/100))*100);
                 addBalanceToPlayer(currentplayer,-mortgage);
                 buyableField.setMortgaged(false);
+            }
+        }
+    }
+    public void sellHousePrompt(Player currentplayer){
+        int mortgage=0;
+        ArrayList<String> housedFields = new ArrayList<>();
+        for (Property property: getOwnedProperties(currentplayer)){
+
+                if (property.getHouseCount()>0 && property.getHouseCount()<4){
+                 mortgage=property.getHousePrice()/2;
+                    housedFields.add(property.getName()+ " "+mortgage+",-" );
+                } else if (property.getHouseCount()==5) {
+                    mortgage=property.getHousePrice()*5/2;
+                    housedFields.add(property.getName()+" "+ mortgage+",-");
+                }
+        }
+        housedFields.add(Language.getString("cancelSellHouse"));
+        String result= mgui.requestUserDropDown(Language.getString("payMortgage"),housedFields.toArray(new String[0]));
+        for (Property property:getOwnedProperties(currentplayer)){
+            if (result.equals(Language.getString("cancelSellHouse"))){
+
+            }
+            if ((property.getName()+" "+ mortgage).equals(result)){
+                if (property.getHouseCount()<5) {
+                    mgui.buildHouse(property, property.getHouseCount() - 1);
+                    addBalanceToPlayer(currentplayer,property.getHousePrice()/2);
+                } else if (property.getHouseCount()==5) {
+                    mgui.buildHotel(property,false);
+                    addBalanceToPlayer(currentplayer,-property.getHousePrice()*5/2);
+                }
             }
         }
     }

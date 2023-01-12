@@ -229,11 +229,18 @@ public class MatadorGUI {
         street.setHouses(houses);
     }
 
-    public void buildHotel(Property field){
-        field.setHouses(5);
-        GUI_Field plot = gui.getFields()[field.getID()];
-        GUI_Street street = (GUI_Street) plot;
-        street.setHotel(true);
+    public void buildHotel(Property field, Boolean build){
+        if (build) {
+            field.setHouses(5);
+            GUI_Field plot = gui.getFields()[field.getID()];
+            GUI_Street street = (GUI_Street) plot;
+            street.setHotel(true);
+        }else {
+            field.setHouses(0);
+            GUI_Field plot = gui.getFields()[field.getID()];
+            GUI_Street street = (GUI_Street) plot;
+            street.setHotel(false);
+        }
     }
 
     private String getTurnInfo(){

@@ -26,7 +26,7 @@ public class ChanceCardController {
     public void DoChanceCard(Player currentPlayer, GameController controller ) {
         this.controller = controller;
         //getNumchance()[0]
-        switch (getNumchance()[0]) {
+        switch (32) {
             case 1 -> wealthBasedCost(currentPlayer, "1",500,2000);
             case 2 -> wealthBasedCost(currentPlayer, "2",800,2300);
             case 3 -> giveOrTakeCash(currentPlayer,"3",-1000);
@@ -166,7 +166,7 @@ public class ChanceCardController {
     private void moveToStart(Player player){
         mgui.showMessage(Language.getString("case24"));
         mgui.displayChanceCards("24");
-        player.setPlayerPosition(0);
+        controller.movePlayer(player,40-player.getPlayerPosition());
         mgui.drawPlayerPosition(player);
     }
     private void moveForwardThree(Player player){
@@ -180,10 +180,12 @@ public class ChanceCardController {
         mgui.showMessage(Language.getString("case26"));
         mgui.displayChanceCards("26");
         if (player.getPlayerPosition()<3){
-            player.setPlayerPosition(39);
+            controller.movePlayer(player,player.getPlayerPosition()+35);
+            controller.landOnField(player,0);
             mgui.drawPlayerPosition(player);
         }else {
-            player.setPlayerPosition(player.getPlayerPosition() - 3);
+            controller.movePlayer(player,-3);
+            controller.landOnField(player,0);
             mgui.drawPlayerPosition(player);
         }
     }

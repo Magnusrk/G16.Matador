@@ -62,7 +62,7 @@ public class MatadorGUI {
 
         switch (playerNum) {
             case 0 -> {
-                GUI_Player guiPlayer = new GUI_Player(name,balance,new GUI_Car(Color.RED, Color.LIGHT_GRAY, CAR, HORIZONTAL_GRADIANT));
+                GUI_Player guiPlayer = new GUI_Player(name,balance,new GUI_Car(Color.BLUE, Color.WHITE, CAR, HORIZONTAL_GRADIANT));
                 gui.addPlayer(guiPlayer);
                 guiPlayers.add(guiPlayer);
             }

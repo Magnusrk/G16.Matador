@@ -9,17 +9,25 @@ playerName;Please write the player's name:
 
 
 
-start;Let's start
-startsub;Received 4k
+start;Start
+startsub;Receive 4k
+pressStart;Press OK to start!
 startdesc;Received 4000$ when they passed "Start"
 chance;Chance
+throwDice;Throw the dice;
+
 
 noowner;For sale
-tryluck;Take Chance card
+tryluck;Chance card
+takeChance;Take a chance card
+tax1;Pay \nincome- \ntax
+tax2;Extra\nfederal tax
+taxdesc1;Pay income-tax 4000,-
+taxdesc2;Pay extra federal-tax 2000,-
 price;Price:
 housePrice;House price:
 rent;Rent:
-allOwned;All properties are owned. Rental: 2x
+allOwned;All properties owned. Rent: 2x
 1house;1 House:
 2house;2 Houses:
 3house;3 Houses:
@@ -29,14 +37,18 @@ hotel;Hotel:
 1brew;1 Owned brewery:
 2brew;2 Owned breweries:
 
-1ship;1 owned Shipping company:
-2ship;2 owned Shipping companies:
-3ship;3 owned Shipping companies:
-4ship;4 owned Shipping companies:
+1ship;1 owned company:
+2ship;2 owned companies:
+3ship;3 owned companies:
+4ship;4 owned companies:
 
-prison;Prison
+jail;Jail
+visitJail;Just visiting
 parking;Parking
+parkingDesc;Take a break
 gotojail;Go to jail
+gotojailDesc;You are jailed. \nThrow two of a kind to be released.
+
 
 throwDice;throw the dice!
 chooseLanguage;Choose game language
@@ -76,13 +88,13 @@ prop; You are on a property without an owner. Would you like to buy this propert
 ship; You are on a shipping company without an owner. Would you like to buy this shipping company?
 brew; You are on a brewery without an owner. Would you like to buy this brewery?
 
-payrent; You landed on a field with an owner and you have to pay the rent.
+payrent; You landed on a field with an owner and you have to pay to
 propikkeråd; You landed on a property without an owner, but you cannot afford it.
 selfown; You have land on a field that you own. Nothing happens.
-
 bid; Do you want to bid on the field? The current bid is
 yourbid; How much do you want to bid?
 auctionWon; won the auction!
+tax;You pay taxes
 aucTur; 's turn
 
 
@@ -138,7 +150,7 @@ mort; Mortgage a house.
 payMort; Pay a mortgage.
 selectTradeReceiver; Who would you like to trade with?
 cancelTrade; Cancel trade
-createTradeOffer; Lav et foreslag til en handelsaftale. På nuværende tidspunkt er aftalen som følger:
+createTradeOffer;Make a trade offer. Currently the deal is:
 createCounterTradeOffer; Hvad vil du byde for de tilbudte aktiver?
 tradeOfferSetMoney; Money
 tradeOfferSetField; Properties

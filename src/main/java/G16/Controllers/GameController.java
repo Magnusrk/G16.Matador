@@ -80,6 +80,7 @@ public class GameController {
         String language = mgui.requestUserDropDown("Select game language", "Dansk", "English");
         if(language.equals("English")){
             Language.setLanguage("en");
+            mgui.updateGUI(fields);
         }
     }
 
@@ -111,7 +112,7 @@ public class GameController {
                 mgui.drawPlayerPosition(newPlayer);
                 playerNum++;
             }
-            mgui.showMessage("Tryk OK for at starte!");
+            mgui.showMessage(Language.getString("pressStart"));
         }
     }
 

@@ -62,7 +62,7 @@ public class MatadorGUI {
 
         switch (playerNum) {
             case 0 -> {
-                GUI_Player guiPlayer = new GUI_Player(name,balance,new GUI_Car(Color.RED, Color.LIGHT_GRAY, CAR, HORIZONTAL_GRADIANT));
+                GUI_Player guiPlayer = new GUI_Player(name,balance,new GUI_Car(Color.BLUE, Color.WHITE, CAR, HORIZONTAL_GRADIANT));
                 gui.addPlayer(guiPlayer);
                 guiPlayers.add(guiPlayer);
             }
@@ -123,7 +123,7 @@ public class MatadorGUI {
 
                 selectedPlayer.getCar().setPosition(gui.getFields()[currentPosition]);
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(100);
                 } catch (InterruptedException e){
                     System.out.println("Animation interrupted");
                 }
@@ -206,8 +206,12 @@ public class MatadorGUI {
      */
     public void setOwner(Field field,int pos){
         GUI_Field[] defaultFields = gui.getFields();
+        GUI_Field position =  defaultFields[pos];
         if (field instanceof BuyableField prop){
-            defaultFields[pos].setSubText(prop.getOwner().getName());
+           position.setSubText(prop.getOwner().getName());
+            if(position instanceof  GUI_Ownable ownable){
+                ownable.setBorder(guiPlayers.get(prop.getOwner().getID()).getPrimaryColor());
+            }
         }
     }
 
@@ -217,9 +221,14 @@ public class MatadorGUI {
      */
     public void resetOwner(Field field , int pos){
         GUI_Field[] defaultFields = gui.getFields();
+        GUI_Field position = defaultFields[pos];
         if (field instanceof BuyableField prop){
-            defaultFields[pos].setSubText(prop.getPrice()+",-");
+            position.setSubText(prop.getPrice()+",-");
+            if(position instanceof  GUI_Ownable ownable){
+                ownable.setBorder(null);
+            }
         }
+
     }
 
     public void buildHouse(Property field, int houses){
@@ -241,6 +250,11 @@ public class MatadorGUI {
             GUI_Street street = (GUI_Street) plot;
             street.setHotel(false);
         }
+    }
+
+    public void setBorderColor(Player player, Color color){
+        GUI_Field field = gui.getFields()[player.getPlayerPosition()];
+
     }
 
     private String getTurnInfo(){

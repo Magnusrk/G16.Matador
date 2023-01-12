@@ -19,6 +19,7 @@ import G16.PlayerUtils.Player;
 import G16.PlayerUtils.TradeOffer;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Street;
+import org.apache.commons.codec.language.bm.Lang;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -66,10 +67,20 @@ public class GameController {
 
     public void playGame() {
         new DevConsole(this);
+
+        setGameLanguage();
+
         setupPlayers();
         gameStarted = true;
         playTurn();
 
+    }
+
+    private void setGameLanguage(){
+        String language = mgui.requestUserDropDown("Select game language", "Dansk", "English");
+        if(language.equals("English")){
+            Language.setLanguage("en");
+        }
     }
 
     //Create players, limit amount of player to 3-6 players then add player's names.
@@ -307,7 +318,7 @@ public class GameController {
      */
     private void throwAndMove(Player currentPlayer) {
         //Throw Dice
-        mgui.showMessage(currentPlayer.getName() + " kast med terningen!");
+        mgui.showMessage(currentPlayer.getName() + " "+ Language.getString("throwDice"));
         boolean extra = true;
         /*This code is used to stay on the same players turn in case they land a dice roll of 2 of a kind.
          *It will stay in the while as long as 2 of a kind is rolled and stop if 2 of a kind is not rolled.
@@ -375,6 +386,7 @@ public class GameController {
      */
     public void landOnField (Player player, int diceSum){
         Field currentField = fields[player.getPlayerPosition()];
+        mgui.setBorderColor(player, Color.RED);
         if(currentField instanceof GoToJail){
             goToJail(player);
         } else if (currentField instanceof Property prop) {
@@ -393,7 +405,7 @@ public class GameController {
                 payShipRent(player, ship);
                 }
             } else if (currentField instanceof Tax tax){
-                mgui.showMessage("Du betaler skat");
+                mgui.showMessage(Language.getString("tax"));
                 addBalanceToPlayer(player, -tax.getTax());
             } else if (currentField instanceof Brewery brew){
                 if (brew.getOwner()==null){
@@ -404,7 +416,6 @@ public class GameController {
             } else if (currentField instanceof Chance chance){
             ccController.DoChanceCard(player,this);
         }
-
     }
     /** Used to give money to a player who passes start
      * @param player is the player who get the money
@@ -471,31 +482,32 @@ public class GameController {
             mgui.showMessage(Language.getString("betalt"));
             throwAndMove(player);
         } else {
+            mgui.showMessage(Language.getString("3kast"));
+            for(int i=0; i<3; i++){
+                int[] dieValue = die.throwDice();
+                mgui.drawDice(dieValue[0], dieValue[1]);
 
-            int[] dieValue = die.throwDice();
-            mgui.drawDice(dieValue[0], dieValue[1]);
-
-            if (dieValue[0] == dieValue[1]) {
-                player.setJailed(false);
-                movePlayer(player, dieValue[0] + dieValue[1]);
-                landOnField(player, dieValue[0] + dieValue[1]);
-                mgui.showMessage(Language.getString("2ens"));
-                mgui.drawPlayerPosition(player);
-                extraCounter++;
-                throwAndMove(player);
-            } else {
-                player.increaseTurnsInJail();
-                mgui.showMessage(Language.getString("ikke2ens"));
-                if (player.getTurnsInJail() > 2) {
-                    addBalanceToPlayer(player, -1000);
+                if (dieValue[0] == dieValue[1]) {
                     player.setJailed(false);
+                    mgui.showMessage(Language.getString("2ens"));
                     movePlayer(player, dieValue[0] + dieValue[1]);
-                    landOnField(player, dieValue[0] + dieValue[1]);
-                    mgui.showMessage(Language.getString("3ture"));
                     mgui.drawPlayerPosition(player);
-                    movePlayer(player, dieValue[0] + dieValue[1]);
                     landOnField(player, dieValue[0] + dieValue[1]);
-
+                    extraCounter++;
+                    throwAndMove(player);
+                    break;
+                } else {
+                    player.increaseTurnsInJail();
+                    mgui.showMessage(Language.getString("ikke2ens"));
+                    if (player.getTurnsInJail() > 8) {
+                        addBalanceToPlayer(player, -1000);
+                        player.setJailed(false);
+                        mgui.showMessage(Language.getString("3ture"));
+                        movePlayer(player, dieValue[0] + dieValue[1]);
+                        mgui.drawPlayerPosition(player);
+                        landOnField(player, dieValue[0] + dieValue[1]);
+                        break;
+                    }
                 }
             }
         }
@@ -530,7 +542,7 @@ public class GameController {
                 if (TEST_MODE){
                     results = Language.getString("yesTxt");
                 } else {
-                    results = mgui.requestUserButton(Language.getString("ship") + ShippingCompanyName.getTitle() + Language.getString("ship2"), Language.getString("yesTxt"), Language.getString("noTxt"));
+                    results = mgui.requestUserButton(Language.getString("ship")+" "+  ShippingCompanyName.getTitle() + Language.getString("ship2"), Language.getString("yesTxt"), Language.getString("noTxt"));
                 }
                 if (results.equals(Language.getString("yesTxt"))) {
                     currentPlayer.setShipsOwned(currentPlayer.getShipsOwned()+1);
@@ -596,8 +608,12 @@ public class GameController {
                 }
             }
         }
-        else
-        {
+        else {
+            if (currentField.getOwner().getJailed()){
+                mgui.showMessage(Language.getString("ownerJailed"));
+            } else if (currentField.getMortgaged()) {
+                mgui.showMessage(Language.getString("mortgaged"));
+            }
             mgui.showMessage(Language.getString("selfown"));
         }
     }
@@ -650,6 +666,7 @@ public class GameController {
                 if (prop.getOwner()==bankruptPlayer){
                     prop.setOwner(null);
                     mgui.resetOwner(prop,i);
+                    mgui.buildHouse((Property) prop,0);
                 }
             }
         }

@@ -76,9 +76,11 @@ public class MatadorGUI {
             if (fields[i] instanceof  Tax tax) {
                 if (Objects.equals(tax.getName(), "Indkomstskat")){
                     defaultFields[i].setTitle(Language.getString("tax1"));
+                    defaultFields[i].setSubText(Language.getString("taxPrice1"));
                     defaultFields[i].setDescription(Language.getString("taxdesc1"));
                 } else {
                     defaultFields[i].setTitle(Language.getString("tax2"));
+                    defaultFields[i].setSubText(Language.getString("taxPrice2"));
                     defaultFields[i].setDescription(Language.getString("taxdesc2"));
                 }
             }

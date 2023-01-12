@@ -16,9 +16,6 @@ import G16.Language;
 import G16.PlayerUtils.Die;
 import G16.PlayerUtils.FakeDie;
 import G16.PlayerUtils.Player;
-import G16.PlayerUtils.TradeOffer;
-import gui_fields.GUI_Field;
-import gui_fields.GUI_Street;
 
 import java.awt.*;
 import java.util.ArrayList;

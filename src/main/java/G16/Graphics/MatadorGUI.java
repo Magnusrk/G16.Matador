@@ -7,14 +7,15 @@ import G16.Fields.BuyableFields.Property;
 import G16.Fields.BuyableFields.ShippingCompany;
 import G16.Language;
 import G16.PlayerUtils.Player;
-import gui_fields.*;
-import gui_main.GUI;
+import G16.mguiPatched.gui_fields.GUI_Ownable;
+import G16.mguiPatched.gui_fields.GUI_Tax;
+import G16.mguiPatched.gui_main.GUI;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-import static gui_fields.GUI_Car.Pattern.*;
-import static gui_fields.GUI_Car.Type.*;
+import static G16.mguiPatched.gui_fields.GUI_Car.Pattern.*;
+import static G16.mguiPatched.gui_fields.GUI_Car.Type.*;
 /** Represents the GUI of the game
  * @author G16
  * @version 0.1
@@ -22,14 +23,14 @@ import static gui_fields.GUI_Car.Type.*;
 public class MatadorGUI {
 
     protected final GUI gui; //Instance of the diplomitdtu.matadorGUI
-    protected final ArrayList<GUI_Player> guiPlayers = new ArrayList<>();
+    protected final ArrayList<G16.mguiPatched.gui_fields.GUI_Player> guiPlayers = new ArrayList<>();
 
     protected GameController gc;
 
     public MatadorGUI(GameController gc, Field[] fields){
         this.gc = gc;
 
-        GUI_Field[] defaultFields = getFields();
+        G16.mguiPatched.gui_fields.GUI_Field[] defaultFields = getFields();
         for (int i = 0; i<defaultFields.length; i++){
             defaultFields[0].setSubText(Language.getString("startsub"));
             defaultFields[0].setDescription(Language.getString("startdesc"));
@@ -62,29 +63,29 @@ public class MatadorGUI {
 
         switch (playerNum) {
             case 0 -> {
-                GUI_Player guiPlayer = new GUI_Player(name,balance,new GUI_Car(Color.RED, Color.LIGHT_GRAY, CAR, HORIZONTAL_GRADIANT));
+                G16.mguiPatched.gui_fields.GUI_Player guiPlayer = new G16.mguiPatched.gui_fields.GUI_Player(name,balance,new G16.mguiPatched.gui_fields.GUI_Car(Color.RED, Color.LIGHT_GRAY, CAR, HORIZONTAL_GRADIANT));
                 gui.addPlayer(guiPlayer);
                 guiPlayers.add(guiPlayer);
             }
             case 1-> {
-                GUI_Player guiPlayer = new GUI_Player(name,balance,new GUI_Car(Color.YELLOW, Color.BLUE, TRACTOR, DIAGONAL_DUAL_COLOR));
+                G16.mguiPatched.gui_fields.GUI_Player guiPlayer = new G16.mguiPatched.gui_fields.GUI_Player(name,balance,new G16.mguiPatched.gui_fields.GUI_Car(Color.YELLOW, Color.BLUE, TRACTOR, DIAGONAL_DUAL_COLOR));
                 gui.addPlayer(guiPlayer);
                 guiPlayers.add(guiPlayer);
             }case 2-> {
-                GUI_Player guiPlayer = new GUI_Player(name,balance,new GUI_Car(Color.RED, Color.YELLOW, RACECAR, HORIZONTAL_LINE));
+                G16.mguiPatched.gui_fields.GUI_Player guiPlayer = new G16.mguiPatched.gui_fields.GUI_Player(name,balance,new G16.mguiPatched.gui_fields.GUI_Car(Color.RED, Color.YELLOW, RACECAR, HORIZONTAL_LINE));
                 gui.addPlayer(guiPlayer);
                 guiPlayers.add(guiPlayer);
             }case 3-> {
-                GUI_Player guiPlayer = new GUI_Player(name,balance,new GUI_Car(Color.LIGHT_GRAY, Color.LIGHT_GRAY, UFO, HORIZONTAL_DUAL_COLOR));
+                G16.mguiPatched.gui_fields.GUI_Player guiPlayer = new G16.mguiPatched.gui_fields.GUI_Player(name,balance,new G16.mguiPatched.gui_fields.GUI_Car(Color.LIGHT_GRAY, Color.LIGHT_GRAY, UFO, HORIZONTAL_DUAL_COLOR));
                 gui.addPlayer(guiPlayer);
                 guiPlayers.add(guiPlayer);
             }
             case 4-> {
-                GUI_Player guiPlayer = new GUI_Player(name,balance,new GUI_Car(Color.BLACK, Color.WHITE, CAR, CHECKERED));
+                G16.mguiPatched.gui_fields.GUI_Player guiPlayer = new G16.mguiPatched.gui_fields.GUI_Player(name,balance,new G16.mguiPatched.gui_fields.GUI_Car(Color.BLACK, Color.WHITE, CAR, CHECKERED));
                 gui.addPlayer(guiPlayer);
                 guiPlayers.add(guiPlayer);
             }case 5-> {
-                GUI_Player guiPlayer = new GUI_Player(name,balance,new GUI_Car(Color.PINK, Color.MAGENTA, TRACTOR, HORIZONTAL_GRADIANT));
+                G16.mguiPatched.gui_fields.GUI_Player guiPlayer = new G16.mguiPatched.gui_fields.GUI_Player(name,balance,new G16.mguiPatched.gui_fields.GUI_Car(Color.PINK, Color.MAGENTA, TRACTOR, HORIZONTAL_GRADIANT));
                 gui.addPlayer(guiPlayer);
                 guiPlayers.add(guiPlayer);
             }
@@ -95,7 +96,7 @@ public class MatadorGUI {
      * @param player Player object of the player.
      */
     public void removeCar(Player player){
-        GUI_Player bankruptplayer = guiPlayers.get(player.getID());
+        G16.mguiPatched.gui_fields.GUI_Player bankruptplayer = guiPlayers.get(player.getID());
         if(bankruptplayer.getCar().getPosition() != null){
             bankruptplayer.getCar().getPosition().drawCar(bankruptplayer, false);
         }
@@ -111,7 +112,7 @@ public class MatadorGUI {
      * @param player player object of the player who should be updated.
      */
     public void drawPlayerPosition(Player player){
-        GUI_Player selectedPlayer = guiPlayers.get(player.getID());
+        G16.mguiPatched.gui_fields.GUI_Player selectedPlayer = guiPlayers.get(player.getID());
         int fieldCount = gui.getFields().length;
         int currentPosition = player.getPreviousPlayerPosition();
 
@@ -204,7 +205,7 @@ public class MatadorGUI {
      * @param pos The position of the field.
      */
     public void setOwner(Field field,int pos){
-        GUI_Field[] defaultFields = gui.getFields();
+        G16.mguiPatched.gui_fields.GUI_Field[] defaultFields = gui.getFields();
         if (field instanceof BuyableField prop){
             defaultFields[pos].setSubText(prop.getOwner().getName());
         }
@@ -215,7 +216,7 @@ public class MatadorGUI {
      * @param pos The position of the field.
      */
     public void resetOwner(Field field , int pos){
-        GUI_Field[] defaultFields = gui.getFields();
+        G16.mguiPatched.gui_fields.GUI_Field[] defaultFields = gui.getFields();
         if (field instanceof BuyableField prop){
             defaultFields[pos].setSubText(prop.getPrice()+",-");
         }
@@ -223,15 +224,15 @@ public class MatadorGUI {
 
     public void buildHouse(Property field, int houses){
         field.setHouses(houses);
-        GUI_Field plot = gui.getFields()[field.getID()];
-        GUI_Street street = (GUI_Street) plot;
+        G16.mguiPatched.gui_fields.GUI_Field plot = gui.getFields()[field.getID()];
+        G16.mguiPatched.gui_fields.GUI_Street street = (G16.mguiPatched.gui_fields.GUI_Street) plot;
         street.setHouses(houses);
     }
 
     public void buildHotel(Property field){
         field.setHouses(5);
-        GUI_Field plot = gui.getFields()[field.getID()];
-        GUI_Street street = (GUI_Street) plot;
+        G16.mguiPatched.gui_fields.GUI_Field plot = gui.getFields()[field.getID()];
+        G16.mguiPatched.gui_fields.GUI_Street street = (G16.mguiPatched.gui_fields.GUI_Street) plot;
         street.setHotel(true);
     }
 
@@ -246,49 +247,50 @@ public class MatadorGUI {
     /** Manually instantiated GUI_Field array. Copied from diplomitdtu.matadorgui
      * @return GUI_Field[] array of default fields.
      */
-    public GUI_Field[] getFields() {
-        GUI_Field[] fields = new GUI_Field[40];
+    public G16.mguiPatched.gui_fields.GUI_Field[] getFields() {
+        G16.mguiPatched.gui_fields.GUI_Field[] fields = new G16.mguiPatched.gui_fields.GUI_Field[40];
         int i = 0;
-        fields[i++] = new GUI_Start("Start", "Modtag: 4k", "Modtag kr. 200,-\nnår de passerer start", Color.RED, Color.BLACK);
-        fields[i++] = new GUI_Street("Rødovrevej", "1200,-", "Rødovrevej", "Leje:  20", new Color(75, 155, 225), Color.WHITE);
-        fields[i++] = new GUI_Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
-        fields[i++] = new GUI_Street("Hvidovrevej", "Pris:  60", "Hvidovrevej", "Leje:  20", new Color(75, 155, 225), Color.WHITE);
-        fields[i++] = new GUI_Tax("Betal\nindkomst-\nskat", "Betal 4000,-", "Betal indkomstskat 4000,-", Color.GRAY, Color.BLACK);
-        fields[i++] = new GUI_Shipping("default", "Forsea", "Pris:  200", "Øresundsredderiet", "Leje:  75", Color.WHITE, Color.BLACK);
-        fields[i++] = new GUI_Street("Roskildevej", "Pris:  100", "Roskildevej", "Leje:  40", new Color(255, 135, 120), Color.BLACK);
-        fields[i++] = new GUI_Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
-        fields[i++] = new GUI_Street("Valby Langgade", "Pris:  100", "Valby Langgade", "Leje:  40", new Color(255, 135, 120), Color.BLACK);
-        fields[i++] = new GUI_Street("Allégade", "Pris:  120", "Allégade", "Leje:  45", new Color(255, 135, 120), Color.BLACK);
-        fields[i++] = new GUI_Jail("default", "Fængsel", "Fængsel", "På besøg i fængslet", new Color(125, 125, 125), Color.BLACK);
-        fields[i++] = new GUI_Street("Frederiksberg Allé", "Pris:  140", "Frederiksberg Allé", "Leje:  50", new Color(102, 204, 0), Color.BLACK);
-        fields[i++] = new GUI_Brewery("src/main/resources/sqaus.png", "Sqaush", "Pris:  150", "Tuborg bryggeri", "10 x [Terningslag]", Color.BLACK, Color.WHITE);
-        fields[i++] = new GUI_Street("Bülowsvej", "Pris:  140", "Bülowsvej", "Leje:  50", new Color(102, 204, 0), Color.BLACK);
-        fields[i++] = new GUI_Street("Gammel Kongevej", "Pris:  140", "Gammel Kongevej", "Leje:  50", new Color(102, 204, 0), Color.BLACK);
-        fields[i++] = new GUI_Shipping("default", "Molslinjen", "Pris:  200", "D.F.D.S.", "Leje:  75", Color.WHITE, Color.BLACK);
-        fields[i++] = new GUI_Street("Bernstorffsvej", "Pris:  180", "Bernstorffsvej", "Leje:  60", new Color(153, 153, 153), Color.BLACK);
-        fields[i++] = new GUI_Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
-        fields[i++] = new GUI_Street("Hellerupvej", "Pris:  180", "Hellerupvej", "Leje:  60", new Color(153, 153, 153), Color.BLACK);
-        fields[i++] = new GUI_Street("Strandvejen", "Pris:  180", "Strandvejen", "Leje:  60", new Color(153, 153, 153), Color.BLACK);
-        fields[i++] = new GUI_Refuge("default", "Helle", "Helle", "Ta' en pause", Color.WHITE, Color.BLACK);
-        fields[i++] = new GUI_Street("Trianglen", "Pris:  220", "Trianglen", "Leje:  70", Color.RED, Color.BLACK);
-        fields[i++] = new GUI_Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
-        fields[i++] = new GUI_Street("Østerbrogade", "Pris:  220", "Østerbrogade", "Leje:  70", Color.RED, Color.BLACK);
-        fields[i++] = new GUI_Street("Grønningen", "Pris:  240", "Grønningen", "Leje:  80", Color.RED, Color.BLACK);
-        fields[i++] = new GUI_Shipping("default", "Scandlines", "Pris:  200", "Ø.S. redderiet", "Leje:  75", Color.WHITE, Color.BLACK);
-        fields[i++] = new GUI_Street("Bredgade", "Pris:  260", "Bredgade", "Leje:  80", Color.WHITE, Color.BLACK);
-        fields[i++] = new GUI_Street("Kgs. Nytorv", "Scandlines", "Kongens Nytorv", "Leje:  80", Color.WHITE, Color.BLACK);
-        fields[i++] = new GUI_Brewery("src/main/resources/coca.png", "Coca-Cola", "Pris:  150", "Carlsberg bryggeri", "10 x [Terningslag]", Color.BLACK, Color.WHITE);
-        fields[i++] = new GUI_Street("Østergade", "Pris:  280", "Østergade", "Leje:  85", Color.WHITE, Color.BLACK);
-        fields[i++] = new GUI_Jail("default", "Gå i fængsel", "Gå i fængsel", "De fængsles\nSlå to ens for at komme ud", new Color(125, 125, 125), Color.BLACK);
-        fields[i++] = new GUI_Street("Amagertorv", "Pris:  300", "Amagertorv", "Leje:  95", new Color(255, 255, 50), Color.BLACK);
-        fields[i++] = new GUI_Street("Vimmelskaftet", "Pris:  300", "Vimmelskaftet", "Leje:  95", new Color(255, 255, 50), Color.BLACK);
-        fields[i++] = new GUI_Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
-        fields[i++] = new GUI_Street("Nygade", "Pris:  320", "Nygade", "Leje:  100", new Color(255, 255, 50), Color.BLACK);
-        fields[i++] = new GUI_Shipping("default", "D.F.D.S", "Pris:  200", "Bornholms redderi", "Leje:  75", Color.WHITE, Color.BLACK);
-        fields[i++] = new GUI_Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
-        fields[i++] = new GUI_Street("Frederiksberggade", "Pris:  350", "Frederiksberggade", "Leje:  120", new Color(150, 60, 150), Color.WHITE);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Start("Start", "Modtag: 4k", "Modtag kr. 200,-\nnår de passerer start", Color.RED, Color.BLACK);
+        (GUI_Ownable)fields[i]
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Street("Rødovrevej", "1200,-", "Rødovrevej", "Leje:  20", new Color(75, 155, 225), Color.WHITE);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Street("Hvidovrevej", "Pris:  60", "Hvidovrevej", "Leje:  20", new Color(75, 155, 225), Color.WHITE);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Tax("Betal\nindkomst-\nskat", "Betal 4000,-", "Betal indkomstskat 4000,-", Color.GRAY, Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Shipping("default", "Forsea", "Pris:  200", "Øresundsredderiet", "Leje:  75", Color.WHITE, Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Street("Roskildevej", "Pris:  100", "Roskildevej", "Leje:  40", new Color(255, 135, 120), Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Street("Valby Langgade", "Pris:  100", "Valby Langgade", "Leje:  40", new Color(255, 135, 120), Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Street("Allégade", "Pris:  120", "Allégade", "Leje:  45", new Color(255, 135, 120), Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Jail("default", "Fængsel", "Fængsel", "På besøg i fængslet", new Color(125, 125, 125), Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Street("Frederiksberg Allé", "Pris:  140", "Frederiksberg Allé", "Leje:  50", new Color(102, 204, 0), Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Brewery("src/main/resources/sqaus.png", "Sqaush", "Pris:  150", "Tuborg bryggeri", "10 x [Terningslag]", Color.BLACK, Color.WHITE);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Street("Bülowsvej", "Pris:  140", "Bülowsvej", "Leje:  50", new Color(102, 204, 0), Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Street("Gammel Kongevej", "Pris:  140", "Gammel Kongevej", "Leje:  50", new Color(102, 204, 0), Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Shipping("default", "Molslinjen", "Pris:  200", "D.F.D.S.", "Leje:  75", Color.WHITE, Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Street("Bernstorffsvej", "Pris:  180", "Bernstorffsvej", "Leje:  60", new Color(153, 153, 153), Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Street("Hellerupvej", "Pris:  180", "Hellerupvej", "Leje:  60", new Color(153, 153, 153), Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Street("Strandvejen", "Pris:  180", "Strandvejen", "Leje:  60", new Color(153, 153, 153), Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Refuge("default", "Helle", "Helle", "Ta' en pause", Color.WHITE, Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Street("Trianglen", "Pris:  220", "Trianglen", "Leje:  70", Color.RED, Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Street("Østerbrogade", "Pris:  220", "Østerbrogade", "Leje:  70", Color.RED, Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Street("Grønningen", "Pris:  240", "Grønningen", "Leje:  80", Color.RED, Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Shipping("default", "Scandlines", "Pris:  200", "Ø.S. redderiet", "Leje:  75", Color.WHITE, Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Street("Bredgade", "Pris:  260", "Bredgade", "Leje:  80", Color.WHITE, Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Street("Kgs. Nytorv", "Scandlines", "Kongens Nytorv", "Leje:  80", Color.WHITE, Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Brewery("src/main/resources/coca.png", "Coca-Cola", "Pris:  150", "Carlsberg bryggeri", "10 x [Terningslag]", Color.BLACK, Color.WHITE);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Street("Østergade", "Pris:  280", "Østergade", "Leje:  85", Color.WHITE, Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Jail("default", "Gå i fængsel", "Gå i fængsel", "De fængsles\nSlå to ens for at komme ud", new Color(125, 125, 125), Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Street("Amagertorv", "Pris:  300", "Amagertorv", "Leje:  95", new Color(255, 255, 50), Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Street("Vimmelskaftet", "Pris:  300", "Vimmelskaftet", "Leje:  95", new Color(255, 255, 50), Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Street("Nygade", "Pris:  320", "Nygade", "Leje:  100", new Color(255, 255, 50), Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Shipping("default", "D.F.D.S", "Pris:  200", "Bornholms redderi", "Leje:  75", Color.WHITE, Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Chance("?", "Prøv lykken", "Ta' et chancekort.", new Color(204, 204, 204), Color.BLACK);
+        fields[i++] = new G16.mguiPatched.gui_fields.GUI_Street("Frederiksberggade", "Pris:  350", "Frederiksberggade", "Leje:  120", new Color(150, 60, 150), Color.WHITE);
         fields[i++] = new GUI_Tax("Ekstra-\nordinær\nstatsskat", "Betal 2000,-", "Betal ekstraordinær\nstatsskat: 2000,-", Color.GRAY, Color.BLACK);
-        fields[i] = new GUI_Street("Rådhuspladsen", "Pris:  400", "Rådhuspladsen", "Leje:  150", new Color(150, 60, 150), Color.WHITE);
+        fields[i] = new G16.mguiPatched.gui_fields.GUI_Street("Rådhuspladsen", "Pris:  400", "Rådhuspladsen", "Leje:  150", new Color(150, 60, 150), Color.WHITE);
         return fields;
     }
 }

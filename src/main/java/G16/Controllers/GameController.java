@@ -645,6 +645,7 @@ public class GameController {
                 if (prop.getOwner()==bankruptPlayer){
                     prop.setOwner(null);
                     mgui.resetOwner(prop,i);
+                    mgui.buildHouse((Property) prop,0);
                 }
             }
         }

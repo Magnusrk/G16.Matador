@@ -40,8 +40,8 @@ public class TestingGUI extends MatadorGUI{
 
     @Override
     public int requestInteger(String message, int minValue, int maxValue) {
-
-        return minValue;
+        int choice = (int) ((Math.random() * (maxValue-minValue)));
+        return choice+minValue;
     }
 
     @Override

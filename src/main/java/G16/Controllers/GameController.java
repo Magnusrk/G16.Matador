@@ -461,31 +461,32 @@ public class GameController {
             mgui.showMessage(Language.getString("betalt"));
             throwAndMove(player);
         } else {
+            mgui.showMessage(Language.getString("3kast"));
+            for(int i=0; i<3; i++){
+                int[] dieValue = die.throwDice();
+                mgui.drawDice(dieValue[0], dieValue[1]);
 
-            int[] dieValue = die.throwDice();
-            mgui.drawDice(dieValue[0], dieValue[1]);
-
-            if (dieValue[0] == dieValue[1]) {
-                player.setJailed(false);
-                movePlayer(player, dieValue[0] + dieValue[1]);
-                landOnField(player, dieValue[0] + dieValue[1]);
-                mgui.showMessage(Language.getString("2ens"));
-                mgui.drawPlayerPosition(player);
-                extraCounter++;
-                throwAndMove(player);
-            } else {
-                player.increaseTurnsInJail();
-                mgui.showMessage(Language.getString("ikke2ens"));
-                if (player.getTurnsInJail() > 2) {
-                    addBalanceToPlayer(player, -1000);
+                if (dieValue[0] == dieValue[1]) {
                     player.setJailed(false);
+                    mgui.showMessage(Language.getString("2ens"));
                     movePlayer(player, dieValue[0] + dieValue[1]);
-                    landOnField(player, dieValue[0] + dieValue[1]);
-                    mgui.showMessage(Language.getString("3ture"));
                     mgui.drawPlayerPosition(player);
-                    movePlayer(player, dieValue[0] + dieValue[1]);
                     landOnField(player, dieValue[0] + dieValue[1]);
-
+                    extraCounter++;
+                    throwAndMove(player);
+                    break;
+                } else {
+                    player.increaseTurnsInJail();
+                    mgui.showMessage(Language.getString("ikke2ens"));
+                    if (player.getTurnsInJail() > 8) {
+                        addBalanceToPlayer(player, -1000);
+                        player.setJailed(false);
+                        mgui.showMessage(Language.getString("3ture"));
+                        movePlayer(player, dieValue[0] + dieValue[1]);
+                        mgui.drawPlayerPosition(player);
+                        landOnField(player, dieValue[0] + dieValue[1]);
+                        break;
+                    }
                 }
             }
         }

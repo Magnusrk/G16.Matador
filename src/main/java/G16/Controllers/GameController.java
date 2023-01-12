@@ -394,7 +394,6 @@ public class GameController {
             } else if (currentField instanceof Chance chance){
             ccController.DoChanceCard(player,this);
         }
-
     }
     /** Used to give money to a player who passes start
      * @param player is the player who get the money

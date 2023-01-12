@@ -123,7 +123,7 @@ public class MatadorGUI {
 
                 selectedPlayer.getCar().setPosition(gui.getFields()[currentPosition]);
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(100);
                 } catch (InterruptedException e){
                     System.out.println("Animation interrupted");
                 }

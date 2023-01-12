@@ -365,6 +365,7 @@ public class GameController {
      */
     public void landOnField (Player player, int diceSum){
         Field currentField = fields[player.getPlayerPosition()];
+        mgui.setBorderColor(player, Color.RED);
         if(currentField instanceof GoToJail){
             goToJail(player);
         } else if (currentField instanceof Property prop) {

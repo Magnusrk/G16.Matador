@@ -78,8 +78,11 @@ ship2; shipping company without an owner. Would you like to buy this shipping co
 brew; You are on a brewery without an owner. Would you like to buy this brewery?
 
 payrent; You landed on a field with an owner and you have to pay the rent.
+ownerJailed;Owner of the property is imprisoned. You don't have to pay the rent.
+mortaged;The owner has pledged the property so you don't have to pay the rent.
 propikkeråd; You landed on a property without an owner, but you cannot afford it.
 selfown; You have land on a field that you own. Nothing happens.
+tax;You pay tax
 
 bid; Do you want to bid on the field? The current bid is
 yourbid; How much do you want to bid?
@@ -132,11 +135,13 @@ getPlayerAction;Choose an action.
 cancelBuyHouseText; Cancel
 buyHouseMessage; Choose which street you want build a house or hotel on.
 
+toPay;At betale:
+
 mortgage; Which property do you want to mortgage?
 payMortgage; Which mortgage do you want to pay?
-cancelMortgage; Cancel mortgage.
-mort; Mortgage a house.
-payMort; Pay a mortgage.
+cancelMortgage; Cancel mortgage
+mort; Mortgage a house
+payMort; Pay a mortgage
 selectTradeReceiver; Who would you like to trade with?
 cancelTrade; Cancel trade
 createTradeOffer; Lav et foreslag til en handelsaftale. På nuværende tidspunkt er aftalen som følger:

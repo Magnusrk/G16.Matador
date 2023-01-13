@@ -173,8 +173,8 @@ public class ChanceCardController {
         mgui.showMessage(Language.getString("case25"));
         mgui.displayChanceCards("25");
         controller.movePlayer(player,3);
-        controller.landOnField(player,0);
         mgui.drawPlayerPosition(player);
+        controller.landOnField(player,0);
         //player.setPlayerPosition(player.getPlayerPosition()+3);
     }
     private void moveBackThree(Player player){
@@ -182,12 +182,12 @@ public class ChanceCardController {
         mgui.displayChanceCards("26");
         if (player.getPlayerPosition()<3){
             controller.movePlayer(player,player.getPlayerPosition()+35);
-            controller.landOnField(player,0);
             mgui.drawPlayerPosition(player);
+            controller.landOnField(player,0);
         }else {
             controller.movePlayer(player,-3);
-            controller.landOnField(player,0);
             mgui.drawPlayerPosition(player);
+            controller.landOnField(player,0);
         }
     }
     private void moveToShip(Player player, boolean doubleRent){

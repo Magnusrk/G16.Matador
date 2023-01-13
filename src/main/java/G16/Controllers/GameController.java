@@ -315,7 +315,10 @@ public class GameController {
 
             mgui.drawDice(diceThrow[0], diceThrow[1]);
 
-            if (currentPlayer.getJailed()) {
+            if (currentPlayer.getBankrupt()){
+                break;
+            }
+            else if (currentPlayer.getJailed()) {
                 break;
             } else if (diceThrow[0] == diceThrow[1]) {
                 extraCounter++;
@@ -623,8 +626,9 @@ public class GameController {
                 mgui.showMessage(Language.getString("ownerJailed"));
             } else if (currentField.getMortgaged()) {
                 mgui.showMessage(Language.getString("mortgaged"));
-            }
+            }else {
             mgui.showMessage(Language.getString("selfown"));
+            }
         }
     }
     /** Used to pay rent when a player lands on a ferry field
@@ -643,7 +647,13 @@ public class GameController {
                 addBalanceToPlayer(currentPlayer,-currentPlayer.getPlayerBalance() - 1);
             }
         } else {
-            mgui.showMessage(Language.getString("selfown"));
+            if (currentField.getOwner().getJailed()){
+                mgui.showMessage(Language.getString("ownerJailed"));
+            } else if (currentField.getMortgaged()) {
+                mgui.showMessage(Language.getString("mortgaged"));
+            }else {
+                mgui.showMessage(Language.getString("selfown"));
+            }
         }
     }
     /** Used to pay rent when a player lands on a brewery field
@@ -663,7 +673,13 @@ public class GameController {
                 addBalanceToPlayer(currentPlayer,-currentPlayer.getPlayerBalance() - 1);
             }
         } else{
+        if (currentField.getOwner().getJailed()){
+            mgui.showMessage(Language.getString("ownerJailed"));
+        } else if (currentField.getMortgaged()) {
+            mgui.showMessage(Language.getString("mortgaged"));
+        }else {
             mgui.showMessage(Language.getString("selfown"));
+        }
         }
     }
     /** Used to remove the owner of buyable fields if they're owned by a bankrupt player.

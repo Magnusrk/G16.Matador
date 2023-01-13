@@ -623,8 +623,9 @@ public class GameController {
                 mgui.showMessage(Language.getString("ownerJailed"));
             } else if (currentField.getMortgaged()) {
                 mgui.showMessage(Language.getString("mortgaged"));
-            }
+            }else {
             mgui.showMessage(Language.getString("selfown"));
+            }
         }
     }
     /** Used to pay rent when a player lands on a ferry field

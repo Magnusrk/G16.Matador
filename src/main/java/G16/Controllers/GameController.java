@@ -716,16 +716,6 @@ public class GameController {
         }
     }
 
-    public void sellHouse(Player builder, Property field, int houses){
-        if (field.getHouseCount()>1 && field.getHouseCount()<4){
-            mgui.buildHouse(field,houses);
-            addBalanceToPlayer(builder,field.getHousePrice()/2);
-        } else if (field.getHouseCount()==5) {
-            mgui.buildHotel(field,false);
-            addBalanceToPlayer(builder,5*field.getHousePrice()/2);
-        }
-    }
-
     /** Used to show whose turn it is on the UI
      *@return String
      */

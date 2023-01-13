@@ -42,6 +42,8 @@ public class GameController {
     private int extraCounter = 0;
     private boolean gameStarted = false;
     private boolean auctionMode =false;
+
+    private boolean bankruptcySavingState =false;
     ChanceCardController ccController;
     TradeController tradeController;
 
@@ -461,11 +463,16 @@ public class GameController {
         }
 
         if (response.equals(Language.getString("injailpay"))) {
-            addBalanceToPlayer(player, -1000);
-            player.setJailed(false);
-            mgui.updatePlayerBalance(player);
-            mgui.showMessage(Language.getString("betalt"));
-            throwAndMove(player);
+            if (player.getPlayerBalance()< 1000){
+                mgui.showMessage(Language.getString("injailcantpay"));
+                inJail(player);
+            } else {
+                addBalanceToPlayer(player, -1000);
+                player.setJailed(false);
+                mgui.updatePlayerBalance(player);
+                mgui.showMessage(Language.getString("betalt"));
+                throwAndMove(player);
+            }
         } else {
             mgui.showMessage(Language.getString("3kast"));
             for(int i=0; i<3; i++){
@@ -486,12 +493,18 @@ public class GameController {
                     mgui.showMessage(Language.getString("ikke2ens"));
                     if (player.getTurnsInJail() > 8) {
                         addBalanceToPlayer(player, -1000);
-                        player.setJailed(false);
-                        mgui.showMessage(Language.getString("3ture"));
-                        movePlayer(player, dieValue[0] + dieValue[1]);
-                        mgui.drawPlayerPosition(player);
-                        landOnField(player, dieValue[0] + dieValue[1]);
-                        break;
+
+                        if (player.getPlayerBalance()< 0) {
+                            mgui.showMessage(Language.getString("3tureBankrupt"));
+                            checkPlayerBankrupt(player);
+                        } else {
+                            player.setJailed(false);
+                            movePlayer(player, dieValue[0] + dieValue[1]);
+                            mgui.showMessage(Language.getString("3ture"));
+                            mgui.drawPlayerPosition(player);
+                            landOnField(player, dieValue[0] + dieValue[1]);
+                            break;
+                        }
                     }
                 }
             }
@@ -499,37 +512,46 @@ public class GameController {
     }
 
     public void addBalanceToPlayer(Player player, int amount){
-        boolean con=true;
-        String result= null;
+
         player.addBalance(amount);
         mgui.updatePlayerBalance(player);
         if (player.getPlayerBalance()< 0 && getOwnedBuyableFields(player).isEmpty()){
             player.setBankrupt(true);
-        } else if (!getOwnedBuyableFields(player).isEmpty() && player.getPlayerBalance()<0) {
-            while (con) {
-                result = mgui.requestUserButton(Language.getString("bankerot"), Language.getString("mort"), Language.getString("sellHouse"), Language.getString("con"));
-                if (result.equals(Language.getString("mort"))) {
-                    mortgage(player);
-                } else if (result.equals(Language.getString("sellHouse"))) {
-                    sellHousePrompt(player);
-                } else if(result.equals(Language.getString("con"))){
-                    ArrayList<BuyableField> ownedFields = getOwnedBuyableFields(player);
-                    ownedFields.removeIf(BuyableField::getMortgaged);
-                    if(!(ownedFields.size() > 0 ) && player.getPlayerBalance() < 0){
-                        con = false;
-                        player.setBankrupt(true);
+        } else if (!getOwnedBuyableFields(player).isEmpty() && player.getPlayerBalance()<0 ) {
+            playerBankruptcySaveChance(player);
+        }
+    }
 
+    private void playerBankruptcySaveChance(Player player) {
+        if(bankruptcySavingState){
+            return;
+        }
+        bankruptcySavingState = true;
+        String result;
+        boolean con = true;
+        while (con) {
+            result = mgui.requestUserButton(Language.getString("bankerot"), Language.getString("mort"), Language.getString("sellHouse"), Language.getString("con"));
+            if (result.equals(Language.getString("mort"))) {
+                mortgage(player);
+            } else if (result.equals(Language.getString("sellHouse"))) {
+                sellHousePrompt(player);
+            } else if(result.equals(Language.getString("con"))){
+                ArrayList<BuyableField> ownedFields = getOwnedBuyableFields(player);
+                ownedFields.removeIf(BuyableField::getMortgaged);
+                if(!(ownedFields.size() > 0 ) && player.getPlayerBalance() < 0){
+                    con = false;
+                    player.setBankrupt(true);
 
-                    } else if (player.getPlayerBalance()>=0) {
-                        con= false;
-                    } else {
-                        mgui.showMessage(Language.getString("stillBankerot"));
-                    }
-
+                } else if (player.getPlayerBalance()>=0) {
+                    con = false;
+                } else {
+                    mgui.showMessage(Language.getString("stillBankerot"));
                 }
 
             }
+
         }
+        bankruptcySavingState = false;
     }
 
     /** Used to get an arraylist of all the players

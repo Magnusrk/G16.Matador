@@ -116,9 +116,10 @@ public class GameController {
         if (!currentPlayer.getBankrupt()) {
             if (currentPlayer.getJailed()) {
                 inJail(currentPlayer);
+                if (!currentPlayer.getBankrupt()) {askPlayerActions(currentPlayer);}
             } else {
                 throwAndMove(currentPlayer);
-                askPlayerActions(currentPlayer);
+                if (!currentPlayer.getBankrupt()) {askPlayerActions(currentPlayer);}
             }
 
             checkPlayerBankrupt(currentPlayer);
@@ -351,7 +352,7 @@ public class GameController {
                 mgui.showMessage(Language.getString("gotojailprompt"));
             } else if (diceThrow[0] == diceThrow[1]) {
                 mgui.showMessage(Language.getString("ekstra"));
-                mgui.showMessage(currentPlayer.getName() + " kast med terningen!");
+                mgui.showMessage(currentPlayer.getName() + " "+ Language.getString("throwDice"));
             }
         }
     }
@@ -492,15 +493,23 @@ public class GameController {
                     player.increaseTurnsInJail();
                     mgui.showMessage(Language.getString("ikke2ens"));
                     if (player.getTurnsInJail() > 8) {
-                        addBalanceToPlayer(player, -1000);
-
-                        if (player.getPlayerBalance()< 0) {
+                        if (player.getPlayerBalance()< 1000) {
                             mgui.showMessage(Language.getString("3tureBankrupt"));
+                            addBalanceToPlayer(player, -1000);
                             checkPlayerBankrupt(player);
+                            if (player.getBankrupt()==false) {
+                                player.setJailed(false);
+                                movePlayer(player, dieValue[0] + dieValue[1]);
+                                mgui.showMessage(Language.getString("noLongBankrupt"));
+                                mgui.drawPlayerPosition(player);
+                                landOnField(player, dieValue[0] + dieValue[1]);
+                                break;
+                            }
                         } else {
                             player.setJailed(false);
                             movePlayer(player, dieValue[0] + dieValue[1]);
                             mgui.showMessage(Language.getString("3ture"));
+                            addBalanceToPlayer(player, -1000);
                             mgui.drawPlayerPosition(player);
                             landOnField(player, dieValue[0] + dieValue[1]);
                             break;

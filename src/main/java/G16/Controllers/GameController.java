@@ -787,10 +787,10 @@ public class GameController {
             currentField.setOwner(highestbidder);
             mgui.setOwner(currentField, currentPlayer.getPlayerPosition());
             if (currentField instanceof Brewery brewery){
-                currentPlayer.setBrewsOwned(currentPlayer.getBrewsOwned()+1);
+                highestbidder.setBrewsOwned(currentPlayer.getBrewsOwned()+1);
             }
             if (currentField instanceof ShippingCompany shippingCompany){
-                currentPlayer.setShipsOwned(currentPlayer.getShipsOwned()+1);
+                highestbidder.setShipsOwned(currentPlayer.getShipsOwned()+1);
             }
             addBalanceToPlayer(highestbidder,-bid);
             mgui.showMessage(highestbidder.getName() + Language.getString("auctionWon"));

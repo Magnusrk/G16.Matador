@@ -34,7 +34,7 @@ public class TradeController {
     public void startTrade(Player currentPlayer) {
 
         ArrayList<Player> players = gc.getPlayers();
-
+        players.removeIf(Player::getBankrupt);
         ArrayList<String> options = new ArrayList<>();
         for(Player p : players){
             options.add(p.getName());

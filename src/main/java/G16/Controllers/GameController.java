@@ -895,7 +895,7 @@ public class GameController {
                     addBalanceToPlayer(currentplayer,property.getHousePrice()/2);
                 } else if (property.getHouseCount()==5) {
                     mgui.buildHotel(property,false);
-                    addBalanceToPlayer(currentplayer,-property.getHousePrice()*5/2);
+                    addBalanceToPlayer(currentplayer,property.getHousePrice()*5/2);
                 }
             }
         }

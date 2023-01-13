@@ -155,6 +155,7 @@ public class GameController {
            houses=property.getHouseCount();
             if (houses>0) {
                 options.add(Language.getString("sellHouse"));
+                break;
             }
         }
 

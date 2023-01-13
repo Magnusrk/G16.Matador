@@ -178,3 +178,4 @@ sellHouse; Sælg hus eller hotel.
 con; Slut
 bankerot; Du er ved at gå bankerot og bliver nødt til at pantsætte nogle ejendomme eller sælge huse og hoteller
 stillBankerot; Du er stadig bankerot. Sælg flere huse og/eller pansæt grunde.
+cancelSellHouse; Anullér salg

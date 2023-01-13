@@ -82,6 +82,7 @@ injailifcard; You have one release card. Would you like to use it?
 ikke2ens; You didn't get two of kind.
 3kast; You have 3 tries to get 2 of a kind.
 2ens; You got two of a kind. You move forward as the dice shows.
+3tureBankrupt;You have been imprisoned for three turns and must pay a fine of 1000$.
 3ture;You have been imprisoned for three turns and must pay a fine of 1000$. Move according to your next dice roll.
 ekstra; You got two of a kind. You receive an extra turn.
 snyd???; You got two of a kind too many times. You are sent to Jail.

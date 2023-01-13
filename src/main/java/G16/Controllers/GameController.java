@@ -461,7 +461,7 @@ public class GameController {
         }
 
         if (response.equals(Language.getString("injailpay"))) {
-            if (player.getPlayerBalance()< 1001){
+            if (player.getPlayerBalance()< 1000){
                 mgui.showMessage(Language.getString("injailcantpay"));
                 inJail(player);
             } else {
@@ -491,12 +491,18 @@ public class GameController {
                     mgui.showMessage(Language.getString("ikke2ens"));
                     if (player.getTurnsInJail() > 8) {
                         addBalanceToPlayer(player, -1000);
-                        player.setJailed(false);
-                        mgui.showMessage(Language.getString("3ture"));
-                        movePlayer(player, dieValue[0] + dieValue[1]);
-                        mgui.drawPlayerPosition(player);
-                        landOnField(player, dieValue[0] + dieValue[1]);
-                        break;
+
+                        if (player.getPlayerBalance()< 0) {
+                            mgui.showMessage(Language.getString("3tureBankrupt"));
+                            checkPlayerBankrupt(player);
+                        } else {
+                            player.setJailed(false);
+                            movePlayer(player, dieValue[0] + dieValue[1]);
+                            mgui.showMessage(Language.getString("3ture"));
+                            mgui.drawPlayerPosition(player);
+                            landOnField(player, dieValue[0] + dieValue[1]);
+                            break;
+                        }
                     }
                 }
             }

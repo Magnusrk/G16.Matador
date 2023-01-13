@@ -15,6 +15,7 @@ startsub;Modtag 4k
 startdesc;Modtag kr. 4000,- når de passerer start
 chance;Chance
 throwDice;kast med terningen!
+turn;'s tur]
 
 noowner;Ingen ejer
 tryluck;Prøv lykken
@@ -178,3 +179,4 @@ sellHouse; Sælg hus eller hotel.
 con; Slut
 bankerot; Du er ved at gå bankerot og bliver nødt til at pantsætte nogle ejendomme eller sælge huse og hoteller
 stillBankerot; Du er stadig bankerot. Sælg flere huse og/eller pansæt grunde.
+cancelSellHouse; Anullér salg

@@ -714,7 +714,7 @@ public class GameController {
      */
     public String getTurnMessage (){
         if(players.size() > 0 && gameStarted && !auctionMode){
-            return "["+players.get(currentPlayerID).getName() +"'s tur] ";
+            return "["+players.get(currentPlayerID).getName() +Language.getString("turn")+" ";
         }
         else {
             return "";

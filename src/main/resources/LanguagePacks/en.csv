@@ -15,6 +15,7 @@ pressStart;Press OK to start!
 startdesc;Received 4000$ when they passed "Start"
 chance;Chance
 throwDice;Throw the dice
+turn;'s turn]
 
 
 noowner;For sale
@@ -87,8 +88,8 @@ betalt; You have paid a fine of 1000$. Now you can throw the dice.
 brugtkort; You have used a release card. Now you can throw the dice.
 
 prop; You are on a property without an owner. Would you like to buy this property?
-ship; You are on a
-ship2; shipping company without an owner. Would you like to buy this shipping company?
+ship; You land on
+ship2; it has no owner. Would you like to buy this shipping company?
 brew; You are on a brewery without an owner. Would you like to buy this brewery?
 
 payrent; You landed on a field with an owner and you have to pay to

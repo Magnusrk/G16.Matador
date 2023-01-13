@@ -316,7 +316,10 @@ public class GameController {
 
             mgui.drawDice(diceThrow[0], diceThrow[1]);
 
-            if (currentPlayer.getJailed()) {
+            if (currentPlayer.getBankrupt()){
+                break;
+            }
+            else if (currentPlayer.getJailed()) {
                 break;
             } else if (diceThrow[0] == diceThrow[1]) {
                 extraCounter++;
@@ -728,7 +731,7 @@ public class GameController {
      */
     public String getTurnMessage (){
         if(players.size() > 0 && gameStarted && !auctionMode){
-            return "["+players.get(currentPlayerID).getName() +"'s tur] ";
+            return "["+players.get(currentPlayerID).getName() +Language.getString("turn")+" ";
         }
         else {
             return "";

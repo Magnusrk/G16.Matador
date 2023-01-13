@@ -196,8 +196,12 @@ public class ChanceCardController {
         mgui.displayChanceCards("28");
 
         if (player.getPlayerPosition()== 36 || player.getPlayerPosition()== 2){
-            player.setPlayerPosition(5);
+            if (player.getPlayerPosition()==36){
+                controller.giveStartMoney(player);
+            }
+            controller.movePlayer(player, 5-player.getPlayerPosition());
             mgui.drawPlayerPosition(player);
+            System.out.println("tetst");
             if(fields[5] instanceof ShippingCompany ship && ship.getOwner() != null) {
                 controller.payShipRent(player, (BuyableField) fields[5]);
                 if (doubleRent) {
@@ -270,14 +274,18 @@ public class ChanceCardController {
         if (player.getPlayerPosition()> address) {
             controller.movePlayer(player, 40 - player.getPlayerPosition() + address);
             mgui.drawPlayerPosition(player);
+            controller.landOnField(player,0);
         } else {
             controller.movePlayer(player, address - player.getPlayerPosition());
             mgui.drawPlayerPosition(player);
+            controller.landOnField(player,0);
         }
         mgui.showMessage(Language.getString(mesg));
         if(fields[address] instanceof Property prop && prop.getOwner() != null && !prop.getMortgaged()) {
+            controller.landOnField(player,0);
             controller.payRent(player, (BuyableField) fields[address]);
         }else {
+            controller.landOnField(player,0);
             controller.buyField(player, (BuyableField) fields[address]);
         }
     }

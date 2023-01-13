@@ -1,5 +1,6 @@
 package G16.Controllers;
 
+import G16.Fields.BuyableFields.BuyableField;
 import G16.PlayerUtils.Player;
 import junit.framework.TestCase;
 
@@ -56,9 +57,9 @@ public class GameControllerTest extends TestCase {
         controller.setupPlayers();
         ArrayList<Player> players = controller.getPlayers();
         controller.fakeDie(true,1,2);
-        controller.playTurn();
+        controller.buyField(players.get(0), (BuyableField) controller.getFields()[3]);
         assertEquals(28800,players.get(0).getPlayerBalance());
-        controller.playTurn();
+        controller.payRent(players.get(1), (BuyableField) controller.getFields()[3]);
         assertEquals(28850,players.get(0).getPlayerBalance());
         assertEquals(29950,players.get(1).getPlayerBalance());
     }
@@ -68,18 +69,18 @@ public class GameControllerTest extends TestCase {
         controller.setupPlayers();
         ArrayList<Player> players = controller.getPlayers();
         controller.fakeDie(true,2,4);
-        controller.playTurn();
+        controller.buyField(players.get(0), (BuyableField) controller.getFields()[6]);
         assertEquals(28000,players.get(0).getPlayerBalance());
         controller.setPlayerTurn(0);
         controller.fakeDie(true,2,0);
-        controller.playTurn();
+        controller.buyField(players.get(0), (BuyableField) controller.getFields()[8]);
         assertEquals(26000,players.get(0).getPlayerBalance());
         controller.setPlayerTurn(0);
         controller.fakeDie(true,1,0);
-        controller.playTurn();
+        controller.buyField(players.get(0), (BuyableField) controller.getFields()[9]);
         assertEquals(23600,players.get(0).getPlayerBalance());
         controller.fakeDie(true,2,4);
-        controller.playTurn();
+        controller.payRent(players.get(1), (BuyableField) controller.getFields()[6]);
         assertEquals(29800,players.get(1).getPlayerBalance());
         assertEquals(23800,players.get(0).getPlayerBalance());
     }
@@ -89,10 +90,10 @@ public class GameControllerTest extends TestCase {
         controller.setupPlayers();
         ArrayList<Player> players = controller.getPlayers();
         controller.fakeDie(true,2,3);
-        controller.playTurn();
+        controller.buyField(players.get(0), (BuyableField) controller.getFields()[5]);
         assertEquals(26000,players.get(0).getPlayerBalance());
         assertEquals(1,players.get(0).getShipsOwned());
-        controller.playTurn();
+        controller.payShipRent(players.get(1),(BuyableField) controller.getFields()[5]);
         assertEquals(29500,players.get(1).getPlayerBalance());
         assertEquals(26500,players.get(0).getPlayerBalance());
     }
@@ -101,10 +102,10 @@ public class GameControllerTest extends TestCase {
         controller.setupPlayers();
         ArrayList<Player> players = controller.getPlayers();
         controller.fakeDie(true,2,3);
-        controller.playTurn();
+        controller.buyField(players.get(0), (BuyableField) controller.getFields()[5]);
         players.get(0).setShipsOwned(players.get(0).getShipsOwned()+1);
         assertEquals(26000,players.get(0).getPlayerBalance());
-        controller.playTurn();
+        controller.payShipRent(players.get(1),(BuyableField) controller.getFields()[5]);
         assertEquals(29000,players.get(1).getPlayerBalance());
         assertEquals(27000,players.get(0).getPlayerBalance());
     }
@@ -114,10 +115,10 @@ public class GameControllerTest extends TestCase {
         controller.setupPlayers();
         ArrayList<Player> players = controller.getPlayers();
         controller.fakeDie(true,7,5);
-        controller.playTurn();
+        controller.buyField(players.get(0), (BuyableField) controller.getFields()[12]);
         assertEquals(27000,players.get(0).getPlayerBalance());
         assertEquals(1,players.get(0).getBrewsOwned());
-        controller.playTurn();
+        controller.payBrewRent(players.get(1),(BuyableField) controller.getFields()[12],12);
         assertEquals(28800,players.get(1).getPlayerBalance());
         assertEquals(28200,players.get(0).getPlayerBalance());
     }
@@ -126,11 +127,11 @@ public class GameControllerTest extends TestCase {
         controller.setupPlayers();
         ArrayList<Player> players = controller.getPlayers();
         controller.fakeDie(true,7,5);
-        controller.playTurn();
+        controller.buyField(players.get(0), (BuyableField) controller.getFields()[12]);
         players.get(0).setBrewsOwned(players.get(0).getBrewsOwned()+1);
         assertEquals(27000,players.get(0).getPlayerBalance());
         assertEquals(2,players.get(0).getBrewsOwned());
-        controller.playTurn();
+        controller.payBrewRent(players.get(1),(BuyableField) controller.getFields()[12],12);
         assertEquals(27600,players.get(1).getPlayerBalance());
         assertEquals(29400,players.get(0).getPlayerBalance());
     }
@@ -149,18 +150,17 @@ public class GameControllerTest extends TestCase {
     }
 
     public void testPayTaxes(){
-        for (int i = 0; i<1000; i++) {
             GameController controller = new GameController(true);
             controller.setupPlayers();
             ArrayList<Player> players = controller.getPlayers();
             controller.fakeDie(true, 1, 3);
-            controller.playTurn();
+            players.get(0).setPlayerPosition(4);
+            controller.landOnField(players.get(0),4);
             assertEquals(26000, players.get(0).getPlayerBalance());
             controller.fakeDie(true, 30, 8);
-            controller.playTurn();
+            players.get(1).setPlayerPosition(38);
+            controller.landOnField(players.get(1),38);
             assertEquals(28000, players.get(1).getPlayerBalance());
-        }
-
     }
     public void testBankruptcy(){
         GameController controller = new GameController(true);

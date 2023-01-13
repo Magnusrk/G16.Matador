@@ -85,13 +85,13 @@ snyd???; Du har slået to ens for mange gange og bliver derfor sendt i fængsel.
 betalt; Du har betalt 1000 kr i bøde og får lov til at slå med terningerne.
 brugtkort; Du har brugt et løsladelseskort og får lov til at slå med terningerne
 
-prop; Du har landet på en ejendom som ikke har nogen ejer. Vil du købe ejendommen?
-ship; Du har landet på
-ship2; som ikke har nogen ejer. Vil de købe rederiet?
-brew; Du har landet på en bryggeri som ikke har nogen ejer. Vil du købe bryggeriet?
+prop; Du er landet på et ejendom som ikke har nogen ejer. Vil du købe ejendommen?
+ship; Du er landet på
+ship2; som ikke har nogen ejer. Vil du købe rederiet?
+brew; Du er landet på et bryggeri som ikke har nogen ejer. Vil du købe bryggeriet?
 
 payrent; Du har landet på et felt som er ejet og bliver nødt til at betale leje til
-ownerJailed;Ejeren af feltet er i fængels så du betaler ikke leje.
+ownerJailed;Ejeren af feltet er i fængel så du betaler ikke leje.
 mortaged;Ejeren har pantsat grunden så du skal ikke betale leje.
 propikkeråd; Du har landet på en ejendom som ikke har nogle ejer, men du har ikke råd til at købe den.
 selfown; Du har landet på et felt som du selv ejer. Der sker ingenting.

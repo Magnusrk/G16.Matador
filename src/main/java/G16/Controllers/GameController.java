@@ -515,7 +515,7 @@ public class GameController {
                 } else if(result.equals(Language.getString("con"))){
                     ArrayList<BuyableField> ownedFields = getOwnedBuyableFields(player);
                     ownedFields.removeIf(BuyableField::getMortgaged);
-                    if(!(ownedFields.size() > 0 )){
+                    if(!(ownedFields.size() > 0 ) && player.getPlayerBalance() < 0){
                         con = false;
                         player.setBankrupt(true);
 
@@ -872,7 +872,7 @@ public class GameController {
                 }
         }
         housedFields.add(Language.getString("cancelSellHouse"));
-        String result= mgui.requestUserDropDown(Language.getString("payMortgage"),housedFields.toArray(new String[0]));
+        String result= mgui.requestUserDropDown(Language.getString("sellHouse"),housedFields.toArray(new String[0])); // Ik pay mortgate
         for (Property property:getOwnedProperties(currentplayer)){
             if (result.equals(Language.getString("cancelSellHouse"))){
 

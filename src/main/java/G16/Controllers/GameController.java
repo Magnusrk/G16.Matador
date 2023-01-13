@@ -315,10 +315,7 @@ public class GameController {
 
             mgui.drawDice(diceThrow[0], diceThrow[1]);
 
-            if (currentPlayer.getBankrupt()){
-                break;
-            }
-            else if (currentPlayer.getJailed()) {
+            if (currentPlayer.getJailed()) {
                 break;
             } else if (diceThrow[0] == diceThrow[1]) {
                 extraCounter++;
@@ -344,7 +341,10 @@ public class GameController {
             movePlayer(currentPlayer, diceSum);
             mgui.drawPlayerPosition(currentPlayer);
             landOnField(currentPlayer, diceSum);
-            if (currentPlayer.getJailed()) {
+            if (currentPlayer.getBankrupt()){
+                break;
+            }
+            else if (currentPlayer.getJailed()) {
                 mgui.showMessage(Language.getString("gotojailprompt"));
             } else if (diceThrow[0] == diceThrow[1]) {
                 mgui.showMessage(Language.getString("ekstra"));

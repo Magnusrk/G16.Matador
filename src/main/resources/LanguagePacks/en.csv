@@ -73,6 +73,7 @@ noTxt;No
 restartQuestion;Do you want to restart the game?
 injail;You are under arrested! You must pay 1000 $, get two of a kind or use a release card to get released from jail .
 injailpay;Pay 1000$
+injailcantpay; You don't have enough money to pay your way out of jail.
 injaildie; Thrown the dice!
 injailtre; You have been imprisoned for three turns. If you can't get two of a kind then you must pay a fine.
 injailcard; Use Release cards

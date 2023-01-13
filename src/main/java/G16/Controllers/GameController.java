@@ -461,11 +461,16 @@ public class GameController {
         }
 
         if (response.equals(Language.getString("injailpay"))) {
-            addBalanceToPlayer(player, -1000);
-            player.setJailed(false);
-            mgui.updatePlayerBalance(player);
-            mgui.showMessage(Language.getString("betalt"));
-            throwAndMove(player);
+            if (player.getPlayerBalance()< 1001){
+                mgui.showMessage(Language.getString("injailcantpay"));
+                inJail(player);
+            } else {
+                addBalanceToPlayer(player, -1000);
+                player.setJailed(false);
+                mgui.updatePlayerBalance(player);
+                mgui.showMessage(Language.getString("betalt"));
+                throwAndMove(player);
+            }
         } else {
             mgui.showMessage(Language.getString("3kast"));
             for(int i=0; i<3; i++){

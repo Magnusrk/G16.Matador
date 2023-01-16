@@ -881,7 +881,7 @@ public class GameController {
         ArrayList<String> housedFields = new ArrayList<>();
         for (Property property: getOwnedProperties(currentplayer)){
 
-                if (property.getHouseCount()>0 && property.getHouseCount()<4){
+                if (property.getHouseCount()>0 && property.getHouseCount()<=4){
                  mortgage=property.getHousePrice()/2;
                     housedFields.add(property.getName()+ " "+mortgage+",-" );
                 } else if (property.getHouseCount()==5) {

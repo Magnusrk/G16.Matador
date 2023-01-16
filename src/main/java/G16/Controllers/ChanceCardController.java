@@ -26,7 +26,7 @@ public class ChanceCardController {
     public void DoChanceCard(Player currentPlayer, GameController controller ) {
         this.controller = controller;
         //getNumchance()[0]
-        switch (getNumchance()[0]) {
+        switch (38) {
             case 1 -> wealthBasedCost(currentPlayer, "1",500,2000);
             case 2 -> wealthBasedCost(currentPlayer, "2",800,2300);
             case 3 -> giveOrTakeCash(currentPlayer,"3",-1000);
@@ -274,18 +274,14 @@ public class ChanceCardController {
         if (player.getPlayerPosition()> address) {
             controller.movePlayer(player, 40 - player.getPlayerPosition() + address);
             mgui.drawPlayerPosition(player);
-            controller.landOnField(player,0);
         } else {
             controller.movePlayer(player, address - player.getPlayerPosition());
             mgui.drawPlayerPosition(player);
-            controller.landOnField(player,0);
         }
         mgui.showMessage(Language.getString(mesg));
         if(fields[address] instanceof Property prop && prop.getOwner() != null && !prop.getMortgaged()) {
-            controller.landOnField(player,0);
             controller.payRent(player, (BuyableField) fields[address]);
-        }else {
-            controller.landOnField(player,0);
+        } else {
             controller.buyField(player, (BuyableField) fields[address]);
         }
     }

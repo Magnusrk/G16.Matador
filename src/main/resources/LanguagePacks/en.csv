@@ -97,13 +97,14 @@ brew; You are on a brewery without an owner. Would you like to buy this brewery?
 
 payrent; You landed on a field with an owner and you have to pay to
 ownerJailed;The owner of the property is imprisoned. You don't have to pay the rent.
-mortaged;The owner has pledged the property so you don't have to pay the rent.
+mortgaged;The owner has pledged the property so you don't have to pay the rent.
 propikkeråd; You landed on a property without an owner, but you cannot afford it.
 selfown; You have land on a field that you own. Nothing happens.
+tax;You pay taxes
+
 bid; Do you want to bid on the field? The current bid is
 yourbid; How much do you want to bid?
 auctionWon; won the auction!
-tax;You pay taxes
 aucTur; 's turn
 
 

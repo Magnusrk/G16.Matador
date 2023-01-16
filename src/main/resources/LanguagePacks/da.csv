@@ -89,7 +89,7 @@ brew; Du har landet på en bryggeri som ikke har nogen ejer. Vil du købe brygge
 
 payrent; Du har landet på et felt som er ejet og bliver nødt til at betale leje til
 ownerJailed;Ejeren af feltet er i fængels så du betaler ikke leje.
-mortaged;Ejeren har pantsat grunden så du skal ikke betale leje.
+mortgaged;Ejeren har pantsat grunden så du skal ikke betale leje.
 propikkeråd; Du har landet på en ejendom som ikke har nogle ejer, men du har ikke råd til at købe den.
 selfown; Du har landet på et felt som du selv ejer. Der sker ingenting.
 tax;Du betaler skat

@@ -182,3 +182,8 @@ tradeOfferFields; Surrenders properties
 tradeOfferChooseFieldGiver; Choose a player whose properties you would like to trade with.
 
 ikkeNok; You don't have enough money to bid.
+sellHouse; Sell a house or a hotel.
+con; End
+bankerot; You are about to go bankrupt and will have to mortgage some of your properties or sell houses or hotels.
+stillBankerot; You are still bankrupt. Sell more houses and/or mortgage properties.
+cancelSellHouse; Cancel

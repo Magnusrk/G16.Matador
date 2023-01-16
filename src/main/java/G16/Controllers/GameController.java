@@ -204,7 +204,6 @@ public class GameController {
             if(prop.getHouseCount() < 5){
                 options.add(prop.getName() + " - " + prop.getHousePrice() + ",-");
             }
-
         }
         options.add(Language.getString("cancelBuyHouseText"));
         String action = mgui.requestUserDropDown(Language.getString("buyHouseMessage"), options.toArray((new String[0])));
@@ -226,7 +225,6 @@ public class GameController {
             if(field instanceof BuyableField bf){
                 if(bf.getOwner() == currentPlayer){
                     ownedBuyableFields.add(bf);
-
                 }
             }
         }
@@ -239,7 +237,6 @@ public class GameController {
             if(field instanceof Property prop){
                 if(prop.getOwner() == currentPlayer){
                     ownedProperties.add(prop);
-
                 }
             }
         }

@@ -82,8 +82,8 @@ public class GameController {
             int playerNum = 0;
             while (players.size() < playerCount) {
                 //Check that the player's name must not be the same
-                String newPlayerName = "";
-                boolean nameIsTaken = false;
+                String newPlayerName;
+                boolean nameIsTaken;
                 do {//The warning message shows if Player's name is taken and shows the new name filling field.
                     newPlayerName =  mgui.requestString(Language.getString("playerName"));
                     nameIsTaken = false;
@@ -138,7 +138,7 @@ public class GameController {
     }
 
     private void askPlayerActions(Player currentPlayer) {
-        int houses=0;
+        int houses;
         ArrayList<String> options = new ArrayList<>();
         //Trade mulighed
         options.add(Language.getString("tradeAction"));
@@ -384,7 +384,6 @@ public class GameController {
      */
     public void landOnField (Player player, int diceSum){
         Field currentField = fields[player.getPlayerPosition()];
-        mgui.setBorderColor(player, Color.RED);
         if(currentField instanceof GoToJail){
             goToJail(player);
         } else if (currentField instanceof Property prop) {
@@ -411,7 +410,7 @@ public class GameController {
                 } else {
                     payBrewRent(player,brew, diceSum);
                 }
-            } else if (currentField instanceof Chance chance){
+            } else if (currentField instanceof Chance){
             ccController.DoChanceCard(player,this);
         }
     }
@@ -507,7 +506,7 @@ public class GameController {
                             mgui.showMessage(Language.getString("3tureBankrupt"));
                             addBalanceToPlayer(player, -1000);
                             checkPlayerBankrupt(player);
-                            if (player.getBankrupt()==false) {
+                            if (!player.getBankrupt()) {
                                 player.setJailed(false);
                                 movePlayer(player, dieValue[0] + dieValue[1]);
                                 mgui.showMessage(Language.getString("noLongBankrupt"));
@@ -586,7 +585,7 @@ public class GameController {
     public void buyField(Player currentPlayer, BuyableField currentField) {
         if (currentField.getPrice()< currentPlayer.getPlayerBalance()) {
             String results = null;
-            if (currentField instanceof Property prop){
+            if (currentField instanceof Property){
                 if (TEST_MODE){
                     results = Language.getString("yesTxt");
                 } else {
@@ -827,10 +826,10 @@ public class GameController {
         if (highestbidder!=null) {
             currentField.setOwner(highestbidder);
             mgui.setOwner(currentField, currentPlayer.getPlayerPosition());
-            if (currentField instanceof Brewery brewery){
+            if (currentField instanceof Brewery){
                 highestbidder.setBrewsOwned(currentPlayer.getBrewsOwned()+1);
             }
-            if (currentField instanceof ShippingCompany shippingCompany){
+            if (currentField instanceof ShippingCompany){
                 highestbidder.setShipsOwned(currentPlayer.getShipsOwned()+1);
             }
             addBalanceToPlayer(highestbidder,-bid);
@@ -841,7 +840,7 @@ public class GameController {
     }
 
     public void mortgage(Player currentplayer){
-        int mortgage=0;
+        int mortgage;
         ArrayList<String> ownedfields = new ArrayList<>();
         for (BuyableField buyableField : getOwnedBuyableFields(currentplayer)){
             if (!buyableField.getMortgaged()) {
@@ -853,9 +852,6 @@ public class GameController {
         String result= mgui.requestUserDropDown(Language.getString("mortgage"),ownedfields.toArray(new String[0]));
         for (BuyableField buyableField:getOwnedBuyableFields(currentplayer)){
             mortgage = buyableField.getPrice() / 2;
-            if (result.equals(Language.getString("cancelMortgage"))){
-
-            }
             if ((buyableField.getName()+" "+ mortgage+",-").equals(result)){
                 mortgage = buyableField.getPrice() / 2;
                 addBalanceToPlayer(currentplayer,mortgage);
@@ -867,7 +863,7 @@ public class GameController {
     }
 
     public void payMortgage(Player currentplayer){
-        int mortgage=0;
+        int mortgage;
         ArrayList<String> mortgagedFields = new ArrayList<>();
         for (BuyableField buyableField: getOwnedBuyableFields(currentplayer)){
             if (buyableField.getMortgaged()) {
@@ -879,9 +875,6 @@ public class GameController {
         String result= mgui.requestUserDropDown(Language.getString("payMortgage"),mortgagedFields.toArray(new String[0]));
         for (BuyableField buyableField:getOwnedBuyableFields(currentplayer)){
             mortgage = (int) ((buyableField.getPrice()/2)+(Math.round((buyableField.getPrice()*0.1)/100))*100);
-            if (result.equals(Language.getString("cancelMortgage"))){
-
-            }
             if ((buyableField.getName()+" "+ mortgage+",-").equals(result)){
                 mortgage = (int) ((buyableField.getPrice()/2)+(Math.round((buyableField.getPrice()*0.1)/100))*100);
                 addBalanceToPlayer(currentplayer,-mortgage);
@@ -902,11 +895,8 @@ public class GameController {
                 }
         }
         housedFields.add(Language.getString("cancelSellHouse"));
-        String result= mgui.requestUserDropDown(Language.getString("sellHouse"),housedFields.toArray(new String[0])); // Ik pay mortgate
+        String result= mgui.requestUserDropDown(Language.getString("sellHouse"),housedFields.toArray(new String[0]));
         for(Property property : sellhouseProps){
-            if (result.equals(Language.getString("cancelSellHouse"))){
-
-            }
             if ((property.getName()+" "+ mortgage+",-").equals(result)){
                 if (property.getHouseCount()<5) {
                     mgui.buildHouse(property, property.getHouseCount() - 1);

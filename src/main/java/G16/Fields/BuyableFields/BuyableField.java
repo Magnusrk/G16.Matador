@@ -3,8 +3,6 @@ package G16.Fields.BuyableFields;
 import G16.Fields.Field;
 import G16.PlayerUtils.Player;
 
-import javax.swing.border.Border;
-
 public abstract class BuyableField extends Field {
 
     private Player owner;

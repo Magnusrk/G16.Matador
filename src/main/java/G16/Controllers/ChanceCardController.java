@@ -7,8 +7,6 @@ import G16.Fields.Field;
 import G16.Graphics.MatadorGUI;
 import G16.Language;
 import G16.PlayerUtils.Player;
-
-import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -17,10 +15,10 @@ public class ChanceCardController {
     MatadorGUI mgui;
     static int[] numchance = IntStream.range(1,45).toArray();
     GameController controller;
-    int[] chanceArray=Shufflechancecard();
 
     public ChanceCardController(MatadorGUI mgui) {
         this.mgui = mgui;
+        shuffleChanceCard();
     }
 
     public void DoChanceCard(Player currentPlayer, GameController controller ) {
@@ -70,24 +68,22 @@ public class ChanceCardController {
 
     /* shuffles the values in the array. Code found on https://www.digitalocean.com/community/tutorials/shuffle-array-java
      */
-    private int[] Shufflechancecard(){
+    private void shuffleChanceCard(){
         Random rand = new Random();
-
         for (int i = 0; i < numchance.length; i++) {
             int randomIndexToSwap = rand.nextInt(numchance.length);
             int temp = numchance[randomIndexToSwap];
             numchance[randomIndexToSwap] = numchance[i];
             numchance[i] = temp;
         }
-
-        return numchance;
     }
-
+    /**
+     * Puts the chancecard you've drawn on the bottom pile
+     * @return The array that contains the order of chancecards
+     */
     private int[] leftshiftarray(){
         int[] proxy = new int[numchance.length];
-        for (int i = 0; i < numchance.length-1; i++) {
-            proxy[i] = numchance[i + 1];
-        }
+        if (numchance.length - 1 >= 0) System.arraycopy(numchance, 1, proxy, 0, numchance.length - 1);
         proxy[numchance.length-1] = numchance[0];
         return proxy;
     }
@@ -95,10 +91,8 @@ public class ChanceCardController {
     private int[] getNumchance(){
         return numchance;
     }
-    private int[] drawChancecard() {
-        getNumchance();
+    private void drawChancecard() {
         setNumchance(leftshiftarray());
-        return getNumchance();
     }
 
     private void setNumchance(int[] proxy){

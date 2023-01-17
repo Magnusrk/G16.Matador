@@ -1,8 +1,6 @@
 package G16.Fields.BuyableFields;
-import G16.Language;
-import gui_resources.Attrs;
 
-import javax.swing.*;
+import G16.Language;
 import java.awt.Color;
 public class Property extends BuyableField {
     protected int housePrice;

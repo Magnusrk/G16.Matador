@@ -69,7 +69,7 @@ public class MatadorGUI {
             if (fields[i] instanceof Brewery brew){
                 defaultFields[i].setDescription(brew.toString());
             }
-            if (fields[i] instanceof Chance chance){
+            if (fields[i] instanceof Chance){
                 defaultFields[i].setSubText(Language.getString("tryluck"));
                 defaultFields[i].setDescription(Language.getString("takeChance"));
             }
@@ -84,16 +84,16 @@ public class MatadorGUI {
                     defaultFields[i].setDescription(Language.getString("taxdesc2"));
                 }
             }
-            if (fields[i] instanceof Jail jail){
+            if (fields[i] instanceof Jail){
                 defaultFields[i].setSubText(Language.getString("jail"));
                 defaultFields[i].setDescription(Language.getString("visitJail"));
             }
-            if (fields[i] instanceof VisitorField visit){
+            if (fields[i] instanceof VisitorField){
                 defaultFields[i].setTitle(Language.getString("parking"));
                 defaultFields[i].setSubText(Language.getString("parking"));
                 defaultFields[i].setDescription(Language.getString("parkingDesc"));
             }
-            if (fields[i] instanceof GoToJail goToJail){
+            if (fields[i] instanceof GoToJail){
                 defaultFields[i].setSubText(Language.getString("gotojail"));
                 defaultFields[i].setDescription(Language.getString("gotojailDesc"));
             }
@@ -316,17 +316,9 @@ public class MatadorGUI {
         }
     }
 
-    public void setBorderColor(Player player, Color color){
-        GUI_Field field = gui.getFields()[player.getPlayerPosition()];
-
-    }
 
     private String getTurnInfo(){
         return gc.getTurnMessage();
-    }
-
-    public void displayChanceCard(String text){
-        gui.displayChanceCard(text);
     }
 
     /** Manually instantiated GUI_Field array. Copied from diplomitdtu.matadorgui

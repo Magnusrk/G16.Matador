@@ -16,10 +16,7 @@ import G16.Language;
 import G16.PlayerUtils.Die;
 import G16.PlayerUtils.FakeDie;
 import G16.PlayerUtils.Player;
-import G16.PlayerUtils.TradeOffer;
-import gui_fields.GUI_Field;
-import gui_fields.GUI_Street;
-import org.apache.commons.codec.language.bm.Lang;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -161,19 +158,9 @@ public class GameController {
                 break;
             }
         }
-
-        HashMap<Color, Integer> streetHouseMap = new HashMap<>();
-        for(Property prop : ownedProperties){
-            Color currentColor = prop.getColor();
-            if(streetHouseMap.containsKey(currentColor)){
-                if(prop.getHouseCount() < streetHouseMap.get(currentColor)){
-                    streetHouseMap.replace(currentColor, prop.getHouseCount());
-                }
-            }else {
-                streetHouseMap.put(currentColor, prop.getHouseCount());
-            }
-        }
-        ownedProperties.removeIf(prop -> prop.getHouseCount() > streetHouseMap.get(prop.getColor()));
+        ArrayList<Property>[] HouseInfo = getHouseMethod(ownedProperties);
+        ownedProperties = HouseInfo[0];
+        ArrayList<Property> ownedHouses = HouseInfo[1];
 
         //Slut tur
         options.add(Language.getString("endTurnAction"));
@@ -189,12 +176,38 @@ public class GameController {
         } else if (action.equals(Language.getString("payMort"))) {
             payMortgage(currentPlayer);
         } else if (action.equals(Language.getString("sellHouse"))) {
-            sellHousePrompt(currentPlayer);
+            sellHousePrompt(currentPlayer, ownedHouses);
         }
         if(!action.equals(Language.getString("endTurnAction"))){
             askPlayerActions(currentPlayer);
         }
     }
+
+    @NotNull
+    private static ArrayList<Property>[] getHouseMethod(ArrayList<Property> ownedProperties) {
+        ArrayList<Property> ownedHouses= (ArrayList<Property>) ownedProperties.clone();
+
+        HashMap<Color, Integer> streetMinHouseMap = new HashMap<>();
+        HashMap<Color, Integer> streetMaxHouseMap = new HashMap<>();
+        for(Property prop : ownedProperties){
+            Color currentColor = prop.getColor();
+            if(streetMinHouseMap.containsKey(currentColor)){
+                if(prop.getHouseCount() < streetMinHouseMap.get(currentColor)){
+                    streetMinHouseMap.replace(currentColor, prop.getHouseCount());
+                }
+                if(prop.getHouseCount() > streetMaxHouseMap.get(currentColor)){
+                    streetMaxHouseMap.replace(currentColor, prop.getHouseCount());
+                }
+            }else {
+                streetMinHouseMap.put(currentColor, prop.getHouseCount());
+                streetMaxHouseMap.put(currentColor, prop.getHouseCount());
+            }
+        }
+        ownedProperties.removeIf(prop -> prop.getHouseCount() > streetMinHouseMap.get(prop.getColor()));
+        ownedHouses.removeIf(prop -> prop.getHouseCount() < streetMaxHouseMap.get(prop.getColor()));
+        return new ArrayList[]{ownedProperties, ownedHouses};
+    }
+
     public int getPlayerAmount(){
         return players.size();
     }
@@ -204,7 +217,6 @@ public class GameController {
             if(prop.getHouseCount() < 5){
                 options.add(prop.getName() + " - " + prop.getHousePrice() + ",-");
             }
-
         }
         options.add(Language.getString("cancelBuyHouseText"));
         String action = mgui.requestUserDropDown(Language.getString("buyHouseMessage"), options.toArray((new String[0])));
@@ -226,7 +238,6 @@ public class GameController {
             if(field instanceof BuyableField bf){
                 if(bf.getOwner() == currentPlayer){
                     ownedBuyableFields.add(bf);
-
                 }
             }
         }
@@ -239,7 +250,6 @@ public class GameController {
             if(field instanceof Property prop){
                 if(prop.getOwner() == currentPlayer){
                     ownedProperties.add(prop);
-
                 }
             }
         }
@@ -543,7 +553,7 @@ public class GameController {
             if (result.equals(Language.getString("mort"))) {
                 mortgage(player);
             } else if (result.equals(Language.getString("sellHouse"))) {
-                sellHousePrompt(player);
+                sellHousePrompt(player, getHouseMethod(getOwnedProperties(player))[1]);
             } else if(result.equals(Language.getString("con"))){
                 ArrayList<BuyableField> ownedFields = getOwnedBuyableFields(player);
                 ownedFields.removeIf(BuyableField::getMortgaged);
@@ -840,7 +850,7 @@ public class GameController {
             }
         }
         ownedfields.add(Language.getString("cancelMortgage"));
-       String result= mgui.requestUserDropDown(Language.getString("mortgage"),ownedfields.toArray(new String[0]));
+        String result= mgui.requestUserDropDown(Language.getString("mortgage"),ownedfields.toArray(new String[0]));
         for (BuyableField buyableField:getOwnedBuyableFields(currentplayer)){
             mortgage = buyableField.getPrice() / 2;
             if (result.equals(Language.getString("cancelMortgage"))){
@@ -879,12 +889,12 @@ public class GameController {
             }
         }
     }
-    public void sellHousePrompt(Player currentplayer){
+    public void sellHousePrompt(Player currentplayer, ArrayList<Property> sellhouseProps){
         int mortgage=0;
         ArrayList<String> housedFields = new ArrayList<>();
-        for (Property property: getOwnedProperties(currentplayer)){
-                if (property.getHouseCount()>0 && property.getHouseCount()<4){
-                    mortgage=property.getHousePrice()/2;
+        for(Property property : sellhouseProps){
+                if (property.getHouseCount()>0 && property.getHouseCount()<=4){
+                 mortgage=property.getHousePrice()/2;
                     housedFields.add(property.getName()+ " "+mortgage+",-" );
                 } else if (property.getHouseCount()==5) {
                     mortgage=property.getHousePrice()*5/2;
@@ -893,7 +903,7 @@ public class GameController {
         }
         housedFields.add(Language.getString("cancelSellHouse"));
         String result= mgui.requestUserDropDown(Language.getString("sellHouse"),housedFields.toArray(new String[0])); // Ik pay mortgate
-        for (Property property:getOwnedProperties(currentplayer)){
+        for(Property property : sellhouseProps){
             if (result.equals(Language.getString("cancelSellHouse"))){
 
             }

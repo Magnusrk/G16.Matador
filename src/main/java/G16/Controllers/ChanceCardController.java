@@ -255,7 +255,6 @@ public class ChanceCardController {
         } else {
             controller.movePlayer(player, 15 - player.getPlayerPosition());
             mgui.drawPlayerPosition(player);
-
         }
         mgui.showMessage(Language.getString("case29"));
         mgui.displayChanceCards("29");
@@ -273,18 +272,14 @@ public class ChanceCardController {
         if (player.getPlayerPosition()> address) {
             controller.movePlayer(player, 40 - player.getPlayerPosition() + address);
             mgui.drawPlayerPosition(player);
-            controller.landOnField(player,0);
         } else {
             controller.movePlayer(player, address - player.getPlayerPosition());
             mgui.drawPlayerPosition(player);
-            controller.landOnField(player,0);
         }
         mgui.showMessage(Language.getString(mesg));
         if(fields[address] instanceof Property prop && prop.getOwner() != null && !prop.getMortgaged()) {
-            controller.landOnField(player,0);
             controller.payRent(player, (BuyableField) fields[address]);
-        }else {
-            controller.landOnField(player,0);
+        } else {
             controller.buyField(player, (BuyableField) fields[address]);
         }
     }

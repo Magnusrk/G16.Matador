@@ -12,3 +12,7 @@
 ## Run test
 1. Make sure that java 18 is module is selected in Run/Debug Configurations in Run all test
 2. Run "Run all test" config
+
+## Known issues
+1. You can buy houses without having sufficient funds and then you will lose the game
+2. When a property is up for auction sometimes a bankrupt player can bid on it

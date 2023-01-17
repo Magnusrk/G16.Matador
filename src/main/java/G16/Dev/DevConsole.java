@@ -46,7 +46,7 @@ public class DevConsole {
                         System.out.println("Invalid syntax.");
                         break;
                     }
-                    gc.addPlayerMoney(id, amount);
+                    gc.addPlayerBalanceByID(id, amount);
                     break;
 
                 case "turn":

@@ -1,6 +1,8 @@
 package G16.Graphics;
 import G16.Controllers.GameController;
 import G16.Fields.Field;
+import G16.PlayerUtils.Player;
+import gui_fields.GUI_Player;
 
 /** Represents a dummy GUI used for testing
 * @author G16
@@ -31,9 +33,22 @@ public class TestingGUI extends MatadorGUI{
     }
 
     @Override
-    public int requestInteger(String message, int minValue, int maxValue) {
+    public String requestUserDropDown(String msg,String...options){
+        int choice = (int) ((Math.random() * (options.length)));
+        return options[choice];
+    }
 
-        return minValue;
+    @Override
+    public int requestInteger(String message, int minValue, int maxValue) {
+        int choice = (int) ((Math.random() * (maxValue-minValue)));
+        return choice+minValue;
+    }
+
+    @Override
+    public void drawPlayerPosition(Player player){
+        GUI_Player selectedPlayer = guiPlayers.get(player.getID());
+        player.setPlayerPosition(player.getPlayerPosition());
+        selectedPlayer.getCar().setPosition(gui.getFields()[player.getPlayerPosition()]);
     }
 
 }

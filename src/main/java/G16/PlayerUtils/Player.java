@@ -4,7 +4,9 @@ public class Player {
     private String name;
     private final MoneyBalance balance = new MoneyBalance();
     private int playerPosition = 0;
+    private int previousPlayerPosition = 0;
     private boolean jailed = false;
+
     private boolean bankrupt = false;
     private int outOfJailCards = 0;
     private int ID = -1;
@@ -56,9 +58,11 @@ public class Player {
     }
     public void addBalance(int add){
         balance.updateMoney(add);
+        /*
         if (balance.getBalance() < 0){
             bankrupt = true;
         }
+         */
     }
 
     public int getShipsOwned() {
@@ -76,7 +80,12 @@ public class Player {
     }
 
     public void setPlayerPosition(int position){
+        previousPlayerPosition = playerPosition;
         playerPosition = position;
+    }
+
+    public int getPreviousPlayerPosition(){
+        return previousPlayerPosition;
     }
     public void setJailed(boolean jail){
         jailed = jail;
@@ -95,5 +104,9 @@ public class Player {
     @Override
     public String toString() {
         return name;
+    }
+
+    public void setBankrupt(boolean bankrupt) {
+        this.bankrupt = bankrupt;
     }
 }

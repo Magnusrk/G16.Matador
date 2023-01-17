@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f16e1365-b81e-4a2a-bfcd-ab41a5f0edce" name="Changes" comment="Added extra turn conditions and rules">
+    <list default="true" id="f16e1365-b81e-4a2a-bfcd-ab41a5f0edce" name="Changes" comment="Updated text strings in the language files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/G16/Controllers/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/G16/Controllers/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/LanguagePacks/da.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/LanguagePacks/da.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev_branch" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -77,6 +78,9 @@
       <updated>1672734601100</updated>
       <workItem from="1672736127833" duration="2401000" />
       <workItem from="1672918719660" duration="1143000" />
+      <workItem from="1673355507884" duration="296000" />
+      <workItem from="1673424612959" duration="13430000" />
+      <workItem from="1673511564639" duration="1655000" />
     </task>
     <task id="LOCAL-00001" summary="Created PlayerUtils branch">
       <created>1672742907999</created>
@@ -106,7 +110,77 @@
       <option name="project" value="LOCAL" />
       <updated>1672926134860</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added missing gotojailprompt">
+      <created>1673426205062</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1673426205062</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Resolved issue with extra turns and gotojailfield">
+      <created>1673427767647</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1673427767647</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Resolved issue with extra turns and gotojailfield">
+      <created>1673427948557</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1673427948557</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Resolved issue with extra turns and gotojailfield">
+      <created>1673429576622</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1673429576622</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Added code so inJail updates player balance when fee is paid">
+      <created>1673435387513</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1673435387513</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Updated some text strings in the language files">
+      <created>1673435994936</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1673435994936</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Updated some text strings in the language files">
+      <created>1673436469600</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1673436469600</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Updated some text strings in the language files">
+      <created>1673436643389</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1673436643389</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Updated some text strings in the language files">
+      <created>1673436789634</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1673436789634</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Updated text strings in the language files">
+      <created>1673439127536</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1673439127536</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -130,6 +204,11 @@
     <MESSAGE value="Updated MoneyBalance" />
     <MESSAGE value="Updated goToJail to show player position in jail" />
     <MESSAGE value="Added extra turn conditions and rules" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added extra turn conditions and rules" />
+    <MESSAGE value="Added missing gotojailprompt" />
+    <MESSAGE value="Resolved issue with extra turns and gotojailfield" />
+    <MESSAGE value="Added code so inJail updates player balance when fee is paid" />
+    <MESSAGE value="Updated some text strings in the language files" />
+    <MESSAGE value="Updated text strings in the language files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated text strings in the language files" />
   </component>
 </project>

@@ -50,7 +50,7 @@ public class Language {
     public static String getString(String key){
         if(dictionary.isEmpty())
             setLanguage(currentLanguagePack);
-        return dictionary.getOrDefault(key, "STRING-NOT-FOUND");
+        return dictionary.getOrDefault(key, "STRING NOT FOUND: "  +key);
 
     }
 

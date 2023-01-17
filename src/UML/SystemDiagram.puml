@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+
+
+(Fængsel\n K9, K14, K20) --> (Kerne\n K1-K8,K11 og K21)
+
+(Lykkeprøve\n K10) -> (Kerne\n K1-K8,K11 og K21)
+(Kerne\n K1-K8,K11 og K21) <- (Grunde\n K12 og K22)
+
+(Lykkeprøve\n K10) .. (Fængsel\n K9, K14, K20)
+(Lykkeprøve\n K10) .. (Grunde\n K12 og K22)
+
+
+(Lykkeprøve\n K10) .. (Rederi\n K18)
+
+(Handel\n K15, K19) --> (Grunde\n K12 og K22)
+(Auktion\n K17) --> (Grunde\n K12 og K22)
+(Rederi\n K18) --> (Grunde\n K12 og K22)
+(Brewery) --> (Grunde\n K12 og K22)
+(Pantsætning\n K16) --> (Grunde\n K12 og K22)
+(Hus og Hotel\n K13) --> (Grunde\n K12 og K22)
+
+@enduml

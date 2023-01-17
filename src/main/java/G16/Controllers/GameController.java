@@ -290,7 +290,7 @@ public class GameController {
         nextDiceValue = value;
     }
     /** Used to do controlled test for method that uses the dice.
-     * @param loaded determines wheter the dice should be predetermined or random.
+     * @param loaded determines whether the dice should be predetermined or random.
      * @param value1 the face value of the first die
      * @param value2 the face value of the second die
      */
@@ -883,9 +883,8 @@ public class GameController {
         int mortgage=0;
         ArrayList<String> housedFields = new ArrayList<>();
         for (Property property: getOwnedProperties(currentplayer)){
-
                 if (property.getHouseCount()>0 && property.getHouseCount()<4){
-                 mortgage=property.getHousePrice()/2;
+                    mortgage=property.getHousePrice()/2;
                     housedFields.add(property.getName()+ " "+mortgage+",-" );
                 } else if (property.getHouseCount()==5) {
                     mortgage=property.getHousePrice()*5/2;

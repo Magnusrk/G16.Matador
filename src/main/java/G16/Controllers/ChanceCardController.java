@@ -201,7 +201,6 @@ public class ChanceCardController {
             }
             controller.movePlayer(player, 5-player.getPlayerPosition());
             mgui.drawPlayerPosition(player);
-            System.out.println("tetst");
             if(fields[5] instanceof ShippingCompany ship && ship.getOwner() != null) {
                 controller.payShipRent(player, (BuyableField) fields[5]);
                 if (doubleRent) {

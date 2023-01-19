@@ -1,0 +1,68 @@
+@startuml
+title Activity diagram
+
+start
+
+:Choose language input;
+:Create players;
+:Fill in player's name;
+:Throw dice;
+:Land on Field;
+if (Is field buyable?) is (yes) then
+  if (Has owner) is (no) then
+    if (Purchase?) is (yes) then
+      :Buy property;
+    else (no)
+      :Other players can make an offer;
+    endif
+
+   else (yes)
+    if (Player's own land) is (yes) then
+      if (Player own the fields with the same color) is (yes) then
+        :Buy houses and hotel;
+      else (no)
+        'Player has to wait until they own all property in the same color or make a trade with another player.
+      endif
+    else (no)
+      if (Player can pay the rent) is (yes) then
+      :Pay rent;
+        'Player can continue play game after the rent has been paid.
+      else (no)
+        :Mortgage;
+      endif
+    endif
+
+  endif
+else (no)
+  if (Go to Jail field) is (yes)then
+        :Imprison;
+        if (Want to pay fine?) is (no) then
+        :Throw dice 3 times;
+        if (Got 2 of a kind) is (yes) then
+          :Release;
+        else (no)
+          :Stay in jail;
+        endif
+        else (yes)
+        : Pay a fine 1000kr.;
+        :Release;
+        endif
+
+
+   else (no)
+    if (Is it Chance card field?) is (yes) then
+      :Do chance cards;
+    else (no)
+       if (Pay taxes field) is (yes) then
+         :Pay taxes;
+       else (no)
+
+       endif
+
+    endif
+
+endif
+endif
+stop
+
+@enduml
